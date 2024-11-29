@@ -2,10 +2,17 @@
   "name": "@farcaster/frame-sdk",
   "version": "0.0.3",
   "main": "dist/index.js",
+  "module": "./dist/esm/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/index.js"
+    }
+  },
   "scripts": {
     "clean": "rm -rf dist",
     "prebuild": "npm run clean",
-    "build": "tsc",
+    "build": "tsc --project tsconfig.json && tsc --project tsconfig.esm.json",
     "typecheck": "tsc --noEmit"
   },
   "files": [

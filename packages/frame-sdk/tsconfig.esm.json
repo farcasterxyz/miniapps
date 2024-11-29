@@ -3,7 +3,7 @@
   "include": ["src"],
   "exclude": ["dist", "build", "node_modules"],
   "compilerOptions": {
-    "module": "CommonJS",
-    "outDir": "dist"
+    "module": "ESNext",
+    "outDir": "dist/esm"
   }
 }
