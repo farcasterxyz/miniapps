@@ -1,6 +1,6 @@
 import { Provider, RpcRequest, RpcResponse } from "ox";
 import { WebViewEndpoint } from "../endpoint";
-import { EventMap } from "ox/_types/core/Provider";
+import { EventMap } from "ox/Provider";
 
 export function forwardProviderEvents(
   provider: Provider.Provider, 
