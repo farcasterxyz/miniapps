@@ -1,4 +1,4 @@
-import { eventPayloadSchema } from "@farcaster/frame-core";
+import { serverEventSchema } from "@farcaster/frame-core";
 import {
   VerifyJsonFarcasterSignature,
   verifyJsonFarcasterSignature,
@@ -37,7 +37,7 @@ export async function parseWebhookEvent(
     );
   }
 
-  const event = eventPayloadSchema.safeParse(payloadJson);
+  const event = serverEventSchema.safeParse(payloadJson);
   if (event.success === false) {
     throw new InvalidEventDataError("Invalid event payload", event.error);
   }

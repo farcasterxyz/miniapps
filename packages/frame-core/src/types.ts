@@ -1,5 +1,18 @@
-import type { Address, Provider, RpcRequest, RpcResponse, RpcSchema } from "ox";
-import { FrameNotificationDetails } from "./schemas";
+import type {
+  Address,
+  Provider,
+  RpcRequest,
+  RpcResponse,
+  RpcSchema,
+} from "ox";
+import {
+  FrameNotificationDetails,
+  EventFrameAdded,
+  EventFrameRemoved,
+  EventNotificationsEnabled,
+  EventNotificationsDisabled,
+} from "./schemas";
+import * as SignIn from "./actions/signIn";
 
 export type SetPrimaryButton = (options: {
   text: string;
@@ -53,6 +66,7 @@ export type FrameContext = {
      * Profile image URL
      */
     pfpUrl?: string;
+    location?: AccountLocation;
   };
   location?: FrameLocationContext;
   client: {
@@ -62,6 +76,10 @@ export type FrameContext = {
   };
 };
 
+export type AddFrameRejectedReason =
+  | "invalid_domain_manifest"
+  | "rejected_by_user";
+
 export type AddFrameResult =
   | {
       added: true;
@@ -69,7 +87,7 @@ export type AddFrameResult =
     }
   | {
       added: false;
-      reason: "invalid_domain_manifest" | "rejected_by_user";
+      reason: AddFrameRejectedReason;
     };
 
 export type AddFrame = () => Promise<AddFrameResult>;
@@ -88,11 +106,43 @@ export const DEFAULT_READY_OPTIONS: ReadyOptions = {
   disableNativeGestures: false,
 };
 
+export type SignInOptions = {
+  /**
+   * A random string used to prevent replay attacks.
+   */
+  nonce: string;
+
+  /**
+   * Start time at which the signature becomes valid.
+   * ISO 8601 datetime.
+   */
+  notBefore?: string;
+
+  /**
+   * Expiration time at which the signature is no longer valid.
+   * ISO 8601 datetime.
+   */
+  expirationTime?: string;
+};
+
+export type WireFrameHost = {
+  context: FrameContext;
+  close: () => void;
+  ready: (options?: Partial<ReadyOptions>) => void;
+  openUrl: (url: string) => void;
+  signIn: SignIn.WireSignIn;
+  setPrimaryButton: SetPrimaryButton;
+  ethProviderRequest: EthProviderRequest;
+  ethProviderRequestV2: RpcTransport;
+  addFrame: AddFrame;
+};
+
 export type FrameHost = {
   context: FrameContext;
   close: () => void;
   ready: (options?: Partial<ReadyOptions>) => void;
   openUrl: (url: string) => void;
+  signIn: SignIn.SignIn;
   setPrimaryButton: SetPrimaryButton;
   ethProviderRequest: EthProviderRequest;
   ethProviderRequestV2: RpcTransport;
@@ -139,3 +189,20 @@ export type EmitEthProvider = <event extends EthProviderWireEvent["event"]>(
   event: event,
   params: Extract<EthProviderWireEvent, { event: event }>["params"],
 ) => void;
+
+export type EventFrameAddRejected = {
+  event: "frame_add_rejected";
+  reason: AddFrameRejectedReason;
+};
+
+export type EventPrimaryButtonClicked = {
+  event: "primary_button_clicked";
+};
+
+export type FrameClientEvent =
+  | EventFrameAdded
+  | EventFrameAddRejected
+  | EventFrameRemoved
+  | EventNotificationsEnabled
+  | EventNotificationsDisabled
+  | EventPrimaryButtonClicked;

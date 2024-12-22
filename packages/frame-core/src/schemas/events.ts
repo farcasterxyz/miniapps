@@ -1,45 +1,41 @@
 import { z } from "zod";
 import { notificationDetailsSchema } from "./notifications";
 
-export const eventFrameAddedPayloadSchema = z.object({
+export const eventFrameAddedSchema = z.object({
   event: z.literal("frame_added"),
   notificationDetails: notificationDetailsSchema.optional(),
 });
 
-export type EventFrameAddedPayload = z.infer<
-  typeof eventFrameAddedPayloadSchema
->;
+export type EventFrameAdded = z.infer<typeof eventFrameAddedSchema>;
 
-export const eventFrameRemovedPayloadSchema = z.object({
+export const eventFrameRemovedSchema = z.object({
   event: z.literal("frame_removed"),
 });
 
-export type EventFrameRemovedPayload = z.infer<
-  typeof eventFrameRemovedPayloadSchema
->;
+export type EventFrameRemoved = z.infer<typeof eventFrameRemovedSchema>;
 
-export const eventNotificationsEnabledPayloadSchema = z.object({
+export const eventNotificationsEnabledSchema = z.object({
   event: z.literal("notifications_enabled"),
   notificationDetails: notificationDetailsSchema.required(),
 });
 
-export type EventNotificationsEnabledPayload = z.infer<
-  typeof eventNotificationsEnabledPayloadSchema
+export type EventNotificationsEnabled = z.infer<
+  typeof eventNotificationsEnabledSchema
 >;
 
-export const notificationsDisabledPayloadSchema = z.object({
+export const notificationsDisabledSchema = z.object({
   event: z.literal("notifications_disabled"),
 });
 
-export type EventNotificationsDisabledPayload = z.infer<
-  typeof notificationsDisabledPayloadSchema
+export type EventNotificationsDisabled = z.infer<
+  typeof notificationsDisabledSchema
 >;
 
-export const eventPayloadSchema = z.discriminatedUnion("event", [
-  eventFrameAddedPayloadSchema,
-  eventFrameRemovedPayloadSchema,
-  eventNotificationsEnabledPayloadSchema,
-  notificationsDisabledPayloadSchema,
+export const serverEventSchema = z.discriminatedUnion("event", [
+  eventFrameAddedSchema,
+  eventFrameRemovedSchema,
+  eventNotificationsEnabledSchema,
+  notificationsDisabledSchema,
 ]);
 
-export type FrameEvent = z.infer<typeof eventPayloadSchema>;
+export type FrameServerEvent = z.infer<typeof serverEventSchema>;

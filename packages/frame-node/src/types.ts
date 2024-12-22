@@ -1,4 +1,4 @@
-import { FrameEvent } from "@farcaster/frame-core";
+import { FrameServerEvent } from "@farcaster/frame-core";
 
 export type VerifyAppKeyResult =
   | { valid: true; appFid: number }
@@ -18,7 +18,7 @@ export type VerifyJfsResult = {
 export type ParseWebhookEventResult = {
   fid: number;
   appFid: number;
-  event: FrameEvent;
+  event: FrameServerEvent;
 };
 
 export class BaseError<C extends Error | undefined = undefined> extends Error {

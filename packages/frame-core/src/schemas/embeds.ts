@@ -1,5 +1,10 @@
 import { z } from "zod";
-import { hexColorSchema, frameNameSchema, secureUrlSchema } from "./shared";
+import {
+  hexColorSchema,
+  frameNameSchema,
+  secureUrlSchema,
+  buttonTitleSchema,
+} from "./shared";
 
 export const actionLaunchFrameSchema = z.object({
   type: z.literal("launch_frame"),
@@ -12,8 +17,6 @@ export const actionLaunchFrameSchema = z.object({
 export const actionSchema = z.discriminatedUnion("type", [
   actionLaunchFrameSchema,
 ]);
-
-export const buttonTitleSchema = z.string().max(32);
 
 export const buttonSchema = z.object({
   title: buttonTitleSchema,

@@ -1,6 +1,6 @@
 {
   "name": "@farcaster/frame-node",
-  "version": "0.0.2",
+  "version": "0.0.8",
   "main": "dist/index.js",
   "module": "esm/index.js",
   "scripts": {
@@ -16,6 +16,7 @@
   },
   "files": [
     "dist",
+    "esm",
     "src"
   ],
   "devDependencies": {
@@ -26,7 +27,7 @@
     "vitest": "^2.1.8"
   },
   "dependencies": {
-    "@farcaster/frame-core": "^0.0.15",
+    "@farcaster/frame-core": "^0.0.19",
     "ox": "^0.4.0"
   },
   "publishConfig": {

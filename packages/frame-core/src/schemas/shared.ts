@@ -7,6 +7,7 @@ export const secureUrlSchema = z
   .max(512);
 
 export const frameNameSchema = z.string().max(32);
+export const buttonTitleSchema = z.string().max(32);
 
 export const hexColorSchema = z
   .string()

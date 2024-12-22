@@ -1,6 +1,6 @@
 {
   "name": "@farcaster/frame-host",
-  "version": "0.0.15",
+  "version": "0.0.19",
   "main": "dist/index.js",
   "scripts": {
     "clean": "rm -rf dist",
@@ -18,7 +18,7 @@
     "typescript": "^5.6.3"
   },
   "dependencies": {
-    "@farcaster/frame-core": "^0.0.15",
+    "@farcaster/frame-core": "^0.0.19",
     "ox": "^0.4.0"
   }
 }

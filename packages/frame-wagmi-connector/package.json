@@ -1,0 +1,32 @@
+{
+  "name": "@farcaster/frame-wagmi-connector",
+  "version": "0.0.6",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "prebuild": "npm run clean",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "devDependencies": {
+    "@farcaster/frame-sdk": "^0.0.20",
+    "@farcaster/tsconfig": "*",
+    "tsup": "^8.3.5",
+    "typescript": "^5.6.3",
+    "viem": "^2.21.55",
+    "wagmi": "^2.14.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@farcaster/frame-sdk": "^0.0.20",
+    "viem": "^2.21.55",
+    "wagmi": "^2.14.1"
+  }
+}

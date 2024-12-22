@@ -4,6 +4,9 @@ import type {
   FrameContext,
   AddFrame,
   ReadyOptions,
+  SignIn,
+  FrameNotificationDetails,
+  AddFrameRejectedReason,
 } from "@farcaster/frame-core";
 
 declare global {
@@ -21,6 +24,19 @@ export type Compute<type> = { [key in keyof type]: type[key] } & unknown;
 
 export type EventMap = {
   primaryButtonClicked: () => void;
+  frameAdded: ({
+    notificationDetails,
+  }: {
+    notificationDetails?: FrameNotificationDetails;
+  }) => void;
+  frameAddRejected: ({ reason }: { reason: AddFrameRejectedReason }) => void;
+  frameRemoved: () => void;
+  notificationsEnabled: ({
+    notificationDetails,
+  }: {
+    notificationDetails: FrameNotificationDetails;
+  }) => void;
+  notificationsDisabled: () => void;
 };
 
 export type Emitter = Compute<EventEmitter<EventMap>>;
@@ -37,6 +53,7 @@ export type FrameSDK = {
   actions: {
     ready: (options?: Partial<ReadyOptions>) => Promise<void>;
     openUrl: (url: string) => Promise<void>;
+    signIn: SignIn.SignIn;
     close: () => Promise<void>;
     setPrimaryButton: SetPrimaryButton;
     addFrame: AddFrame;

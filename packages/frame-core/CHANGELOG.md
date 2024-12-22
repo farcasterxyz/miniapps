@@ -1,5 +1,29 @@
 # @farcaster/frame-core
 
+## 0.0.19
+
+### Patch Changes
+
+- f5457ab: Add real-time eventing from host to frame
+
+## 0.0.18
+
+### Patch Changes
+
+- 27e8fca: add sign in action
+
+## 0.0.17
+
+### Patch Changes
+
+- 2a5ec00: accept next as a valid frame schema version
+
+## 0.0.16
+
+### Patch Changes
+
+- fdcc36a: Add imageUrl and buttonTitle to domain manifest frame config
+
 ## 0.0.15
 
 ### Patch Changes

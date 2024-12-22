@@ -8,9 +8,9 @@ declare global {
 }
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
-  <div style='position:relative;'>
-    <div id="splash" style='position:absolute;top:0;left:0;width:100%;height:100%;background-color:#eeeeee;'></div>
-    <iframe src="/frame/" id="frame" height="695" width="424" />
+  <div id="container">
+    <div id="splash"></div>
+    <iframe src="/frame/" id="iframe" height="695" width="424" style="border:none;" />
   </div>
 `;
 
@@ -21,7 +21,7 @@ const frameHost: FrameHost = {
 } as FrameHost;
 
 exposeToIframe({
-  iframe: document.querySelector<HTMLIFrameElement>("#frame")!,
+  iframe: document.querySelector<HTMLIFrameElement>("#iframe")!,
   sdk: frameHost,
   ethProvider: window.ethereum,
   frameOrigin: window.origin,

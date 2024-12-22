@@ -1,5 +1,32 @@
 # @farcaster/frame-host
 
+## 0.0.14
+
+### Patch Changes
+
+- f5457ab: Add real-time eventing from host to frame
+- Updated dependencies [f5457ab]
+  - @farcaster/frame-host@0.0.19
+
+## 0.0.13
+
+### Patch Changes
+
+- Updated dependencies [27e8fca]
+  - @farcaster/frame-host@0.0.18
+
+## 0.0.12
+
+### Patch Changes
+
+- @farcaster/frame-host@0.0.17
+
+## 0.0.11
+
+### Patch Changes
+
+- @farcaster/frame-host@0.0.16
+
 ## 0.0.10
 
 ### Patch Changes

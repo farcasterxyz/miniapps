@@ -1,7 +1,7 @@
 import type { Endpoint } from "./comlink";
-import type { EmitEthProvider } from "@farcaster/frame-core";
+import type { EmitEthProvider, FrameClientEvent } from "@farcaster/frame-core";
 
 export type HostEndpoint = Endpoint & {
-  emit: (data: any) => void;
+  emit: (event: FrameClientEvent) => void;
   emitEthProvider: EmitEthProvider;
 };
