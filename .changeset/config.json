@@ -1,9 +1,6 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@3.0.4/schema.json",
-  "changelog": [
-    "@changesets/changelog-github",
-    { "repo": "farcasterxyz/frames" }
-  ],
+  "changelog": ["@changesets/changelog-github", { "repo": "farcasterxyz/frames" }],
   "commit": true,
   "fixed": [],
   "linked": [],
