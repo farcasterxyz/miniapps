@@ -9,7 +9,10 @@
     "build": "tsc",
     "typecheck": "tsc --noEmit"
   },
-  "files": ["dist", "src"],
+  "files": [
+    "dist",
+    "src"
+  ],
   "devDependencies": {
     "@farcaster/frame-sdk": "workspace:*",
     "@farcaster/tsconfig": "workspace:*",
