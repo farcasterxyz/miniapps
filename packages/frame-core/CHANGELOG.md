@@ -1,5 +1,11 @@
 # @farcaster/frame-core
 
+## 0.0.24
+
+### Patch Changes
+
+- [#90](https://github.com/farcasterxyz/frames/pull/90) [`41e13ce`](https://github.com/farcasterxyz/frames/commit/41e13ce646f3e4f34430fd346d2f6df258428da4) Thanks [@deodad](https://github.com/deodad)! - add viewProfile action
+
 ## 0.0.23
 
 ### Patch Changes
