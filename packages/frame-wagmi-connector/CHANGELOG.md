@@ -1,5 +1,15 @@
 # @farcaster/frame-wagmi-connector
 
+## 0.0.14
+
+### Patch Changes
+
+- [#91](https://github.com/farcasterxyz/frames/pull/91) [`e04bf33`](https://github.com/farcasterxyz/frames/commit/e04bf33605fb3574580bb3915c82062ba51d07c0) Thanks [@deodad](https://github.com/deodad)! - - improved isAuthorized
+  - Updates isAuthorized to call eth_accounts to determine if the connector is
+    authorized or not. If the frame provided wallet is connected this will return
+    true, otherwise it should return false without triggering a prompt for the user
+    to connect.
+
 ## 0.0.13
 
 ### Patch Changes
