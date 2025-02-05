@@ -270,7 +270,7 @@ export default function Demo(
         <div className="mb-4">
           <h2 className="font-2xl font-bold">Context</h2>
           <button
-          type="button"
+            type="button"
             onClick={toggleContext}
             className="flex items-center gap-2 transition-colors"
           >

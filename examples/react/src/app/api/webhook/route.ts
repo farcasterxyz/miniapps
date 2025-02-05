@@ -1,7 +1,7 @@
 import {
   type ParseWebhookEvent,
+  type ParseWebhookEventResult,
   parseWebhookEvent,
-  ParseWebhookEventResult,
   verifyAppKeyWithNeynar,
 } from '@farcaster/frame-node'
 import type { NextRequest } from 'next/server'
@@ -14,7 +14,7 @@ import { sendFrameNotification } from '~/lib/notifs'
 export async function POST(request: NextRequest) {
   const requestJson = await request.json()
 
-  let data:ParseWebhookEventResult|undefined
+  let data: ParseWebhookEventResult | undefined
   try {
     data = await parseWebhookEvent(requestJson, verifyAppKeyWithNeynar)
   } catch (e: unknown) {
