@@ -1,5 +1,11 @@
 # @farcaster/frame-core
 
+## 0.0.25
+
+### Patch Changes
+
+- [#99](https://github.com/farcasterxyz/frames/pull/99) [`ce37061`](https://github.com/farcasterxyz/frames/commit/ce3706174e19bc074e302c66b19c529b5b99f84b) Thanks [@horsefacts](https://github.com/horsefacts)! - add view token action type
+
 ## 0.0.24
 
 ### Patch Changes
