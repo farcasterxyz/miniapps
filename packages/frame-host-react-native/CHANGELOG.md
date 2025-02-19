@@ -1,5 +1,13 @@
 # @farcaster/frame-host
 
+## 0.0.21
+
+### Patch Changes
+
+- Updated dependencies [[`b20e3cf`](https://github.com/farcasterxyz/frames/commit/b20e3cfd6105a2a7f837cc9f1db2ccd4620b274b)]:
+  - @farcaster/frame-core@0.0.26
+  - @farcaster/frame-host@0.0.26
+
 ## 0.0.20
 
 ### Patch Changes

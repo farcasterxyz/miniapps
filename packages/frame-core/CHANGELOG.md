@@ -1,5 +1,11 @@
 # @farcaster/frame-core
 
+## 0.0.26
+
+### Patch Changes
+
+- [#102](https://github.com/farcasterxyz/frames/pull/102) [`b20e3cf`](https://github.com/farcasterxyz/frames/commit/b20e3cfd6105a2a7f837cc9f1db2ccd4620b274b) Thanks [@horsefacts](https://github.com/horsefacts)! - add aspectRatio to embed schema
+
 ## 0.0.25
 
 ### Patch Changes
