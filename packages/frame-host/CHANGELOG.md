@@ -1,5 +1,14 @@
 # @farcaster/frame-host
 
+## 0.0.27
+
+### Patch Changes
+
+- [#107](https://github.com/farcasterxyz/frames/pull/107) [`a437325`](https://github.com/farcasterxyz/frames/commit/a43732592fb3c8fd33400f01a97a08d6fe11bb88) Thanks [@horsefacts](https://github.com/horsefacts)! - add swap/token actions
+
+- Updated dependencies [[`a437325`](https://github.com/farcasterxyz/frames/commit/a43732592fb3c8fd33400f01a97a08d6fe11bb88)]:
+  - @farcaster/frame-core@0.0.27
+
 ## 0.0.26
 
 ### Patch Changes

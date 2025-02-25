@@ -1,6 +1,6 @@
 {
   "name": "@farcaster/frame-node",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "main": "dist/index.js",
   "module": "esm/index.js",
   "scripts": {
