@@ -1,5 +1,11 @@
 # @farcaster/frame-host
 
+## 0.0.24
+
+### Patch Changes
+
+- [#114](https://github.com/farcasterxyz/frames/pull/114) [`abaddb5`](https://github.com/farcasterxyz/frames/commit/abaddb5c228b26c853d1599529c1592d5074fda8) Thanks [@deodad](https://github.com/deodad)! - remove direct dependency on frame-core
+
 ## 0.0.23
 
 ### Patch Changes
