@@ -1,5 +1,13 @@
 # vanilla
 
+## 0.0.13
+
+### Patch Changes
+
+- Updated dependencies [[`1c32408`](https://github.com/farcasterxyz/frames/commit/1c32408ec1e37748fc4c8aa6cf14f70119a8aabf)]:
+  - @farcaster/frame-host@0.0.29
+  - @farcaster/frame-sdk@0.0.30
+
 ## 0.0.12
 
 ### Patch Changes

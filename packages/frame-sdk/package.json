@@ -1,6 +1,6 @@
 {
   "name": "@farcaster/frame-sdk",
-  "version": "0.0.29",
+  "version": "0.0.30",
   "main": "dist/index.js",
   "scripts": {
     "clean": "rm -rf dist",
