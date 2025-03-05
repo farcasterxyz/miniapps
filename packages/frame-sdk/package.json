@@ -1,6 +1,12 @@
 {
   "name": "@farcaster/frame-sdk",
   "version": "0.0.30",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/farcasterxyz/frames.git",
+    "directory": "packages/frame-sdk"
+  },
   "main": "dist/index.js",
   "scripts": {
     "clean": "rm -rf dist",

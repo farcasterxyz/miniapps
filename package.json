@@ -1,6 +1,6 @@
 {
-  "name": "frames",
   "private": true,
+  "name": "frames",
   "scripts": {
     "build": "turbo build",
     "check": "biome check .",

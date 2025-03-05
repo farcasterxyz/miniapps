@@ -1,6 +1,12 @@
 {
   "name": "@farcaster/frame-host",
   "version": "0.0.29",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/farcasterxyz/frames.git",
+    "directory": "packages/frame-host"
+  },
   "main": "dist/index.js",
   "scripts": {
     "clean": "rm -rf dist",

@@ -1,6 +1,12 @@
 {
   "name": "@farcaster/frame-node",
   "version": "0.0.17",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/farcasterxyz/frames.git",
+    "directory": "packages/frame-node"
+  },
   "main": "dist/index.js",
   "module": "esm/index.js",
   "scripts": {

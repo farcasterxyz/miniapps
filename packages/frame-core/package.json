@@ -1,6 +1,12 @@
 {
   "name": "@farcaster/frame-core",
   "version": "0.0.28",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/farcasterxyz/frames.git",
+    "directory": "packages/frame-core"
+  },
   "main": "dist/index.js",
   "module": "esm/index.js",
   "scripts": {
