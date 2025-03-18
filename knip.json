@@ -11,6 +11,10 @@
     },
     "examples/vanilla": {
       "entry": ["src/main.ts", "frame/index.ts"]
+    },
+    "site": {
+      "ignoreDependencies": ["@farcaster/frame-core", "@farcaster/frame-sdk"],
+      "ignore": ["vocs.config.ts"]
     }
   }
 }
