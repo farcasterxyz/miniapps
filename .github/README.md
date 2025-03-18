@@ -1,5 +1,3 @@
-<br />
-
 <p align="center">
   <a href="https://docs.farcaster.xyz/developers/frames/v2/">
       <picture>
@@ -34,8 +32,6 @@
     </picture>
   </a>
 </p>
-
-<br />
 
 ---
 
