@@ -1,5 +1,6 @@
 export * from './actions'
 export * from './wallet'
 export * as Context from './context'
+export * as Manifest from './manifest'
 export * from './types'
 export * from './schemas'

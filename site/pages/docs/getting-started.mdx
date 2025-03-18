@@ -1,0 +1,75 @@
+# Getting Started
+
+## Overview
+
+Frames are web apps built with HTML, CSS, and JavaScript that use the Frames
+SDK to integrate natively within a Farcaster client.
+
+You can use your favorite web framework for developing a Frame. 
+
+
+In this guide we'll use [Vite](https://vitejs.dev) and
+[React](https://react.dev).
+
+## Installation
+
+Install the Frames SDK into your project.
+
+### Package Manager
+
+:::code-group
+
+```bash [npm]
+npm install @farcaster/frame-sdk
+```
+
+```bash [pnpm]
+pnpm add @farcaster/frame-sdk
+```
+
+```bash [yarn]
+yarn add @farcaster/frame-sdk
+```
+
+:::
+
+### CDN
+
+If you're not using a package manager, you can also use the Frame SDK via an
+ESM-compatible CDN such as esm.sh. Simply add a `<script type="module">` tag to
+the bottom of your HTML file with the following content.
+
+```html
+<script type="module">
+  import { sdk } from 'https://esm.sh/@farcaster/frame-sdk'
+</script>
+```
+
+## Calling ready
+
+When a user launches a frame, a splash screen is shown (more on this later) to
+the user until the application signals that it's ready to be shown to the user:
+
+```ts twoslash
+import { sdk } from '@farcaster/frame-sdk'
+
+// ---cut---
+await sdk.actions.ready();
+```
+
+## Previewing your frame
+
+There is a lot you can do to make an engaging social application but this is
+minimum you need to do to turn your application into a frame.
+
+Let's preview it in Warpcast:
+
+1. Open the [Warpcast Frame Developer Tools](https://warpcast.com/~/developers/frames) on desktop
+2. Enter your web app url in _Frame URL_ in the **Preview Frame** tool
+3. Hit _Preview_
+
+
+## Verifying your frame
+
+TODO
+

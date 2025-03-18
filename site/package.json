@@ -1,0 +1,21 @@
+{
+  "name": "site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vocs dev",
+    "build": "vocs build",
+    "preview": "vocs preview"
+  },
+  "dependencies": {
+    "react": "latest",
+    "react-dom": "latest",
+    "vocs": "latest"
+  },
+  "devDependencies": {
+    "@farcaster/frame-core": "workspace:*",
+    "@farcaster/frame-sdk": "workspace:*",
+    "@types/react": "latest",
+    "typescript": "latest"
+  }
+}
