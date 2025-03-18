@@ -1,3 +1,5 @@
+<br />
+
 <p align="center">
   <a href="https://docs.farcaster.xyz/developers/frames/v2/">
       <picture>
@@ -7,6 +9,7 @@
   </a>
 </p>
 
+<br />
 
 <p align="center">
   Build onchain social apps
