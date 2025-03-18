@@ -16,7 +16,7 @@
   <a href="https://www.npmjs.com/package/@farcaster/frame-sdk">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/npm/dm/@@farcaster/frame-sdk/core?colorA=21262d&colorB=21262d">
-      <img src="https://img.shields.io/npm/dm/@@farcaster/frame-sdk/core?colorA=f6f8fa&colorB=f6f8fa" alt="Downloads per month">
+      <img src="https://img.shields.io/npm/dm/@farcaster/frame-sdk/core?colorA=f6f8fa&colorB=f6f8fa" alt="Downloads per month">
     </picture>
   </a>
 </p>
