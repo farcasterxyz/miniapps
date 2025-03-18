@@ -4,12 +4,10 @@
   <a href="https://docs.farcaster.xyz/developers/frames/v2/">
       <picture>
         <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/farcasterxzy/frames/main/.github/gh-logo-dark.svg">
-        <img alt="farcaster frames logo" src="https://raw.githubusercontent.com/farcasterxyz/frames/main/.github/gh-logo-light.svg" width="auto">
+        <img alt="farcaster frames logo" src="https://raw.githubusercontent.com/farcasterxyz/frames/main/.github/gh-logo-light.svg" width="auto" height="30">
       </picture>
   </a>
 </p>
-
-<br />
 
 <p align="center">
   Build onchain social apps
