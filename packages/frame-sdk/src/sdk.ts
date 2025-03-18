@@ -5,13 +5,13 @@ import {
   Provider,
   SignIn,
 } from '@farcaster/frame-core'
+import type { EIP1193Provider } from 'mipd'
 import { RpcRequest, RpcResponse, type RpcSchema } from 'ox'
 import { announceProvider } from './ethProvider'
-import { frameHost } from './frameHost'
 import * as EthProvider from './ethProvider'
+import { frameHost } from './frameHost'
 import { transport } from './transport'
 import type { FrameSDK } from './types'
-import type { EIP1193Provider } from 'mipd'
 
 const emitter = Provider.createEmitter()
 
@@ -61,7 +61,6 @@ function listener(ev: Event) {
   if (ev.data.source) {
     const message = ev.data as MessageChannel.HostMessage
     if (message.source === 'farcaster-host-response') {
-      console.log('received frame host response: ', message.payload)
       const response = message.payload
 
       const callback = pendingRequestCallbacks[response.id]
@@ -72,7 +71,6 @@ function listener(ev: Event) {
     }
 
     if (message.source === 'farcaster-host-event') {
-      console.log('received frame host event: ', message.payload)
       const payload = message.payload
 
       if (payload.event === 'eip6963:announceProvider') {
@@ -89,7 +87,6 @@ function listener(ev: Event) {
     }
 
     if (message.source === 'farcaster-eth-provider-event') {
-      console.log('received eth provider event: ', message.payload)
       const event = message.payload
       emitter.emit(event.event as never, ...(event.params as never))
       return

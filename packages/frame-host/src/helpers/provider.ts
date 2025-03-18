@@ -1,6 +1,6 @@
+import { type MessageChannel, Util } from '@farcaster/frame-core'
 import { Provider, type RpcRequest, RpcResponse } from 'ox'
 import type { HostEndpoint } from '../types'
-import { Util, type MessageChannel } from '@farcaster/frame-core'
 
 export function forwardProviderEvents({
   provider,
@@ -75,12 +75,10 @@ export function exposeProvider({
             result,
           }
         } catch (e) {
-          console.log('thrown', e)
           if (
             e instanceof RpcResponse.BaseError ||
             e instanceof Provider.ProviderRpcError
           ) {
-            console.log('provider errro', e)
             return {
               id: request.id,
               jsonrpc: request.jsonrpc,
@@ -91,8 +89,6 @@ export function exposeProvider({
               },
             }
           }
-
-          console.log('THIS IS CACUGHT', e)
 
           // TODO actually just return unknown
           throw e

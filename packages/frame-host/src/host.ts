@@ -1,4 +1,4 @@
-import { type WireFrameHost, Provider } from '@farcaster/frame-core'
+import { Provider, type WireFrameHost } from '@farcaster/frame-core'
 import { RpcResponse } from 'ox'
 
 export function fromSDK({

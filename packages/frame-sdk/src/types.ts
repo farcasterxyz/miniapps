@@ -1,13 +1,13 @@
 import type {
   AddFrame,
   Context,
+  Provider,
   Ready,
   SetPrimaryButtonOptions,
   SignIn,
   Swap,
   ViewProfile,
   ViewToken,
-  Provider,
 } from '@farcaster/frame-core'
 import type { Provider as EthProvider } from 'ox'
 

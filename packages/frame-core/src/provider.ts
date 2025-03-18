@@ -1,8 +1,8 @@
 import { EventEmitter } from 'eventemitter3'
-import type { AddFrame } from './actions'
-import type { FrameNotificationDetails } from './schemas'
-import type { Schema } from './jsonRpc'
 import type { RpcSchema } from 'ox'
+import type { AddFrame } from './actions'
+import type { Schema } from './jsonRpc'
+import type { FrameNotificationDetails } from './schemas'
 
 // https://twitter.com/mattpocockuk/status/1622730173446557697?s=20&t=v01xkqU3KO0Mg
 type Compute<type> = { [key in keyof type]: type[key] } & unknown

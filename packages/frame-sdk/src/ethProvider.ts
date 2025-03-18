@@ -61,7 +61,6 @@ function listener(ev: Event) {
   if (ev.data.source) {
     const message = ev.data as MessageChannel.HostMessage
     if (message.source === 'farcaster-eth-provider-response') {
-      console.log('received eth provider response: ', message.payload)
       const response = message.payload
 
       const callback = pendingRequestCallbacks[response.id]
@@ -72,7 +71,6 @@ function listener(ev: Event) {
     }
 
     if (message.source === 'farcaster-eth-provider-event') {
-      console.log('received eth provider event: ', message.payload)
       const event = message.payload
       emitter.emit(event.event, ...(event.params as never))
       return

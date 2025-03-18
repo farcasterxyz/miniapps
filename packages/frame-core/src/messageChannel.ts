@@ -1,4 +1,4 @@
-import { RpcRequest, RpcResponse } from 'ox'
+import type { RpcRequest, RpcResponse } from 'ox'
 import type { EthProviderWireEvent, FrameClientEvent, JsonRpc } from '.'
 
 export interface EventSource {

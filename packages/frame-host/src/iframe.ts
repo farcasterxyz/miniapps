@@ -2,8 +2,8 @@ import type { FrameHost, MessageChannel } from '@farcaster/frame-core'
 import type { Provider } from 'ox'
 import { exposeProvider, exposeToEndpoint } from './helpers/endpoint'
 import {
-  wrapProviderRequest,
   exposeProvider as exposeEthProvider,
+  wrapProviderRequest,
 } from './helpers/provider'
 import { wrapHandlers } from './helpers/sdk'
 import { fromSDK } from './host'
@@ -108,12 +108,10 @@ export function exposeToIframe({
 
     const message = ev.data as MessageChannel.MiniAppMessage
     if (message.source === 'farcaster-mini-app-request') {
-      console.log('received app request', message.payload)
       return
     }
 
     if (message.source === 'farcaster-eth-provider-request') {
-      console.log('received eth provider request', message.payload)
       return
     }
   })

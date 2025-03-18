@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { stringify, isAllowedOrigin } from '../src/util'
+import { isAllowedOrigin, stringify } from '../src/util'
 
 describe('stringify', () => {
   test('parameters: JSON', () => {
