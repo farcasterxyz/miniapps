@@ -1,6 +1,7 @@
 import type { RpcRequest, RpcResponse, RpcSchema } from 'ox'
 import type { Ready } from './actions'
 import type { FrameContext } from './context'
+import { openUrl } from './actions/OpenUrl'
 
 export type Schema = RpcSchema.From<
   | {
@@ -14,6 +15,13 @@ export type Schema = RpcSchema.From<
       Request: {
         method: 'app_ready'
         params?: Ready.ReadyOptions
+      }
+      ReturnType: undefined
+    }
+  | {
+      Request: {
+        method: 'app_open_url'
+        params?: openUrl.Options
       }
       ReturnType: undefined
     }

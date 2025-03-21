@@ -1,3 +1,7 @@
+export type GlobalErrorType<name extends string = 'Error'> = Error & {
+  name: name
+}
+
 export class BaseError<
   cause extends Error | undefined = undefined,
 > extends Error {
