@@ -1,3 +1,4 @@
+export * as Add from './Add'
 export * as AddFrame from './AddFrame'
 export * as Ready from './Ready'
 export * as SignIn from './SignIn'

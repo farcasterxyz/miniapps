@@ -10,6 +10,8 @@
   "main": "dist/index.js",
   "module": "esm/index.js",
   "scripts": {
+    "changeset:prepublish": "pnpm version:update",
+    "changeset:version": "pnpm version:update",
     "clean": "rm -rf dist esm",
     "prebuild": "npm run clean",
     "build": "pnpm build:cjs & pnpm build:esm",
@@ -18,7 +20,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest --coverage"
+    "test:coverage": "vitest --coverage",
+    "version:update": "tsx ./scripts/update-version.ts"
   },
   "files": [
     "dist",
@@ -27,7 +30,10 @@
   ],
   "devDependencies": {
     "@farcaster/tsconfig": "workspace:*",
+    "@types/fs-extra": "^11.0.4",
     "@vitest/coverage-v8": "^2.1.8",
+    "fs-extra": "^11.3.0",
+    "tsx": "^4.19.3",
     "typescript": "^5.7.2",
     "vitest": "^2.1.9"
   },

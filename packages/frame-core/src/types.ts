@@ -24,7 +24,7 @@ export type SetPrimaryButtonOptions = {
 
 // start backwards compat, remove in 1.0
 export * from './wallet/ethereum'
-export { DEFAULT_READY_OPTIONS, ReadyOptions } from './actions/Ready'
+export { Ready } from './actions'
 export type SignInOptions = SignIn.SignInOptions
 // end backwards compat
 
@@ -33,7 +33,7 @@ export type SetPrimaryButton = (options: SetPrimaryButtonOptions) => void
 export type WireFrameHost = {
   context: FrameContext
   close: () => void
-  ready: Ready.Ready
+  ready: (options: Ready.ready.Options) => void
   openUrl: (url: string) => void
   signIn: SignIn.WireSignIn
   setPrimaryButton: SetPrimaryButton
@@ -49,7 +49,7 @@ export type WireFrameHost = {
 export type FrameHost = {
   context: FrameContext
   close: () => void
-  ready: Ready.Ready
+  ready: (options: Ready.ready.Options) => void
   openUrl: (url: string) => void
   signIn: SignIn.SignIn
   setPrimaryButton: SetPrimaryButton

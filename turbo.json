@@ -10,6 +10,12 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
     },
+    "changeset:prepublish": {
+      "dependsOn": ["^changeset:prepublish"]
+    },
+    "changeset:version": {
+      "dependsOn": ["^changeset:version"]
+    },
     "test": {
       "dependsOn": ["build", "^test"]
     },

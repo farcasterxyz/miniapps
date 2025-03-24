@@ -1,4 +1,4 @@
-import * as Errors from '../errors'
+import type * as Errors from '../errors'
 import type { Transport } from '../jsonRpc'
 
 export declare namespace ready {

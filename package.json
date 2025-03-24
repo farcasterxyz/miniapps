@@ -3,6 +3,9 @@
   "name": "frames",
   "scripts": {
     "build": "turbo build",
+    "changeset:prepublish": "turbo run changset:prepublish && turbo run build typecheck --force",
+    "changeset:publish": "pnpm changeset:prepublish && changset version",
+    "changeset:version": "changeset version && turbo run changeset:version && pnpm format",
     "check": "biome check .",
     "check:repo": "sherif",
     "check:types": "turbo typecheck",
@@ -13,7 +16,6 @@
     "knip": "knip",
     "preinstall": "only-allow pnpm",
     "prepare": "pnpm simple-git-hooks",
-    "publish-packages": "turbo run build typecheck --force && changeset version && changeset publish",
     "test": "turbo test",
     "typecheck": "turbo typecheck"
   },
