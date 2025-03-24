@@ -27,73 +27,101 @@ For example:
 
 ## Making a page sharable
 
-Add a special meta tag in the `<head>` section of the page you want to make
+Add a meta tag in the `<head>` section of the page you want to make
 sharable specifying the Frame metadata:
 
 ```html
 <meta name="fc:frame" content="<stringified FrameEmbed JSON>" />
 ```
 
-```ts
-type FrameEmbed = {
-  /** Frame spec version. The literal 'next'. */
-  version: 'next';
-
-  /** 
-   * Image to display. 
-   * Must be 3:2 aspect ratio and less than 10 MB.
-   * The URL must be <= 512 characters.
-   */
-  imageUrl: string;
-
-  button: {
-    /**
-     * Button text.
-     * Max length of 32 characters.
-     */
-    title: string;
-
-    action: {
-      /** 
-       * Action type. 
-       * Must be the literal "launch_frame". 
-       */
-      type: 'launch_frame';
-
-      /**
-       * URL to open.
-       * Max length of 512 characters.
-       */
-      url: string;
-
-      /**
-       * Name of the app.
-       */
-      name: string;
-
-      /**
-       * Splash image URL.
-       * Image must be 200x200px and less than 1MB.
-       * Max 512 characters.
-       */
-      splashImageUrl: string;
-
-      /**
-       * Hex color code
-       *
-       * @example: "#eeeee4"
-       */
-      splashBackgroundColor: string;
-    };
-  };
-};
-```
-You can use the [Warpcast Frame Debug
-Tool](https://warpcast.com/~/developers/frames) to preview a Frame.
-
 When a user shares the URL with your Frame on it in a Farcaster client, the
 Farcaster client will fetch the HTML, see the `fc:frame` meta tag, and use it
 to render a rich card.
+
+
+## Properties
+
+![frame schematic](/frame-schematic.png)
+
+### `version`
+
+The string literal `'next'`.
+
+
+### `imageUrl`
+
+The URL of the image that should be displayed. 
+
+- the image will be displayed at 3:2 aspect ratio.
+- the image less than 10MB
+- The URL must be \<= 512 characters
+
+
+### `button.title`
+
+This text will be rendered in the button. Use a clear call-to-action that hints
+to the user what action they can take in your app.
+
+
+### `button.action.type`
+
+The string literal `'launch_frame'`.
+
+
+### `button.action.url`
+
+The URL that the user will be sent to within your app.
+
+
+### `button.action.name` (optional)
+
+Name of the application. Defaults to name of your application in `farcaster.json`.
+
+
+### `button.action.splashImageUrl` (optional)
+
+Splash image URL. Defaults to `splashImageUrl` specified in your application's `farcaster.json`.
+
+### `button.action.splashBackgroundColor` (optional)
+
+Splash image Color. Defaults to `splashBackgroundColor` specified in your application's `farcaster.json`.
+
+
+## Example 
+
+```typescript 
+const frame = {
+  version: "next",
+  imageUrl: "https://yoink.party/framesV2/opengraph-image",
+  button: {
+    title: "🚩 Start",
+    action: {
+      type: "launch_frame",
+      url: "https://yoink.party/framesV2",
+      name:"Yoink!",
+      splashImageUrl: "https://yoink.party/logo.png",
+      splashBackgroundColor:"#f5f0ec"
+    }
+  }
+}
+```
+
+```html
+<html lang="en">
+  <head>
+    <!-- head content -->
+    <meta name="fc:frame" content='{"version":"next","imageUrl":"https://yoink.party/framesV2/opengraph-image","button":{"title":"🚩 Start","action":{"type":"launch_frame","name":"Yoink!","url":"https://yoink.party/framesV2","splashImageUrl":"https://yoink.party/logo.png","splashBackgroundColor":"#f5f0ec"}}}' />
+  </head>
+  <body>
+    <!-- page content -->
+  </body>
+</html>
+```
+
+## Debugging 
+
+You can use the [Warpcast Frame Debug
+Tool](https://warpcast.com/~/developers/frames) to preview a Frame.
 
 
 ## Caching
@@ -107,6 +135,15 @@ will be attached to the cast and won't be updated even if the Frame data at
 that URL gets changed.
 
 TODO add link to metadata cache busting tool
+
+
+### Lifecycle
+
+1. App adds an `fc:frame` meta tag to a page to make it sharable.
+2. User copies URL and embeds it in a cast.
+3. Farcaster client fetches the URL and attaches the frame metadata to the cast.
+4. Farcaster client injects the cast + embed + attached metadata into thousands of feeds.
+5. User sees cast in feed with a Frame rendered from the attached metadata.
 
 
 ## Advanced Topics 

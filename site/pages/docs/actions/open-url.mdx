@@ -3,6 +3,8 @@ title: addFrame
 description: Opens an external URL
 ---
 
+import { Caption } from '../../../components/Caption';
+
 # openUrl
 
 Opens an external URL.
@@ -10,6 +12,12 @@ Opens an external URL.
 If a user is on mobile `openUrl` can be used to deeplink
 users into different parts of the Farcaster client they
 are using.
+
+![opening a url](/open_url_preview.png)
+
+<Caption>
+  Opening an external url with `openUrl`.
+</Caption>
 
 ## Usage
 
@@ -24,4 +32,4 @@ await sdk.actions.openUrl(url)
 
 ## Return Value
 
-`void`
+`void
