@@ -1,3 +1,7 @@
+export type GlobalErrorType<name extends string = 'Error'> = Error & {
+  name: name
+}
+
 export class BaseError<
   cause extends Error | undefined = undefined,
 > extends Error {
@@ -14,8 +18,4 @@ export declare namespace BaseError {
   type Options<cause extends Error | undefined = Error | undefined> = {
     cause?: cause | undefined
   }
-}
-
-export type GlobalErrorType<name extends string = 'Error'> = Error & {
-  name: name
 }
