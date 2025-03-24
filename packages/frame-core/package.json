@@ -18,9 +18,9 @@
     "build:cjs": "tsc -p tsconfig.node.json",
     "build:esm": "tsc -p tsconfig.json",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest --coverage",
+    "test": "vitest -c ./test/vitest.config.ts run",
+    "test:watch": "vitest -c ./test/vitest.config.ts",
+    "test:coverage": "vitest -c ./test/vitest.config.ts --coverage",
     "version:update": "tsx ./scripts/update-version.ts"
   },
   "files": [

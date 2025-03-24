@@ -5,11 +5,11 @@ export type GlobalErrorType<name extends string = 'Error'> = Error & {
 }
 
 /**
- * Base error class inherited by all errors thrown by ox.
+ * Base error class inherited by all errors thrown by @farcaster/frame-core.
  *
  * @example
  * ```ts
- * import { Errors } from 'ox'
+ * import { Errors } from '@farcaster/frame-core'
  * throw new Errors.BaseError('An error occurred')
  * ```
  */
@@ -47,7 +47,7 @@ export class BaseError<
       return options.docsPath
     })()
 
-    const docsBaseUrl = 'https://oxlib.sh'
+    const docsBaseUrl = 'https://miniapps.xyz'
     const docs = `${docsBaseUrl}${docsPath ?? ''}`
 
     const message = [
