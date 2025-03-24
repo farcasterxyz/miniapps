@@ -1,6 +1,6 @@
-import { type Endpoint, windowEndpoint } from 'comlink'
+import { type MessageChannel, Util } from '@farcaster/frame-core'
 
-const mockEndpoint: Endpoint = {
+const mockEndpoint: MessageChannel.MessageChannel = {
   postMessage() {
     // noop
   },
@@ -12,23 +12,44 @@ const mockEndpoint: Endpoint = {
   },
 }
 
-const webViewEndpoint: Endpoint = {
-  postMessage: (data: unknown) => {
-    console.debug('[webview:req]', data)
-    window.ReactNativeWebView.postMessage(JSON.stringify(data))
-  },
-  addEventListener: (_, listener, ...args) => {
-    document.addEventListener('FarcasterFrameCallback', listener, ...args)
-  },
-  removeEventListener: (_, listener) => {
-    document.removeEventListener('FarcasterFrameCallback', listener)
-  },
+function isWebview(window: Window) {
+  return !!window.ReactNativeWebView && window.top === window
+}
+
+export function webviewEndpoint(): MessageChannel.MessageChannel {
+  return {
+    postMessage: (message: unknown) => {
+      window.ReactNativeWebView.postMessage(Util.stringify(message))
+    },
+    addEventListener: (_, listener, ...args) => {
+      document.addEventListener('message', listener, ...args)
+    },
+    removeEventListener: (_, listener) => {
+      document.removeEventListener('message', listener)
+    },
+  }
+}
+
+export function iframeEndpoint(
+  options: Partial<{ targetOrigin: string }> = {},
+): MessageChannel.MessageChannel {
+  return {
+    postMessage: (message: unknown) => {
+      window.parent.postMessage(message, options.targetOrigin ?? '*')
+    },
+    addEventListener: (_, listener, ...args) => {
+      window.addEventListener('message', listener, ...args)
+    },
+    removeEventListener: (_, listener) => {
+      window.removeEventListener('message', listener)
+    },
+  }
 }
 
 export const endpoint = (() => {
-  // No actions are actually gonna take place during SSR, thus it's safe to return mocked endpoint
+  // Assume SSR, return a mock endpoint
   if (typeof window === 'undefined') return mockEndpoint
-  return window?.ReactNativeWebView
-    ? webViewEndpoint
-    : windowEndpoint(window?.parent ?? window)
+  if (isWebview(window)) return webviewEndpoint()
+
+  return iframeEndpoint()
 })()

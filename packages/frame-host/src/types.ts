@@ -1,13 +1,21 @@
 import type { EmitEthProvider, FrameClientEvent } from '@farcaster/frame-core'
-import type { Endpoint } from './comlink'
 
-export type HostEndpoint = Endpoint & {
-  /**
-   * @deprecated
-   */
+export interface EventSource {
+  addEventListener(
+    type: string,
+    listener: EventListenerOrEventListenerObject,
+    options?: {},
+  ): void
+
+  removeEventListener(
+    type: string,
+    listener: EventListenerOrEventListenerObject,
+    options?: {},
+  ): void
+}
+
+export interface HostEndpoint extends EventSource {
+  postMessage(message: any): void
   emit: (event: FrameClientEvent) => void
-  /**
-   * @deprecated
-   */
   emitEthProvider: EmitEthProvider
 }

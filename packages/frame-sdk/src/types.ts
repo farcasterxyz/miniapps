@@ -25,7 +25,8 @@ type SetPrimaryButton = (options: SetPrimaryButtonOptions) => Promise<void>
 export type FrameSDK = {
   context: Promise<Context.FrameContext>
   actions: {
-    ready: (options?: Partial<Ready.ReadyOptions>) => Promise<void>
+    add: () => Promise<void>
+    ready: (options?: Partial<Ready.ready.Options>) => Promise<void>
     openUrl: (url: string) => Promise<void>
     close: () => Promise<void>
     setPrimaryButton: SetPrimaryButton

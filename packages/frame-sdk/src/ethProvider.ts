@@ -11,7 +11,7 @@ import type {
 } from 'mipd'
 import { Provider, RpcRequest, RpcResponse } from 'ox'
 import { frameHost } from './frameHost'
-import { transport } from './transport'
+import { endpoint } from './endpoint'
 
 const emitter = Provider.createEmitter()
 const store = RpcRequest.createStore()
@@ -42,7 +42,7 @@ export const provider: Provider.Provider = Provider.from({
         }
       }
 
-      transport.postMessage({
+      endpoint.postMessage({
         source: 'farcaster-eth-provider-request',
         payload: request,
       })
@@ -78,7 +78,7 @@ function listener(ev: Event) {
   }
 }
 
-transport.addEventListener('message', listener)
+endpoint.addEventListener('message', listener)
 
 export function announceProvider(
   detail: AnnounceProviderParameters,

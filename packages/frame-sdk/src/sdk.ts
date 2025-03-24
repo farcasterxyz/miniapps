@@ -1,54 +1,39 @@
 import {
   AddFrame,
-  type JsonRpc,
+  JsonRpc,
   type MessageChannel,
   Provider,
   SignIn,
 } from '@farcaster/frame-core'
 import type { EIP1193Provider } from 'mipd'
-import { RpcRequest, RpcResponse, type RpcSchema } from 'ox'
 import { announceProvider } from './ethProvider'
 import * as EthProvider from './ethProvider'
 import { frameHost } from './frameHost'
-import { transport } from './transport'
+import { endpoint } from './endpoint'
 import type { FrameSDK } from './types'
 
 const emitter = Provider.createEmitter()
 
-const pendingRequestCallbacks: Record<
-  string,
-  (response: JsonRpc.Response) => void
-> = {}
+const pendingRequestCallbacks: Record<string, (response: never) => void> = {}
 
-const store = RpcRequest.createStore<JsonRpc.Schema>()
-
-export const request = <
-  methodName extends RpcSchema.ExtractMethodName<JsonRpc.Schema>,
->(
-  parameters: RpcSchema.ExtractRequest<JsonRpc.Schema, methodName>,
-): Promise<RpcSchema.ExtractReturnType<JsonRpc.Schema, methodName>> => {
-  return new Promise((resolve, reject) => {
-    const request = store.prepare<methodName>(parameters as never)
-
-    pendingRequestCallbacks[request.id] = (response: JsonRpc.Response) => {
-      try {
-        resolve(
-          // @ts-expect-error
-          RpcResponse.parse<JsonRpc.Response>(response, {
-            request,
-          }),
-        )
-      } catch (e) {
-        reject(e)
+const transport = JsonRpc.createTransport({
+  async request(request) {
+    return new Promise((resolve, reject) => {
+      pendingRequestCallbacks[request.id] = (response) => {
+        try {
+          resolve(response)
+        } catch (e) {
+          reject(e)
+        }
       }
-    }
 
-    transport.postMessage({
-      source: 'farcaster-mini-app-request',
-      payload: request,
+      endpoint.postMessage({
+        source: 'farcaster-mini-app-request',
+        payload: request,
+      })
     })
-  })
-}
+  },
+})
 
 function listener(ev: Event) {
   if (!(ev instanceof MessageEvent) || typeof ev.data === 'string') {
@@ -94,16 +79,19 @@ function listener(ev: Event) {
   }
 }
 
-transport.addEventListener('message', listener)
+endpoint.addEventListener('message', listener)
 
 export const sdk: FrameSDK = {
   ...emitter,
   get context() {
-    return request({ method: 'app_context' })
+    return transport.request({ method: 'app_context' })
   },
   actions: {
+    add() {
+      return transport.request({ method: 'app_add' })
+    },
     async ready() {
-      return await request({ method: 'app_ready' })
+      return await transport.request({ method: 'app_ready' })
     },
     setPrimaryButton: frameHost.setPrimaryButton.bind(frameHost),
     close: frameHost.close.bind(frameHost),

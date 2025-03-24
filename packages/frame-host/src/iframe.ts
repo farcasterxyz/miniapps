@@ -1,12 +1,11 @@
 import type { FrameHost, MessageChannel } from '@farcaster/frame-core'
 import type { Provider } from 'ox'
-import { exposeProvider, exposeToEndpoint } from './helpers/endpoint'
-import {
-  exposeProvider as exposeEthProvider,
-  wrapProviderRequest,
-} from './helpers/provider'
-import { wrapHandlers } from './helpers/sdk'
-import { fromSDK } from './host'
+import { exposeProvider } from './appProvider'
+import { exposeProvider as exposeEthProvider } from './ethProvider'
+import { exposeToEndpoint } from './v0/endpoint'
+import { wrapProviderRequest } from './v0/provider'
+import { wrapHandlers } from './v0/sdk'
+import { fromHost } from './host'
 import type { HostEndpoint } from './types'
 
 /**
@@ -142,8 +141,8 @@ export function exposeToIframe({
     }
   })()
 
-  const frameProvider = fromSDK({
-    sdk: extendedSdk,
+  const frameProvider = fromHost({
+    host: extendedSdk,
   })
 
   const unexposeProvider = exposeProvider({

@@ -1,23 +1,27 @@
 import { Provider, type WireFrameHost } from '@farcaster/frame-core'
 import { RpcResponse } from 'ox'
 
-export function fromSDK({
-  sdk,
+export function fromHost({
+  host,
 }: {
-  sdk: WireFrameHost
+  host: WireFrameHost
 }): Provider.Provider {
   const emitter = Provider.createEmitter()
 
   // @ts-expect-error
   return {
     ...emitter,
-    async request({ method }) {
+    async request({ method, params }) {
       try {
         switch (method) {
           case 'app_context':
-            return sdk.context as never
+            return host.context as never
           case 'app_ready':
-            return sdk.ready() as never
+            return host.ready(params as never) as never
+          case 'app_add':
+            return host.addFrame() as never
+          case 'app_open_url':
+            return host.openUrl(params as never) as never
           default:
             throw new RpcResponse.MethodNotSupportedError()
         }

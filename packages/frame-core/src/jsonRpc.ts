@@ -1,8 +1,7 @@
-import type { RpcRequest, RpcResponse, RpcSchema } from 'ox'
+import { RpcRequest, RpcResponse, type RpcSchema } from 'ox'
 import type { openUrl } from './actions/OpenUrl'
 import type { ready } from './actions/Ready'
 import type { FrameContext } from './context'
-import * as Errors from './errors'
 
 export type Schema = RpcSchema.From<
   | {
@@ -36,47 +35,47 @@ export type Schema = RpcSchema.From<
 >
 
 export type Request = RpcRequest.RpcRequest<Schema>
-export type Response = RpcResponse.RpcResponse<Schema>
 
-export type RequestFn = <
-  methodName extends RpcSchema.MethodNameGeneric<Schema>,
->(
-  parameters: RpcSchema.ExtractRequest<Schema, methodName>,
-) => Promise<
+export type Response<methodName extends RpcSchema.ExtractMethodName<Schema>> =
   RpcResponse.RpcResponse<RpcSchema.ExtractReturnType<Schema, methodName>>
+
+export type ResponseReturnType<
+  methodName extends RpcSchema.ExtractMethodName<Schema>,
+> = RpcResponse.RpcResponse<RpcSchema.ExtractReturnType<Schema, methodName>>
+
+export type RequestFn<raw extends boolean = false> = <
+  methodName extends RpcSchema.ExtractMethodName<Schema>,
+>(
+  parameters: raw extends true
+    ? RpcRequest.RpcRequest<Schema>
+    : RpcSchema.ExtractRequest<Schema, methodName>,
+) => Promise<
+  raw extends true
+    ? Response<methodName>
+    : RpcSchema.ExtractReturnType<Schema, methodName>
 >
 
 export type Transport = {
-  request: RequestFn
+  request: RequestFn<false>
 }
 
-type TransportConfig = {
-  request: RequestFn
+export type TransportConfig = {
+  request: RequestFn<true>
 }
 
-export const createTransport = ({ request }: TransportConfig): Transport => ({
-  request,
-})
+export const createTransport = ({
+  request: requestFn,
+}: TransportConfig): Transport => {
+  const store = RpcRequest.createStore<Schema>()
 
-export type RequestHandler = (request: Request) => Promise<Response>
+  return {
+    async request(parameters) {
+      const request = store.prepare(parameters as never)
+      const response = await requestFn(request as never)
 
-export class RpcRequestError extends Errors.BaseError {
-  override name = 'JsonRpc.RpcRequestError'
-
-  code: number
-  data?: unknown
-
-  constructor({
-    error,
-  }: {
-    body: { [x: string]: unknown } | { [y: string]: unknown }[]
-    error: { code: number; data?: unknown; message: string }
-    url: string
-  }) {
-    super('RPC request failed.', {
-      cause: error as any,
-    })
-    this.code = error.code
-    this.data = error.data
+      return RpcResponse.parse(response as never, {
+        request,
+      })
+    },
   }
 }
