@@ -24,7 +24,7 @@ export class BaseError<
   override cause: cause
   override name = 'BaseError'
 
-  version = `ox@${getVersion()}`
+  version = `@farcaster/frame-core@${getVersion()}`
 
   constructor(shortMessage: string, options: BaseError.Options<cause> = {}) {
     const details = (() => {
