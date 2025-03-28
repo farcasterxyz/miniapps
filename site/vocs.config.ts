@@ -60,6 +60,10 @@ export default defineConfig({
             link: '/docs/guides/loading',
           },
           {
+            text: 'Sharing your app',
+            link: '/docs/guides/sharing',
+          },
+          {
             text: 'Interacting with wallets',
             link: '/docs/guides/wallets',
           },
@@ -70,10 +74,6 @@ export default defineConfig({
           {
             text: 'Publishing your app',
             link: '/docs/guides/publishing',
-          },
-          {
-            text: 'Sharing your app',
-            link: '/docs/guides/sharing',
           },
           {
             text: 'Authenticating users',
