@@ -28,9 +28,18 @@ import { sdk } from '@farcaster/frame-sdk'
 await sdk.actions.ready();
 ```
 
-To make the animation smooth it's generally recommended to wait until all the
-elements in your interface are loaded before calling ready. This will avoid a
-jarring effect where the user sees a cascade of loading screens.
+**You should call ready as soon as possible while avoiding jitter and content
+reflows.**
+
+Minize loading time for you app by following web performance best practices:
+- [Learn about web performance](https://web.dev/learn/performance)
+- [Test your app's speed and diagnose performance issues](https://pagespeed.web.dev/analysis/https-pagespeed-web-dev/bywca5kqd1?form_factor=mobile)
+
+<br/>
+
+To avoid jitter and content reflowing:
+- Don't call ready your interface has loaded
+- Use placeholders and skeleton states if additional loading is required
 
 
 ### Disabling native gestures
