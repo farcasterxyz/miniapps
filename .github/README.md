@@ -44,7 +44,7 @@ For documentation and guides, visit [miniapps.farcaster.xyz](https://miniapps.fa
 
 For fast, casual conversations:
 
-[Join the Frames Developer Chat on Warpcast](https://warpcast.com/~/group/X2P7HNc4PHTriCssYHNcmQ)
+[Join the Mini Apps Developer Chat on Warpcast](https://warpcast.com/~/group/X2P7HNc4PHTriCssYHNcmQ)
 
 For slow, formal conversations that would benefit from being searchable:
 
