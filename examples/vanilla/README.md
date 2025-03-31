@@ -1,3 +1,3 @@
 # Vanilla Example
 
-Minimal example demonstrating how a Frame Host and Frame interact via postMessage.
+Minimal example demonstrating how a Mini App Host and Mini App interact via postMessage.

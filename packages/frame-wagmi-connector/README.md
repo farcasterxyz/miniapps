@@ -1,6 +1,6 @@
 # @farcaster/frame-wagmi-connector
 
-A [Wagmi connector](https://wagmi.sh/) for interacting with wallets in Frames.
+A [Wagmi connector](https://wagmi.sh/) for interacting with wallets in Mini Apps.
 
 
 ## Installation

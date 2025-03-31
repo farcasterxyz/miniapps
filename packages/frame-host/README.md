@@ -1,6 +1,6 @@
 # @farcaster/frame-host
 
-Library for hosting frames
+Library for hosting Mini Apps
 
 ## Installation
 
@@ -10,6 +10,6 @@ pnpm add @farcaster/frame-host
 
 ## Documentation
 
-For documentation and guides, visit [docs.farcaster.xyz](https://docs.farcaster.xyz/developers/frames/v2/).
+For documentation and guides, visit [miniapps.farcaster.xyz](https://miniapps.farcaster.xyz).
 
 

@@ -1,6 +1,6 @@
 # @farcaster/create-mini-app
 
-Get up and running quickly with [Mini Apps](https://miniapps.xyz) by using the `@farcaster/create-mini-app` CLI.
+Get up and running quickly with [Mini Apps](https://miniapps.farcaster.xyz) by using the `@farcaster/create-mini-app` CLI.
 
 ## Installation
 
@@ -14,4 +14,4 @@ yarn create @farcaster/mini-app
 
 ## Documentation
 
-For documentation and guides, visit [miniapps.xyz](https://miniapps.xyz/docs/getting-started).
+For documentation and guides, visit [miniapps.farcaster.xyz](https://miniapps.farcaster.xyz/docs/getting-started).

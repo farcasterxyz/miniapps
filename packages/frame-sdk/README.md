@@ -19,6 +19,6 @@ Or include via a CDN and access via `frame`:
 
 ## Documentation
 
-For documentation and guides, visit [docs.farcaster.xyz](https://docs.farcaster.xyz/developers/frames/v2/).
+For documentation and guides, visit [miniapps.farcaster.xyz](https://miniapps.farcaster.xyz/docs/getting-started).
 
 
