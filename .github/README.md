@@ -3,8 +3,8 @@
 <p align="center">
   <a href="https://miniapps.farcaster.xyz">
       <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/farcasterxyz/frames/main/.github/gh-logo-dark.svg">
-        <img alt="farcaster frames logo" src="https://raw.githubusercontent.com/farcasterxyz/frames/main/.github/gh-logo-light.svg" width="auto" height="30">
+        <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/farcasterxyz/miniapps/main/.github/gh-logo-dark.svg">
+        <img alt="farcaster mini apps logo" src="https://raw.githubusercontent.com/farcasterxyz/miniapps/main/.github/gh-logo-light.svg" width="auto" height="30">
       </picture>
   </a>
 </p>
