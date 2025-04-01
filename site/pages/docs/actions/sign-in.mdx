@@ -7,7 +7,10 @@ import { Caption } from '../../../components/Caption';
 
 # signIn
 
-Sign in the user using [Sign In with Farcaster](https://github.com/farcasterxyz/protocol/discussions/110).
+Request a [Sign in with Farcaster
+(SIWF)](https://docs.farcaster.xyz/developers/siwf/) credential from the user. 
+
+See the guide on [authenticating users](/docs/guides/auth).
 
 ![signing in a user](/sign_in_preview.png)
 
@@ -52,6 +55,8 @@ type SignInResult = {
 }
 ```
 
-This message should be verified using
-[verifySignInMessage](https://docs.farcaster.xyz/aut-kit/client/app/verify-sign-in-message#verifysigninmessage)
-from `@farcaster/auth-kit`.
+:::note
+This message must be sent to your server and verified. See the guide on
+[authenticating with Farcaster](/docs/guides/loading) for more information.
+:::
+

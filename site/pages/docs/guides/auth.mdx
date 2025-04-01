@@ -3,15 +3,12 @@ title: Authenticating users
 description: Authenticating users in your app
 ---
 
+import { Caption } from '../../../components/Caption';
+
 # Authenticating users
 
 An app can use the [signIn](/docs/actions/sign-in) to get a [Sign in with
-Farcaster (SIWF)] authentication credential for the user.
-
-In cases where the Farcaster client (i.e. on mobile) has direct access to the
-user's signing key (e.g. their custody account) this credential can be produced
-silently without the user needing to take any action. Otherwise the user will be
-prompted to sign in.
+Farcaster (SIWF)](https://docs.farcaster.xyz/developers/siwf/) authentication credential for the user.
 
 After requesting the credential, applications can verify it on their server
 using
@@ -24,7 +21,18 @@ Cookies. Since users are signing in through their Farcaster client their
 expectation will be if they sign out of the their Farcaster client they'll be
 signed out of any Mini Apps as well.
 
-:::note
+## User Experience
+
+In cases where the Farcaster client (i.e. on mobile) has direct access to the
+user's signing key (e.g. their custody account) this credential can be produced
+silently without the user needing to take any action. Otherwise the user will be
+prompted to sign in.
+
 Farcaster clients are working to support silent sign-in across all platforms so
 that users are never prompted to sign in on a different device.
-:::
+
+![signing in a user](/sign_in_preview.png)
+
+<Caption>
+  A users opens an app and is automatically signed in
+</Caption>
