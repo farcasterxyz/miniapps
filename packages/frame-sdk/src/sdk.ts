@@ -51,7 +51,8 @@ export const sdk: FrameSDK = {
 
       throw new Error('Unreachable')
     },
-    openUrl: (url: string) => {
+    openUrl: (urlArg: string | { url: string }) => {
+      const url = typeof urlArg === 'string' ? urlArg : urlArg.url
       return frameHost.openUrl(url.trim())
     },
     addFrame: async () => {
