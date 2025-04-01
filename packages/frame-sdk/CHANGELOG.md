@@ -1,5 +1,11 @@
 # @farcaster/frame-kit
 
+## 0.0.32
+
+### Patch Changes
+
+- [#160](https://github.com/farcasterxyz/miniapps/pull/160) [`3bf8c84`](https://github.com/farcasterxyz/miniapps/commit/3bf8c84de7d338667f4ffd2661bf75da41966608) Thanks [@deodad](https://github.com/deodad)! - Added support for object param in openUrl
+
 ## 0.0.31
 
 ### Patch Changes
