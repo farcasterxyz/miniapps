@@ -46,8 +46,11 @@ To avoid jitter and content reflowing:
 
 Mini Apps are rendered in modal elements where certain swipe gestures or clicks
 outside the app surface will result in the app closing. If your app has conflicting 
-gestures you can use this option to disable these native gestures.
+gestures you can set the `disableNativeGestures` flag to disable native gestures.
 
+```ts
+await sdk.actions.ready({ disableNativeGestures: true });
+```
 
 ## Splash Screen
 
