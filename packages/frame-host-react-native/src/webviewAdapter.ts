@@ -1,7 +1,14 @@
 import type { FrameHost } from '@farcaster/frame-host'
 import { exposeToEndpoint, useExposeToEndpoint } from '@farcaster/frame-host'
 import type { Provider } from 'ox'
-import { type RefObject, useCallback, useEffect, useRef } from 'react'
+import {
+  type RefObject,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import type WebView from 'react-native-webview'
 import type { WebViewMessageEvent, WebViewProps } from 'react-native-webview'
 import { type WebViewEndpoint, createWebViewRpcEndpoint } from './webview'
@@ -20,21 +27,21 @@ export function useWebViewRpcAdapter({
   ethProvider?: Provider.Provider
   debug?: boolean
 }) {
-  const endpointRef = useRef<WebViewEndpoint>()
+  const [endpoint, setEndpoint] = useState<WebViewEndpoint>()
 
   const onMessage: WebViewProps['onMessage'] = useCallback(
     (e: WebViewMessageEvent) => {
-      endpointRef.current?.onMessage(e)
+      endpoint?.onMessage(e)
     },
-    [],
+    [endpoint],
   )
 
   useEffect(() => {
-    const endpoint = createWebViewRpcEndpoint(webViewRef)
-    endpointRef.current = endpoint
+    const newEndpoint = createWebViewRpcEndpoint(webViewRef)
+    setEndpoint(newEndpoint)
 
     const cleanup = exposeToEndpoint({
-      endpoint,
+      endpoint: newEndpoint,
       sdk,
       ethProvider,
       frameOrigin: 'ReactNativeWebView',
@@ -43,40 +50,46 @@ export function useWebViewRpcAdapter({
 
     return () => {
       cleanup?.()
-      endpointRef.current = undefined
+      setEndpoint(undefined)
     }
   }, [webViewRef, sdk, ethProvider, debug])
 
-  return {
-    onMessage,
-    emit: endpointRef.current?.emit,
-    emitEthProvider: endpointRef.current?.emitEthProvider,
-  }
+  return useMemo(
+    () => ({
+      onMessage,
+      emit: endpoint?.emit,
+      emitEthProvider: endpoint?.emitEthProvider,
+    }),
+    [onMessage, endpoint],
+  )
 }
 
 export function useWebViewRpcEndpoint(webViewRef: RefObject<WebView>) {
-  const endpointRef = useRef<WebViewEndpoint>()
+  const [endpoint, setEndpoint] = useState<WebViewEndpoint>()
 
   const onMessage: WebViewProps['onMessage'] = useCallback(
     (e: WebViewMessageEvent) => {
-      endpointRef.current?.onMessage(e)
+      endpoint?.onMessage(e)
     },
-    [],
+    [endpoint],
   )
 
   useEffect(() => {
-    const endpoint = createWebViewRpcEndpoint(webViewRef)
-    endpointRef.current = endpoint
+    const newEndpoint = createWebViewRpcEndpoint(webViewRef)
+    setEndpoint(newEndpoint)
 
     return () => {
-      endpointRef.current = undefined
+      setEndpoint(undefined)
     }
   }, [webViewRef])
 
-  return {
-    endpoint: endpointRef.current,
-    onMessage,
-  }
+  return useMemo(
+    () => ({
+      endpoint,
+      onMessage,
+    }),
+    [endpoint, onMessage],
+  )
 }
 
 export function useExposeWebViewToEndpoint({
