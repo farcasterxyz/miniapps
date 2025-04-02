@@ -109,6 +109,10 @@ export default defineConfig({
                 link: '/docs/actions/open-url',
               },
               {
+                text: 'composeCast',
+                link: '/docs/actions/compose-cast',
+              },
+              {
                 text: 'viewProfile',
                 link: '/docs/actions/view-profile',
               },

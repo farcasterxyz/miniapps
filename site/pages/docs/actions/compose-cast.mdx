@@ -1,0 +1,94 @@
+---
+title: composeCast
+description: Open the cast composer with a suggested cast
+---
+
+import { Caption } from '../../../components/Caption';
+
+# composeCast
+
+Open the cast composer with a suggested cast. The user will be able to modify
+the cast before posting it.
+
+![composing a cast](/compose_cast_action.png)
+
+<Caption>
+  An app prompts the user to cast and includes an embed.
+</Caption>
+
+## Usage
+
+```ts twoslash
+/**
+ * Cryptographically secure nonce generated on the server and associated with
+ * the user's session.
+ */ 
+const text = "I just learned how to compose a cast";
+const embeds = ["https://miniapps.farcaster.xyz/docs/actions/compose-cast"] as [string];
+
+// ---cut---
+import { sdk } from '@farcaster/frame-sdk'
+
+await sdk.actions.composeCast({ 
+  text,
+  embeds,
+})
+```
+
+## Parameters
+
+### text (optional)
+
+- **Type:** `string`
+
+Suggested text for the body of the cast.
+  
+Mentions can be included using the human-writeable form (e.g. @farcaster).
+
+
+### embeds (optional)
+
+- **Type:** `[] | [string] | [string, string]`
+
+Suggested embeds. Max two.
+
+
+### parent (optional)
+
+- **Type:** `{ type: 'cast'; hash: string }`
+
+Suggested parent of the cast.
+
+
+### close (optional)
+
+- **Type:** `boolean`
+
+Whether the app should be closed when this action is called. If true the app
+will be closed and the action will resolve with no result.
+
+
+## Return Value
+
+The cast posted by the user, or `undefined` if set to close.
+
+```ts twoslash
+import { sdk } from "@farcaster/frame-sdk";
+
+// ---cut---
+const result = await sdk.actions.composeCast({ 
+//    ^?  
+  text: "I just learned how to compose a cast",
+  embeds: ["https://miniapps.farcaster.xyz/docs/actions/compose-cast"]
+})
+
+
+
+
+
+
+
+
+
+
+```
