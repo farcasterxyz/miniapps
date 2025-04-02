@@ -3,7 +3,7 @@ title: composeCast
 description: Open the cast composer with a suggested cast
 ---
 
-import { Caption } from '../../../components/Caption';
+import { Caption } from '../../../../components/Caption';
 
 # composeCast
 
@@ -24,7 +24,7 @@ the cast before posting it.
  * the user's session.
  */ 
 const text = "I just learned how to compose a cast";
-const embeds = ["https://miniapps.farcaster.xyz/docs/actions/compose-cast"] as [string];
+const embeds = ["https://miniapps.farcaster.xyz/docs/sdk/actions/compose-cast"] as [string];
 
 // ---cut---
 import { sdk } from '@farcaster/frame-sdk'
@@ -79,7 +79,7 @@ import { sdk } from "@farcaster/frame-sdk";
 const result = await sdk.actions.composeCast({ 
 //    ^?  
   text: "I just learned how to compose a cast",
-  embeds: ["https://miniapps.farcaster.xyz/docs/actions/compose-cast"]
+  embeds: ["https://miniapps.farcaster.xyz/docs/sdk/actions/compose-cast"]
 })
 
 

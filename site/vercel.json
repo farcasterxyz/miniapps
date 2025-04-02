@@ -1,0 +1,44 @@
+{
+  "redirects": [
+    {
+      "source": "/docs/context",
+      "destination": "/docs/sdk/context",
+      "statusCode": 301
+    },
+    {
+      "source": "/docs/wallet",
+      "destination": "/docs/sdk/wallet",
+      "statusCode": 301
+    },
+    {
+      "source": "/docs/actions/add-frame",
+      "destination": "/docs/sdk/actions/add-frame",
+      "statusCode": 301
+    },
+    {
+      "source": "/docs/actions/close",
+      "destination": "/docs/sdk/actions/close",
+      "statusCode": 301
+    },
+    {
+      "source": "/docs/actions/ready",
+      "destination": "/docs/sdk/actions/ready",
+      "statusCode": 301
+    },
+    {
+      "source": "/docs/actions/open-url",
+      "destination": "/docs/sdk/actions/open-url",
+      "statusCode": 301
+    },
+    {
+      "source": "/docs/actions/sign-in",
+      "destination": "/docs/sdk/actions/sign-in",
+      "statusCode": 301
+    },
+    {
+      "source": "/docs/actions/view-profile",
+      "destination": "/docs/sdk/actions/view-profile",
+      "statusCode": 301
+    }
+  ]
+}
