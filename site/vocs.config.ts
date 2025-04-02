@@ -24,7 +24,9 @@ export default defineConfig({
     '/': OG_BASE_URL + '?title=%title&description=%description&',
     '/docs/guides':
       OG_BASE_URL + '?title=%title&description=%description&section=Guide',
-    '/docs/actions':
+    '/docs/sdk':
+      OG_BASE_URL + '?title=%title&description=%description&section=SDK',
+    '/docs/sdk/actions':
       OG_BASE_URL + '?title=%title&description=%description&section=Action',
   },
   theme: {
