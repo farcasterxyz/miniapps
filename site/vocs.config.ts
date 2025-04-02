@@ -93,32 +93,32 @@ export default defineConfig({
             collapsed: true,
             items: [
               {
-                text: 'ready',
-                link: '/docs/actions/ready',
-              },
-              {
                 text: 'addFrame',
                 link: '/docs/actions/add-frame',
               },
               {
-                text: 'signIn',
-                link: '/docs/actions/sign-in',
-              },
-              {
-                text: 'openUrl',
-                link: '/docs/actions/open-url',
+                text: 'close',
+                link: '/docs/actions/close',
               },
               {
                 text: 'composeCast',
                 link: '/docs/actions/compose-cast',
               },
               {
-                text: 'viewProfile',
-                link: '/docs/actions/view-profile',
+                text: 'ready',
+                link: '/docs/actions/ready',
               },
               {
-                text: 'close',
-                link: '/docs/actions/close',
+                text: 'openUrl',
+                link: '/docs/actions/open-url',
+              },
+              {
+                text: 'signIn',
+                link: '/docs/actions/sign-in',
+              },
+              {
+                text: 'viewProfile',
+                link: '/docs/actions/view-profile',
               },
             ],
           },
