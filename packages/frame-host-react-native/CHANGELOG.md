@@ -1,5 +1,11 @@
 # @farcaster/frame-host
 
+## 0.0.27
+
+### Patch Changes
+
+- [`7aa44b1`](https://github.com/farcasterxyz/miniapps/commit/7aa44b150809ba599919111f59a1edb1df19b194) Thanks [@deodad](https://github.com/deodad)! - replace ref usages with state
+
 ## 0.0.26
 
 ### Patch Changes
