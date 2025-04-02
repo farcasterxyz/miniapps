@@ -334,6 +334,8 @@ export function expose(
                 return obj.eip6963RequestProvider(...argumentList);
               case 'addFrame':
                 return obj.addFrame(...argumentList);
+              case 'composeCast':
+                return obj.composeCast(...argumentList);
               case 'viewProfile':
                 return obj.viewProfile(...argumentList);
               default:

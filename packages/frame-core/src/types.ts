@@ -1,5 +1,6 @@
 import type {
   AddFrame,
+  ComposeCast,
   Ready,
   SignIn,
   Swap,
@@ -44,6 +45,7 @@ export type WireFrameHost = {
   viewProfile: ViewProfile.ViewProfile
   viewToken: ViewToken.ViewToken
   swap: Swap.Swap
+  composeCast: (options: ComposeCast.Options) => Promise<ComposeCast.Result>
 }
 
 export type FrameHost = {
@@ -64,6 +66,7 @@ export type FrameHost = {
   viewProfile: ViewProfile.ViewProfile
   viewToken: ViewToken.ViewToken
   swap: Swap.Swap
+  composeCast: (options: ComposeCast.Options) => Promise<ComposeCast.Result>
 }
 
 export type EventFrameAddRejected = {
