@@ -117,6 +117,16 @@ should use the open-source NPM packages that can be found in the
 This SDK facilitates communication over a `postMessage` channel available in
 iframes and mobile WebViews.
 
+
+### Versioning
+
+The SDK is versioned using [Semantic Versioning](https://semver.org/). A
+[What's New page](/docs/sdk/changelog) is maintained to communicate developer
+impacting changes. A [lower level
+changelog](https://github.com/farcasterxyz/miniapps/blob/main/packages/frame-sdk/CHANGELOG.md)
+is maintained within the code base to document all changes.
+
+
 ### API
 
 - [context](/docs/sdk/context) - provides information about the context the Mini App is running in
@@ -148,6 +158,12 @@ hosted uniquely identifies the Mini App. The Manifest contains data that allows
 Farcaster clients to verify the author of the app, present the Mini App in
 discovery surfaces like app stores, and allows the Mini App to send
 notifications.
+
+### Versioning
+
+Manfiests will follow a simple versioning scheme where non-breaking
+changes can be added to the same version but a breaking change must accompany a
+version bump.
 
 
 ### Schema
