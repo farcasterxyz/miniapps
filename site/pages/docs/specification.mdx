@@ -11,8 +11,8 @@ A Mini App is a web application that renders inside a Farcaster client.
 ## Mini App Embed
 
 The primary discovery points for Mini Apps are social feeds. Mini App Embeds
-are an OpenGraph-inspired metadata standard that let's any page in an Mini App
-rendered as a rich object that can launch user into an application.
+are an OpenGraph-inspired metadata standard that lets any page in a Mini App
+be rendered as a rich object that can launch user into an application.
 
 ![mini app embed](/frame-schematic.png)
 
@@ -77,15 +77,78 @@ A Mini App URL must have a FrameEmbed in a serialized form in the `fc:frame` met
 }
 ```
 
+
+## App Surface
+
+![https://github.com/user-attachments/assets/66cba3ca-8337-4644-a3ac-ddc625358390](https://github.com/user-attachments/assets/66cba3ca-8337-4644-a3ac-ddc625358390)
+
+
+### Header
+
+Hosts should render a header above the Mini App that includes the name and
+author specified in the manifest. Clients should show the header whenever the
+Mini App is launched.
+
+
+### Splash Screen
+
+Hosts should show a splash screen as soon as the app is launched. The icon
+and background must be specified in the Mini App manifest or embed meta tags.
+The Mini App can hide the splash screen once loading is complete.
+
+![splash schematic](/splash_screen_schematic.png)
+
+
+### Size & Orientation
+
+A Mini App should be rendered in a vertical modal. Mobile Mini App sizes should
+be dictated by device dimensions while web Mini App sizes should be set to
+424x695px.
+
+
+
+## SDK
+
+Mini Apps can communicate with their Host using a JavaScript SDK. At this time
+there is no formal specification for the message passing format, Hosts and Apps
+should use the open-source NPM packages that can be found in the
+[farcasterxyz/miniapps](https://github.com/farcasterxyz/miniapps) repo.
+
+This SDK facilitates communication over a `postMessage` channel available in
+iframes and mobile WebViews.
+
+### API
+
+- [context](/docs/sdk/context) - provides information about the context the Mini App is running in
+
+#### Actions
+- [addFrame](/docs/sdk/actions/add-frame) - Prompts the user to add the Mini App
+- [close](/docs/sdk/actions/close) - Closes the Mini App
+- [composeCast](/docs/sdk/actions/compose-cast) - Prompt the user to cast
+- [ready](/docs/sdk/actions/ready) - Hides the Splash Screen
+- [signin](/docs/sdk/actions/sign-in) - Prompts the user to Sign In with Farcaster
+- [openUrl](/docs/sdk/actions/open-url) - Open an external URL
+- [viewProfile](/docs/sdk/actions/view-profile) - View a Farcaster profile
+
+#### Wallet
+- [ethProvider](/docs/sdk/wallet) - [EIP-1193 Ethereum Provider](https://eips.ethereum.org/EIPS/eip-1193)
+
+### Events
+
+The SDK allows Mini Apps to [subscribe to events](/docs/sdk/events) emitted by the Host.
+
+
 ## Manifest
 
-Mini Apps publish metadata about themselves using a Manifest file at
-`/.well-known/farcaster.json`. The Manifest includes all the data needed for a
-Farcaster client to let users discover, add, and use a Mini App.
+Mini Apps can publish metadata that allows Farcaster clients to more deeply
+integrate with their Mini App. This file is published at
+`/.well-known/farcaster.json` and the [Fully Qualified Domain
+Name](https://en.wikipedia.org/wiki/Fully_qualified_domain_name) where it is
+hosted uniquely identifies the Mini App. The Manifest contains data that allows
+Farcaster clients to verify the author of the app, present the Mini App in
+discovery surfaces like app stores, and allows the Mini App to send
+notifications.
 
-A Mini App is idenitified by the [Fully Qualified Domain
-Name](https://en.wikipedia.org/wiki/Fully_qualified_domain_name) where its
-`farcaster.json` is hosted.
 
 ### Schema
 
@@ -96,7 +159,7 @@ Name](https://en.wikipedia.org/wiki/Fully_qualified_domain_name) where its
 
 #### accountAssociation
 
-The account association verifies authorship to of this domain to a Farcaster
+The account association verifies authorship of this domain to a Farcaster
 account.
 
 The value is set to the JSON representation of a [JSON Farcaster
@@ -194,70 +257,14 @@ Farcaster clients may cache the manifest for a Mini App but should provide a
 way for refreshing the manifest file.
 
 
-## App Surface
-
-![https://github.com/user-attachments/assets/66cba3ca-8337-4644-a3ac-ddc625358390](https://github.com/user-attachments/assets/66cba3ca-8337-4644-a3ac-ddc625358390)
-
-
-### Header
-
-Hosts should render a header above the Mini App that includes the name and
-author specified in the manifest. Clients should show the header whenever the
-Mini App is launched.
-
-
-### Splash Screen
-
-Hosts should show a splash screen as soon as the app is launched. The icon
-and background must be specified in the Mini App manifest or embed meta tags.
-The Mini App can hide the splash screen once loading is complete.
-
-
-### Size & Orientation
-
-A Mini App should be rendered in a vertical modal. Mobile Mini App sizes should
-be dictated by device dimensions while web Mini App sizes should be set to
-424x695px.
-
-
-
-## SDK
-
-Mini Apps can communicate with their Host using a JavaScript SDK. At this time
-there is no formal specification for the message passing format, Hosts and Apps
-should use the open-source NPM packages that can be found in the
-[farcasterxyz/miniapps](https://github.com/farcasterxyz/miniapps) repo.
-
-This SDK facilitates communication over a `postMessage` channel available in
-iframes and mobile WebViews.
-
-### API
-
-- [context](/docs/context) - provides information about the context the Mini App is running in
-
-#### Actions
-- [ready](/docs/ready) - Hides the Splash Screen
-- [addFrame](/docs/add-frame) - Prompts the user to add the Minin App
-- [signin](/docs/sign-in) - Prompts the user to Sign In with Farcaster
-- [openUrl](/docs/open-url) - Open an external URL
-- [viewProfile](/docs/view-profile) - View a Farcaster profile
-- [close](/docs/close) - Closes the Mini App
-
-#### Wallet
-- [ethProvider](/docs/wallet) - [EIP-1193 Ethereum Provider](https://eips.ethereum.org/EIPS/eip-1193)
-
-### Events
-
-The SDK allows Mini Apps to [subscribe to events](/docs/events) emitted by the Host.
-
 ## Adding Mini Apps
 
 Mini Apps can be added to their Farcaster client by users. This enables the user
 to quickly navigate back to the app and the app to send notifications to the
 user.
 
-Mini Apps can prompt the user to add the app during an interactiong with the
-[addFrame](/docs/add-frame) action. Hosts may also let users add Mini
+Mini Apps can prompt the user to add the app during an interaction with the
+[addFrame](/docs/sdk/actions/add-frame) action. Hosts may also let users add Mini
 Apps from discovery surfaces like app stores or featured notifications.
 
 Before a user adds a Mini App the Host should display information about the app
