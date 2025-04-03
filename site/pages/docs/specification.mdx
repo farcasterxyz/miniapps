@@ -10,78 +10,77 @@ A Mini App is a web application that renders inside a Farcaster client.
 
 ## Mini App Embed
 
-A Mini App Embed can be used to share a Mini App page in a feed.
+The primary discovery points for Mini Apps are social feeds. Mini App Embeds
+are an OpenGraph-inspired metadata standard that let's any page in an Mini App
+rendered as a rich object that can launch user into an application.
+
+![mini app embed](/frame-schematic.png)
 
 ### Versioning
 
-Mini Apps will follow [semantic versioning](https://semver.org/) and Mini Apps must declare the version that they support. Apps will choose to render Mini Apps based on the versions they can support.
+Mini App Embeds will follow a simple versioning scheme where non-breaking
+changes can be added to the same version but a breaking change must accompany a
+version bump.
 
-<a name="mini-app-embed-metatags"></a>
-
-### Mini App Embed Metatags
+### Metatags
 
 A Mini App URL must have a FrameEmbed in a serialized form in the `fc:frame` meta tag in the HTML `<head>`. When this URL is rendered in a cast, the image is displayed in a 3:2 ratio with a button underneath. Clicking the button will open a Mini App to the provided action url and use the splash page to animate the transition.
 
 ```html
-<meta name="fc:frame" content="<stringified FrameEmbed JSON>" />
+<meta name="fc:frame" content="<stringified Embed JSON>" />
 ```
 
-```ts
-type FrameEmbed = {
-  // Frame spec version. Required.
-  // Example: "next"
-  version: 'next';
+### Schema
 
-  // Frame image.
-  // Max 512 characters.
-  // Image must be 3:2 aspect ratio and less than 10 MB.
-  // Example: "https://yoink.party/img/start.png"
-  imageUrl: string;
+| Property | Type   | Required | Description             | Constraints                                   |
+|----------|--------|----------|-------------------------|-----------------------------------------------|
+| version  | string | Yes      | Version of the embed.   | Must be "1" or "next"                         |
+| imageUrl | string | Yes      | Image url for the embed | Max 512 characters. Must be 3:2 aspect ratio. |
+| button   | object | Yes      | Button                  |                                               |
 
-  // Button attributes
-  button: {
-    // Button text.
-    // Max length of 32 characters.
-    // Example: "Yoink Flag"
-    title: string;
+#### Button Schema 
 
-    // Action attributes
-    action: {
-      // Action type. Must be "launch_frame".
-      type: 'launch_frame';
+| Property | Type   | Required | Description          | Constraints                |
+|----------|--------|----------|----------------------|----------------------------|
+| title    | string | Yes      | Mini App name.       | Max length 32 characters   |
+| action   | object | Yes      | Action               | Max length 512 characters. |
 
-      // App name
-      // Max length of 32 characters.
-      // Example: "Yoink!"
-      name: string;
 
-      // Frame launch URL.
-      // Max 512 characters.
-      // Example: "https://yoink.party/"
-      url: string;
+#### Action Schema
 
-      // Splash image URL.
-      // Max 512 characters.
-      // Image must be 200x200px and less than 1MB.
-      // Example: "https://yoink.party/img/splash.png"
-      splashImageUrl: string;
+| Property              | Type   | Required | Description                              | Constraints                                  |
+|-----------------------|--------|----------|------------------------------------------|----------------------------------------------|
+| type                  | string | Yes      | Mini App name.                           | Max length 32 characters                     |
+| url                   | string | Yes      | App URL to open                          | Max length 512 characters.                   |
+| name                  | string | No       |                                          | Name of the application                      |
+| splashImageUrl        | string | No       | URL of image to show on loading screen.  | Max length 32 characters. Must be 200x200px. |
+| splashBackgroundColor | string | No       | Hex color code to use on loading screen. | Hex color code.                              |
 
-      // Hex color code.
-      // Example: "#eeeee4"
-      splashBackgroundColor: string;
-    };
-  };
-};
+
+
+##### Example
+
+```json
+{ 
+  "version": "next",
+  "imageUrl": "https://yoink.party/framesV2/opengraph-image",
+  "button": {
+    "title": "🚩 Start",
+    "action": {
+      "type": "launch_frame",
+      "name": "Yoink!",
+      "url": "https://yoink.party/framesV2",
+      "splashImageUrl": "https://yoink.party/logo.png",
+      "splashBackgroundColor": "#f5f0ec"
+    }  
+  }
+}
 ```
 
+## Manifest
 
-SUMMARY OF CHANGES
-- moved mini app embed into it's own section
-
-## farcaster.json Manifest
-
-Mini Apps publish metadata about themselves using a manifest file at
-`/.well-known/farcaster.json`. This manifest includes all the data needed for a
+Mini Apps publish metadata about themselves using a Manifest file at
+`/.well-known/farcaster.json`. The Manifest includes all the data needed for a
 Farcaster client to let users discover, add, and use a Mini App.
 
 A Mini App is idenitified by the [Fully Qualified Domain
@@ -195,7 +194,7 @@ Farcaster clients may cache the manifest for a Mini App but should provide a
 way for refreshing the manifest file.
 
 
-## Mini App Surface
+## App Surface
 
 ![https://github.com/user-attachments/assets/66cba3ca-8337-4644-a3ac-ddc625358390](https://github.com/user-attachments/assets/66cba3ca-8337-4644-a3ac-ddc625358390)
 
@@ -222,7 +221,7 @@ be dictated by device dimensions while web Mini App sizes should be set to
 
 
 
-## Mini App SDK
+## SDK
 
 Mini Apps can communicate with their Host using a JavaScript SDK. At this time
 there is no formal specification for the message passing format, Hosts and Apps
