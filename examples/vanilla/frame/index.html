@@ -10,6 +10,7 @@
     <h1>Vanilla Frame</h1>
   </header>
   <button id="sign">sign hello</button>
+  <button id="compose-cast">compose cast</button>
   <script type="module">
       import { sdk } from 'https://esm.sh/@farcaster/frame-sdk'
       import { createStore } from 'mipd'
@@ -54,6 +55,10 @@
             .then((signature) => {
               alert('You signed:\n' + signature)
             })
+        }
+
+        document.querySelector('#compose-cast').onclick = async () => {
+          await sdk.actions.composeCast({ close: true })
         }
       }, 750)
     </script>

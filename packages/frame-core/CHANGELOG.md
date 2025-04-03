@@ -1,5 +1,11 @@
 # @farcaster/frame-core
 
+## 0.0.30
+
+### Patch Changes
+
+- [#169](https://github.com/farcasterxyz/miniapps/pull/169) [`e0554b7`](https://github.com/farcasterxyz/miniapps/commit/e0554b77543f0f176e7125d9cd03b7ff76762e29) Thanks [@deodad](https://github.com/deodad)! - Added composeCast action
+
 ## 0.0.29
 
 ### Patch Changes

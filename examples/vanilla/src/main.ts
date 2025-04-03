@@ -38,6 +38,13 @@ const frameHost: FrameHost = {
   eip6963RequestProvider: () => {
     announceProvider()
   },
+  async composeCast(options) {
+    if (options.close) {
+      return undefined
+    }
+
+    throw new Error('Not supported')
+  },
 } as FrameHost
 
 const { endpoint } = exposeToIframe({
