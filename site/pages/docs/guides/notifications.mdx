@@ -119,6 +119,7 @@ export const sendNotificationRequestSchema = z.object({
   targetUrl: z.string().max(256),
   tokens: z.string().array().max(100),
 });
+
 export type SendNotificationRequest = z.infer<
   typeof sendNotificationRequestSchema
 >;
@@ -130,12 +131,13 @@ export const sendNotificationResponseSchema = z.object({
     rateLimitedTokens: z.array(z.string()),
   }),
 });
+
 export type SendNotificationResponse = z.infer<
   typeof sendNotificationResponseSchema
 >;
 ```
 
-The request is a JSON consisting of:
+The request body is a JSON object:
 
 - `notificationId`: a string (max size 128) that serves as an idempotency key
 and will be passed back to the app via context. A Farcaster client should
@@ -149,10 +151,12 @@ issued. Max 256 characters.
 - `tokens`: an array of tokens (for that `url`) to send the notification to.
 Max 100 per call.
 
-Note that client servers may impose rate limits per `token`. Warpcast enforces the following rate limits:
+:::tip
+If your are sending the same notification to multiple users, you can send up to
+100 in a single request by providing multiple `tokens`.
+:::
 
-- 1 notification per 30 seconds per `token`
-- 100 notifications per day per `token`
+<br />
 
 The response from the client server must be an HTTP 200 OK, with a `result` object that contains 3 arrays:
 
@@ -162,9 +166,9 @@ those for which the request is a duplicate (same `notificationId` used before)
 again. This could happen if the user disabled notifications.
 - `rateLimitedTokens`: tokens for which the rate limit was exceeded. You can try later.
 
-Once a user clicks the notification, the Farcaster client will:
+When a user clicks the notification, the Farcaster client will:
 
-- Open `targetUrl`
+- Open your Mini App at `targetUrl`
 - Set the `context.location` to a `FrameLocationNotificationContext`
 
 ```ts
@@ -177,6 +181,14 @@ export type FrameLocationNotificationContext = {
   };
 };
 ```
+
+#### Rate Limits
+
+Host servers may impose rate limits per `token`. The standard rate limits,
+which are enforced by Warpcast, are:
+
+- 1 notification per 30 seconds per `token`
+- 100 notifications per day per `token`
 
 ::::
 

@@ -423,8 +423,6 @@ The Mini App server calls the `notificationUrl` with:
 - `targetUrl`: the target Mini App URL to open when a user clicks the notification. It must match the domain for which the notification token was issued.
 - `tokens`: an array of tokens (for that `notificationUrl`) to send the notification to. Client servers may impose a limit here, e.g. max 10000 tokens.
 
-Client servers may also impose a rate limit per `token`, e.g. 5 sends per 5 minutes.
-
 The response from the client server must be an HTTP 200 OK, with the following 3 arrays:
 
 - `successTokens`: tokens for which the notification succeeded
@@ -436,9 +434,27 @@ Once a user has been notified, when clicking the notification the client app wil
 - Open `targetUrl`
 - Set the context to the notification, see `NotificationLaunchContext`
 
-Hosts should:
+#### Rate Limits
 
-1. Display a list of added Mini Apps somewhere in their UI, allowing the user to enable/disable notifications.
-2. Show notifications from added Mini Apps along with other in-app notifications.
+Host servers should impose rate limits per `token` to prevent intentional or accidentally abuse. The recommended rate limits are:
+- 1 notification per 30 seconds per `token`
+- 100 notifications per day per `token`
 
+
+#### Displaying notifications
+
+Hosts should display a user's Mini App notifications from their UI as follows:
+
+![notifications schematic](/notification_schematic.png)
+
+
+#### Controls
+
+Hosts should provide controls for the user to toggle their notification
+settings for their apps.
+
+- Users should be able to navigate to settings for any Mini App they've added
+  and be able to enable or disable notifications from this menu
+- Users should be able to disable notifications for a Mini App directly from a
+  notification from that Mini App
 
