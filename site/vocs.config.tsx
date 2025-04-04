@@ -16,6 +16,7 @@ export default defineConfig({
       'https://github.com/farcasterxyz/frames/edit/main/site/pages/:path',
     text: 'Edit on GitHub',
   },
+  iconUrl: '/favicon.png',
   logoUrl: {
     light: '/logo-light.svg',
     dark: '/logo-dark.svg',
