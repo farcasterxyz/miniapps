@@ -15,8 +15,8 @@ let disconnect: Connector['onDisconnect'] | undefined
 export function farcasterFrame() {
   return createConnector<typeof FrameSDK.wallet.ethProvider>((config) => ({
     id: 'farcaster',
-    name: 'Farcaster Frame',
-    rdns: 'xyz.farcaster',
+    name: 'Farcaster',
+    rdns: 'xyz.farcaster.MiniAppWallet',
     icon: 'https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/055c25d6-7fe7-4a49-abf9-49772021cf00/original',
     type: farcasterFrame.type,
 
