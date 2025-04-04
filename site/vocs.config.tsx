@@ -20,6 +20,17 @@ export default defineConfig({
     light: '/logo-light.svg',
     dark: '/logo-dark.svg',
   },
+  head() {
+    return (
+      <>
+        <script
+          src="https://cdn.usefathom.com/script.js"
+          data-site="FJKRBMZB"
+          defer
+        />
+      </>
+    )
+  },
   ogImageUrl: {
     '/': OG_BASE_URL + '?title=%title&description=%description&',
     '/docs/guides':
