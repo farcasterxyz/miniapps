@@ -43,6 +43,13 @@ export default defineConfig({
   theme: {
     accentColor: '#8a63d2',
   },
+  search: {
+    boostDocument(documentId) {
+      if (documentId.startsWith('pages/docs')) return 3
+      if (documentId.startsWith('pages/docs/specification')) return 2
+      return 1
+    },
+  },
   topNav: [
     {
       text: 'Examples',
