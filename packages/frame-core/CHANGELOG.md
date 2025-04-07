@@ -1,5 +1,11 @@
 # @farcaster/frame-core
 
+## 0.0.31
+
+### Patch Changes
+
+- [#185](https://github.com/farcasterxyz/miniapps/pull/185) [`c960c03`](https://github.com/farcasterxyz/miniapps/commit/c960c0397c3812ed627f6c2b5ab3927ab02f2366) Thanks [@horsefacts](https://github.com/horsefacts)! - chore: increase URL max length to 1024 characters
+
 ## 0.0.30
 
 ### Patch Changes
