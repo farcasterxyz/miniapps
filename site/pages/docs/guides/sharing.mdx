@@ -50,11 +50,11 @@ The string literal `'next'`.
 
 ### `imageUrl`
 
-The URL of the image that should be displayed. 
+The URL of the image that should be displayed.
 
 - the image will be displayed at 3:2 aspect ratio.
 - the image must be less than 10MB
-- The URL must be \<= 512 characters
+- The URL must be \<= 1024 characters
 
 
 ### `button.title`
@@ -87,9 +87,9 @@ Splash image URL. Defaults to `splashImageUrl` specified in your application's `
 Splash image Color. Defaults to `splashBackgroundColor` specified in your application's `farcaster.json`.
 
 
-## Example 
+## Example
 
-```typescript 
+```typescript
 const frame = {
   version: "next",
   imageUrl: "https://yoink.party/framesV2/opengraph-image",
@@ -118,7 +118,7 @@ const frame = {
 </html>
 ```
 
-## Debugging 
+## Debugging
 
 You can use the [Embed Debug Tool](https://warpcast.com/~/developers/mini-apps/embed) in Warpcast to preview a embed.
 
@@ -156,7 +156,7 @@ a user takes an action in your app to share a embed in a cast.
 At the very least you'll want to setup a embed for the root URL of your application.
 
 
-## Advanced Topics 
+## Advanced Topics
 
 ### Dynamic Embed images
 
@@ -181,7 +181,7 @@ image can get cached and served from CDNs, otherwise users will see a gray
 image in their feed while the dynamic image is generated. You'll also quickly
 rack up a huge bill from your servie provider. The exact time depends on your
 application but opt for the longest time that still keeps the image reasonably
-fresh. If you're needing freshness less than a minute you should reconsider 
+fresh. If you're needing freshness less than a minute you should reconsider
 your design or be prepared to operate a high-performance endpoint.
 
 Here's some more reading if you're interested in doing this:
@@ -192,7 +192,7 @@ Here's some more reading if you're interested in doing this:
 
 If you are generating a dynamic images there's a chance something goes wrong when
 generating the image (for instance, the price of ETH is not available) and you need
-to serve a fallback image. 
+to serve a fallback image.
 
 In this case you should use an extremely short or even 0 `max-age` to prevent the
 error image from getting stuck in any upstream CDNs.

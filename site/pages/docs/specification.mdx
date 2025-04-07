@@ -35,15 +35,15 @@ A Mini App URL must have a FrameEmbed in a serialized form in the `fc:frame` met
 | Property | Type   | Required | Description             | Constraints                                   |
 |----------|--------|----------|-------------------------|-----------------------------------------------|
 | version  | string | Yes      | Version of the embed.   | Must be "1" or "next"                         |
-| imageUrl | string | Yes      | Image url for the embed | Max 512 characters. Must be 3:2 aspect ratio. |
+| imageUrl | string | Yes      | Image url for the embed | Max 1024 characters. Must be 3:2 aspect ratio. |
 | button   | object | Yes      | Button                  |                                               |
 
-#### Button Schema 
+#### Button Schema
 
 | Property | Type   | Required | Description          | Constraints                |
 |----------|--------|----------|----------------------|----------------------------|
 | title    | string | Yes      | Mini App name.       | Max length 32 characters   |
-| action   | object | Yes      | Action               | Max length 512 characters. |
+| action   | object | Yes      | Action               | Max length 1024 characters. |
 
 
 #### Action Schema
@@ -51,7 +51,7 @@ A Mini App URL must have a FrameEmbed in a serialized form in the `fc:frame` met
 | Property              | Type   | Required | Description                              | Constraints                                  |
 |-----------------------|--------|----------|------------------------------------------|----------------------------------------------|
 | type                  | string | Yes      | Mini App name.                           | Max length 32 characters                     |
-| url                   | string | Yes      | App URL to open                          | Max length 512 characters.                   |
+| url                   | string | Yes      | App URL to open                          | Max length 1024 characters.                   |
 | name                  | string | No       |                                          | Name of the application                      |
 | splashImageUrl        | string | No       | URL of image to show on loading screen.  | Max length 32 characters. Must be 200x200px. |
 | splashBackgroundColor | string | No       | Hex color code to use on loading screen. | Hex color code.                              |
@@ -61,7 +61,7 @@ A Mini App URL must have a FrameEmbed in a serialized form in the `fc:frame` met
 ##### Example
 
 ```json
-{ 
+{
   "version": "next",
   "imageUrl": "https://yoink.party/framesV2/opengraph-image",
   "button": {
@@ -72,7 +72,7 @@ A Mini App URL must have a FrameEmbed in a serialized form in the `fc:frame` met
       "url": "https://yoink.party/framesV2",
       "splashImageUrl": "https://yoink.party/logo.png",
       "splashBackgroundColor": "#f5f0ec"
-    }  
+    }
   }
 }
 ```
@@ -217,13 +217,13 @@ Metadata needed to by Hosts to distribute the Mini App.
 |-----------------------|--------|----------|---------------------------------------------------|---------------------------------------------------------------------------------------------|
 | version               | string | Yes      | Manifest version.                                 | Must be '1'.                                                                                |
 | name                  | string | Yes      | Mini App name.                                    | Max length 32 characters                                                                    |
-| homeUrl               | string | Yes      | Default launch URL                                | Max length 512 characters.                                                                  |
-| iconUrl               | string | Yes      | Icon image URL                                    | Max length 512 characters.<br />Image must be 200x200px.                                    |
-| imageUrl              | string | Yes      | Default image to show if shared in a feed.        | Max length 512 characters.<br />Image must be 3:2 aspect ratio.                             |
+| homeUrl               | string | Yes      | Default launch URL                                | Max length 1024 characters.                                                                  |
+| iconUrl               | string | Yes      | Icon image URL                                    | Max length 1024 characters.<br />Image must be 200x200px.                                    |
+| imageUrl              | string | Yes      | Default image to show if shared in a feed.        | Max length 1024 characters.<br />Image must be 3:2 aspect ratio.                             |
 | buttonTitle           | string | Yes      | Default button title to show if shared in a feed. | Max length 32 characters.                                                                   |
 | splashImageUrl        | string | No       | URL of image to show on loading screen.           | Max length 32 characters. Must be 200x200px.                                                |
 | splashBackgroundColor | string | No       | Hex color code to use on loading screen.          | Hex color code.                                                                             |
-| webhookUrl            | string | No       | URL to which clients will POST events.            | Max length 512 characters.<br />Must be set if the Mini App application uses notifications. |
+| webhookUrl            | string | No       | URL to which clients will POST events.            | Max length 1024 characters.<br />Must be set if the Mini App application uses notifications. |
 
 ##### Example
 

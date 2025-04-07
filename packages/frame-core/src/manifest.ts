@@ -65,21 +65,21 @@ export type FrameConfig = {
   /**
    * Default launch URL
    *
-   * Max length of 512 characters.
+   * Max length of 1024 characters.
    */
   homeUrl: string
 
   /**
    * Icon URL
    *
-   * Max length of 512 characters. Image must be 200x200px and less than 1MB.
+   * Max length of 1024 characters. Image must be 200x200px and less than 1MB.
    */
   iconUrl: string
 
   /**
    * Image URL
    *
-   * Max length of 512 characters. Image must have a 3:2 ratio.
+   * Max length of 1024 characters. Image must have a 3:2 ratio.
    */
   imageUrl: string
 
@@ -93,7 +93,7 @@ export type FrameConfig = {
   /**
    * Splash image URL
    *
-   * Max length of 512 characters. Image must be 200x200px and less than 1MB.
+   * Max length of 1024 characters. Image must be 200x200px and less than 1MB.
    */
   splashImageUrl?: string
 
@@ -106,7 +106,7 @@ export type FrameConfig = {
 
   /**
    * URL to which clients will POST server events.
-   * Max 512 characters.
+   * Max length of 1024 characters.
    * Required if the frame application uses notifications.
    */
   webhookUrl?: string

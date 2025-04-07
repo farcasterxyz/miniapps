@@ -4,7 +4,7 @@ export const secureUrlSchema = z
   .string()
   .url()
   .startsWith('https://', { message: 'Must be an https url' })
-  .max(512)
+  .max(1024)
 
 export const frameNameSchema = z.string().max(32)
 export const buttonTitleSchema = z.string().max(32)
