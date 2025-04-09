@@ -100,71 +100,29 @@ looked up when you want to send a notification to a particular user.
 
 ### Send a notification
 
-Once you have a notification token for a user, you can send them a notification
-by sending a `POST` request the `url` associated with that token. 
-
 ![notifications schematic](/notification_schematic.png)
 
-[Example code to send a
-notification](https://github.com/farcasterxyz/frames-v2-demo/blob/7905a24b7cd254a77a7e1a541288379b444bc23e/src/app/api/send-notification/route.ts#L25-L65)
-
-
-Here are the types:
-
-```ts
-export const sendNotificationRequestSchema = z.object({
-  notificationId: z.string().max(128),
-  title: z.string().max(32),
-  body: z.string().max(128),
-  targetUrl: z.string().max(256),
-  tokens: z.string().array().max(100),
-});
-
-export type SendNotificationRequest = z.infer<
-  typeof sendNotificationRequestSchema
->;
-
-export const sendNotificationResponseSchema = z.object({
-  result: z.object({
-    successfulTokens: z.array(z.string()),
-    invalidTokens: z.array(z.string()),
-    rateLimitedTokens: z.array(z.string()),
-  }),
-});
-
-export type SendNotificationResponse = z.infer<
-  typeof sendNotificationResponseSchema
->;
-```
-
-The request body is a JSON object:
-
-- `notificationId`: a string (max size 128) that serves as an idempotency key
-and will be passed back to the app via context. A Farcaster client should
-deliver only one notification per user per `notificationId`, even if called
-multiple times.
-- `title`: title of the notification, max 32 characters
-- `body`: body of the notification, max 128 characters
-- `targetUrl`: the target app URL to open when a user clicks the
-notification. It must match the domain for which the notification token was
-issued. Max 256 characters.
-- `tokens`: an array of tokens (for that `url`) to send the notification to.
-Max 100 per call.
+Once you have a notification token for a user, you can send them a notification
+by sending a `POST` request the `url` associated with that token.
 
 :::tip
-If your are sending the same notification to multiple users, you can send up to
-100 in a single request by providing multiple `tokens`.
+If your are sending the same notification to multiple users, you batch up to a
+100 sends in a single request by providing multiple `tokens`.
 :::
 
+The body of that request must match the following JSON schema:
+
+import SendNotificationRequestSchema from '../../../snippets/sendNotificationRequestSchema.mdx'
+
+<SendNotificationRequestSchema />
+
+The server should response with an HTTP 200 OK and the following JSON body:
+
+import SendNotificationResponseSchema from '../../../snippets/sendNotificationResponseSchema.mdx'
+
+<SendNotificationResponseSchema />
+
 <br />
-
-The response from the client server must be an HTTP 200 OK, with a `result` object that contains 3 arrays:
-
-- `successfulTokens`: tokens for which the notification succeeded, including
-those for which the request is a duplicate (same `notificationId` used before)
-- `invalidTokens`: tokens which are no longer valid and should never be used
-again. This could happen if the user disabled notifications.
-- `rateLimitedTokens`: tokens for which the rate limit was exceeded. You can try later.
 
 When a user clicks the notification, the Farcaster client will:
 
@@ -181,6 +139,9 @@ export type FrameLocationNotificationContext = {
   };
 };
 ```
+
+[Example code to send a
+notification](https://github.com/farcasterxyz/frames-v2-demo/blob/7905a24b7cd254a77a7e1a541288379b444bc23e/src/app/api/send-notification/route.ts#L25-L65)
 
 #### Rate Limits
 

@@ -417,21 +417,15 @@ a user may use.
 
 The Mini App server calls the `notificationUrl` with the following JSON body:
 
-| Property       | Type     | Required | Description                                                                                                                                     | Constraints                                                                  | 
-|----------------|----------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------|
-| notificationId | string   | Yes      | An ID that serves as an idempotency key. When the user opens the Mini App from the notification this ID will be included in the context object. | Maximum length of 128 characters                                             |
-| title          | string   | Yes      | Title of the notification.                                                                                                                      | Max length 32 characters                                                     |
-| body           | string   | Yes      | Body of the notification.                                                                                                                       | Max length 128 characters.                                                   |
-| targetUrl      | string   | Yes      | URL to open when the user clicks the notification.                                                                                              | Max length 1024 characters.<br />Must be on the same domain as the Mini App. |
-| tokens         | string[] | Yes      | Array of notification tokens to send to.                                                                                                        | Max 100 tokens.                                                              |
+import SendNotificationRequestSchema from '../../snippets/sendNotificationRequestSchema.mdx'
+
+<SendNotificationRequestSchema />
 
 The response from the client server must be an HTTP 200 OK with the following JSON body:
 
-| Property          | Type     | Required | Description                                                                                                                                                                        |
-|-------------------|----------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| successTokens     | string[] | Yes      | Tokens for which the notification succeeded.                                                                                                                                       |
-| invalidTokens     | string[] | Yes      | Tokens which are no longer valid and should never be used again. This could happen if the user disabled notifications but for some reason the Mini App server has no record of it. |
-| rateLimitedTokens | string[] | Yes      | Tokens for which the rate limit was exceeded. Mini App server can try later.                                                                                                       |
+import SendNotificationResponseSchema from '../../snippets/sendNotificationResponseSchema.mdx'
+
+<SendNotificationResponseSchema />
 
 Once a user has been notified, when clicking the notification the client app will:
 
