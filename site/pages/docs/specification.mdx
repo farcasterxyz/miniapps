@@ -213,33 +213,17 @@ The `domain` value must exactly match the FQDN of where it is hosted.
 
 Metadata needed to by Hosts to distribute the Mini App.
 
-| Property              | Type   | Required | Description                                       | Constraints                                                                                 |
-|-----------------------|--------|----------|---------------------------------------------------|---------------------------------------------------------------------------------------------|
-| version               | string | Yes      | Manifest version.                                 | Must be '1'.                                                                                |
-| name                  | string | Yes      | Mini App name.                                    | Max length 32 characters                                                                    |
-| homeUrl               | string | Yes      | Default launch URL                                | Max length 1024 characters.                                                                  |
-| iconUrl               | string | Yes      | Icon image URL                                    | Max length 1024 characters.<br />Image must be 200x200px.                                    |
-| imageUrl              | string | Yes      | Default image to show if shared in a feed.        | Max length 1024 characters.<br />Image must be 3:2 aspect ratio.                             |
-| buttonTitle           | string | Yes      | Default button title to show if shared in a feed. | Max length 32 characters.                                                                   |
-| splashImageUrl        | string | No       | URL of image to show on loading screen.           | Max length 32 characters. Must be 200x200px.                                                |
-| splashBackgroundColor | string | No       | Hex color code to use on loading screen.          | Hex color code.                                                                             |
-| webhookUrl            | string | No       | URL to which clients will POST events.            | Max length 1024 characters.<br />Must be set if the Mini App application uses notifications. |
+import ManifestAppConfigSchema from "../../snippets/manifestAppConfigSchema.mdx"
+
+<ManifestAppConfigSchema />
+
 
 ##### Example
 
-```json
-{
-  "version": "1",
-  "name": "Yoink!",
-  "iconUrl": "https://yoink.party/logo.png",
-  "homeUrl": "https://yoink.party/framesV2/",
-  "imageUrl": "https://yoink.party/framesV2/opengraph-image",
-  "buttonTitle": "🚩 Start",
-  "splashImageUrl": "https://yoink.party/logo.png",
-  "splashBackgroundColor": "#f5f0ec",
-  "webhookUrl": "https://yoink.party/api/webhook"
-}
-```
+import ManifestAppConfigExample from "../../snippets/manifestAppConfigExample.mdx"
+
+<ManifestAppConfigExample />
+
 
 ### Example
 

@@ -89,12 +89,12 @@ export default defineConfig({
             link: '/docs/guides/wallets',
           },
           {
-            text: 'Sending notifications',
-            link: '/docs/guides/notifications',
-          },
-          {
             text: 'Publishing your app',
             link: '/docs/guides/publishing',
+          },
+          {
+            text: 'Sending notifications',
+            link: '/docs/guides/notifications',
           },
           {
             text: 'Authenticating users',

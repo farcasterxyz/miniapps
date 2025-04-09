@@ -1,0 +1,38 @@
+### Using localhost
+
+If you are using localhost you'll need to make your local server publicly
+accessible using a tool like ngrok or cloudflared so that Warpcast can scrape
+embed information from your sever.
+
+We recommend using cloudflared since it's free and quick to setup.
+
+::::steps
+
+#### Install cloudflared
+
+```sh
+brew install cloudflared
+```
+
+For more installation options see the [official docs](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads/).
+
+
+#### Expose localhost
+
+Run the following command in your terminal:
+
+```sh
+cloudflared tunnel --url http://localhost:8080
+```
+
+Be sure to specify the correct port for your local server.o
+
+
+#### Use the provided url
+
+`cloudflared` will generate a random subdomain and print it in the terminal for
+you to use. Any traffic to this URL will get sent to you local server.
+
+Enter the provided URL in the Warpcast developer tool.
+
+::::
