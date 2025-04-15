@@ -1,5 +1,5 @@
 import type { FrameHost } from '@farcaster/frame-core'
-import type { Provider } from 'ox'
+import type * as Provider from 'ox/Provider'
 import { useEffect } from 'react'
 import * as Comlink from '../comlink'
 import type { HostEndpoint } from '../types'

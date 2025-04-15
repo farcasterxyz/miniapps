@@ -1,4 +1,6 @@
-import { Provider, type RpcRequest, RpcResponse } from 'ox'
+import * as Provider from 'ox/Provider'
+import type * as RpcRequest from 'ox/RpcRequest'
+import * as RpcResponse from 'ox/RpcResponse'
 import type { HostEndpoint } from '../types'
 
 export function forwardProviderEvents({

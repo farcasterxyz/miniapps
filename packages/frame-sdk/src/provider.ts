@@ -8,7 +8,9 @@ import type {
   EIP1193Provider,
   EIP6963ProviderDetail,
 } from 'mipd'
-import { Provider, RpcRequest, RpcResponse } from 'ox'
+import * as Provider from 'ox/Provider'
+import * as RpcRequest from 'ox/RpcRequest'
+import * as RpcResponse from 'ox/RpcResponse'
 import { frameHost } from './frameHost'
 
 const emitter = Provider.createEmitter()

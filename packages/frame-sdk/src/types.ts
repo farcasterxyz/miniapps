@@ -11,7 +11,7 @@ import type {
   ViewToken,
 } from '@farcaster/frame-core'
 import type { EventEmitter } from 'eventemitter3'
-import type { Provider } from 'ox'
+import type * as Provider from 'ox/Provider'
 
 declare global {
   interface Window {

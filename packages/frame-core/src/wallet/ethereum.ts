@@ -1,4 +1,8 @@
-import type { Address, Provider, RpcRequest, RpcResponse, RpcSchema } from 'ox'
+import type * as Address from 'ox/Address'
+import type * as Provider from 'ox/Provider'
+import type * as RpcRequest from 'ox/RpcRequest'
+import type * as RpcResponse from 'ox/RpcResponse'
+import type * as RpcSchema from 'ox/RpcSchema'
 
 export type EthProvideRequest<
   schema extends RpcSchema.Generic = RpcSchema.Default,

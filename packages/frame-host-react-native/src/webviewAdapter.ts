@@ -1,12 +1,11 @@
 import type { FrameHost } from '@farcaster/frame-host'
 import { exposeToEndpoint, useExposeToEndpoint } from '@farcaster/frame-host'
-import type { Provider } from 'ox'
+import type { Provider } from 'ox/Provider'
 import {
   type RefObject,
   useCallback,
   useEffect,
   useMemo,
-  useRef,
   useState,
 } from 'react'
 import type WebView from 'react-native-webview'
@@ -24,7 +23,7 @@ export function useWebViewRpcAdapter({
 }: {
   webViewRef: RefObject<WebView>
   sdk: Omit<FrameHost, 'ethProviderRequestV2'>
-  ethProvider?: Provider.Provider
+  ethProvider?: Provider
   debug?: boolean
 }) {
   const [endpoint, setEndpoint] = useState<WebViewEndpoint>()
@@ -100,7 +99,7 @@ export function useExposeWebViewToEndpoint({
 }: {
   endpoint: WebViewEndpoint | undefined
   sdk: Omit<FrameHost, 'ethProviderRequestV2'>
-  ethProvider?: Provider.Provider
+  ethProvider?: Provider
   debug?: boolean
 }) {
   useExposeToEndpoint({

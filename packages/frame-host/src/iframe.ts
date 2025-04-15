@@ -1,5 +1,5 @@
 import type { FrameHost } from '@farcaster/frame-core'
-import type { Provider } from 'ox'
+import type { Provider } from 'ox/Provider'
 import * as Comlink from './comlink'
 import { exposeToEndpoint } from './helpers/endpoint'
 import type { HostEndpoint } from './types'
@@ -57,7 +57,7 @@ export function exposeToIframe({
   iframe: HTMLIFrameElement
   sdk: Omit<FrameHost, 'ethProviderRequestV2'>
   frameOrigin: string
-  ethProvider?: Provider.Provider
+  ethProvider?: Provider
   debug?: boolean
 }) {
   const endpoint = createIframeEndpoint({
