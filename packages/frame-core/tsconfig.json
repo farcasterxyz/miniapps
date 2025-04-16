@@ -4,5 +4,5 @@
   "exclude": ["esm", "dist", "build", "node_modules"],
   "compilerOptions": {
     "outDir": "esm"
-   }
+  }
 }
