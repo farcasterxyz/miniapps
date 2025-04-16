@@ -8,26 +8,31 @@ const REPEATED_PUNCTUATION_PATTERN = /(!{2,}|\?{2,}|-{2,})/
 // \u{2702}-\u{27B0} - Dingbats
 // \u{2600}-\u{26FF} - Miscellaneous Symbols
 // \u{2B00}-\u{2BFF} - Miscellaneous Symbols and Arrows
-const EMOJI_PATTERN = /[\u{1F300}-\u{1F9FF}]|[\u{2702}-\u{27B0}]|[\u{2600}-\u{26FF}]|[\u{2B00}-\u{2BFF}]/u
+const EMOJI_PATTERN =
+  /[\u{1F300}-\u{1F9FF}]|[\u{2702}-\u{27B0}]|[\u{2600}-\u{26FF}]|[\u{2B00}-\u{2BFF}]/u
 
-export const createSimpleStringSchema = ({max, noSpaces}: {max?: number, noSpaces?: boolean} = {}) => {
-  const stringValidations = noSpaces 
-    ? z.string().max(max ?? Infinity).regex(/^\S*$/, 'Spaces are not allowed')
-    : z.string().max(max ?? Infinity)
+export const createSimpleStringSchema = ({
+  max,
+  noSpaces,
+}: { max?: number; noSpaces?: boolean } = {}) => {
+  const stringValidations = noSpaces
+    ? z
+        .string()
+        .max(max ?? Number.POSITIVE_INFINITY)
+        .regex(/^\S*$/, 'Spaces are not allowed')
+    : z.string().max(max ?? Number.POSITIVE_INFINITY)
 
   return stringValidations
-    .refine(
-      (value) => !EMOJI_PATTERN.test(value),
-      { message: 'Emojis and symbols are not allowed' }
-    )
-    .refine(
-      (value) => !SPECIAL_CHARS_PATTERN.test(value),
-      { message: 'Special characters (@, #, $, %, ^, &, *, +, =, /, \\, |, ~, «, ») are not allowed' }
-    )
-    .refine(
-      (value) => !REPEATED_PUNCTUATION_PATTERN.test(value),
-      { message: 'Repeated punctuations (!!, ??, --) are not allowed' }
-    )
+    .refine((value) => !EMOJI_PATTERN.test(value), {
+      message: 'Emojis and symbols are not allowed',
+    })
+    .refine((value) => !SPECIAL_CHARS_PATTERN.test(value), {
+      message:
+        'Special characters (@, #, $, %, ^, &, *, +, =, /, \\, |, ~, «, ») are not allowed',
+    })
+    .refine((value) => !REPEATED_PUNCTUATION_PATTERN.test(value), {
+      message: 'Repeated punctuations (!!, ??, --) are not allowed',
+    })
 }
 
 export const secureUrlSchema = z

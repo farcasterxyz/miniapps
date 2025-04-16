@@ -1,11 +1,11 @@
 import { z } from 'zod'
 import {
   buttonTitleSchema,
+  createSimpleStringSchema,
   encodedJsonFarcasterSignatureSchema,
   frameNameSchema,
   hexColorSchema,
   secureUrlSchema,
-  createSimpleStringSchema,
 } from './shared'
 
 const primaryCategorySchema = z.enum([
@@ -21,7 +21,7 @@ const primaryCategorySchema = z.enum([
   'education',
   'developer-tools',
   'entertainment',
-  'art-creativity'
+  'art-creativity',
 ])
 
 export const domainFrameConfigSchema = z.object({
@@ -45,15 +45,18 @@ export const domainFrameConfigSchema = z.object({
   splashBackgroundColor: hexColorSchema.optional(),
   webhookUrl: secureUrlSchema.optional(),
   /** see: https://github.com/farcasterxyz/miniapps/discussions/191 */
-  subtitle: createSimpleStringSchema({max: 30}).optional(),
-  description: createSimpleStringSchema({max: 170}).optional(),
+  subtitle: createSimpleStringSchema({ max: 30 }).optional(),
+  description: createSimpleStringSchema({ max: 170 }).optional(),
   screenshotUrls: z.array(secureUrlSchema).max(3).optional(),
   primaryCategory: primaryCategorySchema.optional(),
-  tags: z.array(createSimpleStringSchema({max: 20, noSpaces: true})).max(5).optional(),
+  tags: z
+    .array(createSimpleStringSchema({ max: 20, noSpaces: true }))
+    .max(5)
+    .optional(),
   heroImageUrl: secureUrlSchema.optional(),
-  tagline: createSimpleStringSchema({max: 30}).optional(),
-  ogTitle: createSimpleStringSchema({max: 30}).optional(),
-  ogDescription: createSimpleStringSchema({max: 100}).optional(),
+  tagline: createSimpleStringSchema({ max: 30 }).optional(),
+  ogTitle: createSimpleStringSchema({ max: 30 }).optional(),
+  ogDescription: createSimpleStringSchema({ max: 100 }).optional(),
   ogImageUrl: secureUrlSchema.optional(),
 })
 

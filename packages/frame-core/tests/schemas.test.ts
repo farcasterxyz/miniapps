@@ -4,7 +4,6 @@ import { actionSchema, createSimpleStringSchema } from '../src/schemas'
 describe('createSimpleStringSchema', () => {
   test('valid string', () => {
     const result = createSimpleStringSchema().safeParse('test: this is valid!')
-    console.log(result.error)
     expect(result.success).toBe(true)
   })
 
@@ -12,24 +11,26 @@ describe('createSimpleStringSchema', () => {
     const result = createSimpleStringSchema().safeParse('test@#$%^&*()')
     expect(result.success).toBe(false)
   })
-  
+
   test('no repeated punctuation', () => {
     const result = createSimpleStringSchema().safeParse('test!!')
     expect(result.success).toBe(false)
   })
-  
+
   test('no emojis', () => {
     const result = createSimpleStringSchema().safeParse('test👍')
     expect(result.success).toBe(false)
   })
 
   test('no spaces', () => {
-    const result = createSimpleStringSchema({noSpaces: true}).safeParse('test with spaces')
+    const result = createSimpleStringSchema({ noSpaces: true }).safeParse(
+      'test with spaces',
+    )
     expect(result.success).toBe(false)
   })
 
   test('max length', () => {
-    const result = createSimpleStringSchema({max: 5}).safeParse('test length')
+    const result = createSimpleStringSchema({ max: 5 }).safeParse('test length')
     expect(result.success).toBe(false)
   })
 })
