@@ -1,5 +1,11 @@
 # @farcaster/frame-host
 
+## 0.0.31
+
+### Patch Changes
+
+- [#198](https://github.com/farcasterxyz/miniapps/pull/198) [`a414c75`](https://github.com/farcasterxyz/miniapps/commit/a414c75489bdcd290ec015cbc99925403dc077d9) Thanks [@horsefacts](https://github.com/horsefacts)! - fix: check event origin
+
 ## 0.0.30
 
 ### Patch Changes
