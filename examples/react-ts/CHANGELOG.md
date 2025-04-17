@@ -1,5 +1,13 @@
 # react-ts
 
+## 0.0.6
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @farcaster/frame-sdk@0.0.35
+  - @farcaster/frame-wagmi-connector@0.0.23
+
 ## 0.0.5
 
 ### Patch Changes

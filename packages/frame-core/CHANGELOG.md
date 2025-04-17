@@ -1,5 +1,12 @@
 # @farcaster/frame-core
 
+## 0.0.32
+
+### Patch Changes
+
+- [#195](https://github.com/farcasterxyz/miniapps/pull/195) [`2617d14`](https://github.com/farcasterxyz/miniapps/commit/2617d145a6f965643857b22e715ced42e71a7c0d) Thanks [@gabrielayuso](https://github.com/gabrielayuso)! - - Introduced new manifest metadata fields (see [discussions/191](https://github.com/farcasterxyz/miniapps/discussions/191))
+  - Deprecated `imageUrl` and `buttonTitle` (see [discussions/194](https://github.com/farcasterxyz/miniapps/discussions/194))
+
 ## 0.0.31
 
 ### Patch Changes
