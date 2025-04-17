@@ -51,7 +51,7 @@ A Mini App URL must have a FrameEmbed in a serialized form in the `fc:frame` met
 | Property              | Type   | Required | Description                              | Constraints                                  |
 |-----------------------|--------|----------|------------------------------------------|----------------------------------------------|
 | type                  | string | Yes      | Mini App name.                           | Max length 32 characters                     |
-| url                   | string | Yes      | App URL to open                          | Max length 1024 characters.                   |
+| url                   | string | No       | App URL to open. If not provided, defaults to the current webpage URL (including query parameters). | Max length 1024 characters.                   |
 | name                  | string | No       |                                          | Name of the application                      |
 | splashImageUrl        | string | No       | URL of image to show on loading screen.  | Max length 32 characters. Must be 200x200px. |
 | splashBackgroundColor | string | No       | Hex color code to use on loading screen. | Hex color code.                              |

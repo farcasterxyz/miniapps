@@ -11,7 +11,7 @@ import {
 export const actionLaunchFrameSchema = z.object({
   type: z.literal('launch_frame'),
   name: frameNameSchema,
-  url: secureUrlSchema,
+  url: secureUrlSchema.optional(),
   splashImageUrl: secureUrlSchema.optional(),
   splashBackgroundColor: hexColorSchema.optional(),
 })
