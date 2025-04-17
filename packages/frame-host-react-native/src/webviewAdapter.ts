@@ -17,11 +17,13 @@ import { type WebViewEndpoint, createWebViewRpcEndpoint } from './webview'
  */
 export function useWebViewRpcAdapter({
   webViewRef,
+  domain,
   sdk,
   ethProvider,
   debug = false,
 }: {
   webViewRef: RefObject<WebView>
+  domain: string
   sdk: Omit<FrameHost, 'ethProviderRequestV2'>
   ethProvider?: Provider
   debug?: boolean
@@ -36,7 +38,7 @@ export function useWebViewRpcAdapter({
   )
 
   useEffect(() => {
-    const newEndpoint = createWebViewRpcEndpoint(webViewRef)
+    const newEndpoint = createWebViewRpcEndpoint(webViewRef, domain)
     setEndpoint(newEndpoint)
 
     const cleanup = exposeToEndpoint({
@@ -51,7 +53,7 @@ export function useWebViewRpcAdapter({
       cleanup?.()
       setEndpoint(undefined)
     }
-  }, [webViewRef, sdk, ethProvider, debug])
+  }, [webViewRef, domain, sdk, ethProvider, debug])
 
   return useMemo(
     () => ({
@@ -63,7 +65,10 @@ export function useWebViewRpcAdapter({
   )
 }
 
-export function useWebViewRpcEndpoint(webViewRef: RefObject<WebView>) {
+export function useWebViewRpcEndpoint(
+  webViewRef: RefObject<WebView>,
+  domain: string,
+) {
   const [endpoint, setEndpoint] = useState<WebViewEndpoint>()
 
   const onMessage: WebViewProps['onMessage'] = useCallback(
@@ -74,13 +79,13 @@ export function useWebViewRpcEndpoint(webViewRef: RefObject<WebView>) {
   )
 
   useEffect(() => {
-    const newEndpoint = createWebViewRpcEndpoint(webViewRef)
+    const newEndpoint = createWebViewRpcEndpoint(webViewRef, domain)
     setEndpoint(newEndpoint)
 
     return () => {
       setEndpoint(undefined)
     }
-  }, [webViewRef])
+  }, [webViewRef, domain])
 
   return useMemo(
     () => ({

@@ -18,6 +18,7 @@ export type WebViewEndpoint = HostEndpoint & {
  */
 export function createWebViewRpcEndpoint(
   ref: RefObject<WebView>,
+  domain: string,
 ): WebViewEndpoint {
   const listeners: EventListenerOrEventListenerObject[] = []
   return {
@@ -55,6 +56,12 @@ export function createWebViewRpcEndpoint(
       `)
     },
     onMessage: (e) => {
+      const originDomain = new URL(e.nativeEvent.url).hostname
+      if (originDomain !== domain) {
+        console.warn('Invalid message domain, ignoring')
+        return
+      }
+
       const data = JSON.parse(e.nativeEvent.data)
       console.debug('[webview:req]', data)
       const messageEvent = new MessageEvent(data)
