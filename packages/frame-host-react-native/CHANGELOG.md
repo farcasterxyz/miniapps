@@ -1,5 +1,11 @@
 # @farcaster/frame-host
 
+## 0.0.32
+
+### Patch Changes
+
+- [#201](https://github.com/farcasterxyz/miniapps/pull/201) [`945c9e5`](https://github.com/farcasterxyz/miniapps/commit/945c9e551c32262cf8d3240e3d42cb48c79133b2) Thanks [@horsefacts](https://github.com/horsefacts)! - fix: allow www subdomain as message origin
+
 ## 0.0.31
 
 ### Patch Changes
