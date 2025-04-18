@@ -57,7 +57,8 @@ export function createWebViewRpcEndpoint(
     },
     onMessage: (e) => {
       const originDomain = new URL(e.nativeEvent.url).hostname
-      if (originDomain !== domain) {
+      const allowedDomains = [domain, `www.${domain}`]
+      if (!allowedDomains.includes(originDomain)) {
         console.warn('Invalid message domain, ignoring')
         return
       }
