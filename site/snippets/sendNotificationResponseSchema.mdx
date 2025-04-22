@@ -1,5 +1,5 @@
 | Property          | Type     | Required | Description                                                                                                                                                                        |
 |-------------------|----------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| successTokens     | string[] | Yes      | Tokens for which the notification succeeded.                                                                                                                                       |
+| successfulTokens  | string[] | Yes      | Tokens for which the notification succeeded.                                                                                                                                       |
 | invalidTokens     | string[] | Yes      | Tokens which are no longer valid and should never be used again. This could happen if the user disabled notifications but for some reason the Mini App server has no record of it. |
 | rateLimitedTokens | string[] | Yes      | Tokens for which the rate limit was exceeded. Mini App server can try later.                                                                                                       |
