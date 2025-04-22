@@ -58,6 +58,8 @@ export const domainFrameConfigSchema = z.object({
   ogTitle: createSimpleStringSchema({ max: 30 }).optional(),
   ogDescription: createSimpleStringSchema({ max: 100 }).optional(),
   ogImageUrl: secureUrlSchema.optional(),
+  /** see: https://github.com/farcasterxyz/miniapps/discussions/204 */
+  noindex: z.boolean().optional(),
 })
 
 export const domainManifestSchema = z.object({

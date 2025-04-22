@@ -1,22 +1,23 @@
-| Property              | Type   | Required | Description                                       | Constraints                                                                                   |
-|-----------------------|--------|----------|---------------------------------------------------|-----------------------------------------------------------------------------------------------|
-| version               | string | Yes      | Manifest version.                                 | Must be '1'.                                                                                  |
-| name                  | string | Yes      | Mini App name.                                    | Max length 32 characters                                                                      |
-| homeUrl               | string | Yes      | Default launch URL                                | Max length 1024 characters.                                                                   |
-| iconUrl               | string | Yes      | Icon image URL                                    | Max length 1024 characters.<br />Image must be 1024x1024px PNG, no alpha.                     |
-| imageUrl              | string | No       | [DEPRECATED] Default image to show if shared in a feed. | Max length 1024 characters.<br />Image must be 3:2 aspect ratio.                        |
-| buttonTitle           | string | No       | [DEPRECATED] Default button title to show if shared in a feed. | Max length 32 characters.                                                        |
-| splashImageUrl        | string | No       | URL of image to show on loading screen.           | Max length 32 characters. Must be 200x200px.                                                  |
-| splashBackgroundColor | string | No       | Hex color code to use on loading screen.          | Hex color code.                                                                               |
-| webhookUrl            | string | No       | URL to which clients will POST events.            | Max length 1024 characters.<br />Must be set if the Mini App application uses notifications.  |
-| subtitle              | string | No       | Short description under app name                  | Max 30 characters, no emojis or special characters                                            |
-| description           | string | No       | Promotional message for Mini App Page             | Max 170 characters, no emojis or special characters                                           |
-| screenshotUrls        | array  | No       | Visual previews of the app                        | Portrait, 1284 x 2778, max 3 screenshots                                                      |
-| primaryCategory       | string | No       | Primary category of app                           | One of: `games`, `social`, `finance`, `utility`, `productivity`, `health-fitness`, `news-media`, `music`, `shopping`, `education`, `developer-tools`, `entertainment`, `art-creativity` |
-| tags                  | array  | No       | Descriptive tags for filtering/search             | Up to 5 tags, max 20 characters each. Lowercase, no spaces, no special characters, no emojis. |
-| heroImageUrl          | string | No       | Promotional display image                         | 1200 x 630px (1.91:1)                                                                         |
-| tagline               | string | No       | Marketing tagline                                 | Max 30 characters                                                                             |
-| ogTitle               | string | No       | Open Graph title                                  | Max 30 characters                                                                             |
-| ogDescription         | string | No       | Open Graph description                            | Max 100 characters                                                                            |
-| ogImageUrl            | string | No       | Open Graph promotional image                      | 1200 x 630px (1.91:1) PNG                                                                     |
+| Property              | Type    | Required | Description                                         | Constraints                                                                                   |
+|-----------------------|---------|----------|-----------------------------------------------------|-----------------------------------------------------------------------------------------------|
+| version               | string  | Yes      | Manifest version.                                   | Must be '1'.                                                                                  |
+| name                  | string  | Yes      | Mini App name.                                      | Max length 32 characters                                                                      |
+| homeUrl               | string  | Yes      | Default launch URL                                  | Max length 1024 characters.                                                                   |
+| iconUrl               | string  | Yes      | Icon image URL                                      | Max length 1024 characters.<br />Image must be 1024x1024px PNG, no alpha.                     |
+| imageUrl              | string  | No       | [DEPRECATED] Default image to show if shared in a feed. | Max length 1024 characters.<br />Image must be 3:2 aspect ratio.                          |
+| buttonTitle           | string  | No       | [DEPRECATED] Default button title to show if shared in a feed. | Max length 32 characters.                                                          |
+| splashImageUrl        | string  | No       | URL of image to show on loading screen.             | Max length 32 characters. Must be 200x200px.                                                  |
+| splashBackgroundColor | string  | No       | Hex color code to use on loading screen.            | Hex color code.                                                                               |
+| webhookUrl            | string  | No       | URL to which clients will POST events.              | Max length 1024 characters.<br />Must be set if the Mini App application uses notifications.  |
+| subtitle              | string  | No       | Short description under app name                    | Max 30 characters, no emojis or special characters                                            |
+| description           | string  | No       | Promotional message for Mini App Page               | Max 170 characters, no emojis or special characters                                           |
+| screenshotUrls        | array   | No       | Visual previews of the app                          | Portrait, 1284 x 2778, max 3 screenshots                                                      |
+| primaryCategory       | string  | No       | Primary category of app                             | One of: `games`, `social`, `finance`, `utility`, `productivity`, `health-fitness`, `news-media`, `music`, `shopping`, `education`, `developer-tools`, `entertainment`, `art-creativity` |
+| tags                  | array   | No       | Descriptive tags for filtering/search               | Up to 5 tags, max 20 characters each. Lowercase, no spaces, no special characters, no emojis. |
+| heroImageUrl          | string  | No       | Promotional display image                           | 1200 x 630px (1.91:1)                                                                         |
+| tagline               | string  | No       | Marketing tagline                                   | Max 30 characters                                                                             |
+| ogTitle               | string  | No       | Open Graph title                                    | Max 30 characters                                                                             |
+| ogDescription         | string  | No       | Open Graph description                              | Max 100 characters                                                                            |
+| ogImageUrl            | string  | No       | Open Graph promotional image                        | 1200 x 630px (1.91:1) PNG                                                                     |
+| noindex               | boolean | No       | Whether to exclude the Mini App from search results | true - to exclude from search results, false - to include in search results (default)         |
 
