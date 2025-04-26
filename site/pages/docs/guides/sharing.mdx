@@ -181,7 +181,7 @@ is made to this endpoint we'd:
 You should always set a non-zero `max-age` (outside of testing) so that the
 image can get cached and served from CDNs, otherwise users will see a gray
 image in their feed while the dynamic image is generated. You'll also quickly
-rack up a huge bill from your servie provider. The exact time depends on your
+rack up a huge bill from your service provider. The exact time depends on your
 application but opt for the longest time that still keeps the image reasonably
 fresh. If you're needing freshness less than a minute you should reconsider
 your design or be prepared to operate a high-performance endpoint.
