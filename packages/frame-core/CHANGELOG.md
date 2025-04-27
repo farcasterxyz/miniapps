@@ -1,5 +1,11 @@
 # @farcaster/frame-core
 
+## 0.0.33
+
+### Patch Changes
+
+- [#205](https://github.com/farcasterxyz/miniapps/pull/205) [`b1c125f`](https://github.com/farcasterxyz/miniapps/commit/b1c125f594379a3007705a8c5ad29c18fd1fdd86) Thanks [@gabrielayuso](https://github.com/gabrielayuso)! - Added `noindex` field to the mini app manifest.
+
 ## 0.0.32
 
 ### Patch Changes

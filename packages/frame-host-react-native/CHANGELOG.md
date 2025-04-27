@@ -1,5 +1,14 @@
 # @farcaster/frame-host
 
+## 0.0.33
+
+### Patch Changes
+
+- [#209](https://github.com/farcasterxyz/miniapps/pull/209) [`334c220`](https://github.com/farcasterxyz/miniapps/commit/334c2208fe85eac398b46cac315ea8d44c1ce997) Thanks [@horsefacts](https://github.com/horsefacts)! - fix: validate host-webview origin
+
+- Updated dependencies []:
+  - @farcaster/frame-host@0.0.34
+
 ## 0.0.32
 
 ### Patch Changes
