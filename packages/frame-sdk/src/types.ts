@@ -6,7 +6,7 @@ import type {
   Ready,
   SetPrimaryButtonOptions,
   SignIn,
-  Swap,
+  SwapToken,
   ViewProfile,
   ViewToken,
 } from '@farcaster/frame-core'
@@ -60,7 +60,7 @@ export type FrameSDK = {
     signIn: SignIn.SignIn
     viewProfile: ViewProfile.ViewProfile
     viewToken: ViewToken.ViewToken
-    swap: Swap.Swap
+    swapToken: SwapToken.SwapToken
     composeCast: <close extends boolean | undefined = undefined>(
       options?: ComposeCast.Options<close>,
     ) => Promise<ComposeCast.Result<close>>
