@@ -1,5 +1,12 @@
 # @farcaster/frame-wagmi-connector
 
+## 0.0.25
+
+### Patch Changes
+
+- Updated dependencies [[`a06cbb3`](https://github.com/farcasterxyz/miniapps/commit/a06cbb3349227af9260e9beffaf2e29305525978)]:
+  - @farcaster/frame-sdk@0.0.37
+
 ## 0.0.24
 
 ### Patch Changes

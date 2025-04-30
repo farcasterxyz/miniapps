@@ -1,5 +1,14 @@
 # @farcaster/frame-kit
 
+## 0.0.37
+
+### Patch Changes
+
+- [#211](https://github.com/farcasterxyz/miniapps/pull/211) [`a06cbb3`](https://github.com/farcasterxyz/miniapps/commit/a06cbb3349227af9260e9beffaf2e29305525978) Thanks [@Slokh](https://github.com/Slokh)! - feat: add experimental token actions
+
+- Updated dependencies [[`a06cbb3`](https://github.com/farcasterxyz/miniapps/commit/a06cbb3349227af9260e9beffaf2e29305525978)]:
+  - @farcaster/frame-core@0.0.34
+
 ## 0.0.36
 
 ### Patch Changes
