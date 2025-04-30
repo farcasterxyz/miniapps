@@ -4,6 +4,7 @@ import type {
   Context,
   FrameNotificationDetails,
   Ready,
+  SendToken,
   SetPrimaryButtonOptions,
   SignIn,
   SwapToken,
@@ -60,6 +61,7 @@ export type FrameSDK = {
     signIn: SignIn.SignIn
     viewProfile: ViewProfile.ViewProfile
     viewToken: ViewToken.ViewToken
+    sendToken: SendToken.SendToken
     swapToken: SwapToken.SwapToken
     composeCast: <close extends boolean | undefined = undefined>(
       options?: ComposeCast.Options<close>,
