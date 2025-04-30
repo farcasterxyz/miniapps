@@ -296,7 +296,7 @@ importers:
   packages/tsconfig: {}
 
   site:
-    dependencies:
+    devDependencies:
       '@farcaster/frame-core':
         specifier: workspace:*
         version: link:../packages/frame-core
@@ -309,25 +309,24 @@ importers:
       '@farcaster/frame-wagmi-connector':
         specifier: workspace:*
         version: link:../packages/frame-wagmi-connector
+      '@types/react':
+        specifier: latest
+        version: 19.1.0
       react:
         specifier: latest
         version: 19.1.0
       react-dom:
         specifier: latest
         version: 19.1.0(react@19.1.0)
+      typescript:
+        specifier: latest
+        version: 5.8.2
       vocs:
         specifier: latest
         version: 1.0.11(@types/node@22.10.2)(@types/react-dom@19.0.4(@types/react@19.1.0))(@types/react@19.1.0)(acorn@8.14.0)(jiti@2.4.2)(lightningcss@1.29.3)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rollup@4.39.0)(terser@5.39.0)(typescript@5.8.2)(yaml@2.7.0)
       wagmi:
         specifier: ^2.14.12
         version: 2.14.12(@tanstack/query-core@5.66.4)(@tanstack/react-query@5.66.9(react@19.1.0))(@types/react@19.1.0)(bufferutil@4.0.9)(react@19.1.0)(typescript@5.8.2)(utf-8-validate@5.0.10)(viem@2.23.15(bufferutil@4.0.9)(typescript@5.8.2)(utf-8-validate@5.0.10)(zod@3.24.1))(zod@3.24.1)
-    devDependencies:
-      '@types/react':
-        specifier: latest
-        version: 19.1.0
-      typescript:
-        specifier: latest
-        version: 5.8.2
 
 packages:
 

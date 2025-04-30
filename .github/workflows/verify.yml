@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  check:
-    name: Check
+  checks:
+    name: Checks
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
@@ -21,7 +21,7 @@ jobs:
 
   build:
     name: Build
-    needs: check
+    needs: checks
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
@@ -34,9 +34,6 @@ jobs:
 
       - name: Build
         run: pnpm build
-
-      - name: Check for unused files, dependencies, and exports
-        run: pnpm knip --production
         
   test:
     name: Tests 

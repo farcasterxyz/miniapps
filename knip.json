@@ -1,4 +1,5 @@
 {
+  "ignoreWorkspaces": ["examples/**"],
   "workspaces": {
     "packages/*": {
       "entry": "src/index.ts",
@@ -13,19 +14,8 @@
       "project": "**/*.ts",
       "ignore": ["src/comlink/**/*.ts"]
     },
-    "examples/vanilla": {
-      "entry": ["src/main.ts", "frame/index.ts"]
-    },
     "site": {
-      "ignoreDependencies": [
-        "@farcaster/frame-core",
-        "@farcaster/frame-sdk",
-        "@farcaster/frame-node",
-        "@farcaster/frame-wagmi-connector",
-        "wagmi"
-      ],
-      "project": "**/*.mdx",
-      "ignore": ["vocs.config.ts"]
+      "project": ["**/*.ts", "**/*.tsx", "**/*.mdx"]
     }
   }
 }
