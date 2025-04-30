@@ -3,17 +3,21 @@
   "name": "frames",
   "scripts": {
     "build": "turbo build",
+    "clean": "pnpm run --r --parallel clean",
+    "changeset:prepublish": "pnpm build",
+    "changeset:publish": "pnpm changeset:prepublish && changeset publish",
+    "changeset:version": "pnpm install --lockfile-only && changeset version && pnpm check",
     "check": "biome check .",
     "check:repo": "sherif",
     "check:types": "turbo typecheck",
     "check:write": "biome check --write --unsafe .",
     "deps": "pnpx taze -r",
     "dev": "turbo dev",
+    "docs:dev": "pnpm --filter site dev",
     "format": "biome format --write",
     "knip": "knip",
     "preinstall": "only-allow pnpm",
     "prepare": "pnpm simple-git-hooks",
-    "publish-packages": "turbo run build typecheck --force && changeset version && changeset publish",
     "test": "turbo test",
     "typecheck": "turbo typecheck"
   },
@@ -34,6 +38,6 @@
     "node": ">=22"
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm check:write"
+    "pre-commit": "pnpm check"
   }
 }
