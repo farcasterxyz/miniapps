@@ -49,3 +49,8 @@ For fast, casual conversations:
 For slow, formal conversations that would benefit from being searchable:
 
 [Discuss Mini Apps on GitHub](https://github.com/farcasterxyz/miniapps/discussions)
+
+## Contributing
+
+Contributions are greatly appreciated! If you're interested in contributing to the Mini Apps monorepo, please read the [Contributing Guide](https://github.com/farcasterxyz/miniapps/blob/main/.github/CONTRIBUTING.md) **before submitting a pull request**.
+
