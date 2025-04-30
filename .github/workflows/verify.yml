@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  checks:
-    name: Checks
+  check:
+    name: Check
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
