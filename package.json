@@ -4,7 +4,7 @@
   "scripts": {
     "build": "turbo build",
     "clean": "pnpm run --r --parallel clean",
-    "changeset:prepublish": "pnpm build",
+    "changeset:prepublish": "pnpm --filter './packages/*' build",
     "changeset:publish": "pnpm changeset:prepublish && changeset publish",
     "changeset:version": "pnpm install --lockfile-only && changeset version && pnpm check",
     "check": "biome check .",
