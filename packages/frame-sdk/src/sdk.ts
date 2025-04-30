@@ -37,9 +37,6 @@ export const sdk: FrameSDK = {
     ready: frameHost.ready.bind(frameHost),
     close: frameHost.close.bind(frameHost),
     viewProfile: frameHost.viewProfile.bind(frameHost),
-    viewToken: frameHost.viewToken.bind(frameHost),
-    sendToken: frameHost.sendToken.bind(frameHost),
-    swapToken: frameHost.swapToken.bind(frameHost),
     signIn: async (options) => {
       const response = await frameHost.signIn(options)
       if (response.result) {
@@ -75,6 +72,11 @@ export const sdk: FrameSDK = {
     composeCast(options = {}) {
       return frameHost.composeCast(options) as never
     },
+  },
+  experimental: {
+    viewToken: frameHost.viewToken.bind(frameHost),
+    sendToken: frameHost.sendToken.bind(frameHost),
+    swapToken: frameHost.swapToken.bind(frameHost),
   },
   wallet: {
     ethProvider: provider,

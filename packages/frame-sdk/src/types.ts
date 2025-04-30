@@ -60,12 +60,14 @@ export type FrameSDK = {
     addFrame: AddFrame.AddFrame
     signIn: SignIn.SignIn
     viewProfile: ViewProfile.ViewProfile
-    viewToken: ViewToken.ViewToken
-    sendToken: SendToken.SendToken
-    swapToken: SwapToken.SwapToken
     composeCast: <close extends boolean | undefined = undefined>(
       options?: ComposeCast.Options<close>,
     ) => Promise<ComposeCast.Result<close>>
+  }
+  experimental: {
+    viewToken: ViewToken.ViewToken
+    sendToken: SendToken.SendToken
+    swapToken: SwapToken.SwapToken
   }
   wallet: {
     ethProvider: Provider.Provider
