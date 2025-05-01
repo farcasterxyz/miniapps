@@ -145,6 +145,18 @@ export default defineConfig({
                 text: 'viewProfile',
                 link: '/docs/sdk/actions/view-profile',
               },
+              {
+                text: 'swapToken',
+                link: '/docs/sdk/actions/swap-token',
+              },
+              {
+                text: 'sendToken',
+                link: '/docs/sdk/actions/send-token',
+              },
+              {
+                text: 'viewToken',
+                link: '/docs/sdk/actions/view-token',
+              },
             ],
           },
           {

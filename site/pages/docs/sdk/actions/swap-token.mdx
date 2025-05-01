@@ -1,0 +1,91 @@
+---
+title: swapToken
+description: Open the swap form with pre-filled tokens
+---
+
+# swapToken
+
+Open the swap form with pre-filled tokens. The user will be able to modify
+the swap before executing the transaction.
+
+## Usage
+
+```ts twoslash
+const sellToken = "eip155:8453/erc20:0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
+const buyToken = "eip155:10/native";
+const sellAmount = "1000000";
+
+// ---cut---
+import { sdk } from '@farcaster/frame-sdk'
+
+await sdk.experimental.swapToken({ 
+  sellToken,
+  buyToken,
+  sellAmount,
+})
+```
+
+## Parameters
+
+### sellToken (optional)
+
+- **Type:** `string`
+
+CAIP-19 asset ID
+
+For example, Base USDC: eip155:8453/erc20:0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913
+
+
+### buyToken (optional)
+
+- **Type:** `string`
+
+CAIP-19 asset ID
+
+For example, OP ETH: eip155:10/native
+
+
+### sellAmount (optional)
+
+- **Type:** `string`
+
+Sell token amount, as numeric string
+
+For example, 1 USDC: 1000000
+
+
+## Return Value
+
+```ts twoslash
+type SwapTokenDetails = {
+  /**
+   * Array of tx identifiers in order of execution.
+   * Some swaps will have both an approval and swap tx.
+   */
+  transactions: `0x${string}`[];
+};
+
+type SwapTokenErrorDetails = {
+  /**
+   * Error code.
+   */
+  error: string;
+  /**
+   * Error message.
+   */
+  message?: string;
+};
+
+export type SwapErrorReason = "rejected_by_user" | "swap_failed";
+
+export type SwapTokenResult =
+  | {
+      success: true;
+      swap: SwapTokenDetails;
+    }
+  | {
+      success: false;
+      reason: SwapErrorReason;
+      error?: SwapTokenErrorDetails;
+    };
+```

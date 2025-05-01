@@ -14,7 +14,7 @@ export type SwapTokenOptions = {
 
   /**
    * Sell token amount, as numeric string.
-   * For example, 10 USDC: 1000000
+   * For example, 1 USDC: 1000000
    */
   sellAmount?: string
 }

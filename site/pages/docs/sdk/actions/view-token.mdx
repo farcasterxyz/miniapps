@@ -1,0 +1,38 @@
+---
+title: viewProfile
+description: Displays a token
+---
+
+# viewToken
+
+Displays a token
+
+## Usage
+
+```ts twoslash
+const token = "eip155:8453/erc20:0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
+
+// ---cut---
+import { sdk } from '@farcaster/frame-sdk'
+
+await sdk.experimental.viewToken({ 
+  token
+})
+```
+
+## Parameters
+
+### token
+
+- **Type:** `string`
+
+CAIP-19 asset ID
+
+For example, Base USDC: eip155:8453/erc20:0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913
+
+
+## Return Value
+
+`void`
+
+

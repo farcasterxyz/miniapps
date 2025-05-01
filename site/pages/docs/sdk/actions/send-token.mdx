@@ -1,0 +1,99 @@
+---
+title: swapToken
+description: Open the send form with pre-filled tokens
+---
+
+# sendToken
+
+Open the send form with a pre-filled token and recipient. The user will be able to modify
+the send before executing the transaction.
+
+## Usage
+
+```ts twoslash
+const token = "eip155:8453/erc20:0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
+const amount = "1000000";
+const recipientFid = 3;
+
+// ---cut---
+import { sdk } from '@farcaster/frame-sdk'
+
+await sdk.experimental.sendToken({ 
+  token,
+  amount,
+  recipientFid,
+})
+```
+
+## Parameters
+
+### token (optional)
+
+- **Type:** `string`
+
+CAIP-19 asset ID
+
+For example, Base USDC: eip155:8453/erc20:0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913
+
+
+### amount (optional)
+
+- **Type:** `string`
+
+Send token amount, as numeric string
+
+For example, 1 USDC: 1000000
+
+
+### recipientAddress (optional)
+
+- **Type:** `string`
+
+Address to send the token to
+
+For example, 0xd8da6bf26964af9d7eed9e03e53415d37aa96045
+
+
+### recipientFid (optional)
+
+- **Type:** `number`
+
+FID to send the token to
+
+For example, dwr: 3
+
+
+## Return Value
+
+```ts twoslash
+type SendTokenDetails = {
+  /**
+   * Tx identifier.
+   */
+  transaction: `0x${string}`
+}
+
+type SendTokenErrorDetails = {
+  /**
+   * Error code.
+   */
+  error: string
+  /**
+   * Error message.
+   */
+  message?: string
+}
+
+export type SendTokenErrorReason = 'rejected_by_user' | 'send_failed'
+
+export type SendTokenResult =
+  | {
+      success: true
+      send: SendTokenDetails
+    }
+  | {
+      success: false
+      reason: SendTokenErrorReason
+      error?: SendTokenErrorDetails
+    }
+```
