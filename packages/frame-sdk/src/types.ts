@@ -51,6 +51,7 @@ export type Emitter = Compute<EventEmitter<EventMap>>
 type SetPrimaryButton = (options: SetPrimaryButtonOptions) => Promise<void>
 
 export type FrameSDK = {
+  isInMiniApp: () => Promise<boolean>
   context: Promise<Context.FrameContext>
   actions: {
     ready: (options?: Partial<Ready.ReadyOptions>) => Promise<void>

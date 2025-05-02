@@ -29,8 +29,40 @@ export function createEmitter(): Emitter {
 
 const emitter = createEmitter()
 
+/**
+ * Determines if the current environment is a MiniApp context.
+ * 
+ * @param timeoutMs - Optional timeout in milliseconds (default: 100)
+ * @returns Promise resolving to boolean indicating if in MiniApp context
+ */
+async function isInMiniApp(timeoutMs: number = 100): Promise<boolean> {
+  // Check for SSR environment
+  if (typeof window === 'undefined') {
+    return false
+  }
+
+  // Fast path: ReactNative WebView environment (mobile)
+  if (window.ReactNativeWebView) {
+    return true
+  }
+
+  // Fast path: iframe environment (web)
+  if (window !== window.parent) {
+    return true
+  }
+
+  // If synchronous checks don't confirm, try async approach with timeout
+  return Promise.race([
+    frameHost.context.then(context => !!context),
+    new Promise<boolean>(resolve => {
+      setTimeout(() => resolve(false), timeoutMs)
+    })
+  ])
+}
+
 export const sdk: FrameSDK = {
   ...emitter,
+  isInMiniApp,
   context: frameHost.context,
   actions: {
     setPrimaryButton: frameHost.setPrimaryButton.bind(frameHost),
