@@ -28,6 +28,7 @@ export function createEmitter(): Emitter {
 }
 
 const emitter = createEmitter()
+let cachedIsInMiniAppResult: boolean | null = null
 
 /**
  * Determines if the current environment is a MiniApp context.
@@ -36,28 +37,38 @@ const emitter = createEmitter()
  * @returns Promise resolving to boolean indicating if in MiniApp context
  */
 async function isInMiniApp(timeoutMs = 100): Promise<boolean> {
-  // Check for SSR environment
+  // Return cached result if we've already determined we are in a MiniApp
+  if (cachedIsInMiniAppResult === true) {
+    return true
+  }
+
+  // Check for SSR environment - definitely not a MiniApp
   if (typeof window === 'undefined') {
     return false
   }
 
-  // Fast path: ReactNative WebView environment (mobile)
-  if (window.ReactNativeWebView) {
-    return true
+  // Short-circuit: definitely NOT a MiniApp
+  if (!window.ReactNativeWebView && window === window.parent) {
+    return false
   }
 
-  // Fast path: iframe environment (web)
-  if (window !== window.parent) {
-    return true
-  }
-
-  // If synchronous checks don't confirm, try async approach with timeout
-  return Promise.race([
-    frameHost.context.then((context) => !!context),
+  // At this point, we MIGHT be in a MiniApp (iframe or RN WebView)
+  // but need to verify by checking for context communication.
+  const isInMiniApp = await Promise.race([
+    frameHost.context.then((context) => !!context), // Check if context resolves to truthy
     new Promise<boolean>((resolve) => {
-      setTimeout(() => resolve(false), timeoutMs)
+      setTimeout(() => resolve(false), timeoutMs) // Timeout resolves to false
     }),
-  ])
+  ]).catch(() => {
+    return false
+  })
+
+  // Cache the result ONLY if true (we are confirmed to be in a MiniApp)
+  if (isInMiniApp) {
+    cachedIsInMiniAppResult = true
+  }
+
+  return isInMiniApp
 }
 
 export const sdk: FrameSDK = {
