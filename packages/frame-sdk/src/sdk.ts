@@ -31,11 +31,11 @@ const emitter = createEmitter()
 
 /**
  * Determines if the current environment is a MiniApp context.
- * 
+ *
  * @param timeoutMs - Optional timeout in milliseconds (default: 100)
  * @returns Promise resolving to boolean indicating if in MiniApp context
  */
-async function isInMiniApp(timeoutMs: number = 100): Promise<boolean> {
+async function isInMiniApp(timeoutMs = 100): Promise<boolean> {
   // Check for SSR environment
   if (typeof window === 'undefined') {
     return false
@@ -53,10 +53,10 @@ async function isInMiniApp(timeoutMs: number = 100): Promise<boolean> {
 
   // If synchronous checks don't confirm, try async approach with timeout
   return Promise.race([
-    frameHost.context.then(context => !!context),
-    new Promise<boolean>(resolve => {
+    frameHost.context.then((context) => !!context),
+    new Promise<boolean>((resolve) => {
       setTimeout(() => resolve(false), timeoutMs)
-    })
+    }),
   ])
 }
 
