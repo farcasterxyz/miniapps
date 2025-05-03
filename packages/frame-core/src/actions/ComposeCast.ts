@@ -2,7 +2,7 @@ export type Options<close extends boolean | undefined = undefined> = {
   /**
    * Suggested text for the body of the cast.
    *
-   * Mentions can be included using the human-writeable form (e.g. @farcaster).
+   * Mentions can be included using the human-writable form (e.g. @farcaster).
    **/
   text?: string
 
