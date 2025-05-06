@@ -104,8 +104,8 @@ them to add it:
 ### Save the notification tokens
 
 When notifications are enabled, the Farcaster client generates a unique
-notification token for the user. This token is sent webhook endpoint along with
-a `url` that the app should call to send a notification. 
+notification token for the user. This token is sent to `webhookUrl` defined in your `farcaster.json`
+along with a `url` that the app should call to send a notification. 
 
 The `token` and `url` need to be securely saved to database so they can be
 looked up when you want to send a notification to a particular user.
@@ -120,7 +120,8 @@ by sending a `POST` request the `url` associated with that token.
 
 :::tip
 If your are sending the same notification to multiple users, you batch up to a
-100 sends in a single request by providing multiple `tokens`.
+100 sends in a single request by providing multiple `tokens`. You can safely
+use the same `notificationId` for all batches.
 :::
 
 The body of that request must match the following JSON schema:
@@ -167,14 +168,6 @@ to send a notification over a 24 hour period.
 For example, if you want to send a daily notification to users you could use
 `daily-reminder-05-06-2024` as your `notificationId`. Now you can safely retry
 requests to send the daily reminder notifications within a 24 hour period.
-
-#### Sending a notification to more than 100 FIDs
-
-As mentioned above, if your are sending the same notification to multiple users, 
-you should batch up to a 100 sends in a single request by providing multiple `tokens`.
-
-In this case, each request, corresponding to a different batch, can use the same
-`notificationId`.
 
 #### Rate Limits
 
