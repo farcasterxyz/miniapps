@@ -419,6 +419,14 @@ Once a user has been notified, when clicking the notification the client app wil
 - Open `targetUrl`
 - Set the context to the notification, see `NotificationLaunchContext`
 
+
+#### Idempotency
+
+A host MUST deduplicate notification requests using `(FID, notificationId)` as
+an idempotency that is valid 24 hours. This allows Apps to safely retry
+notification requests.
+
+
 #### Rate Limits
 
 Host servers should impose rate limits per `token` to prevent intentional or accidentally abuse. The recommended rate limits are:

@@ -143,6 +143,19 @@ export type FrameLocationNotificationContext = {
 [Example code to send a
 notification](https://github.com/farcasterxyz/frames-v2-demo/blob/7905a24b7cd254a77a7e1a541288379b444bc23e/src/app/api/send-notification/route.ts#L25-L65)
 
+
+#### Avoid duplicate notifications
+
+To avoid duplicate notifications, specify a stable `notificationId` for each
+notification you send. This identifier is joined with the FID (e.g. `(fid,
+notificationId)` to create a unique key that is used to deduplicate requests 
+to send a notification over a 24 hour period.
+
+For example, if you want to send a daily notification to users you could use
+`daily-reminder-05-06-2024` as your `notificationId`. Now you can safely retry
+requests to send the daily reminder notifications within a 24 hour period.
+
+
 #### Rate Limits
 
 Host servers may impose rate limits per `token`. The standard rate limits,
