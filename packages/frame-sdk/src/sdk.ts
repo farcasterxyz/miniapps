@@ -1,4 +1,10 @@
-import { AddFrame, type FrameClientEvent, SignIn } from '@farcaster/frame-core'
+import {
+  AddFrame,
+  type FrameClientEvent,
+  type ShareStateProvider,
+  SignIn,
+} from '@farcaster/frame-core'
+import { proxy } from 'comlink'
 import { EventEmitter } from 'eventemitter3'
 import { frameHost } from './frameHost'
 import { provider } from './provider'
@@ -123,6 +129,9 @@ export const sdk: FrameSDK = {
   },
   wallet: {
     ethProvider: provider,
+  },
+  setShareStateProvider: (fn: ShareStateProvider) => {
+    frameHost.setShareStateProvider.bind(frameHost)(proxy(fn))
   },
 }
 

@@ -1,5 +1,10 @@
-import type { FrameHost, WireFrameHost } from '@farcaster/frame-core'
-import { AddFrame, SignIn } from '@farcaster/frame-core'
+import {
+  AddFrame,
+  type FrameHost,
+  SignIn,
+  type WireFrameHost,
+  sharedStateSchema,
+} from '@farcaster/frame-core'
 
 export function wrapHandlers(host: FrameHost): WireFrameHost {
   return {
@@ -43,6 +48,17 @@ export function wrapHandlers(host: FrameHost): WireFrameHost {
 
         throw e
       }
+    },
+    setShareStateProvider: async (fn) => {
+      host.setShareStateProvider(async () => {
+        const result = fn()
+        const state = await Promise.resolve(result)
+        const parsed = sharedStateSchema.safeParse(state)
+        if (!parsed.success) {
+          throw new Error('Invalid share state', { cause: parsed.error })
+        }
+        return parsed.data
+      })
     },
   }
 }
