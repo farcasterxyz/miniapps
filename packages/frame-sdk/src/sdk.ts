@@ -36,7 +36,7 @@ let cachedIsInMiniAppResult: boolean | null = null
  * @param timeoutMs - Optional timeout in milliseconds (default: 100)
  * @returns Promise resolving to boolean indicating if in MiniApp context
  */
-async function isInMiniApp(timeoutMs = 100): Promise<boolean> {
+async function isInMiniApp(timeoutMs = 150): Promise<boolean> {
   // Return cached result if we've already determined we are in a MiniApp
   if (cachedIsInMiniAppResult === true) {
     return true
