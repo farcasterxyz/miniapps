@@ -1,5 +1,12 @@
 # vanilla
 
+## 0.0.21
+
+### Patch Changes
+
+- Updated dependencies [[`dfe777b`](https://github.com/farcasterxyz/miniapps/commit/dfe777b91c78c4c36aae855e1d53d2a4d561f4f8)]:
+  - @farcaster/frame-sdk@0.0.38
+
 ## 0.0.20
 
 ### Patch Changes
