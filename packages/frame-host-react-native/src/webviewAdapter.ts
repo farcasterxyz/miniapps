@@ -1,5 +1,8 @@
-import type { FrameHost } from '@farcaster/frame-host'
-import { exposeToEndpoint, useExposeToEndpoint } from '@farcaster/frame-host'
+import type {
+  FrameHost,
+  Remote as FrameHostRemote,
+} from '@farcaster/frame-host'
+import { exposeToEndpoint } from '@farcaster/frame-host'
 import type { Provider } from 'ox/Provider'
 import {
   type RefObject,
@@ -10,6 +13,8 @@ import {
 } from 'react'
 import type WebView from 'react-native-webview'
 import type { WebViewMessageEvent, WebViewProps } from 'react-native-webview'
+import { releaseProxy, wrapWebViewForRnComlink } from './rn-comlink'
+import type { ReactNativeWebViewProxy } from './rn-comlink-helpers'
 import { type WebViewEndpoint, createWebViewRpcEndpoint } from './webview'
 
 /**
@@ -41,6 +46,9 @@ export function useWebViewRpcAdapter({
     const newEndpoint = createWebViewRpcEndpoint(webViewRef, domain)
     setEndpoint(newEndpoint)
 
+    const webViewProxy =
+      wrapWebViewForRnComlink<ReactNativeWebViewProxy>(newEndpoint)
+
     const cleanup = exposeToEndpoint({
       endpoint: newEndpoint,
       sdk,
@@ -51,6 +59,7 @@ export function useWebViewRpcAdapter({
 
     return () => {
       cleanup?.()
+      webViewProxy?.[releaseProxy]?.()
       setEndpoint(undefined)
     }
   }, [webViewRef, domain, sdk, ethProvider, debug])
@@ -107,11 +116,24 @@ export function useExposeWebViewToEndpoint({
   ethProvider?: Provider
   debug?: boolean
 }) {
-  useExposeToEndpoint({
-    endpoint,
-    sdk,
-    frameOrigin: 'ReactNativeWebView',
-    ethProvider,
-    debug,
-  })
+  useEffect(() => {
+    let webViewProxy: FrameHostRemote<ReactNativeWebViewProxy> | null = null
+    let cleanup: (() => void) | undefined | null = null
+
+    if (endpoint) {
+      webViewProxy = wrapWebViewForRnComlink<ReactNativeWebViewProxy>(endpoint)
+
+      cleanup = exposeToEndpoint({
+        endpoint,
+        sdk,
+        ethProvider,
+        frameOrigin: 'ReactNativeWebView',
+        debug,
+      })
+    }
+    return () => {
+      cleanup?.()
+      webViewProxy?.[releaseProxy]?.()
+    }
+  }, [endpoint, sdk, ethProvider, debug])
 }

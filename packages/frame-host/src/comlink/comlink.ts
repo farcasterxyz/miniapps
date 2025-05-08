@@ -584,7 +584,7 @@ export function windowEndpoint(
   }
 }
 
-function toWireValue(value: any): [WireValue, Transferable[]] {
+export function toWireValue(value: any): [WireValue, Transferable[]] {
   for (const [name, handler] of transferHandlers) {
     if (handler.canHandle(value)) {
       const [serializedValue, transferables] = handler.serialize(value)
@@ -607,7 +607,7 @@ function toWireValue(value: any): [WireValue, Transferable[]] {
   ]
 }
 
-function fromWireValue(value: WireValue): any {
+export function fromWireValue(value: WireValue): any {
   switch (value.type) {
     case WireValueType.HANDLER:
       return transferHandlers.get(value.name)!.deserialize(value.value)
