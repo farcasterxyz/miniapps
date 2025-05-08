@@ -35,3 +35,4 @@ npm-debug.log*
 *.pem
 
 **/.claude/settings.local.json
+.claude.json
