@@ -1,4 +1,4 @@
-import type { FrameHost } from '@farcaster/frame-core'
+import { type FrameHost, Rpc } from '@farcaster/frame-core'
 import type * as Provider from 'ox/Provider'
 import { useEffect } from 'react'
 import * as Comlink from '../comlink'

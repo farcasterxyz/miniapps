@@ -1,4 +1,4 @@
-import { type FrameHost, exposeToIframe } from '@farcaster/frame-host'
+import { type FrameHost, Rpc, exposeToIframe } from '@farcaster/frame-host'
 import './style.css'
 
 declare global {
@@ -52,4 +52,16 @@ const { endpoint } = exposeToIframe({
   sdk: frameHost,
   ethProvider: window.ethereum,
   frameOrigin: window.origin,
+  debug: true,
 })
+
+const appProviderClient = Rpc.createClient<Rpc.AppProviderSchema>({
+  endpoint: endpoint as Rpc.Endpoint,
+  channelName: 'appProvider',
+})
+
+document.querySelector<HTMLButtonElement>('#share')!.onclick = async () => {
+  const result = await appProviderClient.request({
+    method: 'get_share_state',
+  })
+}
