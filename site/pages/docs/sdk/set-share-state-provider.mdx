@@ -1,0 +1,80 @@
+---
+title: setShareStateProvider
+description: Lets mini apps provide a path and query params to be included in the Mini App URL when the host shares a link to the mini app.
+---
+
+# setShareStateProvider
+
+Lets mini apps provide a path and query params to be included in the Mini App URL when the host shares a link to the mini app.
+
+## Usage
+
+```ts
+import { sdk } from '@farcaster/frame-sdk'
+
+
+const init = async () => {
+  await sdk.actions.ready();
+
+  sdk.setShareStateProvider(() => {
+    return {
+      path: "/path/to/share",
+      params: { "foo": "bar" }
+    };
+  });
+};
+
+init();
+```
+
+## Parameters
+
+### fn
+
+- **Type:** `ShareStateProvider`
+
+A function that returns an object with optional `path` and `params` properties.
+
+```ts
+type ShareState = {
+   /**
+    * Query parms to be added to the mini app URL when shared.
+    * 
+    * Either a key-value pair e.g. `{ foo: 'bar' }`, a string e.g. `'foo=bar'`,
+    * or an array of arrays e.g. `[['foo', 'bar'], ['baz', 'qux']]`
+    * (can set `window.location.search` directly).
+    */
+    params?: string | Record<string, string> | string[][];
+   /**
+    * The path to be added to the mini app URL when shared. Added either to
+    * the `homeUrl` specified in the manifest or the URL of an mini app embed
+    * shared on the feed.
+    * 
+    * e.g. `'/specific/miniapp/screen'` (can set `window.location.pathname` directly).
+    */
+    path?: string;
+}
+
+type ShareStateProvider = () => ShareState | Promise<ShareState>
+```
+
+## Return Value
+
+- **Type:** `void`
+
+## Details
+
+Farcaster clients can generate Mini App URLs such as `https://warpcast.com/miniapps/VNo09-kNexFz/farcade` to
+link directly to a mini app. The `ShareState` returned from the provided function will be included in the URL
+when the link is shared by the host (i.e. Warpcast).
+
+
+
+
+Example:
+```
+https://warpcast.com/miniapps/VNo09-kNexFz/farcade/path/to/share?foo=bar
+          ↓
+https://play.farcade.ai/path/to/share?foo=bar
+```
+

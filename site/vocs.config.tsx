@@ -167,6 +167,10 @@ export default defineConfig({
             text: 'Events',
             link: '/docs/sdk/events',
           },
+          {
+            text: 'Share State',
+            link: '/docs/sdk/set-share-state-provider',
+          },
         ],
       },
       {
