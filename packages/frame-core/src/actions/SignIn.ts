@@ -34,6 +34,11 @@ export type SignInOptions = {
 export type SignInResult = {
   signature: string
   message: string
+
+  /**
+   * Indicates if the signature was produced by a custody or auth address.
+   */
+  authMethod: 'custody' | 'authAddress'
 }
 
 export type SignIn = (options: SignInOptions) => Promise<SignInResult>
