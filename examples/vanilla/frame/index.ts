@@ -11,14 +11,15 @@ store.subscribe((providerDetails) => {
 
 setTimeout(() => {
   sdk.actions.ready()
-  Promise.race([
-    sdk.context,
-    new Promise<never>((_, reject) => {
-      setTimeout(() => {
-        reject(new Error('timed out waiting context'))
-      }, 50)
-    }),
-  ])
+
+  sdk.setShareStateProvider(() => {
+    return {
+      path: 'https://www.youtube.com/watch',
+      params: 'v=dQw4w9WgXcQ',
+    }
+  })
+
+  Promise.race([sdk.context])
     .then((ctx) => {
       // biome-ignore lint/suspicious/noConsoleLog: <explanation>
       console.log(ctx)

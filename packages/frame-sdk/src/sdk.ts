@@ -1,11 +1,13 @@
 import {
   AddFrame,
   type FrameClientEvent,
+  Rpc,
   type ShareStateProvider,
   SignIn,
 } from '@farcaster/frame-core'
-import { proxy } from 'comlink'
 import { EventEmitter } from 'eventemitter3'
+import { RpcResponse, type RpcTransport } from 'ox'
+import { endpoint } from './endpoint'
 import { frameHost } from './frameHost'
 import { provider } from './provider'
 import type { Emitter, EventMap, FrameSDK } from './types'
@@ -77,6 +79,36 @@ async function isInMiniApp(timeoutMs = 50): Promise<boolean> {
   return isInMiniApp
 }
 
+type RequestFn = RpcTransport.RequestFn<false, {}, Rpc.AppProviderSchema>
+
+const createAppProvider = () => {
+  let requestFn: RequestFn = () => {
+    throw new Error('How to handle init state?')
+  }
+
+  Rpc.createServer<Rpc.AppProviderSchema>({
+    endpoint: endpoint as Rpc.Endpoint,
+    channelName: 'appProvider',
+    handleRequest(request) {
+      if (!requestFn) {
+        throw new Error('No requestHandler set')
+      }
+
+      return requestFn(request as never)
+    },
+  })
+
+  function setRequestHandler(fn: RequestFn) {
+    requestFn = fn
+  }
+
+  return {
+    setRequestHandler,
+  }
+}
+
+const appProvider = createAppProvider()
+
 export const sdk: FrameSDK = {
   ...emitter,
   isInMiniApp,
@@ -131,7 +163,13 @@ export const sdk: FrameSDK = {
     ethProvider: provider,
   },
   setShareStateProvider: (fn: ShareStateProvider) => {
-    frameHost.setShareStateProvider.bind(frameHost)(proxy(fn))
+    appProvider.setRequestHandler(async (request) => {
+      if (request.method === 'get_share_state') {
+        return fn() as never
+      }
+
+      throw new RpcResponse.MethodNotFoundError()
+    })
   },
 }
 
