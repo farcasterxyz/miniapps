@@ -31,7 +31,8 @@ const nonce = 'securenonce';
 import { sdk } from '@farcaster/frame-sdk'
 
 await sdk.actions.signIn({ 
-  nonce 
+  nonce,
+  acceptAuthAddress: true
 })
 ```
 
@@ -43,6 +44,17 @@ await sdk.actions.signIn({
 
 A random string used to prevent replay attacks, at least 8 alphanumeric
 characters.
+
+### acceptAuthAddress
+
+- **Type:** `boolean`
+
+Whether an [Auth
+Address](https://github.com/farcasterxyz/protocol/discussions/225) signed
+message is acceptable. Defaults to `false` to maintain backwards compatibility,
+though applications should set this to `true` for the best user experience
+assuming their verification method supports it.
+
 
 ## Return Value
 

@@ -18,6 +18,17 @@ export type SignInOptions = {
    * ISO 8601 datetime.
    */
   expirationTime?: string
+
+  /**
+   * Whether an [Auth
+   * Address](https://github.com/farcasterxyz/protocol/discussions/225) signed
+   * message is acceptable. Defaults to `false` to maintain backwards
+   * compatibility, though applications should set this to `true` for the best
+   * user experience assuming their verification method supports it.
+   *
+   * @default false
+   */
+  acceptAuthAddress?: boolean
 }
 
 export type SignInResult = {
