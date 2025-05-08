@@ -252,6 +252,9 @@ importers:
       '@farcaster/frame-core':
         specifier: workspace:*
         version: link:../frame-core
+      '@farcaster/frame-host':
+        specifier: workspace:*
+        version: link:../frame-host
       comlink:
         specifier: ^4.4.2
         version: 4.4.2
