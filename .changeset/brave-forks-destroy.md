@@ -1,7 +1,7 @@
 ---
-"@farcaster/frame-core": minor
-"@farcaster/frame-host": minor
-"@farcaster/frame-sdk": minor
+"@farcaster/frame-core": patch
+"@farcaster/frame-host": patch
+"@farcaster/frame-sdk": patch
 ---
 
-Introduce sdk.setShareStateProvider to let mini apps alter the URL hosts share.
+Introduce sdk.setShareStateProvider to let mini apps alter the URL hosts share state.
