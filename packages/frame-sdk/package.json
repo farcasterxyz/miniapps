@@ -28,7 +28,6 @@
   },
   "dependencies": {
     "@farcaster/frame-core": "workspace:*",
-    "@farcaster/frame-host": "workspace:*",
     "comlink": "^4.4.2",
     "eventemitter3": "^5.0.1",
     "ox": "^0.4.4"
