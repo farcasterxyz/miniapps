@@ -9,7 +9,6 @@ import type {
   ViewToken,
 } from './actions'
 import type { FrameContext } from './context'
-import type { ShareStateProvider } from './funcs'
 import type {
   EventFrameAdded,
   EventFrameRemoved,
@@ -51,7 +50,6 @@ export type WireFrameHost = {
   composeCast: <close extends boolean | undefined = undefined>(
     options: ComposeCast.Options<close>,
   ) => Promise<ComposeCast.Result<close>>
-  setShareStateProvider: (fn: ShareStateProvider) => void
 }
 
 export type FrameHost = {
@@ -76,7 +74,6 @@ export type FrameHost = {
   composeCast: <close extends boolean | undefined = undefined>(
     options: ComposeCast.Options<close>,
   ) => Promise<ComposeCast.Result<close>>
-  setShareStateProvider: (fn: ShareStateProvider) => void
 }
 
 export type EventFrameAddRejected = {

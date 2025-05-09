@@ -344,8 +344,6 @@ export function expose(
                 return obj.swapToken(...argumentList);
               case 'sendToken':
                 return obj.sendToken(...argumentList);
-              case 'setShareStateProvider':
-                return obj.setShareStateProvider(...argumentList);
               default:
                 throw new Error(`Unsupported APPLY for ${path.join('/')}`)
             }

@@ -6,7 +6,6 @@ import type {
   Ready,
   SendToken,
   SetPrimaryButtonOptions,
-  ShareStateProvider,
   SignIn,
   SwapToken,
   ViewProfile,
@@ -74,5 +73,4 @@ export type FrameSDK = {
   wallet: {
     ethProvider: Provider.Provider
   }
-  setShareStateProvider: (fn: ShareStateProvider) => void
 } & Emitter
