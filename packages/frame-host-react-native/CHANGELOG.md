@@ -1,5 +1,16 @@
 # @farcaster/frame-host
 
+## 0.1.0
+
+### Minor Changes
+
+- [#243](https://github.com/farcasterxyz/miniapps/pull/243) [`c051966`](https://github.com/farcasterxyz/miniapps/commit/c0519662494c58e8e59eaddd27695cfc36c6ea09) Thanks [@Ashoat](https://github.com/Ashoat)! - Add experimental Solana support
+
+### Patch Changes
+
+- Updated dependencies [[`c051966`](https://github.com/farcasterxyz/miniapps/commit/c0519662494c58e8e59eaddd27695cfc36c6ea09)]:
+  - @farcaster/frame-host@0.1.0
+
 ## 0.0.34
 
 ### Patch Changes

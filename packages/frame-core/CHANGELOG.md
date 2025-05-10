@@ -1,5 +1,15 @@
 # @farcaster/frame-core
 
+## 0.1.0
+
+### Minor Changes
+
+- [#243](https://github.com/farcasterxyz/miniapps/pull/243) [`c051966`](https://github.com/farcasterxyz/miniapps/commit/c0519662494c58e8e59eaddd27695cfc36c6ea09) Thanks [@Ashoat](https://github.com/Ashoat)! - Add experimental Solana support
+
+### Patch Changes
+
+- [#233](https://github.com/farcasterxyz/miniapps/pull/233) [`a51e8a7`](https://github.com/farcasterxyz/miniapps/commit/a51e8a7d7b89957c537ec798d4942fb778567b9e) Thanks [@deodad](https://github.com/deodad)! - added `acceptAuthAddress` to `sdk.actions.signIn`
+
 ## 0.0.34
 
 ### Patch Changes
