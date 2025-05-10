@@ -7,7 +7,9 @@
       "packages/tsconfig",
       "frame-host/src/comlink",
       "packages/create-mini-app/templates",
-      "package.json"
+      "package.json",
+      "**/esm",
+      "**/dist"
     ]
   },
   "organizeImports": {
