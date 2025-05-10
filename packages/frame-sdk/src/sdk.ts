@@ -1,4 +1,10 @@
-import { AddFrame, type FrameClientEvent, SignIn } from '@farcaster/frame-core'
+import {
+  AddFrame,
+  type FrameClientEvent,
+  SignIn,
+  type SolanaRequestFn,
+  createSolanaWalletProvider,
+} from '@farcaster/frame-core'
 import { EventEmitter } from 'eventemitter3'
 import { frameHost } from './frameHost'
 import { provider } from './provider'
@@ -120,6 +126,11 @@ export const sdk: FrameSDK = {
     viewToken: frameHost.viewToken.bind(frameHost),
     sendToken: frameHost.sendToken.bind(frameHost),
     swapToken: frameHost.swapToken.bind(frameHost),
+    solanaProvider: frameHost.solanaProviderRequest
+      ? createSolanaWalletProvider(
+          frameHost.solanaProviderRequest as unknown as SolanaRequestFn,
+        )
+      : undefined,
   },
   wallet: {
     ethProvider: provider,

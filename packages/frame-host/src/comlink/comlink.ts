@@ -344,6 +344,8 @@ export function expose(
                 return obj.swapToken(...argumentList);
               case 'sendToken':
                 return obj.sendToken(...argumentList);
+              case 'solanaProviderRequest':
+                return obj.solanaProviderRequest(...argumentList);
               default:
                 throw new Error(`Unsupported APPLY for ${path.join('/')}`)
             }

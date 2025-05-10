@@ -15,6 +15,7 @@ import type {
   EventNotificationsDisabled,
   EventNotificationsEnabled,
 } from './schemas'
+import type { SolanaRequestFn } from './solana'
 import type { Ethereum } from './wallet'
 
 export type SetPrimaryButtonOptions = {
@@ -42,6 +43,7 @@ export type WireFrameHost = {
   ethProviderRequest: Ethereum.EthProvideRequest
   ethProviderRequestV2: Ethereum.RpcTransport
   eip6963RequestProvider: () => void
+  solanaProviderRequest?: SolanaRequestFn
   addFrame: AddFrame.WireAddFrame
   viewProfile: ViewProfile.ViewProfile
   viewToken: ViewToken.ViewToken
@@ -66,6 +68,7 @@ export type FrameHost = {
    * Hosts must emit an EventEip6963AnnounceProvider in response.
    */
   eip6963RequestProvider: () => void
+  solanaProviderRequest?: SolanaRequestFn
   addFrame: AddFrame.AddFrame
   viewProfile: ViewProfile.ViewProfile
   viewToken: ViewToken.ViewToken

@@ -7,6 +7,7 @@ import type {
   SendToken,
   SetPrimaryButtonOptions,
   SignIn,
+  SolanaWalletProvider,
   SwapToken,
   ViewProfile,
   ViewToken,
@@ -69,6 +70,7 @@ export type FrameSDK = {
     viewToken: ViewToken.ViewToken
     sendToken: SendToken.SendToken
     swapToken: SwapToken.SwapToken
+    solanaProvider?: SolanaWalletProvider
   }
   wallet: {
     ethProvider: Provider.Provider
