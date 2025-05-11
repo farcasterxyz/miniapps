@@ -84,6 +84,56 @@ You can omit `webhookUrl` for now. We'll show you how to set it up in the
 :::
 
 
+### Hybrid & SSR-friendly detection <span id="hybrid-detection"/>
+
+Some apps serve **both** as a Farcaster Mini App and a website from the same
+domain.  When you want to fetch specific resources **during server-side rendering (SSR)** or
+conditionally lazy-load the SDK on the client, add a lightweight flag that only
+Mini-App launch URLs include
+
+**Two suggested patterns**
+
+| Pattern | How it looks | Why use it |
+|---------|--------------|------------|
+| **Dedicated path** | `/your/path/.../miniapp` | Easiest to match on the server |
+| **Well-known query param** | `https://example.com/page?miniApp=true` | Works when a single page serves both modes |
+
+:::note
+Treat these markers as a **best-effort hint, not proof**.  
+Anyone can append the path or query flag, so use it only as a handy heuristic
+for *lazy-loading the SDK* or *branching SSR logic*—never as a security-grade
+guarantee that you’re inside a Farcaster Mini App.
+:::
+
+#### Example
+
+```ts
+// app/layout.tsx
+'use client'
+import { useEffect } from 'react'
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  useEffect(() => {
+    const url = new URL(window.location.href)
+    const isMini =
+      url.pathname.startsWith('/mini') ||
+      url.searchParams.get('miniApp') === 'true'
+
+    if (isMini) {
+      import('@farcaster/frame-sdk').then(({ sdk }) => {
+        // Mini-App–specific bootstrap here
+        // e.g. sdk.actions.ready()
+      })
+    }
+  }, [])
+
+  return children
+}
+```
+
+On the server you can do the same check to skip expensive Mini App work during
+SSR.
+
 ## Verifying ownership
 
 A Mini App is owned by a single Farcaster account. This lets users know who
