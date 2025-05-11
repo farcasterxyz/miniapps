@@ -1,5 +1,13 @@
 # react-ts
 
+## 0.0.10
+
+### Patch Changes
+
+- Updated dependencies [[`c051966`](https://github.com/farcasterxyz/miniapps/commit/c0519662494c58e8e59eaddd27695cfc36c6ea09)]:
+  - @farcaster/frame-sdk@0.0.39
+  - @farcaster/frame-wagmi-connector@0.0.27
+
 ## 0.0.9
 
 ### Patch Changes
