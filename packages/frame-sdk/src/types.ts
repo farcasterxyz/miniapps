@@ -3,6 +3,7 @@ import type {
   ComposeCast,
   Context,
   FrameNotificationDetails,
+  GetCapabilities,
   Ready,
   SendToken,
   SetPrimaryButtonOptions,
@@ -52,6 +53,7 @@ export type Emitter = Compute<EventEmitter<EventMap>>
 type SetPrimaryButton = (options: SetPrimaryButtonOptions) => Promise<void>
 
 export type FrameSDK = {
+  getCapabilities: GetCapabilities
   isInMiniApp: () => Promise<boolean>
   context: Promise<Context.FrameContext>
   actions: {
@@ -70,9 +72,11 @@ export type FrameSDK = {
     viewToken: ViewToken.ViewToken
     sendToken: SendToken.SendToken
     swapToken: SwapToken.SwapToken
-    solanaProvider?: SolanaWalletProvider
+    getSolanaProvider: () => Promise<SolanaWalletProvider | undefined>
   }
   wallet: {
+    // Deprecated in favor of getEvmProvider
     ethProvider: Provider.Provider
+    getEvmProvider: () => Promise<Provider.Provider | undefined>
   }
 } & Emitter

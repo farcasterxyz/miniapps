@@ -44,7 +44,7 @@ function toProviderRpcError({
   }
 }
 
-export const provider: Provider.Provider = Provider.from({
+export const evmProvider: Provider.Provider = Provider.from({
   ...emitter,
   async request(args) {
     // @ts-expect-error
@@ -83,7 +83,15 @@ export const provider: Provider.Provider = Provider.from({
   },
 })
 
-function announceProvider(
+export async function getEvmProvider(): Promise<Provider.Provider | undefined> {
+  const capabilities = await frameHost.getCapabilities()
+  if (!capabilities.includes('wallet.getEvmProvider')) {
+    return undefined
+  }
+  return evmProvider
+}
+
+function announceEvmProvider(
   detail: AnnounceProviderParameters,
 ): AnnounceProviderReturnType {
   const event: CustomEvent<EIP6963ProviderDetail> = new CustomEvent(
@@ -118,9 +126,9 @@ if (typeof document !== 'undefined') {
     if (event instanceof MessageEvent) {
       const frameEvent = event.data as FrameClientEvent
       if (frameEvent.event === 'eip6963:announceProvider') {
-        announceProvider({
+        announceEvmProvider({
           info: frameEvent.info,
-          provider: provider as EIP1193Provider,
+          provider: evmProvider as EIP1193Provider,
         })
       }
     }
@@ -150,9 +158,9 @@ if (typeof window !== 'undefined') {
       if (event.data.type === 'frameEvent') {
         const frameEvent = event.data.event as FrameClientEvent
         if (frameEvent.event === 'eip6963:announceProvider') {
-          announceProvider({
+          announceEvmProvider({
             info: frameEvent.info,
-            provider: provider as EIP1193Provider,
+            provider: evmProvider as EIP1193Provider,
           })
         }
       }

@@ -33,6 +33,13 @@ export type SignInOptions = SignIn.SignInOptions
 
 export type SetPrimaryButton = (options: SetPrimaryButtonOptions) => void
 
+export type MiniAppHostCapability =
+  | 'wallet.getEvmProvider'
+  | 'wallet.getSolanaProvider'
+  | 'actions.signIn'
+
+export type GetCapabilities = () => Promise<MiniAppHostCapability[]>
+
 export type WireFrameHost = {
   context: FrameContext
   close: () => void
@@ -52,6 +59,7 @@ export type WireFrameHost = {
   composeCast: <close extends boolean | undefined = undefined>(
     options: ComposeCast.Options<close>,
   ) => Promise<ComposeCast.Result<close>>
+  getCapabilities: GetCapabilities
 }
 
 export type FrameHost = {
@@ -77,6 +85,7 @@ export type FrameHost = {
   composeCast: <close extends boolean | undefined = undefined>(
     options: ComposeCast.Options<close>,
   ) => Promise<ComposeCast.Result<close>>
+  getCapabilities: GetCapabilities
 }
 
 export type EventFrameAddRejected = {

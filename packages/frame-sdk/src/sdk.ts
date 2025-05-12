@@ -6,8 +6,9 @@ import {
   createSolanaWalletProvider,
 } from '@farcaster/frame-core'
 import { EventEmitter } from 'eventemitter3'
+import { evmProvider, getEvmProvider } from './evmProvider'
 import { frameHost } from './frameHost'
-import { provider } from './provider'
+import { getSolanaProvider } from './solanaProvider'
 import type { Emitter, EventMap, FrameSDK } from './types'
 
 export function createEmitter(): Emitter {
@@ -79,6 +80,7 @@ async function isInMiniApp(timeoutMs = 50): Promise<boolean> {
 
 export const sdk: FrameSDK = {
   ...emitter,
+  getCapabilities: frameHost.getCapabilities,
   isInMiniApp,
   context: frameHost.context,
   actions: {
@@ -126,14 +128,11 @@ export const sdk: FrameSDK = {
     viewToken: frameHost.viewToken.bind(frameHost),
     sendToken: frameHost.sendToken.bind(frameHost),
     swapToken: frameHost.swapToken.bind(frameHost),
-    solanaProvider: frameHost.solanaProviderRequest
-      ? createSolanaWalletProvider(
-          frameHost.solanaProviderRequest as unknown as SolanaRequestFn,
-        )
-      : undefined,
+    getSolanaProvider,
   },
   wallet: {
-    ethProvider: provider,
+    ethProvider: evmProvider,
+    getEvmProvider: getEvmProvider,
   },
 }
 
