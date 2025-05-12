@@ -1,4 +1,4 @@
-export * as AddFrame from './AddFrame'
+export * as AddMiniApp from './AddMiniApp'
 export * as ComposeCast from './ComposeCast'
 export * as Ready from './Ready'
 export * as SignIn from './SignIn'

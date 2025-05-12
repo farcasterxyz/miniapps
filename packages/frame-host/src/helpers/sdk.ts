@@ -1,5 +1,5 @@
 import type { FrameHost, WireFrameHost } from '@farcaster/frame-core'
-import { AddFrame, SignIn } from '@farcaster/frame-core'
+import { AddMiniApp, SignIn } from '@farcaster/frame-core'
 
 export function wrapHandlers(host: FrameHost): WireFrameHost {
   return {
@@ -9,7 +9,7 @@ export function wrapHandlers(host: FrameHost): WireFrameHost {
         const result = await host.addFrame()
         return { result }
       } catch (e) {
-        if (e instanceof AddFrame.RejectedByUser) {
+        if (e instanceof AddMiniApp.RejectedByUser) {
           return {
             error: {
               type: 'rejected_by_user',
@@ -17,7 +17,7 @@ export function wrapHandlers(host: FrameHost): WireFrameHost {
           }
         }
 
-        if (e instanceof AddFrame.InvalidDomainManifest) {
+        if (e instanceof AddMiniApp.InvalidDomainManifest) {
           return {
             error: {
               type: 'invalid_domain_manifest',

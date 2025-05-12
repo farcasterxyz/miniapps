@@ -1,5 +1,5 @@
 import {
-  AddFrame,
+  AddMiniApp,
   type FrameClientEvent,
   SignIn,
   type SolanaRequestFn,
@@ -78,6 +78,23 @@ async function isInMiniApp(timeoutMs = 50): Promise<boolean> {
   return isInMiniApp
 }
 
+const addMiniApp = async () => {
+  const response = await frameHost.addFrame()
+  if (response.result) {
+    return response.result
+  }
+
+  if (response.error.type === 'invalid_domain_manifest') {
+    throw new AddMiniApp.InvalidDomainManifest()
+  }
+
+  if (response.error.type === 'rejected_by_user') {
+    throw new AddMiniApp.RejectedByUser()
+  }
+
+  throw new Error('Unreachable')
+}
+
 export const sdk: FrameSDK = {
   ...emitter,
   getCapabilities: frameHost.getCapabilities,
@@ -104,22 +121,8 @@ export const sdk: FrameSDK = {
       const url = typeof urlArg === 'string' ? urlArg : urlArg.url
       return frameHost.openUrl(url.trim())
     },
-    addFrame: async () => {
-      const response = await frameHost.addFrame()
-      if (response.result) {
-        return response.result
-      }
-
-      if (response.error.type === 'invalid_domain_manifest') {
-        throw new AddFrame.InvalidDomainManifest()
-      }
-
-      if (response.error.type === 'rejected_by_user') {
-        throw new AddFrame.RejectedByUser()
-      }
-
-      throw new Error('Unreachable')
-    },
+    addFrame: addMiniApp,
+    addMiniApp,
     composeCast(options = {}) {
       return frameHost.composeCast(options) as never
     },

@@ -2,11 +2,11 @@ import * as Errors from '../errors'
 import type { OneOf } from '../internal/types'
 import type { FrameNotificationDetails } from '../schemas'
 
-export type AddFrameResult = {
+export type AddMiniAppResult = {
   notificationDetails?: FrameNotificationDetails
 }
 
-export type AddFrame = () => Promise<AddFrameResult>
+export type AddMiniApp = () => Promise<AddMiniAppResult>
 
 type InvalidDomainManifestJsonError = {
   type: 'invalid_domain_manifest'
@@ -16,23 +16,23 @@ type RejectedByUserJsonError = {
   type: 'rejected_by_user'
 }
 
-export type AddFrameJsonError =
+export type AddMiniAppJsonError =
   | InvalidDomainManifestJsonError
   | RejectedByUserJsonError
 
-export type AddFrameRejectedReason = AddFrameJsonError['type']
+export type AddMiniAppRejectedReason = AddMiniAppJsonError['type']
 
-export type AddFrameJsonResult = OneOf<
-  { result: AddFrameResult } | { error: AddFrameJsonError }
+export type AddMiniAppJsonResult = OneOf<
+  { result: AddMiniAppResult } | { error: AddMiniAppJsonError }
 >
 
-export type WireAddFrame = () => Promise<AddFrameJsonResult>
+export type WireAddMiniApp = () => Promise<AddMiniAppJsonResult>
 
 /**
  * Thrown when the frame does not have a valid domain manifest.
  */
 export class InvalidDomainManifest extends Errors.BaseError {
-  override readonly name = 'AddFrame.InvalidDomainManifest'
+  override readonly name = 'AddMiniApp.InvalidDomainManifest'
 
   constructor() {
     super('Invalid domain manifest')
@@ -43,7 +43,7 @@ export class InvalidDomainManifest extends Errors.BaseError {
  * Thrown when add frame action was rejected by the user.
  */
 export class RejectedByUser extends Errors.BaseError {
-  override readonly name = 'AddFrame.RejectedByUser'
+  override readonly name = 'AddMiniApp.RejectedByUser'
 
   constructor() {
     super('Add frame rejected by user')

@@ -1,5 +1,5 @@
 import type {
-  AddFrame,
+  AddMiniApp,
   ComposeCast,
   Context,
   FrameNotificationDetails,
@@ -38,7 +38,7 @@ export type EventMap = {
   }) => void
   frameAddRejected: ({
     reason,
-  }: { reason: AddFrame.AddFrameRejectedReason }) => void
+  }: { reason: AddMiniApp.AddMiniAppRejectedReason }) => void
   frameRemoved: () => void
   notificationsEnabled: ({
     notificationDetails,
@@ -61,7 +61,9 @@ export type FrameSDK = {
     openUrl: (url: string) => Promise<void>
     close: () => Promise<void>
     setPrimaryButton: SetPrimaryButton
-    addFrame: AddFrame.AddFrame
+    // Deprecated in favor of addMiniApp
+    addFrame: AddMiniApp.AddMiniApp
+    addMiniApp: AddMiniApp.AddMiniApp
     signIn: SignIn.SignIn
     viewProfile: ViewProfile.ViewProfile
     composeCast: <close extends boolean | undefined = undefined>(

@@ -1,5 +1,5 @@
 import type {
-  AddFrame,
+  AddMiniApp,
   ComposeCast,
   Ready,
   SendToken,
@@ -51,7 +51,7 @@ export type WireFrameHost = {
   ethProviderRequestV2: Ethereum.RpcTransport
   eip6963RequestProvider: () => void
   solanaProviderRequest?: SolanaRequestFn
-  addFrame: AddFrame.WireAddFrame
+  addFrame: AddMiniApp.WireAddMiniApp
   viewProfile: ViewProfile.ViewProfile
   viewToken: ViewToken.ViewToken
   sendToken: SendToken.SendToken
@@ -77,7 +77,7 @@ export type FrameHost = {
    */
   eip6963RequestProvider: () => void
   solanaProviderRequest?: SolanaRequestFn
-  addFrame: AddFrame.AddFrame
+  addFrame: AddMiniApp.AddMiniApp
   viewProfile: ViewProfile.ViewProfile
   viewToken: ViewToken.ViewToken
   sendToken: SendToken.SendToken
@@ -90,7 +90,7 @@ export type FrameHost = {
 
 export type EventFrameAddRejected = {
   event: 'frame_add_rejected'
-  reason: AddFrame.AddFrameRejectedReason
+  reason: AddMiniApp.AddMiniAppRejectedReason
 }
 
 export type EventPrimaryButtonClicked = {
