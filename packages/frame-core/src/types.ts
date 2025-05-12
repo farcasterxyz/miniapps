@@ -36,7 +36,17 @@ export type SetPrimaryButton = (options: SetPrimaryButtonOptions) => void
 export type MiniAppHostCapability =
   | 'wallet.getEvmProvider'
   | 'wallet.getSolanaProvider'
+  | 'actions.ready'
+  | 'actions.openUrl'
+  | 'actions.close'
+  | 'actions.setPrimaryButton'
+  | 'actions.addMiniApp'
   | 'actions.signIn'
+  | 'actions.viewProfile'
+  | 'actions.composeCast'
+  | 'actions.viewToken'
+  | 'actions.sendToken'
+  | 'actions.swapToken'
 
 export type GetCapabilities = () => Promise<MiniAppHostCapability[]>
 
