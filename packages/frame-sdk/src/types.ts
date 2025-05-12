@@ -69,11 +69,11 @@ export type FrameSDK = {
     composeCast: <close extends boolean | undefined = undefined>(
       options?: ComposeCast.Options<close>,
     ) => Promise<ComposeCast.Result<close>>
-  }
-  experimental: {
     viewToken: ViewToken.ViewToken
     sendToken: SendToken.SendToken
     swapToken: SwapToken.SwapToken
+  }
+  experimental: {
     getSolanaProvider: () => Promise<SolanaWalletProvider | undefined>
   }
   wallet: {

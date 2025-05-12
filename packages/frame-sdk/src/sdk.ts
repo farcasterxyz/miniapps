@@ -126,11 +126,11 @@ export const sdk: FrameSDK = {
     composeCast(options = {}) {
       return frameHost.composeCast(options) as never
     },
-  },
-  experimental: {
     viewToken: frameHost.viewToken.bind(frameHost),
     sendToken: frameHost.sendToken.bind(frameHost),
     swapToken: frameHost.swapToken.bind(frameHost),
+  },
+  experimental: {
     getSolanaProvider,
   },
   wallet: {
