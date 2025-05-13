@@ -1,5 +1,5 @@
-import { farcasterFrame } from './connector'
+import { farcasterFrame } from './connector.js'
 
-export * from './connector'
+export * from './connector.js'
 
 export default farcasterFrame
