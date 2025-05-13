@@ -1,5 +1,20 @@
 # @farcaster/frame-host
 
+## 0.0.37
+
+### Patch Changes
+
+- [#252](https://github.com/farcasterxyz/miniapps/pull/252) [`a8e5305`](https://github.com/farcasterxyz/miniapps/commit/a8e530578954bfd8903496af4ca4efb56d8c356c) Thanks [@Ashoat](https://github.com/Ashoat)! - Add all SDK actions wallet providers to getCapabilities
+
+- [#250](https://github.com/farcasterxyz/miniapps/pull/250) [`1623538`](https://github.com/farcasterxyz/miniapps/commit/16235380ef907d9c197b916fbbc4dff7ffa78c41) Thanks [@Ashoat](https://github.com/Ashoat)! - Update SDK method addFrame to addMiniApp
+
+- [#255](https://github.com/farcasterxyz/miniapps/pull/255) [`48c0237`](https://github.com/farcasterxyz/miniapps/commit/48c0237a1967e0de4e61f4ef8faae4fd741dbbd9) Thanks [@Ashoat](https://github.com/Ashoat)! - Wrap solanaProviderRequest for data structure serialization across comlink
+
+- [#248](https://github.com/farcasterxyz/miniapps/pull/248) [`055e619`](https://github.com/farcasterxyz/miniapps/commit/055e619a109c5eb9e51bff3ff50ba160f7aac35a) Thanks [@Ashoat](https://github.com/Ashoat)! - Introduce getCapabilities, getEvmProvider, getSolanaProvider
+
+- Updated dependencies [[`a8e5305`](https://github.com/farcasterxyz/miniapps/commit/a8e530578954bfd8903496af4ca4efb56d8c356c), [`1623538`](https://github.com/farcasterxyz/miniapps/commit/16235380ef907d9c197b916fbbc4dff7ffa78c41), [`48c0237`](https://github.com/farcasterxyz/miniapps/commit/48c0237a1967e0de4e61f4ef8faae4fd741dbbd9), [`055e619`](https://github.com/farcasterxyz/miniapps/commit/055e619a109c5eb9e51bff3ff50ba160f7aac35a)]:
+  - @farcaster/frame-core@0.0.36
+
 ## 0.0.36
 
 ### Patch Changes

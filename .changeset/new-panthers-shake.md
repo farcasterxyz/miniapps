@@ -1,8 +1,0 @@
----
-"@farcaster/frame-core": patch
-"@farcaster/frame-host": patch
-"@farcaster/frame-sdk": patch
-"@farcaster/frame-host-react-native": patch
----
-
-Update SDK method addFrame to addMiniApp
