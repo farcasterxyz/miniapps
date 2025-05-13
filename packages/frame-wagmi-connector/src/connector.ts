@@ -26,6 +26,8 @@ export function farcasterFrame() {
         method: 'eth_requestAccounts',
       })
 
+      chainId = chainId ?? config.chains[0].id
+
       if (!accountsChanged) {
         accountsChanged = this.onAccountsChanged.bind(this)
         // @ts-expect-error - provider type is stricter
