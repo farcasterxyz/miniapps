@@ -1,5 +1,15 @@
 # @farcaster/frame-wagmi-connector
 
+## 0.0.30
+
+### Patch Changes
+
+- [#260](https://github.com/farcasterxyz/miniapps/pull/260) [`bcafd2b`](https://github.com/farcasterxyz/miniapps/commit/bcafd2b6ad359d8fac90827e9062caf350703154) Thanks [@deodad](https://github.com/deodad)! - Exported strict ESM.
+
+- [#262](https://github.com/farcasterxyz/miniapps/pull/262) [`b4bd0c4`](https://github.com/farcasterxyz/miniapps/commit/b4bd0c455150b3372aad7ab1830d9e452a2c0556) Thanks [@deodad](https://github.com/deodad)! - Updated connector to consider storage when looking for initial chain.
+
+- [#260](https://github.com/farcasterxyz/miniapps/pull/260) [`bcafd2b`](https://github.com/farcasterxyz/miniapps/commit/bcafd2b6ad359d8fac90827e9062caf350703154) Thanks [@deodad](https://github.com/deodad)! - Switch to config.chains[0] if no `chainId` is provided.
+
 ## 0.0.29
 
 ### Patch Changes
