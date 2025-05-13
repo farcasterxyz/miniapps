@@ -1,4 +1,5 @@
 import {
+  type MiniAppHostCapability,
   type SolanaWalletProvider,
   type SolanaWireRequestFn,
   createSolanaWalletProvider,
@@ -19,8 +20,11 @@ if (solanaProviderRequest) {
 }
 
 async function getSolanaProvider(): Promise<SolanaWalletProvider | undefined> {
-  const capabilities = await frameHost.getCapabilities()
-  if (!capabilities.includes('wallet.getSolanaProvider')) {
+  let capabilities: MiniAppHostCapability[] | undefined
+  try {
+    capabilities = await frameHost.getCapabilities()
+  } catch {}
+  if (!capabilities?.includes('wallet.getSolanaProvider')) {
     return undefined
   }
   return solanaProvider

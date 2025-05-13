@@ -1,6 +1,7 @@
 import type {
   EthProviderWireEvent,
   FrameClientEvent,
+  MiniAppHostCapability,
 } from '@farcaster/frame-core'
 import type {
   AnnounceProviderParameters,
@@ -84,8 +85,11 @@ export const evmProvider: Provider.Provider = Provider.from({
 })
 
 export async function getEvmProvider(): Promise<Provider.Provider | undefined> {
-  const capabilities = await frameHost.getCapabilities()
-  if (!capabilities.includes('wallet.getEvmProvider')) {
+  let capabilities: MiniAppHostCapability[] | undefined
+  try {
+    capabilities = await frameHost.getCapabilities()
+  } catch {}
+  if (!capabilities?.includes('wallet.getEvmProvider')) {
     return undefined
   }
   return evmProvider
