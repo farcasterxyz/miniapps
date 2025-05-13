@@ -26,7 +26,16 @@ export function farcasterFrame() {
         method: 'eth_requestAccounts',
       })
 
-      chainId = chainId ?? config.chains[0]?.id
+      let targetChainId = chainId
+      if (!targetChainId) {
+        const state = (await config.storage?.getItem('state')) ?? {}
+        const isChainSupported = config.chains.some(
+          (x) => x.id === state.chainId,
+        )
+        if (isChainSupported) targetChainId = state.chainId
+        else targetChainId = config.chains[0]?.id
+      }
+      if (!targetChainId) throw new Error('No chains found on connector.')
 
       if (!accountsChanged) {
         accountsChanged = this.onAccountsChanged.bind(this)
@@ -43,8 +52,8 @@ export function farcasterFrame() {
       }
 
       let currentChainId = await this.getChainId()
-      if (chainId && currentChainId !== chainId) {
-        const chain = await this.switchChain!({ chainId })
+      if (targetChainId && currentChainId !== targetChainId) {
+        const chain = await this.switchChain!({ chainId: targetChainId })
         currentChainId = chain.id
       }
 
