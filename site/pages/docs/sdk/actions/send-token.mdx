@@ -18,7 +18,7 @@ const recipientFid = 3;
 // ---cut---
 import { sdk } from '@farcaster/frame-sdk'
 
-await sdk.experimental.sendToken({ 
+await sdk.actions.sendToken({ 
   token,
   amount,
   recipientFid,

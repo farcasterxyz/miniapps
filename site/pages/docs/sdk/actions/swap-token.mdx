@@ -18,7 +18,7 @@ const sellAmount = "1000000";
 // ---cut---
 import { sdk } from '@farcaster/frame-sdk'
 
-await sdk.experimental.swapToken({ 
+await sdk.actions.swapToken({ 
   sellToken,
   buyToken,
   sellAmount,
