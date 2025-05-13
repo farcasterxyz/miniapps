@@ -1,5 +1,11 @@
 # @farcaster/frame-kit
 
+## 0.0.41
+
+### Patch Changes
+
+- [#257](https://github.com/farcasterxyz/miniapps/pull/257) [`dc12377`](https://github.com/farcasterxyz/miniapps/commit/dc1237755d4dd1c8113ef00ff411d81128421d51) Thanks [@Ashoat](https://github.com/Ashoat)! - Fix SDK crash on getEvmProvider/getSolanaProvider if host doesn't support getCapabilities
+
 ## 0.0.40
 
 ### Patch Changes
