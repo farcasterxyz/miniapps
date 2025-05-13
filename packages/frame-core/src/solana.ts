@@ -1,11 +1,12 @@
-import type {
+import {
   Connection as SolanaConnection,
-  SendOptions as SolanaSendOptions,
-  Transaction as SolanaTransaction,
-  VersionedTransaction as SolanaVersionedTransaction,
+  type SendOptions as SolanaSendOptions,
+  type Transaction as SolanaTransaction,
+  type VersionedTransaction as SolanaVersionedTransaction,
 } from '@solana/web3.js'
 
-export type { SolanaConnection }
+export { SolanaConnection }
+export type { SolanaSendOptions }
 
 export type SolanaCombinedTransaction =
   | SolanaTransaction
@@ -24,7 +25,6 @@ export type SolanaSignAndSendTransactionRequestArguments = {
   method: 'signAndSendTransaction'
   params: {
     transaction: SolanaCombinedTransaction
-    connection: SolanaConnection
     options?: SolanaSendOptions
   }
 }
@@ -59,7 +59,6 @@ export interface SolanaWalletProvider {
   ): Promise<{ signedTransaction: T }>
   signAndSendTransaction(input: {
     transaction: SolanaCombinedTransaction
-    connection: SolanaConnection
   }): Promise<{ signature: string }>
 }
 
@@ -73,10 +72,37 @@ export const createSolanaWalletProvider = (
     request({ method: 'signTransaction', params: { transaction } }),
   signAndSendTransaction: (input: {
     transaction: SolanaCombinedTransaction
-    connection: SolanaConnection
   }) =>
     request({
       method: 'signAndSendTransaction',
       params: input,
     }),
 })
+
+export type SolanaWireSignAndSendTransactionRequestArguments = {
+  method: 'signAndSendTransaction'
+  params: {
+    transaction: string
+    options?: SolanaSendOptions
+  }
+}
+
+export type SolanaWireSignTransactionRequestArguments = {
+  method: 'signTransaction'
+  params: {
+    transaction: string
+  }
+}
+
+export type SolanaWireRequestFn = ((
+  request: SolanaConnectRequestArguments,
+) => Promise<{ publicKey: string }>) &
+  ((request: SolanaSignMessageRequestArguments) => Promise<{
+    signature: string
+  }>) &
+  ((request: SolanaWireSignAndSendTransactionRequestArguments) => Promise<{
+    signature: string
+  }>) &
+  ((
+    request: SolanaWireSignTransactionRequestArguments,
+  ) => Promise<{ signedTransaction: string }>)

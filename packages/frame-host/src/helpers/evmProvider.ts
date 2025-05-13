@@ -3,7 +3,7 @@ import type * as RpcRequest from 'ox/RpcRequest'
 import * as RpcResponse from 'ox/RpcResponse'
 import type { HostEndpoint } from '../types'
 
-export function forwardProviderEvents({
+export function forwardEvmProviderEvents({
   provider,
   endpoint,
 }: {
@@ -50,7 +50,7 @@ export function forwardProviderEvents({
  * Wraps a provider's request function with a result format that can transfer
  * errors across scripting boundaries.
  */
-export const wrapProviderRequest =
+export const wrapEvmProviderRequest =
   ({
     provider,
     debug = false,

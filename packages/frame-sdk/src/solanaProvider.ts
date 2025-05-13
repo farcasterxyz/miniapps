@@ -1,14 +1,22 @@
 import {
-  type SolanaRequestFn,
   type SolanaWalletProvider,
+  type SolanaWireRequestFn,
   createSolanaWalletProvider,
+  unwrapSolanaProviderRequest,
 } from '@farcaster/frame-core'
 
 import { frameHost } from './frameHost'
 
-const solanaProvider = createSolanaWalletProvider(
-  frameHost.solanaProviderRequest as unknown as SolanaRequestFn,
-)
+const { solanaProviderRequest } = frameHost
+
+let solanaProvider: SolanaWalletProvider | undefined
+if (solanaProviderRequest) {
+  solanaProvider = createSolanaWalletProvider(
+    unwrapSolanaProviderRequest(
+      solanaProviderRequest as unknown as SolanaWireRequestFn,
+    ),
+  )
+}
 
 async function getSolanaProvider(): Promise<SolanaWalletProvider | undefined> {
   const capabilities = await frameHost.getCapabilities()

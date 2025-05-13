@@ -1,5 +1,9 @@
 import type { FrameHost, WireFrameHost } from '@farcaster/frame-core'
-import { AddMiniApp, SignIn } from '@farcaster/frame-core'
+import {
+  AddMiniApp,
+  SignIn,
+  wrapSolanaProviderRequest,
+} from '@farcaster/frame-core'
 
 export function wrapHandlers(host: FrameHost): WireFrameHost {
   return {
@@ -44,5 +48,8 @@ export function wrapHandlers(host: FrameHost): WireFrameHost {
         throw e
       }
     },
+    solanaProviderRequest: host.solanaProviderRequest
+      ? wrapSolanaProviderRequest(host.solanaProviderRequest)
+      : undefined,
   }
 }
