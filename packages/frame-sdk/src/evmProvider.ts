@@ -85,14 +85,17 @@ export const evmProvider: Provider.Provider = Provider.from({
 })
 
 export async function getEvmProvider(): Promise<Provider.Provider | undefined> {
-  let capabilities: MiniAppHostCapability[] | undefined
   try {
-    capabilities = await frameHost.getCapabilities()
-  } catch {}
-  if (!capabilities?.includes('wallet.getEvmProvider')) {
-    return undefined
+    const capabilities = await frameHost.getCapabilities()
+    if (!capabilities.includes('wallet.getEvmProvider')) {
+      return undefined
+    }
+    return evmProvider
+  } catch {
+    // If this is an old frame host that doesn't support getCapabilities,
+    // getEvmProvider will assume that it's supported
+    return evmProvider
   }
-  return evmProvider
 }
 
 function announceEvmProvider(
