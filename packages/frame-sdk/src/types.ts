@@ -4,6 +4,7 @@ import type {
   Context,
   FrameNotificationDetails,
   GetCapabilities,
+  GetChains,
   Ready,
   SendToken,
   SetPrimaryButtonOptions,
@@ -54,6 +55,7 @@ type SetPrimaryButton = (options: SetPrimaryButtonOptions) => Promise<void>
 
 export type FrameSDK = {
   getCapabilities: GetCapabilities
+  getChains: GetChains
   isInMiniApp: () => Promise<boolean>
   context: Promise<Context.FrameContext>
   actions: {

@@ -50,6 +50,9 @@ export type MiniAppHostCapability =
 
 export type GetCapabilities = () => Promise<MiniAppHostCapability[]>
 
+// Returns a list of CAIP-2 identifiers
+export type GetChains = () => Promise<string[]>
+
 export type WireFrameHost = {
   context: FrameContext
   close: () => void
@@ -70,6 +73,7 @@ export type WireFrameHost = {
     options: ComposeCast.Options<close>,
   ) => Promise<ComposeCast.Result<close>>
   getCapabilities: GetCapabilities
+  getChains: GetChains
 }
 
 export type FrameHost = {
@@ -96,6 +100,7 @@ export type FrameHost = {
     options: ComposeCast.Options<close>,
   ) => Promise<ComposeCast.Result<close>>
   getCapabilities: GetCapabilities
+  getChains: GetChains
 }
 
 export type EventFrameAddRejected = {

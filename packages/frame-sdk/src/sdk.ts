@@ -98,6 +98,7 @@ const addMiniApp = async () => {
 export const sdk: FrameSDK = {
   ...emitter,
   getCapabilities: frameHost.getCapabilities,
+  getChains: frameHost.getChains,
   isInMiniApp,
   context: frameHost.context,
   actions: {
