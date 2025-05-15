@@ -6,7 +6,7 @@ import {
   createSolanaWalletProvider,
 } from '@farcaster/frame-core'
 import { EventEmitter } from 'eventemitter3'
-import { evmProvider, getEvmProvider } from './evmProvider'
+import { ethereumProvider, getEthereumProvider } from './ethereumProvider'
 import { frameHost } from './frameHost'
 import { getSolanaProvider } from './solanaProvider'
 import type { Emitter, EventMap, FrameSDK } from './types'
@@ -135,8 +135,8 @@ export const sdk: FrameSDK = {
     getSolanaProvider,
   },
   wallet: {
-    ethProvider: evmProvider,
-    getEvmProvider: getEvmProvider,
+    ethProvider: ethereumProvider,
+    getEthereumProvider,
   },
 }
 

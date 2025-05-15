@@ -34,7 +34,7 @@ export type SignInOptions = SignIn.SignInOptions
 export type SetPrimaryButton = (options: SetPrimaryButtonOptions) => void
 
 export type MiniAppHostCapability =
-  | 'wallet.getEvmProvider'
+  | 'wallet.getEthereumProvider'
   | 'wallet.getSolanaProvider'
   | 'actions.ready'
   | 'actions.openUrl'

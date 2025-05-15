@@ -79,8 +79,8 @@ export type FrameSDK = {
     getSolanaProvider: () => Promise<SolanaWalletProvider | undefined>
   }
   wallet: {
-    // Deprecated in favor of getEvmProvider
+    // Deprecated in favor of getEthereumProvider
     ethProvider: Provider.Provider
-    getEvmProvider: () => Promise<Provider.Provider | undefined>
+    getEthereumProvider: () => Promise<Provider.Provider | undefined>
   }
 } & Emitter
