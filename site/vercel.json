@@ -39,11 +39,6 @@
       "source": "/docs/actions/view-profile",
       "destination": "/docs/sdk/actions/view-profile",
       "statusCode": 301
-    },
-    {
-      "source": "/docs/is-in-mini-app",
-      "destination": "/docs/sdk/is-in-mini-app",
-      "statusCode": 301
     }
   ]
 }
