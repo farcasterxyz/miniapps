@@ -89,7 +89,12 @@ export async function getEthereumProvider(): Promise<
 > {
   try {
     const capabilities = await frameHost.getCapabilities()
-    if (!capabilities.includes('wallet.getEthereumProvider')) {
+    if (
+      !capabilities.includes('wallet.getEthereumProvider') &&
+      !capabilities.includes('wallet.getEvmProvider' as MiniAppHostCapability)
+    ) {
+      // We used getEvmProvider for a short period before getEthereumProvider.
+      // In case we're talking to an old host, we check the old key.
       return undefined
     }
     return ethereumProvider
