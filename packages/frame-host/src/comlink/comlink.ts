@@ -348,6 +348,8 @@ export function expose(
                 return obj.solanaProviderRequest(...argumentList);
               case 'getCapabilities':
                 return obj.getCapabilities(...argumentList);
+              case 'getChains':
+                return obj.getChains(...argumentList);
               default:
                 throw new Error(`Unsupported APPLY for ${path.join('/')}`)
             }

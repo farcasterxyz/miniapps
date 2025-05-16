@@ -33,8 +33,24 @@ export type SignInOptions = SignIn.SignInOptions
 
 export type SetPrimaryButton = (options: SetPrimaryButtonOptions) => void
 
+export const miniAppHostCapabilityList: [string, ...string[]] = [
+  'wallet.getEthereumProvider',
+  'wallet.getSolanaProvider',
+  'actions.ready',
+  'actions.openUrl',
+  'actions.close',
+  'actions.setPrimaryButton',
+  'actions.addMiniApp',
+  'actions.signIn',
+  'actions.viewProfile',
+  'actions.composeCast',
+  'actions.viewToken',
+  'actions.sendToken',
+  'actions.swapToken',
+]
+
 export type MiniAppHostCapability =
-  | 'wallet.getEvmProvider'
+  | 'wallet.getEthereumProvider'
   | 'wallet.getSolanaProvider'
   | 'actions.ready'
   | 'actions.openUrl'
@@ -49,6 +65,9 @@ export type MiniAppHostCapability =
   | 'actions.swapToken'
 
 export type GetCapabilities = () => Promise<MiniAppHostCapability[]>
+
+// Returns a list of CAIP-2 identifiers
+export type GetChains = () => Promise<string[]>
 
 export type WireFrameHost = {
   context: FrameContext
@@ -70,6 +89,7 @@ export type WireFrameHost = {
     options: ComposeCast.Options<close>,
   ) => Promise<ComposeCast.Result<close>>
   getCapabilities: GetCapabilities
+  getChains: GetChains
 }
 
 export type FrameHost = {
@@ -96,6 +116,7 @@ export type FrameHost = {
     options: ComposeCast.Options<close>,
   ) => Promise<ComposeCast.Result<close>>
   getCapabilities: GetCapabilities
+  getChains: GetChains
 }
 
 export type EventFrameAddRejected = {

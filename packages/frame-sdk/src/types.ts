@@ -4,6 +4,7 @@ import type {
   Context,
   FrameNotificationDetails,
   GetCapabilities,
+  GetChains,
   Ready,
   SendToken,
   SetPrimaryButtonOptions,
@@ -54,6 +55,7 @@ type SetPrimaryButton = (options: SetPrimaryButtonOptions) => Promise<void>
 
 export type FrameSDK = {
   getCapabilities: GetCapabilities
+  getChains: GetChains
   isInMiniApp: () => Promise<boolean>
   context: Promise<Context.FrameContext>
   actions: {
@@ -77,8 +79,8 @@ export type FrameSDK = {
     getSolanaProvider: () => Promise<SolanaWalletProvider | undefined>
   }
   wallet: {
-    // Deprecated in favor of getEvmProvider
+    // Deprecated in favor of getEthereumProvider
     ethProvider: Provider.Provider
-    getEvmProvider: () => Promise<Provider.Provider | undefined>
+    getEthereumProvider: () => Promise<Provider.Provider | undefined>
   }
 } & Emitter

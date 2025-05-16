@@ -2,7 +2,7 @@ import { expect, test } from 'vitest'
 import { createVerifyAppKeyWithHub } from '../src/farcaster'
 
 test('farcaster', async () => {
-  const hubUrl = 'https://nemes.farcaster.xyz:2281'
+  const hubUrl = 'https://snap.farcaster.xyz:3381'
   const verifyAppKey = createVerifyAppKeyWithHub(hubUrl)
   const result = await verifyAppKey(
     5448,

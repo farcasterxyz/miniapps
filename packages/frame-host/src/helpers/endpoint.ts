@@ -3,7 +3,10 @@ import type * as Provider from 'ox/Provider'
 import { useEffect } from 'react'
 import * as Comlink from '../comlink'
 import type { HostEndpoint } from '../types'
-import { forwardEvmProviderEvents, wrapEvmProviderRequest } from './evmProvider'
+import {
+  forwardEthereumProviderEvents,
+  wrapEthereumProviderRequest,
+} from './ethereumProvider'
 import { wrapHandlers } from './sdk'
 
 /**
@@ -26,11 +29,11 @@ export function exposeToEndpoint({
 
   let cleanup: (() => void) | undefined
   if (ethProvider) {
-    extendedSdk.ethProviderRequestV2 = wrapEvmProviderRequest({
+    extendedSdk.ethProviderRequestV2 = wrapEthereumProviderRequest({
       provider: ethProvider,
       debug,
     })
-    cleanup = forwardEvmProviderEvents({ provider: ethProvider, endpoint })
+    cleanup = forwardEthereumProviderEvents({ provider: ethProvider, endpoint })
   }
 
   const unexpose = Comlink.expose(extendedSdk, endpoint, [frameOrigin])

@@ -45,7 +45,7 @@ function toProviderRpcError({
   }
 }
 
-export const evmProvider: Provider.Provider = Provider.from({
+export const ethereumProvider: Provider.Provider = Provider.from({
   ...emitter,
   async request(args) {
     // @ts-expect-error
@@ -84,17 +84,24 @@ export const evmProvider: Provider.Provider = Provider.from({
   },
 })
 
-export async function getEvmProvider(): Promise<Provider.Provider | undefined> {
+export async function getEthereumProvider(): Promise<
+  Provider.Provider | undefined
+> {
   try {
     const capabilities = await frameHost.getCapabilities()
-    if (!capabilities.includes('wallet.getEvmProvider')) {
+    if (
+      !capabilities.includes('wallet.getEthereumProvider') &&
+      !capabilities.includes('wallet.getEvmProvider' as MiniAppHostCapability)
+    ) {
+      // We used getEvmProvider for a short period before getEthereumProvider.
+      // In case we're talking to an old host, we check the old key.
       return undefined
     }
-    return evmProvider
+    return ethereumProvider
   } catch {
     // If this is an old frame host that doesn't support getCapabilities,
-    // getEvmProvider will assume that it's supported
-    return evmProvider
+    // getEthereumProvider will assume that it's supported
+    return ethereumProvider
   }
 }
 
@@ -135,7 +142,7 @@ if (typeof document !== 'undefined') {
       if (frameEvent.event === 'eip6963:announceProvider') {
         announceEvmProvider({
           info: frameEvent.info,
-          provider: evmProvider as EIP1193Provider,
+          provider: ethereumProvider as EIP1193Provider,
         })
       }
     }
@@ -167,7 +174,7 @@ if (typeof window !== 'undefined') {
         if (frameEvent.event === 'eip6963:announceProvider') {
           announceEvmProvider({
             info: frameEvent.info,
-            provider: evmProvider as EIP1193Provider,
+            provider: ethereumProvider as EIP1193Provider,
           })
         }
       }
