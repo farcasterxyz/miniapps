@@ -1,5 +1,11 @@
 # @farcaster/frame-core
 
+## 0.0.39
+
+### Patch Changes
+
+- [#272](https://github.com/farcasterxyz/miniapps/pull/272) [`dc6e185`](https://github.com/farcasterxyz/miniapps/commit/dc6e185a71bfb2b4b9a6d467027cb5e84bcf5f70) Thanks [@Ashoat](https://github.com/Ashoat)! - Introduce requiredChains and requiredCapabilities to manifest
+
 ## 0.0.38
 
 ### Patch Changes

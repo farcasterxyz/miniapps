@@ -1,5 +1,12 @@
 # @farcaster/frame-wagmi-connector
 
+## 0.0.33
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @farcaster/frame-sdk@0.0.44
+
 ## 0.0.32
 
 ### Patch Changes
