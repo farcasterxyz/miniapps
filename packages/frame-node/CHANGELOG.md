@@ -1,5 +1,14 @@
 # @farcaster/frame-node
 
+## 0.0.27
+
+### Patch Changes
+
+- [#270](https://github.com/farcasterxyz/miniapps/pull/270) [`9ca5d35`](https://github.com/farcasterxyz/miniapps/commit/9ca5d35b18c31192dc672b0e83cd0069550eeed1) Thanks [@Ashoat](https://github.com/Ashoat)! - Add getChains and rename getEvmProvider to getEthereumProvider
+
+- Updated dependencies [[`9ca5d35`](https://github.com/farcasterxyz/miniapps/commit/9ca5d35b18c31192dc672b0e83cd0069550eeed1)]:
+  - @farcaster/frame-core@0.0.38
+
 ## 0.0.26
 
 ### Patch Changes
