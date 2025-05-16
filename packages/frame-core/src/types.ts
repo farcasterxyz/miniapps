@@ -33,6 +33,22 @@ export type SignInOptions = SignIn.SignInOptions
 
 export type SetPrimaryButton = (options: SetPrimaryButtonOptions) => void
 
+export const miniAppHostCapabilityList: [string, ...string[]] = [
+  'wallet.getEthereumProvider',
+  'wallet.getSolanaProvider',
+  'actions.ready',
+  'actions.openUrl',
+  'actions.close',
+  'actions.setPrimaryButton',
+  'actions.addMiniApp',
+  'actions.signIn',
+  'actions.viewProfile',
+  'actions.composeCast',
+  'actions.viewToken',
+  'actions.sendToken',
+  'actions.swapToken',
+]
+
 export type MiniAppHostCapability =
   | 'wallet.getEthereumProvider'
   | 'wallet.getSolanaProvider'

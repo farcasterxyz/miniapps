@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { miniAppHostCapabilityList } from '../types'
 import {
   buttonTitleSchema,
   createSimpleStringSchema,
@@ -23,6 +24,25 @@ const primaryCategorySchema = z.enum([
   'entertainment',
   'art-creativity',
 ])
+
+const chainList: [string, ...string[]] = [
+  'eip155:1', // Ethereum mainnet
+  'eip155:8453', // Base mainnet
+  'eip155:42161', // Arbitrum One
+  'eip155:421614', // Arbitrum Sepolia
+  'eip155:84532', // Base Sepolia
+  'eip155:666666666', // Degen
+  'eip155:100', // Gnosis
+  'eip155:10', // Optimism
+  'eip155:11155420', // Optimism Sepolia
+  'eip155:137', // Polygon
+  'eip155:11155111', // Ethereum Sepolia
+  'eip155:7777777', // Zora
+  'eip155:130', // Unichain
+  'eip155:10143', // Monad testnet
+  'eip155:42220', // Celo
+  'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp', // Solana
+]
 
 export const domainFrameConfigSchema = z.object({
   // 0.0.0 and 0.0.1 are not technically part of the spec but kept for
@@ -60,6 +80,12 @@ export const domainFrameConfigSchema = z.object({
   ogImageUrl: secureUrlSchema.optional(),
   /** see: https://github.com/farcasterxyz/miniapps/discussions/204 */
   noindex: z.boolean().optional(),
+  /** see https://github.com/farcasterxyz/miniapps/discussions/256 */
+  requiredChains: z.array(z.enum(chainList)).max(chainList.length).optional(),
+  requiredCapabilities: z
+    .array(z.enum(miniAppHostCapabilityList))
+    .max(miniAppHostCapabilityList.length)
+    .optional(),
 })
 
 export const domainManifestSchema = z.object({
