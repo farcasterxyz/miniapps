@@ -114,7 +114,7 @@ export default defineConfig({
             link: '/docs/sdk/context',
           },
           {
-            text: 'Mini App Detection',
+            text: 'Mini app detection',
             link: '/docs/sdk/is-in-mini-app',
           },
           {
