@@ -1,5 +1,6 @@
 import {
   Transaction as SolanaTransaction,
+  VersionedMessage as SolanaVersionedMessage,
   VersionedTransaction as SolanaVersionedTransaction,
 } from '@solana/web3.js'
 
@@ -26,8 +27,9 @@ function serializeTransaction(transaction: SolanaCombinedTransaction): string {
 function unserializeTransaction(
   transaction: string,
 ): SolanaCombinedTransaction {
-  const bytes = Uint8Array.from(Buffer.from(transaction, 'base64'))
-  return (bytes[0] & 0x80) !== 0
+  const bytes = Buffer.from(transaction, 'base64')
+  const version = SolanaVersionedMessage.deserializeMessageVersion(bytes)
+  return version === 'legacy'
     ? SolanaVersionedTransaction.deserialize(bytes)
     : SolanaTransaction.from(bytes)
 }
