@@ -1,5 +1,11 @@
 # @farcaster/frame-core
 
+## 0.0.40
+
+### Patch Changes
+
+- [#276](https://github.com/farcasterxyz/miniapps/pull/276) [`978ab3b`](https://github.com/farcasterxyz/miniapps/commit/978ab3b4b38fa2d294bb3cb22d6b9d5955d1133b) Thanks [@Ashoat](https://github.com/Ashoat)! - Fix unserializeTransaction for Solana VersionedTransaction
+
 ## 0.0.39
 
 ### Patch Changes

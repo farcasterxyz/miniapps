@@ -1,5 +1,13 @@
 # vanilla
 
+## 0.0.28
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @farcaster/frame-host@0.0.41
+  - @farcaster/frame-sdk@0.0.45
+
 ## 0.0.27
 
 ### Patch Changes
