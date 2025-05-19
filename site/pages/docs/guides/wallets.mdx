@@ -1,13 +1,13 @@
 ---
-title: Interacting with Wallets
-description: Seamlessly interact with a user's crypto wallet
+title: Interacting with Ethereum wallets
+description: Seamlessly interact with a user's Ethereum wallet
 ---
 
 import { Caption } from '../../../components/Caption';
 
-# Interacting with Wallets
+# Interacting with Ethereum wallets
 
-Mini Apps can interact with a user's crypto wallet without needing to worry
+Mini Apps can interact with a user's EVM wallet without needing to worry
 about popping open "select your wallet" dialogs or flakey connections.
 
 ![users taking onchain action from app](/transaction-preview.png)
@@ -20,10 +20,10 @@ about popping open "select your wallet" dialogs or flakey connections.
 ## Getting Started
 
 The Mini App SDK exposes an [EIP-1193 Ethereum Provider
-API](https://eips.ethereum.org/EIPS/eip-1193) at `sdk.wallet.ethProvider`.
+API](https://eips.ethereum.org/EIPS/eip-1193) at `sdk.wallet.getEthereumProvider()`.
 
 We recommend using [Wagmi](https://wagmi.sh) to connect to and interact with
-the users wallet. This is not required but provides high-level hooks for
+the user's wallet. This is not required but provides high-level hooks for
 interacting with the wallet in a type-safe way.
 
 ::::steps

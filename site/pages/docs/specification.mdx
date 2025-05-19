@@ -132,7 +132,7 @@ is maintained within the code base to document all changes.
 - [context](/docs/sdk/context) - provides information about the context the Mini App is running in
 
 #### Actions
-- [addFrame](/docs/sdk/actions/add-frame) - Prompts the user to add the Mini App
+- [addMiniApp](/docs/sdk/actions/add-frame) - Prompts the user to add the Mini App
 - [close](/docs/sdk/actions/close) - Closes the Mini App
 - [composeCast](/docs/sdk/actions/compose-cast) - Prompt the user to cast
 - [ready](/docs/sdk/actions/ready) - Hides the Splash Screen
@@ -144,7 +144,8 @@ is maintained within the code base to document all changes.
 - [viewToken](/docs/sdk/actions/view-token) - View a token
 
 #### Wallet
-- [ethProvider](/docs/sdk/wallet) - [EIP-1193 Ethereum Provider](https://eips.ethereum.org/EIPS/eip-1193)
+- [getEthereumProvider](/docs/sdk/wallet) - [EIP-1193 Ethereum Provider](https://eips.ethereum.org/EIPS/eip-1193)
+- [getSolanaProvider](/docs/sdk/solana) - Experimental Solana provider
 
 ### Events
 
@@ -267,7 +268,7 @@ to quickly navigate back to the app and the app to send notifications to the
 user.
 
 Mini Apps can prompt the user to add the app during an interaction with the
-[addFrame](/docs/sdk/actions/add-frame) action. Hosts may also let users add Mini
+[addMiniApp](/docs/sdk/actions/add-frame) action. Hosts may also let users add Mini
 Apps from discovery surfaces like app stores or featured notifications.
 
 Before a user adds a Mini App the Host should display information about the app
@@ -310,7 +311,7 @@ JSON, where the payload is different per event.
 
 #### frame_added
 
-This event may happen when an open frame calls `actions.addFrame` to prompt the
+This event may happen when an open frame calls `actions.addMiniApp` to prompt the
 user to favorite it, or when the frame is closed and the user adds the frame
 elsewhere in the client application (e.g. from a catalog).
 

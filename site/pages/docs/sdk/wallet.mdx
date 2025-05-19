@@ -1,11 +1,11 @@
 ---
-title: Wallet
-description: Interact with the users wallet
+title: Ethereum wallet
+description: Interact with the user's Ethereum wallet
 ---
 
 import { Caption } from '../../../components/Caption';
 
-# Wallet
+# Ethereum wallet
 
 ![users taking onchain action from app](/transaction-preview.png)
 
@@ -14,11 +14,10 @@ import { Caption } from '../../../components/Caption';
 </Caption>
 
 The SDK exposes an [EIP-1193 Ethereum Provider
-](https://eips.ethereum.org/EIPS/eip-1193) at `sdk.wallet.ethProvider`. You can
+](https://eips.ethereum.org/EIPS/eip-1193) at `sdk.wallet.getEthereumProvider()`. You can
 interact with this object directly or use it with ecosystem tools like
 [Wagmi](https://wagmi.sh/) or [Ethers](https://docs.ethers.org/v6/).
 
 For more information:
 - [EIP-1193 Ethereum Provider API](https://eips.ethereum.org/EIPS/eip-1193)
-- [Guide on interacting with wallets](/docs/guides/wallets)
-
+- [Guide on interacting with Ethereum wallets](/docs/guides/wallets)

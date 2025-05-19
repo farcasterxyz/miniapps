@@ -74,6 +74,14 @@ Here's an example `farcaster.json` file:
     "buttonTitle": "🚩 Start",
     "splashImageUrl": "https://yoink.party/logo.png",
     "splashBackgroundColor": "#f5f0ec",
+    "requiredChains": [
+      "eip155:8453"
+    ],
+    "requiredCapabilities": [
+      "actions.signIn",
+      "wallet.getEvmProvider",
+      "actions.swapToken"
+    ]
   }
 }
 ```

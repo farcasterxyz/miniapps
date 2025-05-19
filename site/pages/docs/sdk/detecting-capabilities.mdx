@@ -1,0 +1,40 @@
+---
+title: Detecting chains & capabilities
+description: Determine which chains and SDK functions a given host supports
+---
+
+# Detecting chains & capabilities
+
+Mini Apps are rendered within "hosts" inside web and mobile apps. Not all hosts support the same feature set, but some Mini Apps might require specific features.
+
+If your Mini App requires a given feature, you can declare that feature in your manifest. Alternately, if your Mini App optionally supports a given feature, it can detect the supported set of features at runtime.
+
+## Declaring requirements in your manifest
+
+If your Mini App relies on certain blockchains or SDK methods, you can declare those in your manifest via the properties `requiredChains` and `requiredCapabilities`.
+
+### `requiredChains`
+
+`frame.requiredChains` is an optional [manifest](/docs/guides/publishing#host-a-manifest-file) property that contains an array of [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md) identifiers. If the host does not support all of the chains declared here, it will know not to try rendering your Mini App.
+
+Note that only the chains listed in `chainList` [here](https://github.com/farcasterxyz/miniapps/blob/main/packages/frame-core/src/schemas/manifest.ts) are supported. If your manifest omits `requiredChains`, then the frame host will assume that no chains are required.
+
+### `requiredCapabilities`
+
+`frame.requiredCapabilities` is an optional [manifest](/docs/guides/publishing#host-a-manifest-file) property that contains an array of paths to SDK methods, such as `wallet.getEthereumProvider` or `actions.composeCast`. If the host does not support all of the capabilities declared here, it will know not to try rendering your Mini App.
+
+The full list of supported SDK methods can be found in `miniAppHostCapabilityList` [here](https://github.com/farcasterxyz/miniapps/blob/main/packages/frame-core/src/types.ts). If your manifest omits `requiredCapabilities`, then the frame host will assume that no capabilities are required.
+
+Note that for future-proofing, the capability for the experimental Solana provider is `wallet.getSolanaProvider` instead of `experimental.getSolanaProvider`.
+
+## Runtime detection
+
+If your Mini App optionally supports certain blockchains or SDK methods, you can detect whether they are supported at runtime via SDK calls.
+
+### `getChains`
+
+This SDK method returns a list of supported blockchains as an array of [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md) identifiers.
+
+### `getCapabilities`
+
+This SDK method returns a list of supported SDK methods as an array of paths to those SDK methods. The full list of supported SDK methods can be found in `miniAppHostCapabilityList` [here](https://github.com/farcasterxyz/miniapps/blob/main/packages/frame-core/src/types.ts).

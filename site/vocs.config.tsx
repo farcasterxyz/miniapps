@@ -85,8 +85,12 @@ export default defineConfig({
             link: '/docs/guides/sharing',
           },
           {
-            text: 'Interacting with wallets',
+            text: 'Interacting with Ethereum wallets',
             link: '/docs/guides/wallets',
+          },
+          {
+            text: 'Interacting with Solana wallets',
+            link: '/docs/guides/solana',
           },
           {
             text: 'Publishing your app',
@@ -118,11 +122,15 @@ export default defineConfig({
             link: '/docs/sdk/is-in-mini-app',
           },
           {
+            text: 'Detecting chains & capabilities',
+            link: '/docs/sdk/detecting-capabilities',
+          },
+          {
             text: 'Actions',
             collapsed: true,
             items: [
               {
-                text: 'addFrame',
+                text: 'addMiniApp',
                 link: '/docs/sdk/actions/add-frame',
               },
               {
@@ -164,8 +172,12 @@ export default defineConfig({
             ],
           },
           {
-            text: 'Wallet',
+            text: 'Ethereum wallet',
             link: '/docs/sdk/wallet',
+          },
+          {
+            text: 'Solana wallet',
+            link: '/docs/sdk/solana',
           },
           {
             text: 'Events',

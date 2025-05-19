@@ -1,0 +1,35 @@
+---
+title: Interacting with Solana wallets
+description: Seamlessly interact with a user's Solana wallet
+---
+
+# Interacting with Solana wallets
+
+Mini Apps can interact with a user's Solana wallet without needing to worry
+about popping open "select your wallet" dialogs or flakey connections.
+
+## Getting Started
+
+The SDK exposes an experimental Solana provider at `sdk.experimental.getSolanaProvider()`.
+This provider is modeled after `window.phantom.solana` and its full API can be found [here](https://github.com/farcasterxyz/miniapps/blob/main/packages/frame-core/src/solana.ts).
+
+We're working on integrating Wallet Standard to enable developers to use the Solana Wallet Adapter.
+
+## Demo app
+
+To see how a working Mini App uses the experimental Solana provider, check out our demo Mini App [here](https://github.com/farcasterxyz/frames-v2-demo/blob/main/src/components/Demo.tsx).
+
+## Capabilities check
+
+Note that for future-proofing, the [capability](/docs/sdk/detecting-capabilities) for the Solana provider is defined as `wallet.getSolanaProvider` instead of `experimental.getSolanaProvider`.
+
+## Troubleshooting
+
+### Transaction Scanning
+
+Modern crypto wallets scan transactions and preview them to users to help
+protect users from scams. New contracts and applications can generate false
+positives in these systems. If your transaction is being reported as
+potentially malicious use this [Blockaid
+Tool](https://report.blockaid.io/verifiedProject) to verify your app with
+Blockaid.

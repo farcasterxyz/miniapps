@@ -28,10 +28,11 @@ setTimeout(() => {
     })
 
   document.querySelector<HTMLDivElement>('#sign')!.onclick = () => {
-    sdk.wallet.ethProvider
+    sdk.wallet
+      .getEthereumProvider()
       .request({ method: 'eth_requestAccounts' })
       .then((addresses) => {
-        return sdk.wallet.ethProvider.request({
+        return sdk.wallet.getEthereumProvider().request({
           method: 'personal_sign',
           params: [
             '0x48656c6c6f2066726f6d2056616e696c6c61204672616d65',
