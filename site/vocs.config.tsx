@@ -176,7 +176,7 @@ export default defineConfig({
             link: '/docs/sdk/wallet',
           },
           {
-            text: 'Solana wallet',
+            text: 'Solana wallet (experimental)',
             link: '/docs/sdk/solana',
           },
           {
