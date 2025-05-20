@@ -1,5 +1,14 @@
 # @farcaster/frame-kit
 
+## 0.0.47
+
+### Patch Changes
+
+- [#283](https://github.com/farcasterxyz/miniapps/pull/283) [`600c53d`](https://github.com/farcasterxyz/miniapps/commit/600c53dadfee4cc1b94ca1ea3b974d34f0bf22ea) Thanks [@deodad](https://github.com/deodad)! - Bumped @farcaster/quick-auth version.
+
+- Updated dependencies []:
+  - @farcaster/frame-core@0.0.40
+
 ## 0.0.46
 
 ### Patch Changes

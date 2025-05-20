@@ -1,5 +1,11 @@
 # @farcaster/tsconfig
 
+## 0.0.4
+
+### Patch Changes
+
+- [#283](https://github.com/farcasterxyz/miniapps/pull/283) [`600c53d`](https://github.com/farcasterxyz/miniapps/commit/600c53dadfee4cc1b94ca1ea3b974d34f0bf22ea) Thanks [@deodad](https://github.com/deodad)! - Bumped @farcaster/quick-auth version.
+
 ## 0.0.3
 
 ### Patch Changes
