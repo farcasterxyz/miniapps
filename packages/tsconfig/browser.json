@@ -6,10 +6,10 @@
     "incremental": true,
     "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "target": "es2022",
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "skipLibCheck": true,
-  },
+    "skipLibCheck": true
+  }
 }

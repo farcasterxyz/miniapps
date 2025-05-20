@@ -77,6 +77,17 @@ export type FrameSDK = {
   }
   experimental: {
     getSolanaProvider: () => Promise<SolanaWalletProvider | undefined>
+    quickAuth: (options?: {
+      /**
+       * Use a custom Quick Auth server, otherwise defaults to the public
+       * instance provided by Farcaster.
+       *
+       * @default https://auth.farcaster.xyz
+       */
+      quickAuthServerOrigin?: string
+    }) => Promise<{
+      token: string
+    }>
   }
   wallet: {
     // Deprecated in favor of getEthereumProvider

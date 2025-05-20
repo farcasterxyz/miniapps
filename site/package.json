@@ -12,11 +12,12 @@
     "@farcaster/frame-node": "workspace:*",
     "@farcaster/frame-sdk": "workspace:*",
     "@farcaster/frame-wagmi-connector": "workspace:*",
+    "@farcaster/quick-auth": "^0.0.4",
     "@types/react": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "vocs": "latest",
     "typescript": "latest",
+    "vocs": "latest",
     "wagmi": "^2.14.12"
   }
 }

@@ -166,6 +166,10 @@ export default defineConfig({
                 link: '/docs/sdk/actions/send-token',
               },
               {
+                text: 'quickAuth (experimental)',
+                link: '/docs/sdk/actions/quick-auth',
+              },
+              {
                 text: 'viewToken',
                 link: '/docs/sdk/actions/view-token',
               },

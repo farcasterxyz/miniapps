@@ -1,0 +1,85 @@
+---
+title: quickAuth
+description: Easily authenticate user with Sign In with Farcaster.
+---
+
+import { Caption } from '../../../../components/Caption';
+
+# quickAuth
+
+:::warning
+This is an experimental feature.
+:::
+
+Request a signed JWT from a [Farcaster Quick Auth
+Server](https://github.com/farcasterxyz/protocol/discussions/231). This is the
+quickest way to protect your endpoints using Sign In with Farcaster.
+
+### Quick Auth vs Sign In with Farcaster
+
+[Sign In with
+Farcaster](https://github.com/farcasterxyz/protocol/discussions/110) is the
+foundational standard that allow Farcaster users to authenticate into
+applications.
+
+[Farcaster Quick
+Server](https://github.com/farcasterxyz/protocol/discussions/231) is an
+optional service built on top of SIWF that is highly performant and easy to
+integrate.
+
+If you're not sure where to start we recommend using Quick Auth.
+
+
+## Usage
+
+```ts twoslash
+// ---cut---
+import { sdk } from '@farcaster/frame-sdk'
+
+const { token } = await sdk.experimental.quickAuth()
+```
+
+## Parameters
+
+### quickAuthServerOrigin
+
+- **Type:** `quickAuthServerOrigin`
+
+Use a custom Quick Auth Server. Defaults to `https://auth.farcaster.xyz`.
+
+
+## Return Value
+
+A [JWT](https://datatracker.ietf.org/doc/html/rfc7519) issued by the Quick Auth
+Server based on the Sign In with Farcaster credential signed by the user.
+
+```ts
+type QuickAuthResult = {
+  token: string;
+}
+```
+
+Store this token in memory (i.e. React state) and include it as an authorization
+header to make authenticated requests to your server.
+
+Your server must verify the token:
+
+```ts
+const { createClient } from "@farcaster/quick-auth";
+
+const client = createClient();
+
+// Set this to whatever domain your Mini App is being server from. If you're
+// developing locally use the domain you are tunneling from.
+const domain = 'example.com';
+
+/**
+ * Inside your request handler extract the JWT from a request header
+ * and verify it using @farcaster/quick-auth.
+ *
+ * token - the JWT issued by a Quick Auth Server 
+ * domain - the domain the token was issued to, this should be the same domain
+ * as your mini app is running on.
+ */
+await client.verifyJwt({ token, domain })
+```

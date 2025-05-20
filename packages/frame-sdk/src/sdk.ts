@@ -2,10 +2,10 @@ import {
   AddMiniApp,
   type FrameClientEvent,
   SignIn,
-  type SolanaRequestFn,
-  createSolanaWalletProvider,
 } from '@farcaster/frame-core'
+import { createLightClient } from '@farcaster/quick-auth/light'
 import { EventEmitter } from 'eventemitter3'
+import * as Siwe from 'ox/Siwe'
 import { ethereumProvider, getEthereumProvider } from './ethereumProvider'
 import { frameHost } from './frameHost'
 import { getSolanaProvider } from './solanaProvider'
@@ -133,6 +133,38 @@ export const sdk: FrameSDK = {
   },
   experimental: {
     getSolanaProvider,
+    quickAuth: async (options = {}) => {
+      const quickAuth = createLightClient({
+        origin: options.quickAuthServerOrigin,
+      })
+
+      const { nonce } = await quickAuth.generateNonce()
+      const response = await frameHost.signIn({
+        nonce,
+      })
+
+      if (response.result) {
+        const parsedSiwe = Siwe.parseMessage(response.result.message)
+
+        // The Farcaster Client rendering the Mini App will set the domain
+        // based on the URL it's rendering. It should always be set.
+        if (!parsedSiwe.domain) {
+          throw new Error('Missing domain on SIWE message')
+        }
+
+        return await quickAuth.verifySiwf({
+          domain: parsedSiwe.domain,
+          message: response.result.message,
+          signature: response.result.signature,
+        })
+      }
+
+      if (response.error.type === 'rejected_by_user') {
+        throw new SignIn.RejectedByUser()
+      }
+
+      throw new Error('Unreachable')
+    },
   },
   wallet: {
     ethProvider: ethereumProvider,
