@@ -141,6 +141,7 @@ export const sdk: FrameSDK = {
       const { nonce } = await quickAuth.generateNonce()
       const response = await frameHost.signIn({
         nonce,
+        acceptAuthAddress: true,
       })
 
       if (response.result) {
