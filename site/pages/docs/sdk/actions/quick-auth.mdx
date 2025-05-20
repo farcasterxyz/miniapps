@@ -136,3 +136,84 @@ The JWT expiration time.
 - **Type:** `number`
 
 The JWT issued at time.
+
+
+## Integration Guide
+
+In your Mini App frontend, call the `quickAuth` action to get back a JWT. Store
+it in memory so it can be used for the remainder of this session.
+
+```ts
+import { useState } from "react";
+import { sdk } from "@farcaster/frame-sdk";
+
+export function App() {
+  // Stores the JWT token for this session
+  const [token, setToken] = useState<string>(token)
+
+  async function signIn() {
+    try {
+      const { token } = await sdk.experimental.quickAuth();
+      const req = await fetch(`${SERVER_URL}/me`, {
+        headers: new Headers({ "Authorization": "Bearer " + token })
+      })
+      console.log(await req.json());
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  function signOut() {
+    setToken(undefined);
+  }
+
+  if (!token) {
+    return (
+      <button onClick={signIn}>sign in</button>
+    )
+  }
+
+  return (
+    <button onClick={signOut}>sign out</button>
+  )
+}
+```
+
+In your Mini App backend, verify the JWT to protect resources:
+
+```ts
+import { createClient, Errors } from '@farcaster/quick-auth'
+import { Hono } from 'hono'
+
+const domain = 'example.com';
+const client = createClient();
+const app = new Hono()
+
+app.get('/hello', async (c) => {
+  const authorization = c.req.header('Authorization');
+  if (!authorization || !authorization.startsWith('Bearer ')) {
+    return c.status(401);
+  }
+
+  try {
+    const payload = await client.verifyJwt({
+      token: authorization.split(' ')[1] as string,
+      domain,
+    })
+
+    return c.json({
+      fid: payload.aud
+    })
+  } catch (e) {
+    if (e instanceof Errors.InvalidTokenError) {
+      return c.status(401);
+    }
+
+    throw e;
+  }
+})
+
+export default app
+```
+
+
