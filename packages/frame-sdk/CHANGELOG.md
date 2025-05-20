@@ -1,5 +1,11 @@
 # @farcaster/frame-kit
 
+## 0.0.48
+
+### Patch Changes
+
+- [#288](https://github.com/farcasterxyz/miniapps/pull/288) [`b9b8494`](https://github.com/farcasterxyz/miniapps/commit/b9b84944fe512cff6a20a262bb9e92160ddbba63) Thanks [@deodad](https://github.com/deodad)! - Set acceptAuth true for quickAuth sign in requests.
+
 ## 0.0.47
 
 ### Patch Changes
