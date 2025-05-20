@@ -25,7 +25,16 @@ applications.
 [Farcaster Quick
 Server](https://github.com/farcasterxyz/protocol/discussions/231) is an
 optional service built on top of SIWF that is highly performant and easy to
-integrate.
+integrate. Developers don't need to worry about securely generating and
+consuming nonces or the nuances of verifying a SIWF message—instead they
+receive a signed JWT that can be used as a session token the authenticate their
+server.
+
+The Auth Server offers exceptional performance in two ways:
+- the service is deployed on the edge so nonce generation and verification
+  happens close to your users no matter where they are located
+- the issued tokens are asymmetrically signed so they can be verified locally
+  on your server
 
 If you're not sure where to start we recommend using Quick Auth.
 
