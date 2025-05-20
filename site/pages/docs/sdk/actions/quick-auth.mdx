@@ -55,6 +55,9 @@ Server based on the Sign In with Farcaster credential signed by the user.
 
 ```ts
 type QuickAuthResult = {
+  /**
+   * JWT issued the Quick Auth Server.
+   */
   token: string;
 }
 ```
@@ -81,5 +84,55 @@ const domain = 'example.com';
  * domain - the domain the token was issued to, this should be the same domain
  * as your mini app is running on.
  */
-await client.verifyJwt({ token, domain })
+const payload = await client.verifyJwt({ token, domain })
 ```
+
+### JWT Payload
+
+```json
+{
+  "address": "0xf9D3D372D0097BF26cbf2444B34F5B9522AfaA4b",
+  "iat": 1747764819,
+  "iss": "https://auth.farcaster.xyz",
+  "exp": 1747768419,
+  "sub": 6841,
+  "aud": "miniapps.farcaster.xyz"
+}
+```
+
+#### sub
+
+- **Type:** `number`
+
+The FID of the signed in user. 
+
+
+#### address
+
+- **Type:** `string`
+
+The address the user signed in with.
+
+#### iss
+
+- **Type:** `string`
+
+The Quick Auth server that verified the SIWF credential and issued the JWT.
+
+#### aud
+
+- **Type:** `string`
+
+The domain this token was issued to.
+
+#### exp
+
+- **Type:** `number`
+
+The JWT expiration time.
+
+#### iat
+
+- **Type:** `number`
+
+The JWT issued at time.
