@@ -93,5 +93,6 @@ export type FrameSDK = {
     // Deprecated in favor of getEthereumProvider
     ethProvider: Provider.Provider
     getEthereumProvider: () => Promise<Provider.Provider | undefined>
+    getSolanaProvider: () => Promise<SolanaWalletProvider | undefined>
   }
 } & Emitter

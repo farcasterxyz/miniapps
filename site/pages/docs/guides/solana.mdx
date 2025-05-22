@@ -10,18 +10,95 @@ about popping open "select your wallet" dialogs or flakey connections.
 
 ## Getting Started
 
-The SDK exposes an experimental Solana provider at `sdk.experimental.getSolanaProvider()`.
+The SDK enables Mini Apps to interact with a user's Solana wallet through [Wallet Standard](https://github.com/anza-xyz/wallet-standard/).
+
+We recommend using [Wallet Adapter](https://github.com/anza-xyz/wallet-adapter/)'s React hooks to interface with Wallet Standard. You may also use [Wallet Standard directly](#using-wallet-standard-directly), or interface with our [low-level Solana provider](#low-level-solana-provider).
+
+::::steps
+### Setup Wallet Adapter
+
+Use the [Quick Setup (using React) guide](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md) to setup Wallet Adapter in your project.
+
+### Install the Wallet Standard integration
+
+:::code-group
+
+```bash [npm]
+npm install @farcaster/mini-app-solana
+```
+
+```bash [pnpm]
+pnpm add @farcaster/mini-app-solana
+```
+
+```bash [yarn]
+yarn add @farcaster/mini-app-solana
+```
+
+:::
+
+### Render the Farcaster Solana provider
+
+In place of `ConnectionProvider` and `WalletProvider` from the Wallet Adapter guide, you should render `FarcasterSolanaProvider` from `@farcaster/mini-app-solana`.
+
+This does two things:
+1. Importing from `@farcaster/mini-app-solana` has the side effect of triggering the Farcaster wallet to register via Wallet Standard.
+2. Sets up Wallet Adapter to automatically select the Farcaster wallet.
+
+```tsx
+import * as React from 'react';
+import { FarcasterSolanaProvider } from '@farcaster/mini-app-solana';
+import { useWallet } from '@solana/wallet-adapter-react';
+
+const solanaEndpoint = 'https://mainnet.helius-rpc.com/?api-key=YOUR_API_KEY';
+
+function App() {
+  // FarcasterSolanaProvider internally renders ConnectionProvider
+  // and WalletProvider from @solana/wallet-adapter-react
+  return (
+    <FarcasterSolanaProvider endpoint={solanaEndpoint}>
+      <Content />
+    </FarcasterSolanaProvider>
+  )
+}
+```
+
+### Use the Wallet Adapter hooks
+
+You can now use Wallet Adapter React hooks directly within any component rendered downstream of `FarcasterSolanaProvider`.
+
+```tsx
+function Content() {
+  const { publicKey } = useWallet();
+  const solanaAddress = publicKey?.toBase58() ?? '';
+  return <span>{solanaAddress}</span>;
+}
+```
+
+::::
+
+## Low-level Solana provider
+
+The SDK also exposes a low-level Solana provider at `sdk.wallet.getSolanaProvider()`.
 This provider is modeled after `window.phantom.solana` and its full API can be found [here](https://github.com/farcasterxyz/miniapps/blob/main/packages/frame-core/src/solana.ts).
 
-We're working on integrating Wallet Standard to enable developers to use the Solana Wallet Adapter.
+## Using Wallet Standard directly
+
+It's also possible to interface with the user's Solana wallet directly through Wallet Standard, or via Wallet Adapter's "core" (non-React) integrations.
+
+In order to do so, it's important that you still import our package in our app entry:
+
+```tsx
+import '@farcaster/mini-app-solana';
+```
+
+This ensures that the user's Solana wallet registers with Wallet Standard.
+
+Also note that if you're using Wallet Adapter without our `FarcasterSolanaProvider` React component, you'll need to select the user's Farcaster wallet before attempting any operations.
 
 ## Demo app
 
-To see how a working Mini App uses the experimental Solana provider, check out our demo Mini App [here](https://github.com/farcasterxyz/frames-v2-demo/blob/main/src/components/Demo.tsx).
-
-## Capabilities check
-
-Note that for future-proofing, the [capability](/docs/sdk/detecting-capabilities) for the Solana provider is defined as `wallet.getSolanaProvider` instead of `experimental.getSolanaProvider`.
+To see how a working Mini App uses a Solana wallet, check out our demo Mini App [here](https://github.com/farcasterxyz/frames-v2-demo/blob/main/src/components/Demo.tsx).
 
 ## Troubleshooting
 

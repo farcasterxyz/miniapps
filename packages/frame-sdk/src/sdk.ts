@@ -170,6 +170,7 @@ export const sdk: FrameSDK = {
   wallet: {
     ethProvider: ethereumProvider,
     getEthereumProvider,
+    getSolanaProvider,
   },
 }
 

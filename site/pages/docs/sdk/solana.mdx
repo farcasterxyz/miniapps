@@ -5,11 +5,10 @@ description: Interact with the user's Solana wallet
 
 # Wallet
 
-The SDK exposes an experimental Solana provider at `sdk.experimental.getSolanaProvider()`.
-This provider is modeled after `window.phantom.solana` and its full API can be found [here](https://github.com/farcasterxyz/miniapps/blob/main/packages/frame-core/src/solana.ts).
+The SDK enables Mini Apps to interact with a user's Solana wallet through [Wallet Standard](https://github.com/anza-xyz/wallet-standard/).
 
-We're working on integrating Wallet Standard to enable developers to use the Solana Wallet Adapter.
+Mini apps written in React can use [Wallet Adapter](https://github.com/anza-xyz/wallet-adapter/)'s React hooks, which are sort of like Solana's equivalent of Wagmi. Wallet Adapter also exposes a more low-level interface for non-React apps.
 
 For more information:
-- [Phantom docs](https://docs.phantom.com/solana/detecting-the-provider)
+- [Wallet Adapter docs](https://anza-xyz.github.io/wallet-adapter/)
 - [Guide on interacting with Solana wallets](/docs/guides/solana)

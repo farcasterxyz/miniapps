@@ -25,8 +25,6 @@ Note that only the chains listed in `chainList` [here](https://github.com/farcas
 
 The full list of supported SDK methods can be found in `miniAppHostCapabilityList` [here](https://github.com/farcasterxyz/miniapps/blob/main/packages/frame-core/src/types.ts). If your manifest omits `requiredCapabilities`, then the frame host will assume that no capabilities are required.
 
-Note that for future-proofing, the capability for the experimental Solana provider is `wallet.getSolanaProvider` instead of `experimental.getSolanaProvider`.
-
 ## Runtime detection
 
 If your Mini App optionally supports certain blockchains or SDK methods, you can detect whether they are supported at runtime via SDK calls.

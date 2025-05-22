@@ -105,7 +105,7 @@ export class FarcasterSolanaWallet implements Wallet {
     if (this.account) {
       return
     }
-    const provider = await sdk.experimental.getSolanaProvider()
+    const provider = await sdk.wallet.getSolanaProvider()
     if (!provider) {
       throw new Error('could not get Solana provider')
     }
@@ -158,7 +158,7 @@ export class FarcasterSolanaWallet implements Wallet {
   }
 
   async signSingleMessage(input: SolanaSignMessageInput) {
-    const provider = await sdk.experimental.getSolanaProvider()
+    const provider = await sdk.wallet.getSolanaProvider()
     if (!provider) {
       throw new Error('could not get Solana provider')
     }
@@ -180,7 +180,7 @@ export class FarcasterSolanaWallet implements Wallet {
   }
 
   async signSingleTransaction(input: SolanaSignTransactionInput) {
-    const provider = await sdk.experimental.getSolanaProvider()
+    const provider = await sdk.wallet.getSolanaProvider()
     if (!provider || !frameHost.solanaProviderRequest) {
       // We check the provider to make sure that the frame host has the
       // capability, but we use the frame host directly below to avoid
@@ -212,7 +212,7 @@ export class FarcasterSolanaWallet implements Wallet {
   }
 
   async signAndSendSingleTransaction(input: SolanaSignAndSendTransactionInput) {
-    const provider = await sdk.experimental.getSolanaProvider()
+    const provider = await sdk.wallet.getSolanaProvider()
     if (!provider || !frameHost.solanaProviderRequest) {
       // We check the provider to make sure that the frame host has the
       // capability, but we use the frame host directly below to avoid
