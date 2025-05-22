@@ -1,5 +1,11 @@
 # @farcaster/mini-app-solana
 
+## 0.0.7
+
+### Patch Changes
+
+- [#305](https://github.com/farcasterxyz/miniapps/pull/305) [`f808472`](https://github.com/farcasterxyz/miniapps/commit/f808472de6453391cd70c35ead848a56268236b9) Thanks [@Ashoat](https://github.com/Ashoat)! - Make initial Solana wallet selection immediate
+
 ## 0.0.6
 
 ### Patch Changes
