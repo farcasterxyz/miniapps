@@ -30,31 +30,6 @@ jobs:
       - name: Install dependencies
         uses: ./.github/actions/install-dependencies
 
-      - name: Sanity-check token
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" >> ~/.npmrc
-          echo "👤 npm user    : $(npm whoami)"
-          echo "🏢 org members : $(npm org ls @farcaster --json)"
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Assert publish rights to @farcaster
-        run: |
-          set -euo pipefail
-          tmp=$(mktemp -d)
-          cd "$tmp"
-          pkg="@farcaster/ci-permission-test-${GITHUB_RUN_ID}"
-          npm init -y >/dev/null
-          npm pkg set name="$pkg" version=0.0.0-ci-$GITHUB_RUN_NUMBER \
-                       publishConfig.access=public
-          echo "console.log('ok');" > index.js
-
-          echo "🚀 attempting first‑publish of $pkg"
-          npm publish --tag ci-check --access public
-
-          echo "🧹 unpublishing test package again"
-          npm unpublish "$pkg" --force   # allowed < 72 h after publish
-
       - name: PR or publish
         uses: changesets/action@06245a4e0a36c064a573d4150030f5ec548e4fcc
         with:
