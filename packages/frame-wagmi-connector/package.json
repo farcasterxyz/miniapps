@@ -23,7 +23,7 @@
     "@farcaster/frame-sdk": "workspace:*",
     "@farcaster/tsconfig": "workspace:*",
     "@wagmi/core": "^2.16.3",
-    "typescript": "^5.7.2",
+    "typescript": "^5.8.3",
     "viem": "^2.21.57"
   },
   "publishConfig": {

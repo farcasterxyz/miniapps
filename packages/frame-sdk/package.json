@@ -24,7 +24,7 @@
     "@farcaster/tsconfig": "workspace:*",
     "esbuild": "^0.25.0",
     "mipd": "^0.0.7",
-    "typescript": "^5.7.2"
+    "typescript": "^5.8.3"
   },
   "dependencies": {
     "@farcaster/frame-core": "workspace:*",

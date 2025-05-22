@@ -1,0 +1,12 @@
+{
+  "extends": "@farcaster/tsconfig/browser.json",
+  "include": ["src"],
+  "exclude": ["dist", "build", "node_modules"],
+  "compilerOptions": {
+    "outDir": "dist",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "target": "es2020",
+    "jsx": "react-jsx"
+  }
+}

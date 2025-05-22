@@ -24,7 +24,7 @@
   "devDependencies": {
     "@farcaster/tsconfig": "workspace:*",
     "@types/fs-extra": "^11.0.4",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.3"
   },
   "dependencies": {
     "@clack/prompts": "^0.10.0",
