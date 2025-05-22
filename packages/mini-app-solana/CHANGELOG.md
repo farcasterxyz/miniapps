@@ -1,5 +1,11 @@
 # @farcaster/mini-app-solana
 
+## 0.0.6
+
+### Patch Changes
+
+- [#303](https://github.com/farcasterxyz/miniapps/pull/303) [`1ad7b8b`](https://github.com/farcasterxyz/miniapps/commit/1ad7b8b1e3eb13c80ca8fbab6e12db05c3b72e42) Thanks [@Ashoat](https://github.com/Ashoat)! - Fix log spam between Solana mini app and host with no Solana provider
+
 ## 0.0.5
 
 ### Patch Changes
