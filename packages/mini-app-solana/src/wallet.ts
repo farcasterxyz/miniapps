@@ -2,18 +2,17 @@ import type { SolanaWireRequestFn } from '@farcaster/frame-core'
 import { frameHost, sdk } from '@farcaster/frame-sdk'
 import { base58 } from '@scure/base'
 import {
+  SignAndSendAllTransactions,
+  type SolanaSignAndSendAllTransactionsMethod,
   SolanaSignAndSendTransaction,
-  type SolanaSignAndSendTransactionFeature,
   type SolanaSignAndSendTransactionInput,
   type SolanaSignAndSendTransactionMethod,
   type SolanaSignAndSendTransactionOutput,
   SolanaSignMessage,
-  type SolanaSignMessageFeature,
   type SolanaSignMessageInput,
   type SolanaSignMessageMethod,
   type SolanaSignMessageOutput,
   SolanaSignTransaction,
-  type SolanaSignTransactionFeature,
   type SolanaSignTransactionInput,
   type SolanaSignTransactionMethod,
   type SolanaSignTransactionOutput,
@@ -94,6 +93,11 @@ export class FarcasterSolanaWallet implements Wallet {
         supportedTransactionVersions: ['legacy', 0],
         signAndSendTransaction: this.signAndSendTransaction,
       },
+      [SignAndSendAllTransactions]: {
+        version: '1.0.0',
+        supportedTransactionVersions: ['legacy', 0],
+        signAndSendAllTransactions: this.signAndSendAllTransactions,
+      },
     }
   }
 
@@ -150,7 +154,6 @@ export class FarcasterSolanaWallet implements Wallet {
   signMessage: SolanaSignMessageMethod = async (...inputs) => {
     const outputs: SolanaSignMessageOutput[] = []
     for (const input of inputs) {
-      // Not sure if Privy supports multiple in parallel
       const output = await this.signSingleMessage(input)
       outputs.push(output)
     }
@@ -172,7 +175,6 @@ export class FarcasterSolanaWallet implements Wallet {
   signTransaction: SolanaSignTransactionMethod = async (...inputs) => {
     const outputs: SolanaSignTransactionOutput[] = []
     for (const input of inputs) {
-      // Not sure if Privy supports multiple in parallel
       const output = await this.signSingleTransaction(input)
       outputs.push(output)
     }
@@ -204,7 +206,6 @@ export class FarcasterSolanaWallet implements Wallet {
   ) => {
     const outputs: SolanaSignAndSendTransactionOutput[] = []
     for (const input of inputs) {
-      // Not sure if Privy supports multiple in parallel
       const output = await this.signAndSendSingleTransaction(input)
       outputs.push(output)
     }
@@ -229,6 +230,28 @@ export class FarcasterSolanaWallet implements Wallet {
     })
     const signatureBytes = base58.decode(signature)
     return { signature: signatureBytes }
+  }
+
+  signAndSendAllTransactions: SolanaSignAndSendAllTransactionsMethod = async (
+    inputs,
+    options,
+  ) => {
+    if (options?.mode === 'parallel') {
+      return await Promise.allSettled(
+        inputs.map((input) => this.signAndSendSingleTransaction(input)),
+      )
+    }
+    const outputs: PromiseSettledResult<SolanaSignAndSendTransactionOutput>[] =
+      []
+    for (const input of inputs) {
+      try {
+        const output = await this.signAndSendSingleTransaction(input)
+        outputs.push({ status: 'fulfilled', value: output })
+      } catch (e) {
+        outputs.push({ status: 'rejected', reason: e })
+      }
+    }
+    return outputs
   }
 }
 
