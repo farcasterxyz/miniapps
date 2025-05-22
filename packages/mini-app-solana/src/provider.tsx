@@ -29,11 +29,12 @@ function FarcasterSolanaWalletSelector() {
 
   const farcasterWallet = wallets.find((w) => w.adapter.name === 'Farcaster')
 
+  const selectedFarcasterWalletRef = React.useRef(false)
   React.useEffect(() => {
-    if (!farcasterWallet) {
-      console.error('failed to detected Farcaster Solana wallet')
+    if (!farcasterWallet || selectedFarcasterWalletRef.current) {
       return
     }
+    selectedFarcasterWalletRef.current = true
     ;(async () => {
       try {
         await select(farcasterWallet.adapter.name)

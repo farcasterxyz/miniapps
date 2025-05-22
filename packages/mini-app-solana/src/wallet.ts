@@ -301,8 +301,16 @@ class RegisterWalletEvent extends Event implements WindowRegisterWalletEvent {
     throw new Error('stopPropagation cannot be called')
   }
 }
+;(async () => {
+  if (!window) {
+    return
+  }
 
-if (window) {
+  const provider = await sdk.wallet.getSolanaProvider()
+  if (!provider) {
+    return
+  }
+
   const wallet = new FarcasterSolanaWallet()
   const callback: WindowRegisterWalletEventCallback = ({ register }) =>
     register(wallet)
@@ -326,4 +334,4 @@ if (window) {
       error,
     )
   }
-}
+})()
