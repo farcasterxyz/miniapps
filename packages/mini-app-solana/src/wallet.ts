@@ -302,26 +302,28 @@ class RegisterWalletEvent extends Event implements WindowRegisterWalletEvent {
   }
 }
 
-const wallet = new FarcasterSolanaWallet()
-const callback: WindowRegisterWalletEventCallback = ({ register }) =>
-  register(wallet)
-try {
-  window.dispatchEvent(new RegisterWalletEvent(callback))
-} catch (error) {
-  console.error(
-    'wallet-standard:register-wallet event could not be dispatched',
-    error,
-  )
-}
+if (window) {
+  const wallet = new FarcasterSolanaWallet()
+  const callback: WindowRegisterWalletEventCallback = ({ register }) =>
+    register(wallet)
+  try {
+    window.dispatchEvent(new RegisterWalletEvent(callback))
+  } catch (error) {
+    console.error(
+      'wallet-standard:register-wallet event could not be dispatched',
+      error,
+    )
+  }
 
-try {
-  ;(window as WalletEventsWindow).addEventListener(
-    'wallet-standard:app-ready',
-    ({ detail }) => callback(detail),
-  )
-} catch (error) {
-  console.error(
-    'wallet-standard:app-ready event listener could not be added',
-    error,
-  )
+  try {
+    ;(window as WalletEventsWindow).addEventListener(
+      'wallet-standard:app-ready',
+      ({ detail }) => callback(detail),
+    )
+  } catch (error) {
+    console.error(
+      'wallet-standard:app-ready event listener could not be added',
+      error,
+    )
+  }
 }
