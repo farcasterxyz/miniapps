@@ -38,21 +38,22 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Assert publish rights (dry-run)
+      - name: Assert publish rights to @farcaster
         run: |
           set -euo pipefail
           tmp=$(mktemp -d)
           cd "$tmp"
-
-          # scaffold a brand-new scoped package
           pkg="@farcaster/ci-permission-test-${GITHUB_RUN_ID}"
           npm init -y >/dev/null
           npm pkg set name="$pkg" version=0.0.0-ci-$GITHUB_RUN_NUMBER \
                        publishConfig.access=public
-          echo "console.log('hello world');" > index.js
+          echo "console.log('ok');" > index.js
 
-          echo "🚀 attempting dry-run publish of $pkg"
-          npm publish --tag ci-check --access public --dry-run
+          echo "🚀 attempting first‑publish of $pkg"
+          npm publish --tag ci-check --access public
+
+          echo "🧹 unpublishing test package again"
+          npm unpublish "$pkg" --force   # allowed < 72 h after publish
 
       - name: PR or publish
         uses: changesets/action@06245a4e0a36c064a573d4150030f5ec548e4fcc
