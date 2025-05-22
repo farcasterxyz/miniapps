@@ -1,5 +1,13 @@
 # @farcaster/mini-app-solana
 
+## 0.0.5
+
+### Patch Changes
+
+- [#301](https://github.com/farcasterxyz/miniapps/pull/301) [`5b07c86`](https://github.com/farcasterxyz/miniapps/commit/5b07c866e08be6ac92962daf066f6553008c6a1c) Thanks [@Ashoat](https://github.com/Ashoat)! - Add support for SignAndSendAllTransactions
+
+- [#301](https://github.com/farcasterxyz/miniapps/pull/301) [`5b07c86`](https://github.com/farcasterxyz/miniapps/commit/5b07c866e08be6ac92962daf066f6553008c6a1c) Thanks [@Ashoat](https://github.com/Ashoat)! - Avoid touching window global in SSR context
+
 ## 0.0.4
 
 ### Patch Changes
