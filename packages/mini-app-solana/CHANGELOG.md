@@ -1,5 +1,11 @@
 # @farcaster/mini-app-solana
 
+## 0.0.3
+
+### Patch Changes
+
+- [#296](https://github.com/farcasterxyz/miniapps/pull/296) [`78af09b`](https://github.com/farcasterxyz/miniapps/commit/78af09bf542ce18cd904b99e45228447f9a44e2e) Thanks [@Ashoat](https://github.com/Ashoat)! - Export FarcasterSolanaProvider
+
 ## 0.0.2
 
 ### Patch Changes
