@@ -33,6 +33,9 @@ import {
   type StandardEventsOnMethod,
 } from '@wallet-standard/features'
 
+import { localStorageKey } from './constants'
+
+const walletName = 'Farcaster'
 const supportedChains = ['solana:mainnet'] as const
 const supportedFeatures = [
   StandardConnect,
@@ -54,7 +57,7 @@ export class FarcasterSolanaWallet implements Wallet {
   }
 
   get name() {
-    return 'Farcaster' as const
+    return walletName
   }
 
   get icon() {
@@ -302,7 +305,7 @@ class RegisterWalletEvent extends Event implements WindowRegisterWalletEvent {
   }
 }
 ;(async () => {
-  if (!window) {
+  if (typeof window === 'undefined') {
     return
   }
 
@@ -310,6 +313,8 @@ class RegisterWalletEvent extends Event implements WindowRegisterWalletEvent {
   if (!provider) {
     return
   }
+
+  localStorage.setItem(localStorageKey, `"${walletName}"`)
 
   const wallet = new FarcasterSolanaWallet()
   const callback: WindowRegisterWalletEventCallback = ({ register }) =>
