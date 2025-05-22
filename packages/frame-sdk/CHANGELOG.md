@@ -1,5 +1,11 @@
 # @farcaster/frame-kit
 
+## 0.0.50
+
+### Patch Changes
+
+- [#298](https://github.com/farcasterxyz/miniapps/pull/298) [`846a746`](https://github.com/farcasterxyz/miniapps/commit/846a746d1bdea527517dd503c4e2acda1b06c000) Thanks [@Ashoat](https://github.com/Ashoat)! - Take Solana out of experimental
+
 ## 0.0.49
 
 ### Patch Changes
