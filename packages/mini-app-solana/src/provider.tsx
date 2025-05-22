@@ -14,7 +14,7 @@ type FarcasterSolanaProviderProps = {
   children: React.ReactNode
 }
 
-const FarcasterSolanaProvider: React.FC<FarcasterSolanaProviderProps> =
+export const FarcasterSolanaProvider: React.FC<FarcasterSolanaProviderProps> =
   React.memo(({ endpoint, children }) => (
     <ConnectionProvider endpoint={endpoint}>
       <WalletProvider wallets={wallets} autoConnect>
