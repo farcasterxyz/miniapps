@@ -200,7 +200,7 @@ export class FarcasterSolanaWallet implements Wallet {
       method: 'signTransaction',
       params: { transaction: transactionStr },
     })
-    const signatureBytes = base58.decode(signedTransaction)
+    const signatureBytes = Buffer.from(signedTransaction, 'base64')
     return { signedTransaction: signatureBytes }
   }
 
