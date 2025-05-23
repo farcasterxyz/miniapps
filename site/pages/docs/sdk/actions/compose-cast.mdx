@@ -68,9 +68,18 @@ Whether the app should be closed when this action is called. If true the app
 will be closed and the action will resolve with no result.
 
 
+### channelKey (optional)
+
+- **Type:** `string`
+
+Whether the cast should be posted to a channel.
+
+
 ## Return Value
 
 The cast posted by the user, or `undefined` if set to close.
+
+**Note:** The `cast` property in the result can be `null` if the user decides not to create the cast.
 
 ```ts twoslash
 import { sdk } from "@farcaster/frame-sdk";
@@ -79,16 +88,13 @@ import { sdk } from "@farcaster/frame-sdk";
 const result = await sdk.actions.composeCast({ 
 //    ^?  
   text: "I just learned how to compose a cast",
-  embeds: ["https://miniapps.farcaster.xyz/docs/sdk/actions/compose-cast"]
+  embeds: ["https://miniapps.farcaster.xyz/docs/sdk/actions/compose-cast"],
+  channelKey: "farcaster" // optional channel
 })
 
-
-
-
-
-
-
-
-
-
+// result.cast can be null if user cancels
+if (result?.cast) {
+  console.log(result.cast.hash)
+  console.log(result.cast.channelKey) // includes channel if posted to one
+}
 ```
