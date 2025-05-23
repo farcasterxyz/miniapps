@@ -1,5 +1,11 @@
 # @farcaster/frame-core
 
+## 0.1.0
+
+### Minor Changes
+
+- [#312](https://github.com/farcasterxyz/miniapps/pull/312) [`6d75914`](https://github.com/farcasterxyz/miniapps/commit/6d7591416086d19925315b95f434a8151c919e2b) Thanks [@PirosB3](https://github.com/PirosB3)! - Updated composeCast to support channels and amended the return value to return a null cast if the user cancels.
+
 ## 0.0.40
 
 ### Patch Changes
