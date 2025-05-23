@@ -1,5 +1,13 @@
 # @farcaster/mini-app-solana
 
+## 0.0.8
+
+### Patch Changes
+
+- [#307](https://github.com/farcasterxyz/miniapps/pull/307) [`f04c43f`](https://github.com/farcasterxyz/miniapps/commit/f04c43f403ce04b09f2fc59e95eb756391f01311) Thanks [@Ashoat](https://github.com/Ashoat)! - Fix signTransaction decoding from base58 to base64
+
+- [#308](https://github.com/farcasterxyz/miniapps/pull/308) [`98df4ec`](https://github.com/farcasterxyz/miniapps/commit/98df4ec82b8cb039b5b25a91dae7abc760185be9) Thanks [@Ashoat](https://github.com/Ashoat)! - Update Solana wallet logo from Warpcast to Farcaster
+
 ## 0.0.7
 
 ### Patch Changes
