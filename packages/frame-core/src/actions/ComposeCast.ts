@@ -14,23 +14,31 @@ export type Options<close extends boolean | undefined = undefined> = {
 
   /** Whether the app should be closed when this action is called. */
   close?: close
+
+  /** Whether the cast should be posted to a channel. */
+  channelKey?: string
+}
+
+export type ComposeCastInnerResult = {
+  /** Cast of the created cast */
+  hash: string
+
+  /** Text of the created cast */
+  text?: string
+
+  /** Embeds of the created cast */
+  embeds?: [] | [string] | [string, string]
+
+  /** Parent of the created cast */
+  parent?: { type: 'cast'; hash: string }
+
+  /** Channel key of the created cast */
+  channelKey?: string
 }
 
 export type Result<close extends boolean | undefined = undefined> =
   close extends true
     ? undefined
     : {
-        cast: {
-          /** Cast of the created cast */
-          hash: string
-
-          /** Text of the created cast */
-          text?: string
-
-          /** Embeds of the created cast */
-          embeds?: [] | [string] | [string, string]
-
-          /** Parent of the created cast */
-          parent?: { type: 'cast'; hash: string }
-        }
+        cast: ComposeCastInnerResult | null
       }
