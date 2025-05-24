@@ -205,13 +205,13 @@ export default defineConfig({
       },
       {
         text: 'Managed services',
-        items:[
+        items: [
           {
             text: 'Neynar',
             link: '/docs/managed-services/neynar',
-          }
-        ]
-      }
+          },
+        ],
+      },
     ],
   },
   socials: [
