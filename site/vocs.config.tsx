@@ -158,6 +158,10 @@ export default defineConfig({
                 link: '/docs/sdk/actions/view-profile',
               },
               {
+                text: 'viewCast',
+                link: '/docs/sdk/actions/view-cast',
+              },
+              {
                 text: 'swapToken',
                 link: '/docs/sdk/actions/swap-token',
               },

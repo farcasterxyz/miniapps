@@ -336,6 +336,8 @@ export function expose(
                 return obj.addFrame(...argumentList);
               case 'composeCast':
                 return obj.composeCast(...argumentList);
+              case 'viewCast':
+                return obj.viewCast(...argumentList);
               case 'viewProfile':
                 return obj.viewProfile(...argumentList);
               case 'viewToken':
