@@ -5,6 +5,7 @@ import type {
   SendToken,
   SignIn,
   SwapToken,
+  ViewCast,
   ViewProfile,
   ViewToken,
 } from './actions'
@@ -42,6 +43,7 @@ export const miniAppHostCapabilityList: [string, ...string[]] = [
   'actions.setPrimaryButton',
   'actions.addMiniApp',
   'actions.signIn',
+  'actions.viewCast',
   'actions.viewProfile',
   'actions.composeCast',
   'actions.viewToken',
@@ -58,6 +60,7 @@ export type MiniAppHostCapability =
   | 'actions.setPrimaryButton'
   | 'actions.addMiniApp'
   | 'actions.signIn'
+  | 'actions.viewCast'
   | 'actions.viewProfile'
   | 'actions.composeCast'
   | 'actions.viewToken'
@@ -81,6 +84,7 @@ export type WireFrameHost = {
   eip6963RequestProvider: () => void
   solanaProviderRequest?: SolanaWireRequestFn
   addFrame: AddMiniApp.WireAddMiniApp
+  viewCast: ViewCast.ViewCast
   viewProfile: ViewProfile.ViewProfile
   viewToken: ViewToken.ViewToken
   sendToken: SendToken.SendToken
@@ -108,6 +112,7 @@ export type FrameHost = {
   eip6963RequestProvider: () => void
   solanaProviderRequest?: SolanaRequestFn
   addFrame: AddMiniApp.AddMiniApp
+  viewCast: ViewCast.ViewCast
   viewProfile: ViewProfile.ViewProfile
   viewToken: ViewToken.ViewToken
   sendToken: SendToken.SendToken

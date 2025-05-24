@@ -11,6 +11,7 @@ import type {
   SignIn,
   SolanaWalletProvider,
   SwapToken,
+  ViewCast,
   ViewProfile,
   ViewToken,
 } from '@farcaster/frame-core'
@@ -67,6 +68,7 @@ export type FrameSDK = {
     addFrame: AddMiniApp.AddMiniApp
     addMiniApp: AddMiniApp.AddMiniApp
     signIn: SignIn.SignIn
+    viewCast: ViewCast.ViewCast
     viewProfile: ViewProfile.ViewProfile
     composeCast: <close extends boolean | undefined = undefined>(
       options?: ComposeCast.Options<close>,

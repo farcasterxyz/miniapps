@@ -1,0 +1,59 @@
+---
+title: viewCast
+description: Open a specific cast in the Farcaster client
+---
+
+import { Caption } from '../../../../components/Caption';
+
+# viewCast
+
+Open a specific cast in the Farcaster client. This navigates the user to view
+the full cast with its replies and reactions.
+
+## Usage
+
+```ts twoslash
+const castHash = "0x1234567890abcdef";
+
+// ---cut---
+import { sdk } from '@farcaster/frame-sdk'
+
+await sdk.actions.viewCast({ 
+  hash: castHash,
+})
+```
+
+## Parameters
+
+### hash
+
+- **Type:** `string`
+
+The hash of the cast to view. This should be a valid cast hash from the Farcaster protocol.
+
+### close (optional)
+
+- **Type:** `boolean`
+
+Whether the app should be closed when this action is called. If true, the app
+will be closed after opening the cast view.
+
+## Return Value
+
+`Promise<void>` - This action does not return a value. It triggers navigation to the cast view in the Farcaster client.
+
+```ts twoslash
+import { sdk } from "@farcaster/frame-sdk";
+
+// ---cut---
+// View a specific cast
+await sdk.actions.viewCast({ 
+  hash: "0x1234567890abcdef"
+})
+
+// View a cast and close the mini app
+await sdk.actions.viewCast({ 
+  hash: "0x1234567890abcdef",
+  close: true
+})
+```
