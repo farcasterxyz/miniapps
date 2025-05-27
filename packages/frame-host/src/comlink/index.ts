@@ -1,1 +1,1 @@
-export * from './comlink'
+export * from './comlink.ts'

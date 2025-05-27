@@ -10,7 +10,7 @@ import {
 } from 'react'
 import type WebView from 'react-native-webview'
 import type { WebViewMessageEvent, WebViewProps } from 'react-native-webview'
-import { type WebViewEndpoint, createWebViewRpcEndpoint } from './webview'
+import { type WebViewEndpoint, createWebViewRpcEndpoint } from './webview.ts'
 
 /**
  * Returns a handler of RPC message from WebView.

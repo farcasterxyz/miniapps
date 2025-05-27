@@ -14,7 +14,7 @@ import type {
   SolanaWireRequestFn,
   SolanaWireSignAndSendTransactionRequestArguments,
   SolanaWireSignTransactionRequestArguments,
-} from './solana'
+} from './solana.ts'
 
 function serializeTransaction(transaction: SolanaCombinedTransaction): string {
   return Buffer.from(

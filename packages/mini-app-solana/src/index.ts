@@ -1,3 +1,3 @@
-import './wallet'
+import './wallet.ts'
 
-export * from './provider'
+export * from './provider.tsx'

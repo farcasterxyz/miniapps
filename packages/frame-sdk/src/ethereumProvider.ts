@@ -12,7 +12,7 @@ import type {
 import * as Provider from 'ox/Provider'
 import * as RpcRequest from 'ox/RpcRequest'
 import * as RpcResponse from 'ox/RpcResponse'
-import { frameHost } from './frameHost'
+import { frameHost } from './frameHost.ts'
 
 const emitter = Provider.createEmitter()
 const store = RpcRequest.createStore()

@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { miniAppHostCapabilityList } from '../types'
+import { miniAppHostCapabilityList } from '../types.ts'
 import {
   buttonTitleSchema,
   createSimpleStringSchema,
@@ -7,7 +7,7 @@ import {
   frameNameSchema,
   hexColorSchema,
   secureUrlSchema,
-} from './shared'
+} from './shared.ts'
 
 const primaryCategorySchema = z.enum([
   'games',

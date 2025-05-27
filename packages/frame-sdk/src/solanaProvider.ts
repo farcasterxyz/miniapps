@@ -6,7 +6,7 @@ import {
   unwrapSolanaProviderRequest,
 } from '@farcaster/frame-core'
 
-import { frameHost } from './frameHost'
+import { frameHost } from './frameHost.ts'
 
 const { solanaProviderRequest } = frameHost
 

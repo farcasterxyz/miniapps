@@ -10,6 +10,7 @@
     "target": "es2022",
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "rewriteRelativeImportExtensions": true
   }
 }

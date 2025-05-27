@@ -6,7 +6,7 @@ import {
 } from '@solana/wallet-adapter-react'
 import * as React from 'react'
 
-import { localStorageKey } from './constants'
+import { localStorageKey } from './constants.ts'
 
 // Farcaster Solana wallet will auto-connect
 const wallets: Adapter[] = []

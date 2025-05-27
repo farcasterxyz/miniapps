@@ -1,1 +1,1 @@
-export * as Ethereum from './ethereum'
+export * as Ethereum from './ethereum.ts'

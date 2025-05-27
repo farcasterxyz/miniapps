@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { notificationDetailsSchema } from './notifications'
+import { notificationDetailsSchema } from './notifications.ts'
 
 export const eventFrameAddedSchema = z.object({
   event: z.literal('frame_added'),

@@ -1,7 +1,7 @@
-import { sdk } from './sdk'
+import { sdk } from './sdk.ts'
 
-export * from './frameHost'
-export * from './sdk'
+export * from './frameHost.ts'
+export * from './sdk.ts'
 export * from '@farcaster/frame-core'
 
 export default sdk

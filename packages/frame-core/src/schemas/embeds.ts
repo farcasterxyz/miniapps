@@ -6,7 +6,7 @@ import {
   frameNameSchema,
   hexColorSchema,
   secureUrlSchema,
-} from './shared'
+} from './shared.ts'
 
 export const actionLaunchFrameSchema = z.object({
   type: z.literal('launch_frame'),

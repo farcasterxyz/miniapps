@@ -6,10 +6,10 @@ import {
 import { createLightClient } from '@farcaster/quick-auth/light'
 import { EventEmitter } from 'eventemitter3'
 import * as Siwe from 'ox/Siwe'
-import { ethereumProvider, getEthereumProvider } from './ethereumProvider'
-import { frameHost } from './frameHost'
-import { getSolanaProvider } from './solanaProvider'
-import type { Emitter, EventMap, FrameSDK } from './types'
+import { ethereumProvider, getEthereumProvider } from './ethereumProvider.ts'
+import { frameHost } from './frameHost.ts'
+import { getSolanaProvider } from './solanaProvider.ts'
+import type { Emitter, EventMap, FrameSDK } from './types.ts'
 
 export function createEmitter(): Emitter {
   const emitter = new EventEmitter<EventMap>()

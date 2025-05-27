@@ -5,9 +5,9 @@ import {
   VerifyAppKeyError,
   createJsonFarcasterSignature,
   verifyJsonFarcasterSignature,
-} from '../src/jfs'
-import type { VerifyAppKey } from '../src/types'
-import { hexToBytes } from '../src/util'
+} from '../src/jfs.ts'
+import type { VerifyAppKey } from '../src/types.ts'
+import { hexToBytes } from '../src/util.ts'
 
 describe('verifyJsonFarcasterSignature', () => {
   const verifyAppKeySuccess: VerifyAppKey = async (

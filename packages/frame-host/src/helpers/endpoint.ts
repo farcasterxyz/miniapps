@@ -1,13 +1,13 @@
 import type { FrameHost } from '@farcaster/frame-core'
 import type * as Provider from 'ox/Provider'
 import { useEffect } from 'react'
-import * as Comlink from '../comlink'
-import type { HostEndpoint } from '../types'
+import * as Comlink from '../comlink/index.ts'
+import type { HostEndpoint } from '../types.ts'
 import {
   forwardEthereumProviderEvents,
   wrapEthereumProviderRequest,
-} from './ethereumProvider'
-import { wrapHandlers } from './sdk'
+} from './ethereumProvider.ts'
+import { wrapHandlers } from './sdk.ts'
 
 /**
  * @returns function to cleanup provider listeners

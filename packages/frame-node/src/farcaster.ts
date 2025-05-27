@@ -1,6 +1,10 @@
 import * as AbiParameters from 'ox/AbiParameters'
 import { z } from 'zod'
-import { BaseError, type VerifyAppKey, type VerifyAppKeyResult } from './types'
+import {
+  BaseError,
+  type VerifyAppKey,
+  type VerifyAppKeyResult,
+} from './types.ts'
 
 export const signedKeyRequestAbi = [
   {

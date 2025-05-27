@@ -1,8 +1,8 @@
 import type { FrameHost } from '@farcaster/frame-core'
 import type { Provider } from 'ox/Provider'
-import * as Comlink from './comlink'
-import { exposeToEndpoint } from './helpers/endpoint'
-import type { HostEndpoint } from './types'
+import * as Comlink from './comlink/index.ts'
+import { exposeToEndpoint } from './helpers/endpoint.ts'
+import type { HostEndpoint } from './types.ts'
 
 /**
  * An endpoint of communicating with an iFrame

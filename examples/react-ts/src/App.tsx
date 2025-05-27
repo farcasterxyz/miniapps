@@ -3,7 +3,7 @@ import { farcasterFrame as frameConnector } from '@farcaster/frame-wagmi-connect
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { WagmiProvider, useAccount, useConnect, useSignMessage } from 'wagmi'
-import { config } from './wagmiConfig'
+import { config } from './wagmiConfig.ts'
 
 const queryClient = new QueryClient()
 

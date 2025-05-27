@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { verifyAppKeyWithNeynar } from '../src/neynar'
+import { verifyAppKeyWithNeynar } from '../src/neynar.ts'
 
 test('neynar', async ({ skip }) => {
   if (!process.env.NEYNAR_API_KEY) {

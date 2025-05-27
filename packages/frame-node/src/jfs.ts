@@ -9,8 +9,8 @@ import {
   type VerifyAppKey,
   type VerifyAppKeyResult,
   type VerifyJfsResult,
-} from './types'
-import { bytesToHex, hexToBytes } from './util'
+} from './types.ts'
+import { bytesToHex, hexToBytes } from './util.ts'
 
 export declare namespace VerifyJsonFarcasterSignature {
   type ErrorType =

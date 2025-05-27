@@ -1,5 +1,5 @@
-import * as Errors from '../errors'
-import type { OneOf } from '../internal/types'
+import * as Errors from '../errors.ts'
+import type { OneOf } from '../internal/types.ts'
 
 export type SignInOptions = {
   /**

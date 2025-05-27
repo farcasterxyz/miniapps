@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
-import { InvalidJfsDataError } from '../src/jfs'
-import type { VerifyAppKey } from '../src/types'
-import { InvalidEventDataError, parseWebhookEvent } from '../src/webhook'
+import { InvalidJfsDataError } from '../src/jfs.ts'
+import type { VerifyAppKey } from '../src/types.ts'
+import { InvalidEventDataError, parseWebhookEvent } from '../src/webhook.ts'
 
 describe('parseWebhookEvent', () => {
   const verifyAppKeySuccess: VerifyAppKey = async (

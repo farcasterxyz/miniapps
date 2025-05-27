@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { createVerifyAppKeyWithHub } from '../src/farcaster'
+import { createVerifyAppKeyWithHub } from '../src/farcaster.ts'
 
 test('farcaster', async () => {
   const hubUrl = 'https://snap.farcaster.xyz:3381'

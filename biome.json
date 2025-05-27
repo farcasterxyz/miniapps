@@ -39,6 +39,9 @@
         "noConsoleLog": "error",
         "noExplicitAny": "off",
         "noShadowRestrictedNames": "off"
+      },
+      "correctness": {
+        "useImportExtensions": "error"
       }
     }
   },

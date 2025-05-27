@@ -1,7 +1,7 @@
 import * as Provider from 'ox/Provider'
 import type * as RpcRequest from 'ox/RpcRequest'
 import * as RpcResponse from 'ox/RpcResponse'
-import type { HostEndpoint } from '../types'
+import type { HostEndpoint } from '../types.ts'
 
 export function forwardEthereumProviderEvents({
   provider,

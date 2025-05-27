@@ -33,7 +33,7 @@ import {
   type StandardEventsOnMethod,
 } from '@wallet-standard/features'
 
-import { localStorageKey } from './constants'
+import { localStorageKey } from './constants.ts'
 
 const walletName = 'Farcaster'
 const supportedChains = ['solana:mainnet'] as const

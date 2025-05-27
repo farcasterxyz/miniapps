@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest'
-import { actionSchema, createSimpleStringSchema } from '../src/schemas'
-import { actionLaunchFrameSchema } from '../src/schemas/embeds'
+import { actionLaunchFrameSchema } from '../src/schemas/embeds.ts'
+import { actionSchema, createSimpleStringSchema } from '../src/schemas/index.ts'
 
 describe('createSimpleStringSchema', () => {
   test('valid string', () => {

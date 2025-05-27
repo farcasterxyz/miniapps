@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { secureUrlSchema } from './shared'
+import { secureUrlSchema } from './shared.ts'
 
 export const notificationDetailsSchema = z.object({
   url: z.string(),

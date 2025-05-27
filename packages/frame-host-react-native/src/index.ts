@@ -1,3 +1,3 @@
 export * from '@farcaster/frame-host'
-export * from './webview'
-export * from './webviewAdapter'
+export * from './webview.ts'
+export * from './webviewAdapter.ts'

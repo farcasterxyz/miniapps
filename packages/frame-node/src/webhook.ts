@@ -2,12 +2,12 @@ import { serverEventSchema } from '@farcaster/frame-core'
 import {
   type VerifyJsonFarcasterSignature,
   verifyJsonFarcasterSignature,
-} from './jfs'
+} from './jfs.ts'
 import {
   BaseError,
   type ParseWebhookEventResult,
   type VerifyAppKey,
-} from './types'
+} from './types.ts'
 
 export declare namespace ParseWebhookEvent {
   type ErrorType =

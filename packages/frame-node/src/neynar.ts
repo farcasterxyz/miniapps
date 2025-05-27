@@ -1,5 +1,5 @@
-import { createVerifyAppKeyWithHub } from './farcaster'
-import type { VerifyAppKey, VerifyAppKeyResult } from './types'
+import { createVerifyAppKeyWithHub } from './farcaster.ts'
+import type { VerifyAppKey, VerifyAppKeyResult } from './types.ts'
 
 const apiKey = process.env.NEYNAR_API_KEY || ''
 

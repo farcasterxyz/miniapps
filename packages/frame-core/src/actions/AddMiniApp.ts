@@ -1,6 +1,6 @@
-import * as Errors from '../errors'
-import type { OneOf } from '../internal/types'
-import type { FrameNotificationDetails } from '../schemas'
+import * as Errors from '../errors.ts'
+import type { OneOf } from '../internal/types.ts'
+import type { FrameNotificationDetails } from '../schemas/index.ts'
 
 export type AddMiniAppResult = {
   notificationDetails?: FrameNotificationDetails
