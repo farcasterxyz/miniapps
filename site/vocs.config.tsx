@@ -201,14 +201,14 @@ export default defineConfig({
             text: 'Warpcast Intents',
             link: 'https://docs.farcaster.xyz/reference/warpcast/cast-composer-intents',
           },
-        ],
-      },
-      {
-        text: 'Managed services',
-        items: [
           {
-            text: 'Neynar',
-            link: '/docs/managed-services/neynar',
+            text: 'Managed services',
+            items: [
+              {
+                text: 'Neynar',
+                link: '/docs/managed-services/neynar',
+              },
+            ],
           },
         ],
       },
