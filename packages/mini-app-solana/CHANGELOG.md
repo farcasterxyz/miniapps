@@ -1,5 +1,15 @@
 # @farcaster/mini-app-solana
 
+## 0.0.11
+
+### Patch Changes
+
+- [#324](https://github.com/farcasterxyz/miniapps/pull/324) [`fcb978f`](https://github.com/farcasterxyz/miniapps/commit/fcb978fc45d60cb0c1e5233fc87643d796d17151) Thanks [@Ashoat](https://github.com/Ashoat)! - Use fully-qualified import paths with file extensions
+
+- Updated dependencies [[`fcb978f`](https://github.com/farcasterxyz/miniapps/commit/fcb978fc45d60cb0c1e5233fc87643d796d17151)]:
+  - @farcaster/frame-core@0.1.2
+  - @farcaster/frame-sdk@0.0.53
+
 ## 0.0.10
 
 ### Patch Changes

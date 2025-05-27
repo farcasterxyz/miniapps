@@ -1,5 +1,14 @@
 # @farcaster/frame-host
 
+## 0.0.43
+
+### Patch Changes
+
+- [#324](https://github.com/farcasterxyz/miniapps/pull/324) [`fcb978f`](https://github.com/farcasterxyz/miniapps/commit/fcb978fc45d60cb0c1e5233fc87643d796d17151) Thanks [@Ashoat](https://github.com/Ashoat)! - Use fully-qualified import paths with file extensions
+
+- Updated dependencies [[`fcb978f`](https://github.com/farcasterxyz/miniapps/commit/fcb978fc45d60cb0c1e5233fc87643d796d17151)]:
+  - @farcaster/frame-host@0.0.44
+
 ## 0.0.42
 
 ### Patch Changes
