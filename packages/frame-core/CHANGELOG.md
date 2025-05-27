@@ -1,5 +1,11 @@
 # @farcaster/frame-core
 
+## 0.1.1
+
+### Patch Changes
+
+- [#322](https://github.com/farcasterxyz/miniapps/pull/322) [`277bb50`](https://github.com/farcasterxyz/miniapps/commit/277bb505c4e75f452ce6f1e0df3d936b21e0c8e1) Thanks [@PirosB3](https://github.com/PirosB3)! - Added viewcast functionality.
+
 ## 0.1.0
 
 ### Minor Changes
