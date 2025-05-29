@@ -103,7 +103,19 @@ export const sdk: FrameSDK = {
   context: frameHost.context,
   actions: {
     setPrimaryButton: frameHost.setPrimaryButton.bind(frameHost),
-    ready: frameHost.ready.bind(frameHost),
+    ready: async (options = {}) => {
+      if (options.enableBackNavigation === 'web') {
+        sdk.addListener('backNavigationTriggered', () => {
+          if (window.history.length > 1) {
+            history.back()
+          } else {
+            sdk.actions.close()
+          }
+        })
+      }
+
+      return await frameHost.ready(options)
+    },
     close: frameHost.close.bind(frameHost),
     viewCast: frameHost.viewCast.bind(frameHost),
     viewProfile: frameHost.viewProfile.bind(frameHost),
@@ -202,6 +214,8 @@ if (typeof document !== 'undefined') {
         })
       } else if (frameEvent.event === 'notifications_disabled') {
         emitter.emit('notificationsDisabled')
+      } else if (frameEvent.event === 'back_navigation_triggered') {
+        emitter.emit('backNavigationTriggered')
       }
     }
   })
@@ -230,6 +244,8 @@ if (typeof window !== 'undefined') {
           })
         } else if (frameEvent.event === 'notifications_disabled') {
           emitter.emit('notificationsDisabled')
+        } else if (frameEvent.event === 'back_navigation_triggered') {
+          emitter.emit('backNavigationTriggered')
         }
       }
     }

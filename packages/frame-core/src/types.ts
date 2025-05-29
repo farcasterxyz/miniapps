@@ -153,6 +153,10 @@ export type EventPrimaryButtonClicked = {
   event: 'primary_button_clicked'
 }
 
+export type EventBackNavigationTriggered = {
+  event: 'back_navigation_triggered'
+}
+
 export type FrameClientEvent =
   | EventFrameAdded
   | EventFrameAddRejected
@@ -160,4 +164,5 @@ export type FrameClientEvent =
   | EventNotificationsEnabled
   | EventNotificationsDisabled
   | EventPrimaryButtonClicked
+  | EventBackNavigationTriggered
   | Ethereum.EventEip6963AnnounceProvider
