@@ -9,7 +9,7 @@ export type Manifest = {
 /**
  * Signed domain association linking this frame to a Farcaster account
  *
- * A DomainAssociation can be generated using the {@link https://warpcast.com/~/developers/domains | Warpcast
+ * A DomainAssociation can be generated using the {@link https://farcaster.xyz/~/developers/domains | Warpcast
  * Domains Developer} tool.
  */
 export type AccountAssociation = {

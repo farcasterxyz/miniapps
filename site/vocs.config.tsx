@@ -56,7 +56,7 @@ export default defineConfig({
       text: 'Examples',
       link: 'https://github.com/farcasterxyz/frames/tree/main/examples',
     },
-    { text: 'Rewards', link: 'https://warpcast.com/~/developers/rewards' },
+    { text: 'Rewards', link: 'https://farcaster.xyz/~/developers/rewards' },
   ],
   sidebar: {
     '/': [
