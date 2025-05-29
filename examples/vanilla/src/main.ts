@@ -8,9 +8,14 @@ declare global {
 }
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div id="container">
-    <div id="splash"></div>
-    <iframe src="/frame/" id="iframe" height="695" width="424" style="border:none;" />
+  <div>
+    <div id="header">
+      <button id="back">back</button>
+    </div>
+    <div id="container">
+      <div id="splash"></div>
+      <iframe src="/frame/" id="iframe" height="695" width="424" style="border:none;" />
+    </div>
   </div>
 `
 
@@ -27,7 +32,15 @@ const announceProvider = () => {
 }
 
 const frameHost: FrameHost = {
-  ready: (_options) => {
+  ready: (options) => {
+    if (options?.enableBackNavigation) {
+      const btn = document.querySelector<HTMLButtonElement>('#back')
+      btn!.hidden = false
+      btn!.onclick = () => {
+        endpoint.emit({ event: 'back_navigation_triggered' })
+      }
+    }
+
     document.querySelector<HTMLDivElement>('#splash')!.hidden = true
   },
   context: {
@@ -44,6 +57,9 @@ const frameHost: FrameHost = {
     }
 
     throw new Error('Not supported')
+  },
+  close() {
+    document.querySelector<HTMLDivElement>('#splash')!.hidden = false
   },
 } as FrameHost
 
