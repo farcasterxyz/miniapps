@@ -48,6 +48,7 @@ export type EventMap = {
     notificationDetails: FrameNotificationDetails
   }) => void
   notificationsDisabled: () => void
+  backNavigationTriggered: () => void
 }
 
 export type Emitter = Compute<EventEmitter<EventMap>>
