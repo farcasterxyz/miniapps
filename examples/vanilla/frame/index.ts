@@ -45,4 +45,14 @@ setTimeout(() => {
         }),
     )
   }
+
+  document.querySelector<HTMLDivElement>('#back')!.onclick = () => {
+    if ('navigation' in window) {
+      if (window.navigation.canGoBack) {
+        window.navigation.back()
+      }
+    } else {
+      ;(window as Window).history.back()
+    }
+  }
 }, 750)
