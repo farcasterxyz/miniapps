@@ -14,6 +14,15 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     </div>
     <div id="container">
       <div id="splash"></div>
+      <iframe 
+        src="/frame/" 
+        allow="microphone; camera; clipboard-write 'src'"
+        sandbox="allow-forms allow-scripts allow-same-origin allow-popups"
+        id="iframe" 
+        height="695" 
+        width="424" 
+        style="border:none;" 
+        />
       <iframe src="/frame/" id="iframe" height="695" width="424" style="border:none;" />
     </div>
   </div>
