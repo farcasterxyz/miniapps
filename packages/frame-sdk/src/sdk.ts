@@ -113,9 +113,11 @@ export const sdk: FrameSDK = {
             if (window.navigation.canGoBack) {
               window.navigation.back()
             }
-          } else {
-            window.history.back()
+
+            return
           }
+
+          window.history.back()
         })
       }
 
