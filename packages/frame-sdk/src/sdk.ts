@@ -106,10 +106,15 @@ export const sdk: FrameSDK = {
     ready: async (options = {}) => {
       if (options.enableBackNavigation === 'web') {
         sdk.addListener('backNavigationTriggered', () => {
-          if (window.history.length > 1) {
-            history.back()
+          if (
+            typeof window !== 'undefined' &&
+            window.navigation !== undefined
+          ) {
+            if (window.navigation.canGoBack) {
+              window.navigation.back()
+            }
           } else {
-            sdk.actions.close()
+            window.history.back()
           }
         })
       }
