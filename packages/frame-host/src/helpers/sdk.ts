@@ -51,5 +51,9 @@ export function wrapHandlers(host: FrameHost): WireFrameHost {
     solanaProviderRequest: host.solanaProviderRequest
       ? wrapSolanaProviderRequest(host.solanaProviderRequest)
       : undefined,
+    // Pass through haptics methods directly
+    impactOccurred: host.impactOccurred,
+    notificationOccurred: host.notificationOccurred,
+    selectionChanged: host.selectionChanged,
   }
 }

@@ -352,6 +352,12 @@ export function expose(
                 return obj.getCapabilities(...argumentList);
               case 'getChains':
                 return obj.getChains(...argumentList);
+              case 'impactOccurred':
+                return obj.impactOccurred(...argumentList);
+              case 'notificationOccurred':
+                return obj.notificationOccurred(...argumentList);
+              case 'selectionChanged':
+                return obj.selectionChanged(...argumentList);
               default:
                 throw new Error(`Unsupported APPLY for ${path.join('/')}`)
             }
