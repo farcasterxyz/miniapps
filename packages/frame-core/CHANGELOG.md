@@ -1,5 +1,11 @@
 # @farcaster/frame-core
 
+## 0.1.4
+
+### Patch Changes
+
+- [#338](https://github.com/farcasterxyz/miniapps/pull/338) [`ec372de`](https://github.com/farcasterxyz/miniapps/commit/ec372de3c0c7bcfa0e6acd7c30e0ae1385606d27) Thanks [@PirosB3](https://github.com/PirosB3)! - Moved haptics SDK around
+
 ## 0.1.3
 
 ### Patch Changes
