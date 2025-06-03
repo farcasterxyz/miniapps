@@ -1,5 +1,12 @@
 # @farcaster/frame-host
 
+## 0.0.45
+
+### Patch Changes
+
+- Updated dependencies [[`c9c8580`](https://github.com/farcasterxyz/miniapps/commit/c9c858040370cc4a14691585bb1cee10afde878b)]:
+  - @farcaster/frame-core@0.1.3
+
 ## 0.0.44
 
 ### Patch Changes
