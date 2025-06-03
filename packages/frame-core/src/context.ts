@@ -83,8 +83,13 @@ export type ClientContext = {
   safeAreaInsets?: SafeAreaInsets
 }
 
+export type ClientFeatures = {
+  haptics: boolean
+}
+
 export type FrameContext = {
   client: ClientContext
   user: UserContext
   location?: LocationContext
+  features?: ClientFeatures
 }

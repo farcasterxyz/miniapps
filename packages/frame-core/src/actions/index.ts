@@ -1,5 +1,6 @@
 export * as AddMiniApp from './AddMiniApp.ts'
 export * as ComposeCast from './ComposeCast.ts'
+export * as Haptics from './Haptics.ts'
 export * as Ready from './Ready.ts'
 export * as SignIn from './SignIn.ts'
 export * as SendToken from './SendToken.ts'

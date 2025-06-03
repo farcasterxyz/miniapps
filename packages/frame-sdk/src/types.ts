@@ -5,6 +5,7 @@ import type {
   FrameNotificationDetails,
   GetCapabilities,
   GetChains,
+  Haptics,
   Ready,
   SendToken,
   SetPrimaryButtonOptions,
@@ -76,6 +77,11 @@ export type FrameSDK = {
     viewToken: ViewToken.ViewToken
     sendToken: SendToken.SendToken
     swapToken: SwapToken.SwapToken
+    haptics: {
+      impactOccurred: Haptics.ImpactOccurred
+      notificationOccurred: Haptics.NotificationOccurred
+      selectionChanged: Haptics.SelectionChanged
+    }
   }
   experimental: {
     getSolanaProvider: () => Promise<SolanaWalletProvider | undefined>
