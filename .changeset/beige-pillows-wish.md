@@ -4,4 +4,4 @@
 "@farcaster/frame-sdk": patch
 ---
 
-Added sdk.back.
+Added sdk.back to support back navigation.
