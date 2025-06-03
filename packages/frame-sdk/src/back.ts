@@ -1,17 +1,13 @@
-import type { Back as BackCore, WireFrameHost } from '@farcaster/frame-core'
+import type { WireFrameHost } from '@farcaster/frame-core'
 import type { Remote } from 'comlink'
 import type { Emitter } from './types.ts'
 
 export type Back = {
-  enabled: boolean
   visible: boolean
   show: () => Promise<void>
   hide: () => Promise<void>
-  enable: () => Promise<void>
-  disable: () => Promise<void>
   enableWebNavigation: () => Promise<void>
   disableWebNavigation: () => Promise<void>
-  update: (state: BackCore.BackState) => Promise<void>
 }
 
 export const createBack: (options: {
@@ -21,31 +17,18 @@ export const createBack: (options: {
   let teardownWebNavigation: undefined | (() => void) = undefined
 
   return {
-    enabled: false,
     visible: false,
     async show() {
-      return this.update({
+      await frameHost.updateBackState({
         visible: true,
-        enabled: this.enabled,
       })
+      this.visible = true
     },
     async hide() {
-      return this.update({
+      await frameHost.updateBackState({
         visible: false,
-        enabled: this.enabled,
       })
-    },
-    async enable() {
-      return this.update({
-        visible: this.visible,
-        enabled: true,
-      })
-    },
-    async disable() {
-      return this.update({
-        visible: this.visible,
-        enabled: true,
-      })
+      this.visible = false
     },
     async enableWebNavigation() {
       teardownWebNavigation = setupWebBack({
@@ -56,11 +39,6 @@ export const createBack: (options: {
     async disableWebNavigation() {
       teardownWebNavigation?.()
       teardownWebNavigation = undefined
-    },
-    async update(state) {
-      await frameHost.updateBackState(state)
-      this.visible = state.visible
-      this.enabled = state.enabled
     },
   }
 }
@@ -99,20 +77,14 @@ function setupNavigationApi({
 }) {
   function handleNavigateSuccess() {
     if (navigation.canGoBack) {
-      back.update({
-        visible: true,
-        enabled: true,
-      })
+      back.show()
     } else {
-      back.update({
-        visible: back.enabled,
-        enabled: false,
-      })
+      back.hide()
     }
   }
 
   function handleBackNavigationTriggered() {
-    if (back.enabled && navigation.canGoBack) {
+    if (back.visible && navigation.canGoBack) {
       navigation.back()
     }
   }
@@ -138,13 +110,10 @@ function setupFallback({
   back: Back
   window: Window
 }) {
-  back.update({
-    visible: true,
-    enabled: true,
-  })
+  back.show()
 
   function handleBackNavigationTriggered() {
-    if (back.enabled) {
+    if (back.visible) {
       window.history.back()
     }
   }

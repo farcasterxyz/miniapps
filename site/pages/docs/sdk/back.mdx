@@ -1,17 +1,9 @@
 ---
 title: Back Navigation
-description: Enable native back navigation control
+description: Support back navigation in your mini app
 ---
 
-import { Caption } from '../../../components/Caption.tsx';
-
 # Back Navigation
-
-![users taking onchain action from app](/transaction-preview.png)
-
-<Caption>
-  A native control is used for back navigation
-</Caption>
 
 You can integrate with a back navigation control provided by the Farcaster
 client.
@@ -39,17 +31,11 @@ sdk.addEventListener('backNavigationTriggered', () => {
 })
 ```
 
-Note that the back control must be visible and enabled to trigger events.
-
 ## Properties
 
 ### `enabled`
 - **Type**: `boolean`
 - **Description**: Whether back navigation is currently enabled
-
-### `visible`
-- **Type**: `boolean`
-- **Description**: Whether the back button is currently visible
 
 ## Methods
 
@@ -67,30 +53,6 @@ Hides the back button.
 await sdk.back.hide();
 ```
 
-### `enable()`
-Enables back navigation functionality while preserving visibility state.
-
-```ts
-await sdk.back.enable();
-```
-
-### `disable()`
-Disables back navigation functionality while preserving visibility state.
-
-```ts
-await sdk.back.disable();
-```
-
-### `update(state)`
-Updates both visibility and enabled state simultaneously.
-
-```ts
-await sdk.back.update({
-  visible: true,
-  enabled: true
-});
-```
-
 ## Web Navigation Integration
 
 The SDK can automatically integrate with web navigation APIs.
@@ -98,9 +60,10 @@ The SDK can automatically integrate with web navigation APIs.
 ### `enableWebNavigation()`
 
 Enables automatic integration with the browser's navigation system. This will:
-- Use the modern Navigation API when available
-- Fall back to the History API in older browsers
-- Automatically show/hide the back button based on navigation state
+- Use the modern Navigation API when available; the back button will automatically
+  be shown and hidden based on the value of `canGoBack`.
+- Fall back to the History API in older browsers; the back button will always
+  be shown.
 
 ```ts
 await sdk.back.enableWebNavigation();
@@ -167,15 +130,9 @@ function NavigationExample() {
   useEffect(() => {
     // Update back button based on current page
     if (currentPage === 'home') {
-      sdk.back.update({
-        visible: false,
-        enabled: false
-      });
+      sdk.back.show();
     } else {
-      sdk.back.update({
-        visible: true,
-        enabled: true
-      });
+      sdk.back.hide();
     }
   }, [currentPage]);
 

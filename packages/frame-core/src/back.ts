@@ -1,12 +1,5 @@
 export type BackState = {
   /**
-   * Is the back control enabled.
-   *
-   * @default false
-   */
-  enabled: boolean
-
-  /**
    * Is the back control visible. Note that on mobile devices Farcaster clients
    * may support a gesture based control rather than button control.
    *
@@ -16,7 +9,6 @@ export type BackState = {
 }
 
 export const DEFAULT_BACK_STATE = {
-  enabled: true,
   visible: false,
 }
 
