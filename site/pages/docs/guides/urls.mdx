@@ -51,6 +51,19 @@ Mini App URLs (see ["Sharing your app"](/docs/guides/sharing)) and add all relev
 in your [application config](/docs/guides/publishing#define-your-application-configuration),
 especially `ogTitle`, `ogDescription` and `ogImageUrl`.
 
+
+## How Mini App sub-paths and query params work
+
+Each Mini App defines a `homeUrl` property in its [application config](/docs/guides/publishing#define-your-application-configuration).
+When a user clicks on a Mini App in the Farcaster client's Mini App explorer, a
+WebView (on mobile) or iframe (on web) pointing to the `homeUrl` is opened.
+
+If you share a Mini App URL with a sub-path and/or query parameters, those are appended
+to the `homeUrl`'s path and query string.
+
+For example, if the `homeUrl` is `https://example.com/miniapp/v1` and the Mini App
+URL is `https://farcaster.xyz/miniapps/12345/example-miniapp/leaderboard?sort=points`, the WebView or iframe will load `https://example.com/miniapp/v1/leaderboard?sort=points`.
+
 ## FAQ
 
 **Is there another way to get a Mini App's id?**
