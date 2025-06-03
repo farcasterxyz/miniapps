@@ -39,6 +39,9 @@ export type SignInOptions = SignIn.SignInOptions
 
 export type SetPrimaryButton = (options: SetPrimaryButtonOptions) => void
 
+// Export haptics types
+export type { ImpactOccurred, NotificationOccurred, SelectionChanged }
+
 export const miniAppHostCapabilityList: [string, ...string[]] = [
   'wallet.getEthereumProvider',
   'wallet.getSolanaProvider',
