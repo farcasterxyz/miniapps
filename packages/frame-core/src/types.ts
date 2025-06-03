@@ -61,6 +61,7 @@ export const miniAppHostCapabilityList: [string, ...string[]] = [
   'haptics.impactOccurred',
   'haptics.notificationOccurred',
   'haptics.selectionChanged',
+  'back',
 ]
 
 export type MiniAppHostCapability =
@@ -81,6 +82,7 @@ export type MiniAppHostCapability =
   | 'haptics.impactOccurred'
   | 'haptics.notificationOccurred'
   | 'haptics.selectionChanged'
+  | 'back'
 
 export type GetCapabilities = () => Promise<MiniAppHostCapability[]>
 

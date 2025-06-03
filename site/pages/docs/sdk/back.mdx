@@ -123,6 +123,22 @@ If you are using `enableWebNavigation` this event will automatically be
 listened to and trigger the browser to navigate. Otherwise you should listen
 for this event and respond to it as appropriate for your application.
 
+## Availability
+
+You can check whether the Farcaster client rendering your app supports a back control:
+
+```ts twoslash
+import { sdk } from '@farcaster/frame-sdk'
+
+const capabilities = await sdk.getCapabilities()
+
+if (capabilities.includes('back')) {
+  await sdk.back.enableWebNavigation();
+} else {
+  // show a back button within your app
+}
+```
+
 ## Example: Web Navigation 
 
 ```ts
