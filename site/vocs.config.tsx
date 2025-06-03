@@ -54,7 +54,7 @@ export default defineConfig({
   topNav: [
     {
       text: 'llms.txt',
-      link: '/llms-full.txt',
+      link: 'https://miniapps.farcaster.xyz/llms-full.txt',
     },
     {
       text: 'Examples',
