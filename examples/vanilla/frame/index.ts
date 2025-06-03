@@ -10,7 +10,7 @@ store.subscribe((providerDetails) => {
 })
 
 setTimeout(() => {
-  sdk.actions.ready({ enableBackNavigation: 'web' })
+  sdk.actions.ready()
   Promise.race([
     sdk.context,
     new Promise<never>((_, reject) => {

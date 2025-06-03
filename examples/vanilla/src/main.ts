@@ -41,15 +41,7 @@ const announceProvider = () => {
 }
 
 const frameHost: FrameHost = {
-  ready: (options) => {
-    if (options?.enableBackNavigation) {
-      const btn = document.querySelector<HTMLButtonElement>('#back')
-      btn!.hidden = false
-      btn!.onclick = () => {
-        endpoint.emit({ event: 'back_navigation_triggered' })
-      }
-    }
-
+  ready: () => {
     document.querySelector<HTMLDivElement>('#splash')!.hidden = true
   },
   context: {
@@ -69,6 +61,17 @@ const frameHost: FrameHost = {
   },
   close() {
     document.querySelector<HTMLDivElement>('#splash')!.hidden = false
+  },
+  updateBackState(state) {
+    const btn = document.querySelector<HTMLButtonElement>('#back')
+    if (state.visible) {
+      btn!.hidden = false
+      btn!.onclick = () => {
+        endpoint.emit({ event: 'back_navigation_triggered' })
+      }
+    } else {
+      btn!.hidden = true
+    }
   },
 } as FrameHost
 
