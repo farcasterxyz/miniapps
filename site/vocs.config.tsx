@@ -53,6 +53,10 @@ export default defineConfig({
   },
   topNav: [
     {
+      text: 'llms.txt',
+      link: '/llms-full.txt',
+    },
+    {
       text: 'Examples',
       link: 'https://github.com/farcasterxyz/frames/tree/main/examples',
     },
