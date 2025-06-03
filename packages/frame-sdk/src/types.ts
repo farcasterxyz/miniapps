@@ -5,8 +5,10 @@ import type {
   FrameNotificationDetails,
   GetCapabilities,
   GetChains,
-  Haptics,
+  ImpactOccurred,
+  NotificationOccurred,
   Ready,
+  SelectionChanged,
   SendToken,
   SetPrimaryButtonOptions,
   SignIn,
@@ -77,11 +79,6 @@ export type FrameSDK = {
     viewToken: ViewToken.ViewToken
     sendToken: SendToken.SendToken
     swapToken: SwapToken.SwapToken
-    haptics: {
-      impactOccurred: Haptics.ImpactOccurred
-      notificationOccurred: Haptics.NotificationOccurred
-      selectionChanged: Haptics.SelectionChanged
-    }
   }
   experimental: {
     getSolanaProvider: () => Promise<SolanaWalletProvider | undefined>
@@ -102,5 +99,10 @@ export type FrameSDK = {
     ethProvider: Provider.Provider
     getEthereumProvider: () => Promise<Provider.Provider | undefined>
     getSolanaProvider: () => Promise<SolanaWalletProvider | undefined>
+  }
+  haptics: {
+    impactOccurred: ImpactOccurred
+    notificationOccurred: NotificationOccurred
+    selectionChanged: SelectionChanged
   }
 } & Emitter

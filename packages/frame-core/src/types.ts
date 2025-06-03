@@ -1,7 +1,11 @@
 import type {
+  ImpactOccurred,
+  NotificationOccurred,
+  SelectionChanged,
+} from './actions/Haptics.ts'
+import type {
   AddMiniApp,
   ComposeCast,
-  Haptics,
   Ready,
   SendToken,
   SignIn,
@@ -50,9 +54,9 @@ export const miniAppHostCapabilityList: [string, ...string[]] = [
   'actions.viewToken',
   'actions.sendToken',
   'actions.swapToken',
-  'actions.haptics.impactOccurred',
-  'actions.haptics.notificationOccurred',
-  'actions.haptics.selectionChanged',
+  'haptics.impactOccurred',
+  'haptics.notificationOccurred',
+  'haptics.selectionChanged',
 ]
 
 export type MiniAppHostCapability =
@@ -70,9 +74,9 @@ export type MiniAppHostCapability =
   | 'actions.viewToken'
   | 'actions.sendToken'
   | 'actions.swapToken'
-  | 'actions.haptics.impactOccurred'
-  | 'actions.haptics.notificationOccurred'
-  | 'actions.haptics.selectionChanged'
+  | 'haptics.impactOccurred'
+  | 'haptics.notificationOccurred'
+  | 'haptics.selectionChanged'
 
 export type GetCapabilities = () => Promise<MiniAppHostCapability[]>
 
@@ -99,9 +103,9 @@ export type WireFrameHost = {
   composeCast: <close extends boolean | undefined = undefined>(
     options: ComposeCast.Options<close>,
   ) => Promise<ComposeCast.Result<close>>
-  impactOccurred: Haptics.ImpactOccurred
-  notificationOccurred: Haptics.NotificationOccurred
-  selectionChanged: Haptics.SelectionChanged
+  impactOccurred: ImpactOccurred
+  notificationOccurred: NotificationOccurred
+  selectionChanged: SelectionChanged
   getCapabilities: GetCapabilities
   getChains: GetChains
 }
@@ -130,9 +134,9 @@ export type FrameHost = {
   composeCast: <close extends boolean | undefined = undefined>(
     options: ComposeCast.Options<close>,
   ) => Promise<ComposeCast.Result<close>>
-  impactOccurred: Haptics.ImpactOccurred
-  notificationOccurred: Haptics.NotificationOccurred
-  selectionChanged: Haptics.SelectionChanged
+  impactOccurred: ImpactOccurred
+  notificationOccurred: NotificationOccurred
+  selectionChanged: SelectionChanged
   getCapabilities: GetCapabilities
   getChains: GetChains
 }

@@ -131,11 +131,6 @@ export const sdk: FrameSDK = {
     viewToken: frameHost.viewToken.bind(frameHost),
     sendToken: frameHost.sendToken.bind(frameHost),
     swapToken: frameHost.swapToken.bind(frameHost),
-    haptics: {
-      impactOccurred: frameHost.impactOccurred.bind(frameHost),
-      notificationOccurred: frameHost.notificationOccurred.bind(frameHost),
-      selectionChanged: frameHost.selectionChanged.bind(frameHost),
-    },
   },
   experimental: {
     getSolanaProvider,
@@ -177,6 +172,11 @@ export const sdk: FrameSDK = {
     ethProvider: ethereumProvider,
     getEthereumProvider,
     getSolanaProvider,
+  },
+  haptics: {
+    impactOccurred: frameHost.impactOccurred.bind(frameHost),
+    notificationOccurred: frameHost.notificationOccurred.bind(frameHost),
+    selectionChanged: frameHost.selectionChanged.bind(frameHost),
   },
 }
 

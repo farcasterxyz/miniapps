@@ -1,9 +1,9 @@
-export type ImpactOccurred = (
-  type: 'light' | 'medium' | 'heavy' | 'soft' | 'rigid',
-) => Promise<void>
+// Haptics types
+export type ImpactOccurredType = 'light' | 'medium' | 'heavy' | 'soft' | 'rigid'
+export type NotificationOccurredType = 'success' | 'warning' | 'error'
 
+export type ImpactOccurred = (type: ImpactOccurredType) => Promise<void>
 export type NotificationOccurred = (
-  type: 'success' | 'warning' | 'error',
+  type: NotificationOccurredType,
 ) => Promise<void>
-
 export type SelectionChanged = () => Promise<void>
