@@ -1,0 +1,80 @@
+---
+title: Mini App URLs
+description: How to use Mini App URLs
+---
+
+import { Caption } from '../../../components/Caption.tsx';
+
+# Mini App URLs
+
+Mini Apps have a cannonical URL that can be used to share across social feeds
+and web sites. The URL format is as follows:
+
+`https://farcaster.xyz/miniapps/<app-id>/<app-slug>(/<sub-path>)(?<query-params>)`
+
+- The `<app-id>` is a unique identifier assigned to the Mini App when it is [published](/docs/guides/publishing).
+- The `<app-slug>` is a kebab-case version of the Mini App name, used to create a more readable URL.
+- The `<sub-path>` is an optional path appended to the Mini App’s `homeURL` when it is opened.
+- The `<query-params>` are optional parameters added to the `homeURL` as a query string when the Mini App is opened.
+
+The `<sub-path>` and `<query-params>` are optional and can be used to navigate to a specific page in the Mini App or pass data to the Mini App.
+
+When a user clicks a Mini App URL and is logged in:
+- **On web**: the Mini App opens in the mini app drawer.
+- **On mobile**: the browser deep links to the Farcaster app and opens the Mini App.
+
+
+## Where to find the Mini App URL
+
+On the web [Developers page](https://farcaster.xyz/~/developers), click the top-right
+kebab menu on one of your Mini App cards and select **"Copy link to mini app"**. This
+copies the Mini App URL to your clipboard.
+
+When the Mini App is open, tap on the top-right kebab menu and select **"Copy link"** to
+copy the Mini App URL to your clipboard.
+
+![Copy link to mini app](/copy_link_to_miniapp.png)
+
+<Caption>
+  Copy link to mini app on the Developers page or the Mini App screen.
+</Caption>
+
+
+## How to control what is displayed when I share a Mini App URL
+
+Farcaster automatically generates OpenGraph meta tags for Mini App URLs, ensuring
+they render correctly when shared on social platforms or web apps that support embedded
+link previews, such as X.
+
+To make sure your Mini App displays as intended, include the `fc:frame` meta tag on all
+Mini App URLs (see ["Sharing your app"](/docs/guides/sharing)) and add all relevant fields
+in your [application config](/docs/guides/publishing#define-your-application-configuration),
+especially `ogTitle`, `ogDescription` and `ogImageUrl`.
+
+## FAQ
+
+**Is there another way to get a Mini App's id?**
+
+Not at the moment.
+
+**When copying the link from the Mini App header, it doesn't copy the Mini App URL, why is that?**
+
+Any URL with a valid `fc:frame` meta tag shared in a cast will be treated as a Mini App.
+Copying the link from these Mini Apps will copy the original URL shared in the cast, not the cannonical Mini App URL.
+
+**Can I add a sub-path or query params to the Mini App URL copied from the Mini App header?**
+
+Not at the moment. Only the cannonical Mini App URL or URL shared in the cast will be copied.
+
+**Can I open a Mini App from another Mini App?**
+
+Yes, you can open a Mini App from another Mini App by using the `openUrl` action.
+However, this prompts to close the current app when the new app is opened and there is no
+way to navigate back.
+
+```ts
+import { sdk } from '@farcaster/frame-sdk'
+ 
+const url = 'https://farcaster.xyz/miniapps/deoWzfI9kLjH/rewards'
+await sdk.actions.openUrl(url)
+```

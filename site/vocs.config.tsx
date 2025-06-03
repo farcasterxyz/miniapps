@@ -104,6 +104,10 @@ export default defineConfig({
             text: 'Authenticating users',
             link: '/docs/guides/auth',
           },
+          {
+            text: 'Mini App URLs',
+            link: '/docs/guides/urls',
+          },
         ],
       },
       {
