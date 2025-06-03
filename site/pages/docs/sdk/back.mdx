@@ -1,0 +1,187 @@
+---
+title: Back Navigation
+description: Enable native back navigation control
+---
+
+import { Caption } from '../../../components/Caption.tsx';
+
+# Back Navigation
+
+![users taking onchain action from app](/transaction-preview.png)
+
+<Caption>
+  A native control is used for back navigation
+</Caption>
+
+You can integrate with a back navigation control provided by the Farcaster
+client.
+
+## Usage
+
+If your application is already using browser-based navigation, you can
+integrate in one line:
+
+```ts
+await sdk.back.enableWebNavigation();
+```
+
+Otherwise, you can show the back button with:
+
+```ts
+await sdk.back.show();
+```
+
+And then respond to the back control being triggered:
+
+```ts
+sdk.addEventListener('backNavigationTriggered', () => {
+  // trigger back in your app
+})
+```
+
+Note that the back control must be visible and enabled to trigger events.
+
+## Properties
+
+### `enabled`
+- **Type**: `boolean`
+- **Description**: Whether back navigation is currently enabled
+
+### `visible`
+- **Type**: `boolean`
+- **Description**: Whether the back button is currently visible
+
+## Methods
+
+### `show()`
+Makes the back button visible.
+
+```ts
+await sdk.back.show();
+```
+
+### `hide()`
+Hides the back button.
+
+```ts
+await sdk.back.hide();
+```
+
+### `enable()`
+Enables back navigation functionality while preserving visibility state.
+
+```ts
+await sdk.back.enable();
+```
+
+### `disable()`
+Disables back navigation functionality while preserving visibility state.
+
+```ts
+await sdk.back.disable();
+```
+
+### `update(state)`
+Updates both visibility and enabled state simultaneously.
+
+```ts
+await sdk.back.update({
+  visible: true,
+  enabled: true
+});
+```
+
+## Web Navigation Integration
+
+The SDK can automatically integrate with web navigation APIs.
+
+### `enableWebNavigation()`
+
+Enables automatic integration with the browser's navigation system. This will:
+- Use the modern Navigation API when available
+- Fall back to the History API in older browsers
+- Automatically show/hide the back button based on navigation state
+
+```ts
+await sdk.back.enableWebNavigation();
+```
+
+### `disableWebNavigation()`
+
+Disables web navigation integration.
+
+```ts
+await sdk.back.disableWebNavigation();
+```
+
+## Events
+
+When a user triggers the back control the SDK will emit an
+`backNavigationTriggered` event. 
+
+If you are using `enableWebNavigation` this event will automatically be
+listened to and trigger the browser to navigate. Otherwise you should listen
+for this event and respond to it as appropriate for your application.
+
+## Example: Web Navigation 
+
+```ts
+import { useEffect } from 'react';
+
+function App() {
+  useEffect(() => {
+    // Enable web navigation integration
+    sdk.back.enableWebNavigation();
+  }, []);
+
+  return (
+    <div>
+      {/* Your app content */}
+    </div>
+  );
+}
+```
+
+## Example: Manual
+
+```ts
+function NavigationExample() {
+  const [currentPage, setCurrentPage] = useState('home');
+
+  useEffect(() => {
+    // Update back button based on current page
+    if (currentPage === 'home') {
+      sdk.back.update({
+        visible: false,
+        enabled: false
+      });
+    } else {
+      sdk.back.update({
+        visible: true,
+        enabled: true
+      });
+    }
+  }, [currentPage]);
+
+  const handleBack = () => {
+    if (currentPage !== 'home') {
+      setCurrentPage('home');
+    }
+  };
+
+  // Listen for back navigation events
+  useEffect(() => {
+    sdk.on('backNavigationTriggered', handleBack);
+    return () => sdk.off('backNavigationTriggered', handleBack);
+  }, [currentPage]);
+
+  return (
+    <div>
+      {currentPage === 'home' ? (
+        <HomePage onNavigate={setCurrentPage} />
+      ) : (
+        <SubPage />
+      )}
+    </div>
+  );
+}

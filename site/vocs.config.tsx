@@ -188,6 +188,10 @@ export default defineConfig({
             link: '/docs/sdk/haptics',
           },
           {
+            text: 'Back Navigation',
+            link: '/docs/sdk/back',
+          },
+          {
             text: 'Ethereum wallet',
             link: '/docs/sdk/wallet',
           },
