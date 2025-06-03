@@ -142,6 +142,10 @@ export default defineConfig({
                 link: '/docs/sdk/actions/compose-cast',
               },
               {
+                text: 'haptics',
+                link: '/docs/sdk/actions/haptics',
+              },
+              {
                 text: 'ready',
                 link: '/docs/sdk/actions/ready',
               },

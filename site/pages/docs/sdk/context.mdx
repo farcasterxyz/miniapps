@@ -25,6 +25,9 @@ export type FrameContext = {
     safeAreaInsets?: SafeAreaInsets;
     notificationDetails?: FrameNotificationDetails;
   };
+  features?: {
+    haptics: boolean;
+  };
 };
 ```
 
@@ -268,4 +271,35 @@ However, you may want to set these insets on specific elements: for example if
 you have tab bar at the bottom of your app with a different background, you'd
 want to set the bottom inset as padding there so it looks attached to the
 bottom of the view.
+
+### features
+
+Details about features supported by the client. This allows apps to conditionally
+use features based on client capabilities.
+
+```ts
+export type ClientFeatures = {
+  haptics: boolean;
+};
+```
+
+- `haptics`: whether the client supports haptic feedback
+
+```ts
+> sdk.context.features
+{
+  haptics: true
+}
+```
+
+Example usage:
+
+```ts
+const context = await sdk.context;
+
+// Check if haptics are supported before using
+if (context.features?.haptics) {
+  // Haptic feedback is available
+  await sdk.actions.haptics.impactOccurred('medium');
+}
 
