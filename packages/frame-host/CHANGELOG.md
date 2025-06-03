@@ -1,5 +1,11 @@
 # @farcaster/frame-host
 
+## 0.0.46
+
+### Patch Changes
+
+- [#335](https://github.com/farcasterxyz/miniapps/pull/335) [`8ff3a1f`](https://github.com/farcasterxyz/miniapps/commit/8ff3a1f08d540e531b9a7bd02905743377795081) Thanks [@PirosB3](https://github.com/PirosB3)! - Fixed a bug with haptics
+
 ## 0.0.45
 
 ### Patch Changes
