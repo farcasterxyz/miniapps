@@ -20,6 +20,7 @@ import type {
 } from '@farcaster/frame-core'
 import type { EventEmitter } from 'eventemitter3'
 import type * as Provider from 'ox/Provider'
+import type { Back } from './back.ts'
 
 declare global {
   interface Window {
@@ -63,6 +64,7 @@ export type FrameSDK = {
   getChains: GetChains
   isInMiniApp: () => Promise<boolean>
   context: Promise<Context.FrameContext>
+  back: Back
   actions: {
     ready: (options?: Partial<Ready.ReadyOptions>) => Promise<void>
     openUrl: (url: string) => Promise<void>

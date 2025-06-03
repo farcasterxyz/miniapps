@@ -14,6 +14,7 @@ import type {
   ViewProfile,
   ViewToken,
 } from './actions/index.ts'
+import type { UpdateBackState } from './back.ts'
 import type { FrameContext } from './context.ts'
 import type {
   EventFrameAdded,
@@ -111,6 +112,7 @@ export type WireFrameHost = {
   selectionChanged: SelectionChanged
   getCapabilities: GetCapabilities
   getChains: GetChains
+  updateBackState: UpdateBackState
 }
 
 export type FrameHost = {
@@ -142,6 +144,7 @@ export type FrameHost = {
   selectionChanged: SelectionChanged
   getCapabilities: GetCapabilities
   getChains: GetChains
+  updateBackState: UpdateBackState
 }
 
 export type EventFrameAddRejected = {

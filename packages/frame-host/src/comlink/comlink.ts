@@ -358,6 +358,8 @@ export function expose(
                 return obj.notificationOccurred(...argumentList);
               case 'selectionChanged':
                 return obj.selectionChanged(...argumentList);
+              case 'updateBackState':
+                return obj.updateBackState(...argumentList);
               default:
                 throw new Error(`Unsupported APPLY for ${path.join('/')}`)
             }

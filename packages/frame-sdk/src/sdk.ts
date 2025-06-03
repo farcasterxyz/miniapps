@@ -4,37 +4,14 @@ import {
   SignIn,
 } from '@farcaster/frame-core'
 import { createLightClient } from '@farcaster/quick-auth/light'
-import { EventEmitter } from 'eventemitter3'
 import * as Siwe from 'ox/Siwe'
+import { createBack } from './back.ts'
 import { ethereumProvider, getEthereumProvider } from './ethereumProvider.ts'
 import { frameHost } from './frameHost.ts'
+import { emitter } from './sdkEmitter.ts'
 import { getSolanaProvider } from './solanaProvider.ts'
-import type { Emitter, EventMap, FrameSDK } from './types.ts'
+import type { FrameSDK } from './types.ts'
 
-export function createEmitter(): Emitter {
-  const emitter = new EventEmitter<EventMap>()
-
-  return {
-    get eventNames() {
-      return emitter.eventNames.bind(emitter)
-    },
-    get listenerCount() {
-      return emitter.listenerCount.bind(emitter)
-    },
-    get listeners() {
-      return emitter.listeners.bind(emitter)
-    },
-    addListener: emitter.addListener.bind(emitter),
-    emit: emitter.emit.bind(emitter),
-    off: emitter.off.bind(emitter),
-    on: emitter.on.bind(emitter),
-    once: emitter.once.bind(emitter),
-    removeAllListeners: emitter.removeAllListeners.bind(emitter),
-    removeListener: emitter.removeListener.bind(emitter),
-  }
-}
-
-const emitter = createEmitter()
 let cachedIsInMiniAppResult: boolean | null = null
 
 /**
@@ -101,26 +78,10 @@ export const sdk: FrameSDK = {
   getChains: frameHost.getChains,
   isInMiniApp,
   context: frameHost.context,
+  back: createBack({ frameHost, emitter }),
   actions: {
     setPrimaryButton: frameHost.setPrimaryButton.bind(frameHost),
     ready: async (options = {}) => {
-      if (options.enableBackNavigation === 'web') {
-        sdk.addListener('backNavigationTriggered', () => {
-          if (
-            typeof window !== 'undefined' &&
-            window.navigation !== undefined
-          ) {
-            if (window.navigation.canGoBack) {
-              window.navigation.back()
-            }
-
-            return
-          }
-
-          window.history.back()
-        })
-      }
-
       return await frameHost.ready(options)
     },
     close: frameHost.close.bind(frameHost),
