@@ -292,14 +292,20 @@ export type ClientFeatures = {
 }
 ```
 
-Example usage:
+**Note:** For more fine-grained capability detection, use the [`getCapabilities()`](/docs/sdk/detecting-capabilities#getcapabilities) method which returns specific SDK methods supported by the host.
+
+Example usage with `getCapabilities()`:
 
 ```ts
-const context = await sdk.context;
+import { sdk } from '@farcaster/frame-sdk'
 
-// Check if haptics are supported before using
-if (context.features?.haptics) {
-  // Haptic feedback is available
-  await sdk.actions.haptics.impactOccurred('medium');
+// Get list of supported capabilities
+const capabilities = await sdk.getCapabilities()
+
+// Check if specific haptic methods are supported
+if (capabilities.includes('haptics.impactOccurred')) {
+  // Impact haptic feedback is available
+  await sdk.haptics.impactOccurred('medium')
 }
+```
 

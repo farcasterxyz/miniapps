@@ -15,13 +15,13 @@ Provides haptic feedback to enhance user interactions through physical sensation
 import { sdk } from '@farcaster/frame-sdk'
 
 // Trigger impact feedback
-await sdk.actions.haptics.impactOccurred('medium')
+await sdk.haptics.impactOccurred('medium')
 
 // Trigger notification feedback
-await sdk.actions.haptics.notificationOccurred('success')
+await sdk.haptics.notificationOccurred('success')
 
 // Trigger selection feedback
-await sdk.actions.haptics.selectionChanged()
+await sdk.haptics.selectionChanged()
 ```
 
 ## Methods
@@ -50,10 +50,10 @@ The intensity and style of the impact feedback.
 import { sdk } from '@farcaster/frame-sdk'
 
 // Trigger when user taps a button
-await sdk.actions.haptics.impactOccurred('light')
+await sdk.haptics.impactOccurred('light')
 
 // Trigger for more significant actions
-await sdk.actions.haptics.impactOccurred('heavy')
+await sdk.haptics.impactOccurred('heavy')
 ```
 
 ### notificationOccurred
@@ -78,13 +78,13 @@ The type of notification feedback.
 import { sdk } from '@farcaster/frame-sdk'
 
 // After successful action
-await sdk.actions.haptics.notificationOccurred('success')
+await sdk.haptics.notificationOccurred('success')
 
 // When showing a warning
-await sdk.actions.haptics.notificationOccurred('warning')
+await sdk.haptics.notificationOccurred('warning')
 
 // On error
-await sdk.actions.haptics.notificationOccurred('error')
+await sdk.haptics.notificationOccurred('error')
 ```
 
 ### selectionChanged
@@ -97,10 +97,10 @@ Triggers selection feedback, perfect for UI element selections.
 import { sdk } from '@farcaster/frame-sdk'
 
 // When user selects an item from a list
-await sdk.actions.haptics.selectionChanged()
+await sdk.haptics.selectionChanged()
 
 // When toggling a switch
-await sdk.actions.haptics.selectionChanged()
+await sdk.haptics.selectionChanged()
 ```
 
 ## Return Value
@@ -109,16 +109,24 @@ All haptic methods return `Promise<void>`.
 
 ## Availability
 
-Haptic feedback availability depends on the client device and platform. You can check if haptics are supported using the context:
+Haptic feedback availability depends on the client device and platform. You can check if haptics are supported using the `getCapabilities()` method:
 
 ```ts twoslash
 import { sdk } from '@farcaster/frame-sdk'
 
-const context = await sdk.context
+const capabilities = await sdk.getCapabilities()
 
-if (context.features?.haptics) {
-  // Haptics are supported
-  await sdk.actions.haptics.impactOccurred('medium')
+// Check if specific haptic methods are supported
+if (capabilities.includes('haptics.impactOccurred')) {
+  await sdk.haptics.impactOccurred('medium')
+}
+
+if (capabilities.includes('haptics.notificationOccurred')) {
+  await sdk.haptics.notificationOccurred('success')
+}
+
+if (capabilities.includes('haptics.selectionChanged')) {
+  await sdk.haptics.selectionChanged()
 }
 ```
 

@@ -36,3 +36,28 @@ This SDK method returns a list of supported blockchains as an array of [CAIP-2](
 ### `getCapabilities`
 
 This SDK method returns a list of supported SDK methods as an array of paths to those SDK methods. The full list of supported SDK methods can be found in `miniAppHostCapabilityList` [here](https://github.com/farcasterxyz/miniapps/blob/main/packages/frame-core/src/types.ts).
+
+#### Example
+
+```ts twoslash
+import { sdk } from '@farcaster/frame-sdk'
+
+// Get all supported capabilities
+const capabilities = await sdk.getCapabilities()
+
+// Check for specific capabilities
+const supportsCompose = capabilities.includes('actions.composeCast')
+const supportsWallet = capabilities.includes('wallet.getEthereumProvider')
+
+// Check for haptics support
+const supportsHaptics = {
+  impact: capabilities.includes('haptics.impactOccurred'),
+  notification: capabilities.includes('haptics.notificationOccurred'),
+  selection: capabilities.includes('haptics.selectionChanged')
+}
+
+// Use capabilities conditionally
+if (supportsHaptics.impact) {
+  await sdk.haptics.impactOccurred('medium')
+}
+```
