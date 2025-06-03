@@ -2,26 +2,45 @@ import { sdk } from '@farcaster/frame-sdk'
 import { farcasterFrame as frameConnector } from '@farcaster/frame-wagmi-connector'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useEffect } from 'react'
+import { NavLink, Route, Routes } from 'react-router'
 import { WagmiProvider, useAccount, useConnect, useSignMessage } from 'wagmi'
 import { config } from './wagmiConfig.ts'
 
 const queryClient = new QueryClient()
 
 function App() {
+  useEffect(() => {
+    sdk.actions.ready()
+    sdk.back.enableWebNavigation()
+  }, [])
+
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/wagmi" element={<Wagmi />} />
+    </Routes>
+  )
+}
+
+function Home() {
+  return (
+    <NavLink to="/wagmi" end>
+      Wagmi
+    </NavLink>
+  )
+}
+
+function Wagmi() {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <AppInner />
+        <WagmiInner />
       </QueryClientProvider>
     </WagmiProvider>
   )
 }
 
-function AppInner() {
-  useEffect(() => {
-    sdk.actions.ready()
-  }, [])
-
+function WagmiInner() {
   return (
     <>
       <div>Simple Wagmi React Frame Example</div>
