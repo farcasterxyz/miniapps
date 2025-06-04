@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest'
 import { actionLaunchFrameSchema } from '../src/schemas/embeds.ts'
 import { actionSchema, createSimpleStringSchema } from '../src/schemas/index.ts'
+import { domainFrameConfigSchema } from '../src/schemas/manifest.ts'
 
 describe('createSimpleStringSchema', () => {
   test('valid string', () => {
@@ -106,6 +107,41 @@ describe('actionViewTokenSchema', () => {
         token: id,
       })
       expect(result.success, `Expected invalid CAIP-19: ${id}`).toBe(false)
+    }
+  })
+})
+
+describe('domainFrameConfigSchema castShareUrl validation', () => {
+  const baseConfig = {
+    version: '1' as const,
+    name: 'Test App',
+    iconUrl: 'https://example.com/icon.png',
+    homeUrl: 'https://example.com/home',
+  }
+
+  test('valid when castShareUrl is undefined', () => {
+    const result = domainFrameConfigSchema.safeParse(baseConfig)
+    expect(result.success).toBe(true)
+  })
+
+  test('valid when castShareUrl has same domain as homeUrl', () => {
+    const result = domainFrameConfigSchema.safeParse({
+      ...baseConfig,
+      castShareUrl: 'https://example.com/share',
+    })
+    expect(result.success).toBe(true)
+  })
+
+  test('invalid when castShareUrl has different domain than homeUrl', () => {
+    const result = domainFrameConfigSchema.safeParse({
+      ...baseConfig,
+      castShareUrl: 'https://different.com/share',
+    })
+    expect(result.success).toBe(false)
+    if (!result.success) {
+      expect(result.error.issues[0].message).toBe(
+        'castShareUrl must have the same domain as homeUrl',
+      )
     }
   })
 })
