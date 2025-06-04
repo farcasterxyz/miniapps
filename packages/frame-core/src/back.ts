@@ -10,6 +10,6 @@ export type BackState = {
 
 export const DEFAULT_BACK_STATE = {
   visible: false,
-}
+} satisfies BackState
 
 export type UpdateBackState = (state: BackState) => Promise<void>
