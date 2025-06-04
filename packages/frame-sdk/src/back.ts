@@ -6,6 +6,7 @@ export type Back = {
   visible: boolean
   show: () => Promise<void>
   hide: () => Promise<void>
+  onback: (() => unknown) | null
   enableWebNavigation: () => Promise<void>
   disableWebNavigation: () => Promise<void>
 }
@@ -14,10 +15,23 @@ export const createBack: (options: {
   emitter: Emitter
   frameHost: Remote<WireFrameHost>
 }) => Back = ({ frameHost, emitter }) => {
-  let teardownWebNavigation: undefined | (() => void) = undefined
+  let teardownWebNavigation: (() => void) | undefined = undefined
+  let backCb: (() => unknown) | null = null
 
   return {
     visible: false,
+    get onback() {
+      return backCb
+    },
+    set onback(cb) {
+      if (backCb) {
+        emitter.removeListener('backNavigationTriggered', backCb)
+      }
+      backCb = cb
+      if (cb) {
+        emitter.addListener('backNavigationTriggered', cb)
+      }
+    },
     async show() {
       await frameHost.updateBackState({
         visible: true,

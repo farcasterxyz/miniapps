@@ -17,18 +17,14 @@ integrate in one line:
 await sdk.back.enableWebNavigation();
 ```
 
-Otherwise, you can show the back button with:
+Otherwise, you can set a custom back handler and show the back control:
 
 ```ts
-await sdk.back.show();
-```
-
-And then respond to the back control being triggered:
-
-```ts
-sdk.addEventListener('backNavigationTriggered', () => {
+sdk.back.onback = () => {
   // trigger back in your app
-})
+}
+
+await sdk.back.show();
 ```
 
 ## Properties
@@ -36,6 +32,11 @@ sdk.addEventListener('backNavigationTriggered', () => {
 ### `enabled`
 - **Type**: `boolean`
 - **Description**: Whether back navigation is currently enabled
+
+### `onback`
+- **Type**: `() => unknown`
+- **Description**: Function to call when a back event is triggered. You don't need to
+  set this when using `enableWebNavigation`.
 
 ## Methods
 
@@ -80,7 +81,8 @@ await sdk.back.disableWebNavigation();
 ## Events
 
 When a user triggers the back control the SDK will emit an
-`backNavigationTriggered` event. 
+`backNavigationTriggered` event. You can add an event listener on `sdk` or use
+`sdk.back.onback` to respond to these events.
 
 If you are using `enableWebNavigation` this event will automatically be
 listened to and trigger the browser to navigate. Otherwise you should listen
