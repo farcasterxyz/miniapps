@@ -1,5 +1,14 @@
 # @farcaster/frame-host
 
+## 0.0.48
+
+### Patch Changes
+
+- [#329](https://github.com/farcasterxyz/miniapps/pull/329) [`1b38e2b`](https://github.com/farcasterxyz/miniapps/commit/1b38e2bd8767c1b88c12dd09292db642cdf58e26) Thanks [@deodad](https://github.com/deodad)! - Added sdk.back to support back navigation.
+
+- Updated dependencies [[`1b38e2b`](https://github.com/farcasterxyz/miniapps/commit/1b38e2bd8767c1b88c12dd09292db642cdf58e26), [`c3f8604`](https://github.com/farcasterxyz/miniapps/commit/c3f8604979468145792b4374cacd546060bfe997)]:
+  - @farcaster/frame-core@0.1.5
+
 ## 0.0.47
 
 ### Patch Changes

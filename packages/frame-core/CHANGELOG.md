@@ -1,5 +1,13 @@
 # @farcaster/frame-core
 
+## 0.1.5
+
+### Patch Changes
+
+- [#329](https://github.com/farcasterxyz/miniapps/pull/329) [`1b38e2b`](https://github.com/farcasterxyz/miniapps/commit/1b38e2bd8767c1b88c12dd09292db642cdf58e26) Thanks [@deodad](https://github.com/deodad)! - Added sdk.back to support back navigation.
+
+- [#345](https://github.com/farcasterxyz/miniapps/pull/345) [`c3f8604`](https://github.com/farcasterxyz/miniapps/commit/c3f8604979468145792b4374cacd546060bfe997) Thanks [@PirosB3](https://github.com/PirosB3)! - Added non-finalized feature `castShareUrl`
+
 ## 0.1.4
 
 ### Patch Changes
