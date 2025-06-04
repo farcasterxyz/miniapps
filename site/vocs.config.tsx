@@ -192,7 +192,7 @@ export default defineConfig({
             link: '/docs/sdk/haptics',
           },
           {
-            text: 'Back Navigation',
+            text: 'Back navigation',
             link: '/docs/sdk/back',
           },
           {
