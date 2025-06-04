@@ -1,5 +1,11 @@
 # @farcaster/frame-core
 
+## 0.1.6
+
+### Patch Changes
+
+- [#346](https://github.com/farcasterxyz/miniapps/pull/346) [`2346ca2`](https://github.com/farcasterxyz/miniapps/commit/2346ca27ffdc38076e413c2f66584488b55c4c2f) Thanks [@PirosB3](https://github.com/PirosB3)! - Added constraints for castShareUrl
+
 ## 0.1.5
 
 ### Patch Changes

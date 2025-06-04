@@ -1,5 +1,12 @@
 # @farcaster/frame-host
 
+## 0.0.48
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @farcaster/frame-host@0.0.49
+
 ## 0.0.47
 
 ### Patch Changes
