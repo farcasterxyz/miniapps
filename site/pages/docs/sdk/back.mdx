@@ -39,6 +39,32 @@ generally follow:
   gesture combined with a virtual or physical button depending on the device
 
 
+## Web Navigation integration
+
+The SDK can automatically integrate with web navigation APIs.
+
+### `enableWebNavigation()`
+
+Enables automatic integration with the browser's navigation system. This will:
+- Use the modern Navigation API when available; the back button will automatically
+  be shown and hidden based on the value of `canGoBack`.
+- Fall back to the History API in browsers where Navigation is [not
+  supported](https://developer.mozilla.org/en-US/docs/Web/API/Navigation_API#browser_compatibility)
+  ; the back button will always be shown.
+
+```ts
+await sdk.back.enableWebNavigation();
+```
+
+### `disableWebNavigation()`
+
+Disables web navigation integration.
+
+```ts
+await sdk.back.disableWebNavigation();
+```
+
+
 ## Properties
 
 ### `enabled`
@@ -64,31 +90,6 @@ Hides the back button.
 
 ```ts
 await sdk.back.hide();
-```
-
-## Web Navigation integration
-
-The SDK can automatically integrate with web navigation APIs.
-
-### `enableWebNavigation()`
-
-Enables automatic integration with the browser's navigation system. This will:
-- Use the modern Navigation API when available; the back button will automatically
-  be shown and hidden based on the value of `canGoBack`.
-- Fall back to the History API in browsers where Navigation is [not
-  supported](https://developer.mozilla.org/en-US/docs/Web/API/Navigation_API#browser_compatibility)
-  ; the back button will always be shown.
-
-```ts
-await sdk.back.enableWebNavigation();
-```
-
-### `disableWebNavigation()`
-
-Disables web navigation integration.
-
-```ts
-await sdk.back.disableWebNavigation();
 ```
 
 ## Events
