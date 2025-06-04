@@ -87,6 +87,7 @@ export const domainFrameConfigSchema = z.object({
     .max(miniAppHostCapabilityList.length)
     .optional(),
   /** see https://github.com/farcasterxyz/miniapps/discussions/158 */
+  /** Documentation will be added once this feature is finalized. */
   castShareUrl: secureUrlSchema.optional(),
 })
 
