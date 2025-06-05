@@ -1,19 +1,19 @@
 import type { FrameNotificationDetails } from './schemas/index.ts'
 
-export type CastMention = {
+export type MiniappUser = {
   fid: number
   username?: string
   displayName?: string
   pfpUrl?: string
 }
 
-export interface Cast {
-  fid: number
+export interface MiniappCast {
+  author: MiniappUser
   hash: string
   parentHash?: string
   parentFid?: number
   timestamp?: number
-  mentions?: CastMention[]
+  mentions?: MiniappUser[]
   embeds?: string[]
   channelKey?: string
 }
@@ -21,12 +21,12 @@ export interface Cast {
 export type CastEmbedLocationContext = {
   type: 'cast_embed'
   embed: string
-  cast: Cast
+  cast: MiniappCast
 }
 
 export type CastShareLocationContext = {
   type: 'cast_share'
-  cast: Cast
+  cast: MiniappCast
 }
 
 export type NotificationLocationContext = {
