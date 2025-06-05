@@ -1,6 +1,6 @@
 {
   "name": "@farcaster/frame-wagmi-connector",
-  "version": "0.0.46",
+  "version": "0.0.47",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -30,7 +30,7 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@farcaster/frame-sdk": "^0.0.57",
+    "@farcaster/frame-sdk": "^0.0.58",
     "@wagmi/core": "^2.14.1",
     "viem": "^2.21.55"
   }

@@ -1,5 +1,11 @@
 # @farcaster/frame-core
 
+## 0.1.7
+
+### Patch Changes
+
+- [#353](https://github.com/farcasterxyz/miniapps/pull/353) [`52db973`](https://github.com/farcasterxyz/miniapps/commit/52db9738d45fe3be3afd1db0197bde98c08fd5ca) Thanks [@PirosB3](https://github.com/PirosB3)! - Updated the frame definition.
+
 ## 0.1.6
 
 ### Patch Changes
