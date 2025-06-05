@@ -1,12 +1,32 @@
 import type { FrameNotificationDetails } from './schemas/index.ts'
 
+export type CastMention = {
+  fid: number
+  username?: string
+  displayName?: string
+  pfpUrl?: string
+}
+
+export interface Cast {
+  fid: number
+  hash: string
+  parentHash?: string
+  parentFid?: number
+  timestamp?: number
+  mentions?: CastMention[]
+  embeds?: string[]
+  channelKey?: string
+}
+
 export type CastEmbedLocationContext = {
   type: 'cast_embed'
   embed: string
-  cast: {
-    fid: number
-    hash: string
-  }
+  cast: Cast
+}
+
+export type CastShareLocationContext = {
+  type: 'cast_share'
+  cast: Cast
 }
 
 export type NotificationLocationContext = {
@@ -44,6 +64,7 @@ export type ChannelLocationContext = {
 
 export type LocationContext =
   | CastEmbedLocationContext
+  | CastShareLocationContext
   | NotificationLocationContext
   | LauncherLocationContext
   | ChannelLocationContext
