@@ -7,10 +7,6 @@ import { Caption } from '../../../../components/Caption.tsx';
 
 # quickAuth
 
-:::warning
-This is an experimental feature.
-:::
-
 Request a signed JWT from a [Farcaster Quick Auth
 Server](https://github.com/farcasterxyz/protocol/discussions/231). This is the
 quickest way to protect your endpoints using Sign In with Farcaster.
@@ -45,7 +41,7 @@ If you're not sure where to start we recommend using Quick Auth.
 // ---cut---
 import { sdk } from '@farcaster/frame-sdk'
 
-const { token } = await sdk.experimental.quickAuth()
+const { token } = await sdk.actions.quickAuth()
 ```
 
 ## Parameters
@@ -162,7 +158,7 @@ export function App() {
 
   async function signIn() {
     try {
-      const { token } = await sdk.experimental.quickAuth();
+      const { token } = await sdk.actions.quickAuth();
       const req = await fetch(`${SERVER_URL}/me`, {
         headers: new Headers({ "Authorization": "Bearer " + token })
       })
@@ -225,4 +221,21 @@ app.get('/hello', async (c) => {
 export default app
 ```
 
+## Preconnecting
 
+To optimize performance, provide a `preconnect` hint to the browser so that
+it can preemptively initiate a connection with the Quick Auth Server:
+
+```html
+<link rel="preconnect" href="https://auth.farcaster.xyz" />
+```
+
+Or if you're using React:
+
+```ts
+import { preconnect } from 'react-dom';
+
+function AppRoot() {
+  preconnect("https://auth.farcaster.xyz");
+}
+```

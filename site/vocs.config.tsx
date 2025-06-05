@@ -178,7 +178,7 @@ export default defineConfig({
                 link: '/docs/sdk/actions/send-token',
               },
               {
-                text: 'quickAuth (experimental)',
+                text: 'quickAuth',
                 link: '/docs/sdk/actions/quick-auth',
               },
               {

@@ -58,6 +58,17 @@ export type EventMap = {
 export type Emitter = Compute<EventEmitter<EventMap>>
 
 type SetPrimaryButton = (options: SetPrimaryButtonOptions) => Promise<void>
+type QuickAuth = (options?: {
+  /**
+   * Use a custom Quick Auth server, otherwise defaults to the public
+   * instance provided by Farcaster.
+   *
+   * @default https://auth.farcaster.xyz
+   */
+  quickAuthServerOrigin?: string
+}) => Promise<{
+  token: string
+}>
 
 export type FrameSDK = {
   getCapabilities: GetCapabilities
@@ -82,20 +93,15 @@ export type FrameSDK = {
     viewToken: ViewToken.ViewToken
     sendToken: SendToken.SendToken
     swapToken: SwapToken.SwapToken
+    quickAuth: QuickAuth
   }
   experimental: {
     getSolanaProvider: () => Promise<SolanaWalletProvider | undefined>
-    quickAuth: (options?: {
-      /**
-       * Use a custom Quick Auth server, otherwise defaults to the public
-       * instance provided by Farcaster.
-       *
-       * @default https://auth.farcaster.xyz
-       */
-      quickAuthServerOrigin?: string
-    }) => Promise<{
-      token: string
-    }>
+
+    /**
+     * @deprecated - use `sdk.actions.quickAuth`
+     */
+    quickAuth: QuickAuth
   }
   wallet: {
     // Deprecated in favor of getEthereumProvider
