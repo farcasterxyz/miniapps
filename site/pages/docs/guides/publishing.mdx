@@ -52,6 +52,101 @@ For now we'll create an empty file:
 touch public/.well-known/farcaster.json
 ```
 
+#### Farcaster Hosted Manifests (closed beta)
+
+Farcaster can now host manifests for your mini apps so you can manage them from the Farcaster web Developer Tools.
+
+<details>
+  <summary>Learn more</summary>
+
+Instead of serving a `/.well-known/farcaster.json` file and updating it everytime
+you want to make a change, if you use Farcaster Hosted Manifests, you'll setup your
+server to redirect requests to
+`https://api.farcaster.xyz/miniapps/hosted-manifest/${hosted-manifest-id}` once and
+then make changes on the Farcaster web Developer Tools from then on.
+
+<br />
+
+:::note
+Reach out to [@deodad](https://farcaster.xyz/deodad) or [@gabrielayuso.eth](https://farcaster.xyz/gabrielayuso.eth) if you want to get access to the closed beta.
+:::
+
+##### Setting up redirects
+
+All web servers support redirects. The following are examples of how to setup redirects in popular frameworks.
+
+<details>
+  <summary>Redirects in Next.js</summary>
+
+```ts
+// next.config.js
+import type { NextConfig } from 'next'
+ 
+const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      {
+        source: '/.well-known/farcaster.json',
+        destination: 'https://api.farcaster.xyz/miniapps/hosted-manifest/1234567890',
+        permanent: false,
+      },
+    ]
+  },
+}
+ 
+export default nextConfig
+```
+</details>
+
+<details>
+  <summary>Redirects in Express</summary>
+
+```ts
+const express = require('express')
+const app = express()
+
+app.get('/.well-known/farcaster.json', (req, res) => {
+  res.redirect(307, 'https://api.farcaster.xyz/miniapps/hosted-manifest/1234567890')
+})
+```
+
+</details>
+
+<details>
+  <summary>Redirects in Hono</summary>
+
+```ts
+import { Hono } from 'hono'
+const app = new Hono()
+
+app.get('/.well-known/farcaster.json', (c) => {
+  return c.redirect('https://api.farcaster.xyz/miniapps/hosted-manifest/1234567890', 307)
+})
+
+```
+
+</details>
+
+<details>
+  <summary>Redirects in Remix</summary>
+
+```ts
+// app/routes/.well-known/farcaster.json.tsx
+import { redirect } from '@remix-run/node'
+
+export const loader = () => {
+  return redirect('https://api.farcaster.xyz/miniapps/hosted-manifest/1234567890', 307)
+}
+
+export default () => null
+```
+</details>
+
+</details>
+
+
+
+
 ### Define your application configuration
 
 A Mini App has metadata that is used by Farcaster clients to host your app. This
