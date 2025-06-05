@@ -1,5 +1,11 @@
 # @farcaster/frame-core
 
+## 0.1.8
+
+### Patch Changes
+
+- [#359](https://github.com/farcasterxyz/miniapps/pull/359) [`3e29677`](https://github.com/farcasterxyz/miniapps/commit/3e2967746bb25776fbbf67a059b421640f190491) Thanks [@PirosB3](https://github.com/PirosB3)! - touch up types
+
 ## 0.1.7
 
 ### Patch Changes
