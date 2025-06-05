@@ -1,38 +1,91 @@
 ---
 title: Authenticating users
-description: Authenticating users in your app
+description: Authenticating users in your mini app
 ---
 
 import { Caption } from '../../../components/Caption.tsx';
 
 # Authenticating users
 
-An app can use the [signIn](/docs/sdk/actions/sign-in) to get a [Sign in with
-Farcaster (SIWF)](https://docs.farcaster.xyz/developers/siwf/) authentication credential for the user.
-
-After requesting the credential, applications can verify it on their server
-using
-[verifySignInMessage](https://docs.farcaster.xyz/auth-kit/client/app/verify-sign-in-message).
-Apps can then issue a session token like a JWT that can be used for the
-remainder of the session. 
-
-Session tokens should be kept in memory but not persisted in Local Storage or
-Cookies. Since users are signing in through their Farcaster client their
-expectation will be if they sign out of the their Farcaster client they'll be
-signed out of any Mini Apps as well.
-
-## User Experience
-
-In cases where the Farcaster client (i.e. on mobile) has direct access to the
-user's signing key (e.g. their custody account) this credential can be produced
-silently without the user needing to take any action. Otherwise the user will be
-prompted to sign in.
-
-Farcaster clients are working to support silent sign-in across all platforms so
-that users are never prompted to sign in on a different device.
-
 ![signing in a user](/sign_in_preview.png)
 
 <Caption>
   A users opens an app and is automatically signed in
 </Caption>
+
+Mini Apps can seamlessly authenticate Farcaster users to create secure sessions.
+
+## Quick Auth
+
+The easiest way to get an authenticated session for a user. [Quick
+Auth](/docs/sdk/actions/quick-auth) uses [Sign in with
+Farcaster](https://docs.farcaster.xyz/developers/siwf/) under the hood to
+authenticate the user and returns a standard JWT that can be easily verified by
+your server and used as a session token.
+
+[Get started with Quick Auth](/docs/sdk/actions/quick-auth).
+
+
+## Sign In with Farcaster
+
+Alternatively, an app can use the [signIn](/docs/sdk/actions/sign-in) to get a
+[Sign in with Farcaster](https://docs.farcaster.xyz/developers/siwf/)
+authentication credential for the user.
+
+After requesting the credential, applications must verify it on their server
+using
+[verifySignInMessage](https://docs.farcaster.xyz/auth-kit/client/app/verify-sign-in-message).
+Apps can then issue a session token like a JWT that can be used for the
+remainder of the session. 
+
+
+## Enable seamless sign in on web
+
+Farcaster recently added support for signing in via additional wallets (see the
+[Auth Address](https://github.com/farcasterxyz/protocol/discussions/225)
+standard).
+
+If you are using Quick Auth no action is needed. If you are using `signIn`
+directly you will need to make a couple changes to support signing in with Auth
+Addresses:
+
+::::steps
+
+### Accept auth addresses
+
+Update `@farcaster/frame-sdk` to version `0.0.39` or later. Opt in to auth
+address sign in by passing `acceptAuthAddress: true` to the `signIn` action:
+
+```ts
+import { sdk } from '@farcaster/frame-sdk'
+ 
+await sdk.actions.signIn({ 
+  nonce,
+  acceptAuthAddress: true
+});
+```
+
+::::
+
+
+Farcaster client developers can find more information [here](https://www.notion.so/warpcast/Public-Auth-Address-Implementation-Guide-1fc6a6c0c10180a9b2a7f24c71143eae).
+
+
+### Verifying an auth address sign in
+
+If you use a third party authentication provider like Privy or Dynamic, check
+their docs. You’ll likely need to update your dependencies.
+
+If you verify sign in messages yourself, update the `@farcaster/auth-client`
+package to version `0.6.0` or later. Call `verifySignInMessage` and pass
+`acceptAuthAddress: true`:
+
+```ts
+const { data, success, fid } = await appClient.verifySignInMessage({
+  nonce: 'abcd1234',
+  domain: 'example.com',
+  message: 'example.com wants you to sign in with your Ethereum account…',
+  signature: '0x9335c3055d47780411a3fdabad293c68c84ea350a11794cd11fd51b…',
+  acceptAuthAddress: true,
+});
+```
