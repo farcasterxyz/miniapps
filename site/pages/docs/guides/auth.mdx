@@ -77,15 +77,5 @@ If you use a third party authentication provider like Privy or Dynamic, check
 their docs. You’ll likely need to update your dependencies.
 
 If you verify sign in messages yourself, update the `@farcaster/auth-client`
-package to version `0.6.0` or later. Call `verifySignInMessage` and pass
-`acceptAuthAddress: true`:
-
-```ts
-const { data, success, fid } = await appClient.verifySignInMessage({
-  nonce: 'abcd1234',
-  domain: 'example.com',
-  message: 'example.com wants you to sign in with your Ethereum account…',
-  signature: '0x9335c3055d47780411a3fdabad293c68c84ea350a11794cd11fd51b…',
-  acceptAuthAddress: true,
-});
-```
+package to version `0.7.0` or later. Call `verifySignInMessage` will now verify
+signatures from a custody or auth address.
