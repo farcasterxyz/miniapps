@@ -35,13 +35,33 @@ export type FrameContext = {
 Contains information about the context from which the Mini App was launched.
 
 ```ts
+export type MiniappUser = {
+  fid: number;
+  username?: string;
+  displayName?: string;
+  pfpUrl?: string;
+};
+
+export type MiniappCast = {
+  author: MiniappUser;
+  hash: string;
+  parentHash?: string;
+  parentFid?: number;
+  timestamp?: number;
+  mentions?: MiniappUser[];
+  embeds?: string[];
+  channelKey?: string;
+};
+
 export type CastEmbedLocationContext = {
   type: 'cast_embed';
   embed: string;
-  cast: {
-    fid: number;
-    hash: string;
-  };
+  cast: MiniappCast;
+};
+
+export type CastShareLocationContext = {
+  type: 'cast_share';
+  cast: MiniappCast;
 };
 
 export type NotificationLocationContext = {
@@ -79,6 +99,7 @@ export type ChannelLocationContext = {
 
 export type LocationContext =
   | CastEmbedLocationContext
+  | CastShareLocationContext
   | NotificationLocationContext
   | LauncherLocationContext
   | ChannelLocationContext;
@@ -92,9 +113,43 @@ Indicates that the Mini App was launched from a cast (where it is an embed).
 > sdk.context.location
 {
   type: "cast_embed",
+  embed: "https://myapp.example.com",
   cast: {
-    fid: 3621,
+    author: {
+      fid: 3621,
+      username: "alice",
+      displayName: "Alice",
+      pfpUrl: "https://example.com/alice.jpg"
+    },
     hash: "0xa2fbef8c8e4d00d8f84ff45f9763b8bae2c5c544",
+    timestamp: 1749160866000,
+    mentions: [],
+    embeds: ["https://myapp.example.com"],
+    channelKey: "farcaster"
+  }
+}
+```
+
+#### Cast Share
+
+Indicates that the Mini App was launched when a user shared a cast to your app (similar to sharing content to an app on mobile platforms).
+
+```ts
+> sdk.context.location
+{
+  type: "cast_share",
+  cast: {
+    author: {
+      fid: 12152,
+      username: "pirosb3",
+      displayName: "Daniel - Bountycaster",
+      pfpUrl: "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/7229dfa5-4873-42d0-9dd0-69f4f3fc4d00/original"
+    },
+    hash: "0x1177603a7464a372fc358a7eabdeb70880d81612",
+    timestamp: 1749160866000,
+    mentions: [],
+    embeds: ["https://frames-v2.vercel.app/"],
+    channelKey: "staging"
   }
 }
 ```
@@ -125,6 +180,19 @@ Indicates that the Mini App was launched directly by the client app outside of a
   type: "launcher"
 }
 ```
+
+#### Cast Object Structure
+
+When your Mini App is launched from a cast context (either `cast_embed` or `cast_share`), you receive a comprehensive cast object with the following metadata:
+
+- **author**: The user who created the cast, including their FID, username, display name, and profile picture
+- **hash**: The unique identifier for the cast
+- **parentHash** (optional): If this is a reply, the hash of the parent cast
+- **parentFid** (optional): If this is a reply, the FID of the parent cast author
+- **timestamp** (optional): Unix timestamp in milliseconds when the cast was created
+- **mentions** (optional): Array of users mentioned in the cast
+- **embeds** (optional): Array of URLs embedded in the cast
+- **channelKey** (optional): The channel where the cast was posted
 
 ### `user`
 
