@@ -1,5 +1,11 @@
 # @farcaster/frame-host
 
+## 0.0.51
+
+### Patch Changes
+
+- [#364](https://github.com/farcasterxyz/miniapps/pull/364) [`23d84b9`](https://github.com/farcasterxyz/miniapps/commit/23d84b9404326a7eeb2a2137258cc2837afd7ab4) Thanks [@Ashoat](https://github.com/Ashoat)! - RefObject<WebView> -> RefObject<WebView | null>
+
 ## 0.0.50
 
 ### Patch Changes
