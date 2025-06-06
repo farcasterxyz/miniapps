@@ -112,6 +112,10 @@ export default defineConfig({
             text: 'Mini App URLs',
             link: '/docs/guides/urls',
           },
+          {
+            text: 'Share Extensions',
+            link: '/docs/guides/share-extension',
+          },
         ],
       },
       {
