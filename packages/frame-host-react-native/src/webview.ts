@@ -17,7 +17,7 @@ export type WebViewEndpoint = HostEndpoint & {
  * An endpoint of communicating with WebView
  */
 export function createWebViewRpcEndpoint(
-  ref: RefObject<WebView>,
+  ref: RefObject<WebView | null>,
   domain: string,
 ): WebViewEndpoint {
   const listeners: EventListenerOrEventListenerObject[] = []

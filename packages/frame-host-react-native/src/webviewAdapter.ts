@@ -66,7 +66,7 @@ export function useWebViewRpcAdapter({
 }
 
 export function useWebViewRpcEndpoint(
-  webViewRef: RefObject<WebView>,
+  webViewRef: RefObject<WebView | null>,
   domain: string,
 ) {
   const [endpoint, setEndpoint] = useState<WebViewEndpoint>()
