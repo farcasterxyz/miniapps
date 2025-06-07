@@ -43,7 +43,7 @@ export type SetPrimaryButton = (options: SetPrimaryButtonOptions) => void
 // Export haptics types
 export type { ImpactOccurred, NotificationOccurred, SelectionChanged }
 
-export const miniAppHostCapabilityList: [string, ...string[]] = [
+export const miniAppHostCapabilityList = [
   'wallet.getEthereumProvider',
   'wallet.getSolanaProvider',
   'actions.ready',
@@ -62,27 +62,9 @@ export const miniAppHostCapabilityList: [string, ...string[]] = [
   'haptics.notificationOccurred',
   'haptics.selectionChanged',
   'back',
-]
+] as const satisfies [string, ...string[]]
 
-export type MiniAppHostCapability =
-  | 'wallet.getEthereumProvider'
-  | 'wallet.getSolanaProvider'
-  | 'actions.ready'
-  | 'actions.openUrl'
-  | 'actions.close'
-  | 'actions.setPrimaryButton'
-  | 'actions.addMiniApp'
-  | 'actions.signIn'
-  | 'actions.viewCast'
-  | 'actions.viewProfile'
-  | 'actions.composeCast'
-  | 'actions.viewToken'
-  | 'actions.sendToken'
-  | 'actions.swapToken'
-  | 'haptics.impactOccurred'
-  | 'haptics.notificationOccurred'
-  | 'haptics.selectionChanged'
-  | 'back'
+export type MiniAppHostCapability = (typeof miniAppHostCapabilityList)[number]
 
 export type GetCapabilities = () => Promise<MiniAppHostCapability[]>
 

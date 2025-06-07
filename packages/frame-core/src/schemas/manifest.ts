@@ -25,7 +25,7 @@ const primaryCategorySchema = z.enum([
   'art-creativity',
 ])
 
-const chainList: [string, ...string[]] = [
+const chainList = [
   'eip155:1', // Ethereum mainnet
   'eip155:8453', // Base mainnet
   'eip155:42161', // Arbitrum One
@@ -42,7 +42,12 @@ const chainList: [string, ...string[]] = [
   'eip155:10143', // Monad testnet
   'eip155:42220', // Celo
   'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp', // Solana
-]
+] as const satisfies [string, ...string[]]
+
+function removeArrayDuplicates<T>(arr: T[]) {
+  const set = new Set(arr)
+  return Array.from(set)
+}
 
 export const domainFrameConfigSchema = z
   .object({
@@ -82,10 +87,13 @@ export const domainFrameConfigSchema = z
     /** see: https://github.com/farcasterxyz/miniapps/discussions/204 */
     noindex: z.boolean().optional(),
     /** see https://github.com/farcasterxyz/miniapps/discussions/256 */
-    requiredChains: z.array(z.enum(chainList)).max(chainList.length).optional(),
+    requiredChains: z
+      .array(z.enum(chainList))
+      .transform(removeArrayDuplicates)
+      .optional(),
     requiredCapabilities: z
       .array(z.enum(miniAppHostCapabilityList))
-      .max(miniAppHostCapabilityList.length)
+      .transform(removeArrayDuplicates)
       .optional(),
     /** see https://github.com/farcasterxyz/miniapps/discussions/158 */
     /** Documentation will be added once this feature is finalized. */
