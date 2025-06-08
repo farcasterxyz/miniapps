@@ -21,6 +21,7 @@ import type {
 import type { EventEmitter } from 'eventemitter3'
 import type * as Provider from 'ox/Provider'
 import type { Back } from './back.ts'
+import type { QuickAuth } from './quickAuth.ts'
 
 declare global {
   interface Window {
@@ -58,17 +59,6 @@ export type EventMap = {
 export type Emitter = Compute<EventEmitter<EventMap>>
 
 type SetPrimaryButton = (options: SetPrimaryButtonOptions) => Promise<void>
-type QuickAuth = (options?: {
-  /**
-   * Use a custom Quick Auth server, otherwise defaults to the public
-   * instance provided by Farcaster.
-   *
-   * @default https://auth.farcaster.xyz
-   */
-  quickAuthServerOrigin?: string
-}) => Promise<{
-  token: string
-}>
 
 export type FrameSDK = {
   getCapabilities: GetCapabilities
@@ -76,6 +66,7 @@ export type FrameSDK = {
   isInMiniApp: () => Promise<boolean>
   context: Promise<Context.FrameContext>
   back: Back
+  quickAuth: QuickAuth
   actions: {
     ready: (options?: Partial<Ready.ReadyOptions>) => Promise<void>
     openUrl: (url: string) => Promise<void>
@@ -93,15 +84,14 @@ export type FrameSDK = {
     viewToken: ViewToken.ViewToken
     sendToken: SendToken.SendToken
     swapToken: SwapToken.SwapToken
-    quickAuth: QuickAuth
   }
   experimental: {
     getSolanaProvider: () => Promise<SolanaWalletProvider | undefined>
 
     /**
-     * @deprecated - use `sdk.actions.quickAuth`
+     * @deprecated - use `sdk.quickAuth.getToken`
      */
-    quickAuth: QuickAuth
+    quickAuth: QuickAuth['getToken']
   }
   wallet: {
     // Deprecated in favor of getEthereumProvider

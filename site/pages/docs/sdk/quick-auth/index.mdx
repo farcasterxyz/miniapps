@@ -1,0 +1,191 @@
+---
+title: Quick Auth
+description: Easily authenticate Farcaster users in your mini app
+---
+
+# Quick Auth
+
+Quick Auth is the easiest way to get an authenticated session for a Farcaster
+user.
+
+
+## Getting an authenticated session
+
+::::steps
+
+### Get a token
+
+In your Mini App frontend, use [`sdk.quickAuth.getToken`](/docs/sdk/quick-auth/get-token) to get a signed JWT.
+The token will automatically be stored in memory and subsequent calls to
+`getToken` will return the cached token, or generate a new one if the token is
+expired.
+
+```ts
+import { sdk } from "@farcaster/frame-sdk";
+
+export function App() {
+  // Stores the JWT token for this session
+  const [user, setUser] useState();
+
+  async function signIn() {
+    try {
+      const { token } = await sdk.quickAuth.getToken();
+      const req = await fetch(`https://example.com/me`, {
+        headers: new Headers({ "Authorization": "Bearer " + token })
+      })
+
+      setUser(await req.json());
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  if (!user) {
+    return (
+      <button onClick={signIn}>sign in</button>
+    )
+  }
+
+  return (
+    <button onClick={() => {
+      try {
+        const res = await sdk.quickAuth.fetch("https://example.com/ping">);
+        if (res.ok) {
+          alert(await res.text())
+        }
+      }
+    }}>
+      ping
+    </button>
+  )
+}
+```
+
+### Verify the token
+
+In your backend verify the token on any endpoints you want to protect.
+
+First, install the Quick Auth library into your backend with:
+
+```
+npm install @farcaster/quick-auth
+```
+
+Then you can use `verifyJwt` to check the JWT and get back the token payload
+which has the FID of the user as the `sub` property. You can then look up
+additional information about the user. 
+
+```ts
+import { createClient, Errors } from '@farcaster/quick-auth'
+import { Hono } from 'hono'
+import { HTTPException } from 'hono/http-exception'
+
+const domain = 'example.com';
+const client = createClient();
+const app = new Hono()
+
+// Resolve information about the authenticated Farcaster user. In practice
+// you might get this information from your database, Neynar, or Snapchain.
+async function resolveUser(fid: number) {
+  const primaryAddress = await (async () => {
+    const res = await fetch(`https://api.farcaster.xyz/fc/primary-address?fid=${fid}&protocol=ethereum`);
+    if (res.ok) {
+      const { result } = res.json()
+      return result.address.address;
+    }
+  })()
+
+  return {
+    fid,
+    primaryAddress
+  }
+}
+
+app.use(async (c, next) => {
+  const authorization = c.req.header('Authorization');
+  if (!authorization || !authorization.startsWith('Bearer ')) {
+    throw new HTTPException(401, { message: 'Missing token' });
+  }
+
+  try {
+    const payload = await client.verifyJwt({
+      token: authorization.split(' ')[1] as string,
+      domain,
+    })
+
+    const user = resolveUser({ fid: payload.sub });
+    c.set('user', user)
+  } catch (e) {
+    if (e instanceof Errors.InvalidTokenError) {
+      throw new HTTPException(401, { message: 'Invalid token' });
+    }
+
+    throw e;
+  }
+
+  await next()
+})
+
+app.get('/me', async (c) => {
+  const user = c.get('user')
+  return c.json(user)
+})
+
+app.get('/ping', async (c) => {
+  return c.text("pong")
+})
+
+export default app
+```
+
+### Optimize performance
+
+To optimize performance, provide a `preconnect` hint to the browser in your
+frontend so that it can preemptively initiate a connection with the Quick Auth
+Server:
+
+```html
+<link rel="preconnect" href="https://auth.farcaster.xyz" />
+```
+
+Or if you're using React:
+
+```ts
+import { preconnect } from 'react-dom';
+
+function AppRoot() {
+  preconnect("https://auth.farcaster.xyz");
+}
+```
+
+::::
+
+## Quick Auth vs Sign In with Farcaster
+
+[Sign In with
+Farcaster](https://github.com/farcasterxyz/protocol/discussions/110) is the
+foundational standard that allow Farcaster users to authenticate into
+applications.
+
+[Farcaster Quick
+Server](https://github.com/farcasterxyz/protocol/discussions/231) is an
+optional service built on top of SIWF that is highly performant and easy to
+integrate. Developers don't need to worry about securely generating and
+consuming nonces or the nuances of verifying a SIWF message—instead they
+receive a signed JWT that can be used as a session token the authenticate their
+server.
+
+The Auth Server offers exceptional performance in two ways:
+- the service is deployed on the edge so nonce generation and verification
+  happens close to your users no matter where they are located
+- the issued tokens are asymmetrically signed so they can be verified locally
+  on your server
+
+
+## Methods
+
+| Name                                       | Description                         |
+|--------------------------------------------|-------------------------------------|
+| [getToken](/docs/sdk/quick-auth/get-token) | Gets a signed Quick Auth token      | 
+| [fetch](/docs/sdk/quick-auth/fetch)        | Make an authenticated fetch request |
+

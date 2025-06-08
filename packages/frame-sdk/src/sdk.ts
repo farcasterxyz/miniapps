@@ -8,6 +8,7 @@ import * as Siwe from 'ox/Siwe'
 import { createBack } from './back.ts'
 import { ethereumProvider, getEthereumProvider } from './ethereumProvider.ts'
 import { frameHost } from './frameHost.ts'
+import { createQuickAuth } from './quickAuth.ts'
 import { emitter } from './sdkEmitter.ts'
 import { getSolanaProvider } from './solanaProvider.ts'
 import type { FrameSDK } from './types.ts'
@@ -55,40 +56,6 @@ async function isInMiniApp(timeoutMs = 50): Promise<boolean> {
   return isInMiniApp
 }
 
-const quickAuth: FrameSDK['actions']['quickAuth'] = async (options = {}) => {
-  const quickAuthClient = createLightClient({
-    origin: options.quickAuthServerOrigin,
-  })
-
-  const { nonce } = await quickAuthClient.generateNonce()
-  const response = await frameHost.signIn({
-    nonce,
-    acceptAuthAddress: true,
-  })
-
-  if (response.result) {
-    const parsedSiwe = Siwe.parseMessage(response.result.message)
-
-    // The Farcaster Client rendering the Mini App will set the domain
-    // based on the URL it's rendering. It should always be set.
-    if (!parsedSiwe.domain) {
-      throw new Error('Missing domain on SIWE message')
-    }
-
-    return await quickAuthClient.verifySiwf({
-      domain: parsedSiwe.domain,
-      message: response.result.message,
-      signature: response.result.signature,
-    })
-  }
-
-  if (response.error.type === 'rejected_by_user') {
-    throw new SignIn.RejectedByUser()
-  }
-
-  throw new Error('Unreachable')
-}
-
 const addMiniApp = async () => {
   const response = await frameHost.addFrame()
   if (response.result) {
@@ -106,6 +73,8 @@ const addMiniApp = async () => {
   throw new Error('Unreachable')
 }
 
+const quickAuth = createQuickAuth({ frameHost })
+
 export const sdk: FrameSDK = {
   ...emitter,
   getCapabilities: frameHost.getCapabilities,
@@ -113,6 +82,7 @@ export const sdk: FrameSDK = {
   isInMiniApp,
   context: frameHost.context,
   back: createBack({ frameHost, emitter }),
+  quickAuth,
   actions: {
     setPrimaryButton: frameHost.setPrimaryButton.bind(frameHost),
     ready: async (options = {}) => {
@@ -145,11 +115,12 @@ export const sdk: FrameSDK = {
     viewToken: frameHost.viewToken.bind(frameHost),
     sendToken: frameHost.sendToken.bind(frameHost),
     swapToken: frameHost.swapToken.bind(frameHost),
-    quickAuth,
   },
   experimental: {
     getSolanaProvider,
-    quickAuth,
+    quickAuth(options) {
+      return quickAuth.getToken(options)
+    },
   },
   wallet: {
     ethProvider: ethereumProvider,

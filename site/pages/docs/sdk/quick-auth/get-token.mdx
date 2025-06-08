@@ -1,0 +1,113 @@
+---
+title: QuickAuth.getToken
+description: Get a JWT from a Quick Auth Server
+---
+
+import { Caption } from '../../../../components/Caption.tsx';
+
+# QuickAuth.getToken
+
+Request a signed JWT from a [Farcaster Quick Auth
+Server](https://github.com/farcasterxyz/protocol/discussions/231). 
+
+
+## Usage
+
+```ts twoslash
+// ---cut---
+import { sdk } from '@farcaster/frame-sdk'
+
+const { token } = await sdk.quickAuth.getToken()
+```
+
+## Parameters
+
+### force
+
+- **Type:** `boolean`
+
+Acquire a new token even if one is already in memory and not expired.
+
+### quickAuthServerOrigin (optional)
+
+- **Type:** `string`
+
+Use a custom Quick Auth Server. Defaults to `https://auth.farcaster.xyz`.
+
+
+## Return Value
+
+A [JWT](https://datatracker.ietf.org/doc/html/rfc7519) issued by the Quick Auth
+Server based on the Sign In with Farcaster credential signed by the user.
+
+```ts 
+{ token: string; }
+```
+
+Store this token in memory (i.e. React state) and include it as an
+authorization header to make authenticated requests to your server. 
+
+Your server must verify the token:
+
+```ts
+const { createClient } from "@farcaster/quick-auth";
+
+const client = createClient();
+
+// Set this to whatever domain your Mini App is being server from. If you're
+// developing locally use the domain you are tunneling from.
+const domain = 'example.com';
+
+/**
+ * Inside your request handler extract the JWT from a request header
+ * and verify it using @farcaster/quick-auth.
+ *
+ * token - the JWT issued by a Quick Auth Server 
+ * domain - the domain the token was issued to, this should be the same domain
+ * as your mini app is running on.
+ */
+const payload = await client.verifyJwt({ token, domain })
+```
+
+### JWT Payload
+
+```json
+{
+  "iat": 1747764819,
+  "iss": "https://auth.farcaster.xyz",
+  "exp": 1747768419,
+  "sub": 6841,
+  "aud": "miniapps.farcaster.xyz"
+}
+```
+
+#### sub
+
+- **Type:** `number`
+
+The FID of the signed in user. 
+
+
+#### iss
+
+- **Type:** `string`
+
+The Quick Auth server that verified the SIWF credential and issued the JWT.
+
+#### aud
+
+- **Type:** `string`
+
+The domain this token was issued to.
+
+#### exp
+
+- **Type:** `number`
+
+The JWT expiration time.
+
+#### iat
+
+- **Type:** `number`
+
+The JWT issued at time.
