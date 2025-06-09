@@ -132,6 +132,7 @@ export default defineConfig({
           {
             text: 'Quick Auth',
             link: '/docs/sdk/quick-auth',
+            collapsed: true,
             items: [
               {
                 text: '.getToken',

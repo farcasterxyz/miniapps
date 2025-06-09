@@ -5,65 +5,80 @@ description: Easily authenticate Farcaster users in your mini app
 
 # Quick Auth
 
-Quick Auth is the easiest way to get an authenticated session for a Farcaster
-user.
+Quick Auth is lightweight service built on top of Sign In with Farcaster that makes
+it easy to get an authenticated session for a Farcaster user.
 
 
-## Getting an authenticated session
+## Examples
 
-::::steps
+- [Make authenticated requests](#make-authenticated-requests)
+- [Use a session token directly](#use-a-session-token-directly)
+- [Validate a session token](#validate-a-session-token)
 
-### Get a token
+### Make authenticated requests
 
-In your Mini App frontend, use [`sdk.quickAuth.getToken`](/docs/sdk/quick-auth/get-token) to get a signed JWT.
-The token will automatically be stored in memory and subsequent calls to
-`getToken` will return the cached token, or generate a new one if the token is
-expired.
+In your frontend, use [`sdk.quickAuth.fetch`](/docs/sdk/quick-auth/fetch) to
+make an authenticated request. This will automatically get a Quick Auth session
+token if one is not already present and add it as Bearer token in the
+`Authorization` header:
 
-```ts
+```tsx twoslash
+const BACKEND_ORIGIN = 'https://hono-backend.miniapps.farcaster.xyz';
+
+// ---cut---
+import React, { useState, useEffect } from "react";
 import { sdk } from "@farcaster/frame-sdk";
 
 export function App() {
-  // Stores the JWT token for this session
-  const [user, setUser] useState();
+  const [user, setUser] = useState<{ fid: number }>();
 
-  async function signIn() {
-    try {
-      const { token } = await sdk.quickAuth.getToken();
-      const req = await fetch(`https://example.com/me`, {
-        headers: new Headers({ "Authorization": "Bearer " + token })
-      })
+  useEffect(() => {
+    (async () => {
+      const res = await sdk.quickAuth.fetch(`${BACKEND_ORIGIN}/me`);
+      if (res.ok) {
+        setUser(await res.json());
+        sdk.actions.ready()
+      }
+    })()
+  }, [])
 
-      setUser(await req.json());
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
+  // The splash screen will be shown, don't worry about rendering yet.
   if (!user) {
-    return (
-      <button onClick={signIn}>sign in</button>
-    )
+    return null;
   }
 
   return (
-    <button onClick={() => {
-      try {
-        const res = await sdk.quickAuth.fetch("https://example.com/ping">);
-        if (res.ok) {
-          alert(await res.text())
-        }
-      }
-    }}>
-      ping
-    </button>
+    <div>
+      hello, {user.fid}
+    </div>
   )
 }
 ```
 
-### Verify the token
 
-In your backend verify the token on any endpoints you want to protect.
+### Use a session token directly
+
+In your frontend, use
+[`sdk.quickAuth.getToken`](/docs/sdk/quick-auth/get-token) to get a Quick Auth
+session token. If there is already a session token in memory that hasn't
+expired it will be immediately returned, otherwise a fresh one will be
+acquired.
+
+```html 
+<div id="user" />
+
+<script type="module">
+  import ky from "https://esm.sh/ky";
+  import { sdk } from "https://esm.sh/@farcaster/frame-sdk";
+
+  const { token } = await sdk.quickAuth.getToken();
+  const user = await ky.get("http://localhost:8787" + "/me", {headers: {Authorization: 'Bearer ' + token }}).json();
+  document.getElementById("user").textContent = JSON.stringify(user);
+</script>
+```
+
+
+### Validate a session token
 
 First, install the Quick Auth library into your backend with:
 
@@ -72,73 +87,93 @@ npm install @farcaster/quick-auth
 ```
 
 Then you can use `verifyJwt` to check the JWT and get back the token payload
-which has the FID of the user as the `sub` property. You can then look up
-additional information about the user. 
+which has the FID of the user as the `sub` property. 
 
-```ts
-import { createClient, Errors } from '@farcaster/quick-auth'
+You can then look up additional information about the user. 
+
+```ts 
+import { Errors, createClient } from '@farcaster/quick-auth'
 import { Hono } from 'hono'
+import { cors } from 'hono/cors'
+import { createMiddleware } from 'hono/factory'
 import { HTTPException } from 'hono/http-exception'
 
-const domain = 'example.com';
-const client = createClient();
-const app = new Hono()
+const client = createClient()
+const app = new Hono<{ Bindings: Cloudflare.Env }>()
 
 // Resolve information about the authenticated Farcaster user. In practice
 // you might get this information from your database, Neynar, or Snapchain.
 async function resolveUser(fid: number) {
   const primaryAddress = await (async () => {
-    const res = await fetch(`https://api.farcaster.xyz/fc/primary-address?fid=${fid}&protocol=ethereum`);
+    const res = await fetch(
+      `https://api.farcaster.xyz/fc/primary-address?fid=${fid}&protocol=ethereum`,
+    )
     if (res.ok) {
-      const { result } = res.json()
-      return result.address.address;
+      const { result } = await res.json<{
+        result: {
+          address: {
+            fid: number
+            protocol: 'ethereum' | 'solana'
+            address: string
+          }
+        }
+      }>()
+
+      return result.address.address
     }
   })()
 
   return {
     fid,
-    primaryAddress
+    primaryAddress,
   }
 }
 
-app.use(async (c, next) => {
-  const authorization = c.req.header('Authorization');
+const quickAuthMiddleware = createMiddleware<{
+  Bindings: Cloudflare.Env
+  Variables: {
+    user: {
+      fid: number
+      primaryAddress?: string
+    }
+  }
+}>(async (c, next) => {
+  const authorization = c.req.header('Authorization')
   if (!authorization || !authorization.startsWith('Bearer ')) {
-    throw new HTTPException(401, { message: 'Missing token' });
+    throw new HTTPException(401, { message: 'Missing token' })
   }
 
   try {
     const payload = await client.verifyJwt({
       token: authorization.split(' ')[1] as string,
-      domain,
+      domain: c.env.HOSTNAME,
     })
 
-    const user = resolveUser({ fid: payload.sub });
+    const user = await resolveUser(payload.sub)
     c.set('user', user)
   } catch (e) {
     if (e instanceof Errors.InvalidTokenError) {
-      throw new HTTPException(401, { message: 'Invalid token' });
+      console.info('Invalid token:', e.message)
+      throw new HTTPException(401, { message: 'Invalid token' })
     }
 
-    throw e;
+    throw e
   }
 
   await next()
 })
 
-app.get('/me', async (c) => {
-  const user = c.get('user')
-  return c.json(user)
-})
+app.use(cors())
 
-app.get('/ping', async (c) => {
-  return c.text("pong")
+app.get('/me', quickAuthMiddleware, (c) => {
+  return c.json(c.get('user'))
 })
 
 export default app
 ```
 
-### Optimize performance
+
+## Optimizing performance
 
 To optimize performance, provide a `preconnect` hint to the browser in your
 frontend so that it can preemptively initiate a connection with the Quick Auth
@@ -157,8 +192,6 @@ function AppRoot() {
   preconnect("https://auth.farcaster.xyz");
 }
 ```
-
-::::
 
 ## Quick Auth vs Sign In with Farcaster
 
@@ -182,7 +215,7 @@ The Auth Server offers exceptional performance in two ways:
   on your server
 
 
-## Methods
+## Functions
 
 | Name                                       | Description                         |
 |--------------------------------------------|-------------------------------------|

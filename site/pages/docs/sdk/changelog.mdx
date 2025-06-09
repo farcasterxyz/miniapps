@@ -5,14 +5,21 @@ description: Recent changes to the Mini Apps SDK
 
 # What's New
 
+## June 9, 2025 (upcoming)
+
+- Moved Quick Auth out of experimental and enhanced functionality:
+	- Use `sdk.quickAuth.getToken()` in place of `sdk.experimental.quickAuth()`.
+	`getToken` will store the token in memory and return if it not expired,
+	otherwise a new token will be fetched. Developers no longer need to manage
+	keeping this token around or checking expiration and can make calls to
+	`getToken` whenever needed.
+	- Added `fetch` which is a wrapper around the browser Fetch API that
+	adds a Quick Auth token as a Bearer token in the `Authorization` header.
+	
 ## June 6, 2025 (0.0.59)
 
 - Added [`cast_share`](/docs/guides/share-extension) location type for [share extensions](/docs/guides/share-extension), enabling Mini Apps to receive shared casts from the system share sheet
 - Extended the cast object in `cast_embed` and `cast_share` contexts to include comprehensive metadata (author details, timestamps, mentions, embeds, channel)
-
-## June 5, 2025 (0.0.58)
-
-- Moved `quickAuth` out of experimental and into `actions`. Will remain accessible at `experimental` for a couple versions
 
 ## June 4, 2025 (0.0.56)
 
