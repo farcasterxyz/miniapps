@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/docs/sdk/actions/quick-auth",
+      "destination": "/docs/skd/quick-auth",
+      "statusCode": 301
+    },
+    {
       "source": "/docs/context",
       "destination": "/docs/sdk/context",
       "statusCode": 301
