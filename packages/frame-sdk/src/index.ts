@@ -4,7 +4,6 @@ export * from './frameHost.ts'
 export * from './sdk.ts'
 export * from '@farcaster/frame-core'
 
-import { quickAuth } from './quickAuth.ts'
 export * as QuickAuth from './quickAuth.ts'
 
 export { quickAuth } from './quickAuth.ts'
