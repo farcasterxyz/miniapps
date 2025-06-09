@@ -1,9 +1,10 @@
-import { SignIn, type WireFrameHost } from '@farcaster/frame-core'
+import { SignIn } from '@farcaster/frame-core'
 import type { JWTPayload } from '@farcaster/quick-auth'
 import { decodeJwt } from '@farcaster/quick-auth/decodeJwt'
 import { createLightClient } from '@farcaster/quick-auth/light'
-import type { Remote } from 'comlink'
 import * as Siwe from 'ox/Siwe'
+
+import { frameHost } from './frameHost.js'
 
 export declare namespace getToken {
   type Options = {
@@ -30,7 +31,10 @@ export declare namespace getToken {
 }
 
 export type QuickAuth = {
-  token: string | undefined
+  /**
+   * Returns the session token if one is present and not expired.
+   */
+  readonly token: string | undefined
 
   /**
    * Get a Quick Auth JWT.
@@ -39,14 +43,15 @@ export type QuickAuth = {
    * `force` is used. Otherwise a new token will be acquired.
    */
   getToken: (options?: getToken.Options) => getToken.ReturnType
+
+  /**
+   * Make an authenticated fetch request. The `Authorization` header will
+   * contain `Bearer ${token}` where token is a Quick Auth session token.
+   */
   fetch: typeof fetch
 }
 
-export const createQuickAuth = ({
-  frameHost,
-}: {
-  frameHost: Remote<WireFrameHost>
-}): QuickAuth => {
+export const quickAuth: QuickAuth = (() => {
   let current:
     | {
         token: string
@@ -97,7 +102,16 @@ export const createQuickAuth = ({
   }
 
   return {
-    token: current ? current.token : undefined,
+    get token() {
+      if (
+        current &&
+        new Date(current.payload.exp * 1000) > new Date(Date.now() + 15000)
+      ) {
+        return current.token
+      }
+
+      return undefined
+    },
     async getToken(options = {}) {
       const force = options.force ?? false
 
@@ -131,4 +145,4 @@ export const createQuickAuth = ({
       })
     },
   }
-}
+})()
