@@ -1,11 +1,11 @@
 ---
-title: QuickAuth.getToken
-description: Get a JWT from a Quick Auth Server
+title: quickAuth.getToken
+description: Get Quick Auth session token
 ---
 
 import { Caption } from '../../../../components/Caption.tsx';
 
-# QuickAuth.getToken
+# quickAuth.getToken
 
 Request a signed JWT from a [Farcaster Quick Auth
 Server](https://github.com/farcasterxyz/protocol/discussions/231). 
@@ -19,6 +19,9 @@ import { sdk } from '@farcaster/frame-sdk'
 
 const { token } = await sdk.quickAuth.getToken()
 ```
+
+You must [validate the token on your server](/docs/sdk/quick-auth#validate-a-session-token).
+
 
 ## Parameters
 
@@ -44,30 +47,8 @@ Server based on the Sign In with Farcaster credential signed by the user.
 { token: string; }
 ```
 
-Store this token in memory (i.e. React state) and include it as an
-authorization header to make authenticated requests to your server. 
+You must [validate the token on your server](/docs/sdk/quick-auth#validate-a-session-token).
 
-Your server must verify the token:
-
-```ts
-const { createClient } from "@farcaster/quick-auth";
-
-const client = createClient();
-
-// Set this to whatever domain your Mini App is being server from. If you're
-// developing locally use the domain you are tunneling from.
-const domain = 'example.com';
-
-/**
- * Inside your request handler extract the JWT from a request header
- * and verify it using @farcaster/quick-auth.
- *
- * token - the JWT issued by a Quick Auth Server 
- * domain - the domain the token was issued to, this should be the same domain
- * as your mini app is running on.
- */
-const payload = await client.verifyJwt({ token, domain })
-```
 
 ### JWT Payload
 

@@ -3,12 +3,10 @@ import {
   type FrameClientEvent,
   SignIn,
 } from '@farcaster/frame-core'
-import { createLightClient } from '@farcaster/quick-auth/light'
-import * as Siwe from 'ox/Siwe'
 import { createBack } from './back.ts'
 import { ethereumProvider, getEthereumProvider } from './ethereumProvider.ts'
 import { frameHost } from './frameHost.ts'
-import { createQuickAuth } from './quickAuth.ts'
+import { quickAuth } from './quickAuth.ts'
 import { emitter } from './sdkEmitter.ts'
 import { getSolanaProvider } from './solanaProvider.ts'
 import type { FrameSDK } from './types.ts'
@@ -72,8 +70,6 @@ const addMiniApp = async () => {
 
   throw new Error('Unreachable')
 }
-
-const quickAuth = createQuickAuth({ frameHost })
 
 export const sdk: FrameSDK = {
   ...emitter,

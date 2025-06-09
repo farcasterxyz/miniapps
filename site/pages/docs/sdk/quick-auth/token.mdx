@@ -1,0 +1,31 @@
+---
+title: quickAuth.token
+description: Returns an active Quick Auth session token when present
+---
+
+# quickAuth.token
+
+Returns an active Quick Auth session token when present.
+
+:::note
+It's generally preferrable to use [getToken](/docs/sdk/quick-auth/get-token)
+since this will always return a fresh token, however, this property is provided
+for situations where a synchronous API is useful.
+:::
+
+## Usage
+
+```ts twoslash
+// ---cut---
+import { sdk } from '@farcaster/frame-sdk'
+
+// will be undefined
+console.log(sdk.quickAuth.token)
+
+await sdk.quickAuth.getToken();
+
+// will return the active token acquired above
+console.log(sdk.quickAuth.token)
+```
+
+You must [validate the token on your server](/docs/sdk/quick-auth#validate-a-session-token).

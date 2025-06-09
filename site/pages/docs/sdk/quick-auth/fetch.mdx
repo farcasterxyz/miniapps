@@ -1,23 +1,19 @@
 ---
-title: QuickAuth.fetch
-description: Make an authenticated fetch request 
+title: quickAuth.fetch
+description: Make an authenticated fetch request with a Quick Auth session token
 ---
 
-# QuickAuth.fetch
+# quickAuth.fetch
 
 Make a [Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) request
-with a Quick Auth token added as an `Authorization` header:
-
-```
-Authorization: Bearer <token>
-```
+with `Authorization` header set to `Bearer ${token}` where token is a with a
+Quick Auth session token.
 
 :::note
 This is a convenience function that makes it easy to make authenticated
-requests but using it is not a requirement.
-
-You can use `[getToken](/docs/sdk/quick-auth/get-token)` to get a token and
-attach it to requests using the library and format of your choosing.
+requests but using it is not a requirement. Use
+[getToken](/docs/sdk/quick-auth/get-token) to get a token directly and attach
+it to requests using the library and format of your choosing.
 :::
 
 
@@ -32,62 +28,7 @@ import { sdk } from '@farcaster/frame-sdk'
 await sdk.quickAuth.fetch(url)
 ```
 
-On your server, use
-[`@farcaster/quick-auth`](https://github.com/farcasterxyz/quick-auth) to
-validate the token:
-
-```ts
-import { createClient, Errors } from '@farcaster/quick-auth'
-import { Hono } from 'hono'
-import { HTTPException } from 'hono/http-exception'
-
-const domain = 'example.com';
-const client = createClient();
-const app = new Hono()
-
-// Resolve information about the authenticated Farcaster user. In practice
-// you might get this information from your database, Neynar, or Snapchain.
-async function resolveUser(fid: number) {
-  const primaryAddress = await (async () => {
-    const res = await fetch(`https://api.farcaster.xyz/fc/primary-address?fid=${fid}&protocol=ethereum`);
-    if (res.ok) {
-      const { result } = res.json()
-      return result.address.address;
-    }
-  })()
-
-  return {
-    fid,
-    primaryAddress
-  }
-}
-
-app.use(async (c, next) => {
-  const authorization = c.req.header('Authorization');
-  if (!authorization || !authorization.startsWith('Bearer ')) {
-    throw new HTTPException(401, { message: 'Missing token' });
-  }
-
-  try {
-    const payload = await client.verifyJwt({
-      token: authorization.split(' ')[1] as string,
-      domain,
-    })
-
-    const user = resolveUser({ fid: payload.sub });
-    c.set('user', user)
-  } catch (e) {
-    if (e instanceof Errors.InvalidTokenError) {
-      throw new HTTPException(401, { message: 'Invalid token' });
-    }
-
-    throw e;
-  }
-
-  await next()
-})
-```
-
+You must [validate the token on your server](/docs/sdk/quick-auth#validate-a-session-token).
 
 ## Parameters
 
