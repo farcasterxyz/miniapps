@@ -8,9 +8,14 @@ function QuickAuth() {
   return (
     <>
       <h1>sdk.quickAuth</h1>
-      <GetToken />
+      <div>
+        <GetToken />
+      </div>
       <div style={{ marginTop: 10 }}>
         <Fetch />
+      </div>
+      <div style={{ marginTop: 10 }}>
+        <Token />
       </div>
     </>
   )
@@ -39,7 +44,7 @@ function GetToken() {
 }
 
 function Fetch() {
-  const [user, setUser] = useState<any>()
+  const [user, setUser] = useState()
 
   const fetch = useCallback(async () => {
     const res = await sdk.quickAuth.fetch('http://localhost:8787/me')
@@ -58,6 +63,29 @@ function Fetch() {
           <code style={{ whiteSpace: 'pre' }}>
             {JSON.stringify(user, null, 2)}
           </code>
+        </div>
+      )}
+    </div>
+  )
+}
+
+function Token() {
+  const [token, setToken] = useState<string>()
+  const [read, setRead] = useState(false)
+
+  const getToken = useCallback(() => {
+    setToken(sdk.quickAuth.token)
+    setRead(true)
+  }, [])
+
+  return (
+    <div>
+      <button type="button" onClick={getToken}>
+        token
+      </button>
+      {!!read && (
+        <div>
+          <code>read token value: {token}</code>
         </div>
       )}
     </div>
