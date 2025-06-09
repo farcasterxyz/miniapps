@@ -5,11 +5,12 @@
       "tsconfig.json",
       "tsconfig.*.json",
       "packages/tsconfig",
-      "frame-host/src/comlink",
-      "packages/create-mini-app/templates",
       "package.json",
       "**/esm",
-      "**/dist"
+      "**/dist",
+      "examples/hono-backend/worker-configuration.d.ts",
+      "frame-host/src/comlink",
+      "packages/create-mini-app/templates"
     ]
   },
   "organizeImports": {

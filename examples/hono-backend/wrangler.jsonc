@@ -1,0 +1,9 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "hono-backend",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-06-09",
+  "vars": {
+    "HOSTNAME": "candle-bb-condos-shore.trycloudflare.com"
+  }
+}
