@@ -1,5 +1,11 @@
 # @farcaster/frame-kit
 
+## 0.0.61
+
+### Patch Changes
+
+- [#370](https://github.com/farcasterxyz/miniapps/pull/370) [`455cde8`](https://github.com/farcasterxyz/miniapps/commit/455cde82e4b4a1a088b96f091d82533897489374) Thanks [@deodad](https://github.com/deodad)! - Moved quickAuth out of experimental.
+
 ## 0.0.60
 
 ### Patch Changes
