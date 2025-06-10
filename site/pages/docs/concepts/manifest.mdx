@@ -1,0 +1,31 @@
+---
+title: Manifest
+description: Permisionlessly publish your Mini App
+---
+
+# Manifest
+
+Mini Apps can publish metadata that allows Farcaster clients to more deeply
+integrate with their Mini App. This file is published at
+`/.well-known/farcaster.json` and the [Fully Qualified Domain
+Name](https://en.wikipedia.org/wiki/Fully_qualified_domain_name) where it is
+hosted uniquely identifies the Mini App. The Manifest contains data that allows
+Farcaster clients to verify the author of the app, present the Mini App in
+discovery surfaces like app stores, and allows the Mini App to send
+notifications.
+
+Universal Links give you a single URL that can be shared outside Farcaster in
+other social feeds and website that will bring users to your Mini App.
+
+`https://farcaster.xyz/miniapps/<app-id>/<app-slug>(/<sub-path>)(?<query-params>)`
+
+- The `<app-id>` is a unique identifier assigned to the Mini App when it is [published](/docs/guides/publishing).
+- The `<app-slug>` is a kebab-case version of the Mini App name, used to create a more readable URL.
+- The `<sub-path>` is an optional path appended to the Mini App’s `homeURL` when it is opened.
+- The `<query-params>` are optional parameters added to the `homeURL` as a query string when the Mini App is opened.
+
+The `<sub-path>` and `<query-params>` are optional and can be used to navigate to a specific page in the Mini App or pass data to the Mini App.
+
+When a user clicks a Universal Link and is logged in:
+- **On web**: the Mini App opens in the mini app drawer.
+- **On mobile**: the browser deep links to the Farcaster app and opens the Mini App.

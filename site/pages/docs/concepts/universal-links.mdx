@@ -1,14 +1,14 @@
 ---
-title: Mini App URLs
-description: How to use Mini App URLs
+title: Universal Links
+description: Link users into your Mini App from anywhere
 ---
 
-import { Caption } from '../../../components/Caption.tsx';
+import { Caption } from '../../../components/Caption';
 
-# Mini App URLs
+# Universal Links
 
-Mini Apps have a canonical URL that can be used to share across social feeds
-and web sites. The URL format is as follows:
+Universal Links give you a single URL that can be shared outside Farcaster in
+other social feeds and website that will bring users to your Mini App.
 
 `https://farcaster.xyz/miniapps/<app-id>/<app-slug>(/<sub-path>)(?<query-params>)`
 
@@ -19,19 +19,19 @@ and web sites. The URL format is as follows:
 
 The `<sub-path>` and `<query-params>` are optional and can be used to navigate to a specific page in the Mini App or pass data to the Mini App.
 
-When a user clicks a Mini App URL and is logged in:
+When a user clicks a Universal Link and is logged in:
 - **On web**: the Mini App opens in the mini app drawer.
 - **On mobile**: the browser deep links to the Farcaster app and opens the Mini App.
 
 
-## Where to find the Mini App URL
+## Where to find the Universal Link
 
 On the web [Developers page](https://farcaster.xyz/~/developers), click the top-right
 kebab menu on one of your Mini App cards and select **"Copy link to mini app"**. This
-copies the Mini App URL to your clipboard.
+copies the Universal Link to your clipboard.
 
 When the Mini App is open, tap on the top-right kebab menu and select **"Copy link"** to
-copy the Mini App URL to your clipboard.
+copy the Universal Link to your clipboard.
 
 ![Copy link to mini app](/copy_link_to_miniapp.png)
 
@@ -40,14 +40,14 @@ copy the Mini App URL to your clipboard.
 </Caption>
 
 
-## How to control what is displayed when I share a Mini App URL
+## How to control what is displayed when I share a Universal Link
 
-Farcaster automatically generates OpenGraph meta tags for Mini App URLs, ensuring
+Farcaster automatically generates OpenGraph meta tags for Universal Links, ensuring
 they render correctly when shared on social platforms or web apps that support embedded
 link previews, such as X.
 
 To make sure your Mini App displays as intended, include the `fc:frame` meta tag on all
-Mini App URLs (see ["Sharing your app"](/docs/guides/sharing)) and add all relevant fields
+Universal Links (see ["Sharing your app"](/docs/guides/sharing)) and add all relevant fields
 in your [application config](/docs/guides/publishing#define-your-application-configuration),
 especially `ogTitle`, `ogDescription` and `ogImageUrl`.
 
@@ -58,7 +58,7 @@ Each Mini App defines a `homeUrl` property in its [application config](/docs/gui
 When a user clicks on a Mini App in the Farcaster client's Mini App explorer, a
 WebView (on mobile) or iframe (on web) pointing to the `homeUrl` is opened.
 
-If you share a Mini App URL with a sub-path and/or query parameters, those are appended
+If you share a Universal Link with a sub-path and/or query parameters, those are appended
 to the `homeUrl`'s path and query string.
 
 For example, if the `homeUrl` is `https://example.com/miniapp/v1` and the Mini App
@@ -70,14 +70,14 @@ URL is `https://farcaster.xyz/miniapps/12345/example-miniapp/leaderboard?sort=po
 
 Not at the moment.
 
-**When copying the link from the Mini App header, it doesn't copy the Mini App URL, why is that?**
+**When copying the link from the Mini App header, it doesn't copy the Universal Link, why is that?**
 
 Any URL with a valid `fc:frame` meta tag shared in a cast will be treated as a Mini App.
-Copying the link from these Mini Apps will copy the original URL shared in the cast, not the canonical Mini App URL.
+Copying the link from these Mini Apps will copy the original URL shared in the cast, not the canonical Universal Link.
 
-**Can I add a sub-path or query params to the Mini App URL copied from the Mini App header?**
+**Can I add a sub-path or query params to the Universal Link copied from the Mini App header?**
 
-Not at the moment. Only the canonical Mini App URL or URL shared in the cast will be copied.
+Not at the moment. Only the canonical Universal Link or URL shared in the cast will be copied.
 
 **Can I open a Mini App from another Mini App?**
 

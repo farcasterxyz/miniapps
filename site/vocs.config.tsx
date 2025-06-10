@@ -36,10 +36,14 @@ export default defineConfig({
     '/': OG_BASE_URL + '?title=%title&description=%description&',
     '/docs/guides':
       OG_BASE_URL + '?title=%title&description=%description&section=Guide',
+    '/docs/concepts':
+      OG_BASE_URL + '?title=%title&description=%description&section=Concepts',
     '/docs/sdk':
       OG_BASE_URL + '?title=%title&description=%description&section=SDK',
     '/docs/sdk/actions':
       OG_BASE_URL + '?title=%title&description=%description&section=Action',
+    '/docs/sdk/quick-auth':
+      OG_BASE_URL + '?title=%title&description=%description&section=Quick Auth',
   },
   theme: {
     accentColor: '#8a63d2',
@@ -108,13 +112,18 @@ export default defineConfig({
             text: 'Authenticating users',
             link: '/docs/guides/auth',
           },
+        ],
+      },
+      {
+        text: 'Concepts',
+        items: [
           {
-            text: 'Mini App URLs',
-            link: '/docs/guides/urls',
+            text: 'Universal Links',
+            link: '/docs/concepts/universal-links',
           },
           {
             text: 'Share Extensions',
-            link: '/docs/guides/share-extension',
+            link: '/docs/concepts/share-extensions',
           },
         ],
       },

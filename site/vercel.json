@@ -1,6 +1,16 @@
 {
   "redirects": [
     {
+      "source": "/docs/guides/url",
+      "destination": "/docs/concepts/universal-links",
+      "statusCode": 301
+    },
+    {
+      "source": "/docs/guides/share-extension",
+      "destination": "/docs/concepts/share-extensions",
+      "statusCode": 301
+    },
+    {
       "source": "/docs/sdk/actions/quick-auth",
       "destination": "/docs/sdk/quick-auth",
       "statusCode": 301
