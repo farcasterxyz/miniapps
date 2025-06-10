@@ -62,7 +62,7 @@ export const miniAppHostCapabilityList = [
   'haptics.notificationOccurred',
   'haptics.selectionChanged',
   'back',
-] as const satisfies [string, ...string[]]
+] as const
 
 export type MiniAppHostCapability = (typeof miniAppHostCapabilityList)[number]
 

@@ -42,7 +42,7 @@ const chainList = [
   'eip155:10143', // Monad testnet
   'eip155:42220', // Celo
   'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp', // Solana
-] as const satisfies [string, ...string[]]
+] as const
 
 function removeArrayDuplicates<T>(arr: T[]) {
   const set = new Set(arr)
