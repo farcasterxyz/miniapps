@@ -1,5 +1,13 @@
 # @farcaster/mini-app-solana
 
+## 0.0.18
+
+### Patch Changes
+
+- Updated dependencies [[`a9e5271`](https://github.com/farcasterxyz/miniapps/commit/a9e5271c2b8675b60787e9d4a65f707de6a2fd28)]:
+  - @farcaster/frame-core@0.1.9
+  - @farcaster/frame-sdk@0.0.62
+
 ## 0.0.17
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @farcaster/frame-core
 
+## 0.1.9
+
+### Patch Changes
+
+- [#368](https://github.com/farcasterxyz/miniapps/pull/368) [`a9e5271`](https://github.com/farcasterxyz/miniapps/commit/a9e5271c2b8675b60787e9d4a65f707de6a2fd28) Thanks [@pahhhblo](https://github.com/pahhhblo)! - Improved requiredChains and requiredCapabilities typing in domainFrameConfigSchema.
+
 ## 0.1.8
 
 ### Patch Changes
