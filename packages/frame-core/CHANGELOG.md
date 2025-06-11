@@ -1,5 +1,11 @@
 # @farcaster/frame-core
 
+## 0.1.10
+
+### Patch Changes
+
+- [#382](https://github.com/farcasterxyz/miniapps/pull/382) [`3417795`](https://github.com/farcasterxyz/miniapps/commit/34177950c373087a989dedfa0bf5eac6391f0850) Thanks [@PirosB3](https://github.com/PirosB3)! - added missing text field
+
 ## 0.1.9
 
 ### Patch Changes
