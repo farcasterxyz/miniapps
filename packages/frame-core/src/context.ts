@@ -14,6 +14,7 @@ export interface MiniappCast {
   parentFid?: number
   timestamp?: number
   mentions?: MiniappUser[]
+  text: string
   embeds?: string[]
   channelKey?: string
 }

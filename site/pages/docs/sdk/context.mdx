@@ -49,6 +49,7 @@ export type MiniappCast = {
   parentFid?: number;
   timestamp?: number;
   mentions?: MiniappUser[];
+  text: string;
   embeds?: string[];
   channelKey?: string;
 };
@@ -124,6 +125,7 @@ Indicates that the Mini App was launched from a cast (where it is an embed).
     hash: "0xa2fbef8c8e4d00d8f84ff45f9763b8bae2c5c544",
     timestamp: 1749160866000,
     mentions: [],
+    text: "Check out this awesome mini app!",
     embeds: ["https://myapp.example.com"],
     channelKey: "farcaster"
   }
@@ -148,6 +150,7 @@ Indicates that the Mini App was launched when a user shared a cast to your app (
     hash: "0x1177603a7464a372fc358a7eabdeb70880d81612",
     timestamp: 1749160866000,
     mentions: [],
+    text: "Sharing this interesting cast with you!",
     embeds: ["https://frames-v2.vercel.app/"],
     channelKey: "staging"
   }
