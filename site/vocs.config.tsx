@@ -13,7 +13,7 @@ export default defineConfig({
   titleTemplate: '%s · Farcaster Mini Apps',
   editLink: {
     pattern:
-      'https://github.com/farcasterxyz/frames/edit/main/site/pages/:path',
+      'https://github.com/farcasterxyz/miniapps/edit/main/site/pages/:path',
     text: 'Edit on GitHub',
   },
   iconUrl: '/favicon.png',
@@ -58,7 +58,7 @@ export default defineConfig({
     },
     {
       text: 'Examples',
-      link: 'https://github.com/farcasterxyz/frames/tree/main/examples',
+      link: 'https://github.com/farcasterxyz/miniapps/tree/main/examples',
     },
     { text: 'Rewards', link: 'https://farcaster.xyz/~/developers/rewards' },
   ],
@@ -247,7 +247,7 @@ export default defineConfig({
   socials: [
     {
       icon: 'github',
-      link: 'https://github.com/farcasterxyz/frames',
+      link: 'https://github.com/farcasterxyz/miniapps',
     },
     {
       icon: 'x',
