@@ -1,5 +1,11 @@
 # @farcaster/frame-core
 
+## 0.2.0
+
+### Minor Changes
+
+- [#387](https://github.com/farcasterxyz/miniapps/pull/387) [`6c593bf`](https://github.com/farcasterxyz/miniapps/commit/6c593bf4971c40d00dfc1d99a6a063b0ccf4f6b3) Thanks [@CassOnMars](https://github.com/CassOnMars)! - feat: support canonicalDomain
+
 ## 0.1.10
 
 ### Patch Changes
