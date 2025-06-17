@@ -58,6 +58,34 @@ export const hexColorSchema = z
       'Invalid hex color code. It should be in the format #RRGGBB or #RGB.',
   })
 
+// Domain validation regex:
+// - Each label (part between dots) must start and end with alphanumeric
+// - Labels can contain hyphens in the middle
+// - Cannot have consecutive dots
+// - Must have at least one dot (TLD required)
+// - TLD must be at least 2 characters and only letters
+const DOMAIN_REGEX =
+  /^(?!.*\.\.)([a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$/
+
+export const domainSchema = z
+  .string()
+  .max(1024)
+  .regex(DOMAIN_REGEX, {
+    message: 'Must be a valid domain name (e.g., example.com, sub.example.com)',
+  })
+  .refine((value) => !value.includes('://'), {
+    message: 'Domain must not include protocol (http://, https://, etc.)',
+  })
+  .refine((value) => !value.includes('/'), {
+    message: 'Domain must not include path separators',
+  })
+  .refine((value) => !value.includes('@'), {
+    message: 'Domain must not include @ symbol',
+  })
+  .refine((value) => !value.includes(':'), {
+    message: 'Domain must not include port numbers',
+  })
+
 export const aspectRatioSchema = z.union([z.literal('1:1'), z.literal('3:2')])
 
 export const encodedJsonFarcasterSignatureSchema = z.object({

@@ -101,6 +101,10 @@ export default defineConfig({
             link: '/docs/guides/publishing',
           },
           {
+            text: 'Domain migration',
+            link: '/docs/guides/domain-migration',
+          },
+          {
             text: 'Sending notifications',
             link: '/docs/guides/notifications',
           },

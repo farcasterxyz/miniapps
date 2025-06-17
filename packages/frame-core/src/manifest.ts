@@ -110,4 +110,11 @@ export type FrameConfig = {
    * Required if the frame application uses notifications.
    */
   webhookUrl?: string
+
+  /**
+   * Canonical domain for the frame application.
+   * If specified, this domain will be treated as the primary domain for the frame.
+   * Max length of 1024 characters.
+   */
+  canonicalDomain?: string
 }

@@ -1,0 +1,163 @@
+---
+title: Domain Migration
+description: Guide to migrating your Farcaster Mini App to a new domain.
+---
+
+import { Caption } from '../../../components/Caption.tsx';
+
+# Migrating to a new domain
+
+While Mini Apps are designed to be associated with a stable domain, there are times when you may need to migrate your app to a new domain. This could be due to rebranding, domain expiration, or other business reasons.
+
+The `canonicalDomain` field enables a smooth transition by allowing you to specify the new domain in your old manifest, ensuring clients can discover and redirect to your app's new location.
+
+## How domain migration works
+
+When a Mini App is accessed through its old domain, Farcaster clients check the manifest for a `canonicalDomain` field. If present, clients will:
+
+1. Recognize that the app has moved to a new domain
+2. Update their references to point to the new domain
+3. Redirect users to the app at its new location
+
+This ensures continuity for your users and preserves your app's presence in app stores and user installations.
+
+## Migration steps
+
+::::steps
+
+### Prepare your new domain
+
+Set up your Mini App on the new domain with a complete manifest file at `/.well-known/farcaster.json`. This should include all your app configuration and an account association from the same FID to maintain ownership verification.
+
+```json
+{
+  "accountAssociation": {
+    "header": "...",
+    "payload": "...",
+    "signature": "..."
+  },
+  "frame": {
+    "version": "1",
+    "name": "Your App Name",
+    "iconUrl": "https://new-domain.com/icon.png",
+    "homeUrl": "https://new-domain.com",
+    // ... other configuration
+  }
+}
+```
+
+### Update the old domain manifest
+
+Add the `canonicalDomain` field to your manifest on the **old domain**, pointing to your new domain:
+
+```json
+{
+  "accountAssociation": {
+    "header": "...",
+    "payload": "...",
+    "signature": "..."
+  },
+  "frame": {
+    "version": "1",
+    "name": "Your App Name",
+    "iconUrl": "https://old-domain.com/icon.png",
+    "homeUrl": "https://old-domain.com",
+    "canonicalDomain": "new-domain.com", // Add this line
+    // ... other configuration
+  }
+}
+```
+
+:::note
+The `canonicalDomain` value must be a valid domain name without protocol, port, or path:
+- ✅ `app.new-domain.com`
+- ✅ `new-domain.com`
+- ❌ `https://new-domain.com`
+- ❌ `new-domain.com:3000`
+- ❌ `new-domain.com/app`
+:::
+
+### Optional: Add canonicalDomain to the new manifest
+
+You can optionally include the `canonicalDomain` field in your new domain's manifest as well, pointing to itself. This can help with client caching and ensures consistency:
+
+```json
+{
+  "accountAssociation": {
+    "header": "...",
+    "payload": "...",
+    "signature": "..."
+  },
+  "frame": {
+    "version": "1",
+    "name": "Your App Name",
+    "iconUrl": "https://new-domain.com/icon.png",
+    "homeUrl": "https://new-domain.com",
+    "canonicalDomain": "new-domain.com", // Self-referential
+    // ... other configuration
+  }
+}
+```
+
+### Maintain both domains during transition
+
+Keep both domains active during the migration period to ensure a smooth transition:
+
+- Continue serving your app from the old domain with redirects to the new domain
+- Keep the manifest file accessible on both domains
+- Monitor traffic to understand when most users have migrated
+
+### Implement redirects (recommended)
+
+While the `canonicalDomain` field helps Farcaster clients understand the migration, you should also implement HTTP redirects from your old domain to the new one for users accessing your app directly after the manifest changes have been retrieved by the clients:
+
+```js
+// Example redirect in Express
+app.get('*', (req, res) => {
+  const newUrl = `https://new-domain.com${req.originalUrl}`;
+  res.redirect(301, newUrl);
+});
+```
+
+::::
+
+## Best practices
+
+### Plan ahead
+
+- Choose a stable domain from the start to minimize the need for migrations
+- If you anticipate a rebrand, consider using a neutral domain that can outlast brand changes
+
+### Communicate the change
+
+- Notify your users about the domain change through in-app messages or casts
+- Update any documentation or links that reference your old domain
+
+### Test thoroughly
+
+- Verify that your manifest is correctly served on both domains
+- Test the migration flow in different Farcaster clients
+- Ensure all app functionality works correctly on the new domain
+
+### Monitor the transition
+
+- Track traffic on both domains to understand migration progress
+- Keep the old domain active until traffic drops to negligible levels
+- Consider setting up analytics to track successful redirects
+
+## Troubleshooting
+
+### Clients not recognizing the new domain
+
+Ensure that:
+- The `canonicalDomain` value is correctly formatted (no protocol, port, or path)
+- Your manifest is accessible at `/.well-known/farcaster.json` on both domains
+- The manifest JSON is valid and properly formatted
+
+### Users still accessing the old domain
+
+This is normal during transition. Some clients may cache manifest data, and users may have bookmarked the old URL. Continue to serve redirects from the old domain.
+
+### Account association issues
+
+Make sure you use the same account to produce the association on both domains to maintain ownership verification. Do not reuse the account association data from one manifest to the other.

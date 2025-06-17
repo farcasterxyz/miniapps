@@ -2,6 +2,7 @@ import { describe, expect, test } from 'vitest'
 import { actionLaunchFrameSchema } from '../src/schemas/embeds.ts'
 import { actionSchema, createSimpleStringSchema } from '../src/schemas/index.ts'
 import { domainFrameConfigSchema } from '../src/schemas/manifest.ts'
+import { domainSchema } from '../src/schemas/shared.ts'
 
 describe('createSimpleStringSchema', () => {
   test('valid string', () => {
@@ -143,5 +144,101 @@ describe('domainFrameConfigSchema castShareUrl validation', () => {
         'castShareUrl must have the same domain as homeUrl',
       )
     }
+  })
+})
+
+describe('domainSchema', () => {
+  test('valid domains', () => {
+    const validDomains = [
+      'example.com',
+      'sub.example.com',
+      'sub.sub.example.com',
+      'example.co.uk',
+      'test-domain.com',
+      'test123.com',
+      '123test.com',
+      'a.b.c.d.example.com',
+      'x.com', // Single letter domains are valid
+      '0.pizza', // Single digit domains are valid
+    ]
+
+    for (const domain of validDomains) {
+      const result = domainSchema.safeParse(domain)
+      expect(result.success, `Expected valid domain: ${domain}`).toBe(true)
+    }
+  })
+
+  test('invalid domains with protocols', () => {
+    const invalidDomains = [
+      'http://example.com',
+      'https://example.com',
+      'ftp://example.com',
+      'ws://example.com',
+    ]
+
+    for (const domain of invalidDomains) {
+      const result = domainSchema.safeParse(domain)
+      expect(result.success, `Expected invalid domain: ${domain}`).toBe(false)
+    }
+  })
+
+  test('invalid domains with paths', () => {
+    const result = domainSchema.safeParse('example.com/path')
+    expect(result.success).toBe(false)
+  })
+
+  test('invalid domains with port numbers', () => {
+    const result = domainSchema.safeParse('example.com:8080')
+    expect(result.success).toBe(false)
+  })
+
+  test('invalid domains with @ symbol', () => {
+    const result = domainSchema.safeParse('user@example.com')
+    expect(result.success).toBe(false)
+  })
+
+  test('invalid domain formats', () => {
+    const invalidDomains = [
+      'example', // No TLD
+      '.example.com', // Starts with dot
+      'example.com.', // Ends with dot
+      'example..com', // Consecutive dots
+      '-example.com', // Starts with hyphen
+      'example-.com', // Ends with hyphen
+      'example.c', // TLD too short
+      'example.123', // Numeric TLD
+      '', // Empty string
+      'example .com', // Contains space
+    ]
+
+    for (const domain of invalidDomains) {
+      const result = domainSchema.safeParse(domain)
+      expect(result.success, `Expected invalid domain: ${domain}`).toBe(false)
+    }
+  })
+})
+
+describe('domainFrameConfigSchema canonicalDomain validation', () => {
+  const baseConfig = {
+    version: '1' as const,
+    name: 'Test App',
+    iconUrl: 'https://example.com/icon.png',
+    homeUrl: 'https://example.com/home',
+  }
+
+  test('valid when canonicalDomain is a valid domain', () => {
+    const result = domainFrameConfigSchema.safeParse({
+      ...baseConfig,
+      canonicalDomain: 'app.example.com',
+    })
+    expect(result.success).toBe(true)
+  })
+
+  test('invalid when canonicalDomain contains protocol', () => {
+    const result = domainFrameConfigSchema.safeParse({
+      ...baseConfig,
+      canonicalDomain: 'https://app.example.com',
+    })
+    expect(result.success).toBe(false)
   })
 })

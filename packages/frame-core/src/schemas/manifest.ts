@@ -3,6 +3,7 @@ import { miniAppHostCapabilityList } from '../types.ts'
 import {
   buttonTitleSchema,
   createSimpleStringSchema,
+  domainSchema,
   encodedJsonFarcasterSignatureSchema,
   frameNameSchema,
   hexColorSchema,
@@ -98,6 +99,8 @@ export const domainFrameConfigSchema = z
     /** see https://github.com/farcasterxyz/miniapps/discussions/158 */
     /** Documentation will be added once this feature is finalized. */
     castShareUrl: secureUrlSchema.optional(),
+    /** Canonical domain for the frame application */
+    canonicalDomain: domainSchema.optional(),
   })
   .refine(
     (data) => {
