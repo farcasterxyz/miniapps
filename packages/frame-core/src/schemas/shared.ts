@@ -40,6 +40,9 @@ export const secureUrlSchema = z
   .url()
   .startsWith('https://', { message: 'Must be an https url' })
   .max(1024)
+  .refine((url) => !url.includes(' '), {
+    message: 'URL must not contain spaces',
+  })
 
 export const frameNameSchema = z.string().max(32)
 export const buttonTitleSchema = z.string().max(32)
