@@ -1,0 +1,37 @@
+{
+  "name": "@farcaster/miniapp-wagmi-connector",
+  "version": "0.0.53",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/farcasterxyz/frames.git",
+    "directory": "packages/miniapp-wagmi-connector"
+  },
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "prebuild": "npm run clean",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "devDependencies": {
+    "@farcaster/miniapp-sdk": "workspace:*",
+    "@farcaster/tsconfig": "workspace:*",
+    "@wagmi/core": "^2.16.3",
+    "typescript": "^5.8.3",
+    "viem": "^2.21.57"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@farcaster/miniapp-sdk": "^0.0.64",
+    "@wagmi/core": "^2.14.1",
+    "viem": "^2.21.55"
+  }
+}

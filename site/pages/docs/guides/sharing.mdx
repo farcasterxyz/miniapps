@@ -31,11 +31,13 @@ Add a meta tag in the `<head>` section of the page you want to make
 sharable specifying the embed metadata:
 
 ```html
-<meta name="fc:frame" content="<stringified FrameEmbed JSON>" />
+<meta name="fc:miniapp" content="<stringified MiniAppEmbed JSON>" />
+<!-- For backward compatibility -->
+<meta name="fc:frame" content="<stringified MiniAppEmbed JSON>" />
 ```
 
 When a user shares the URL with your embed on it in a Farcaster client, the
-Farcaster client will fetch the HTML, see the `fc:frame` meta tag, and use it
+Farcaster client will fetch the HTML, see the `fc:miniapp` (or `fc:frame` for backward compatibility) meta tag, and use it
 to render a rich card.
 
 
@@ -65,7 +67,7 @@ to the user what action they can take in your app.
 
 ### `button.action.type`
 
-The string literal `'launch_frame'`.
+The string literal `'launch_miniapp'` (or `'launch_frame'` for backward compatibility).
 
 
 ### `button.action.url` (optional)
@@ -90,13 +92,13 @@ Splash image Color. Defaults to `splashBackgroundColor` specified in your applic
 ## Example
 
 ```typescript
-const frame = {
+const miniapp = {
   version: "next",
   imageUrl: "https://yoink.party/framesV2/opengraph-image",
   button: {
     title: "🚩 Start",
     action: {
-      type: "launch_frame",
+      type: "launch_miniapp",
       url: "https://yoink.party/framesV2",
       name:"Yoink!",
       splashImageUrl: "https://yoink.party/logo.png",
@@ -110,6 +112,8 @@ const frame = {
 <html lang="en">
   <head>
     <!-- head content -->
+    <meta name="fc:miniapp" content='{"version":"next","imageUrl":"https://yoink.party/framesV2/opengraph-image","button":{"title":"🚩 Start","action":{"type":"launch_miniapp","name":"Yoink!","url":"https://yoink.party/framesV2","splashImageUrl":"https://yoink.party/logo.png","splashBackgroundColor":"#f5f0ec"}}}' />
+    <!-- For backward compatibility -->
     <meta name="fc:frame" content='{"version":"next","imageUrl":"https://yoink.party/framesV2/opengraph-image","button":{"title":"🚩 Start","action":{"type":"launch_frame","name":"Yoink!","url":"https://yoink.party/framesV2","splashImageUrl":"https://yoink.party/logo.png","splashBackgroundColor":"#f5f0ec"}}}' />
   </head>
   <body>
@@ -152,9 +156,9 @@ that URL gets changed.
 
 ### Lifecycle
 
-1. App adds an `fc:frame` meta tag to a page to make it sharable.
+1. App adds an `fc:miniapp` (and optionally `fc:frame` for backward compatibility) meta tag to a page to make it sharable.
 2. User copies URL and embeds it in a cast.
-3. Farcaster client fetches the URL and attaches the frame metadata to the cast.
+3. Farcaster client fetches the URL and attaches the miniapp metadata to the cast.
 4. Farcaster client injects the cast + embed + attached metadata into thousands of feeds.
 5. User sees cast in feed with an embed rendered from the attached metadata.
 

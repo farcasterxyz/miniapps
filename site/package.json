@@ -8,10 +8,10 @@
     "preview": "vocs preview"
   },
   "devDependencies": {
-    "@farcaster/frame-core": "workspace:*",
-    "@farcaster/frame-node": "workspace:*",
-    "@farcaster/frame-sdk": "workspace:*",
-    "@farcaster/frame-wagmi-connector": "workspace:*",
+    "@farcaster/miniapp-core": "workspace:*",
+    "@farcaster/miniapp-node": "workspace:*",
+    "@farcaster/miniapp-sdk": "workspace:*",
+    "@farcaster/miniapp-wagmi-connector": "workspace:*",
     "@farcaster/quick-auth": "^0.0.4",
     "@types/react": "latest",
     "react": "latest",

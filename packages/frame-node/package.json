@@ -33,7 +33,7 @@
     "vitest": "^2.1.9"
   },
   "dependencies": {
-    "@farcaster/frame-core": "workspace:*",
+    "@farcaster/miniapp-node": "workspace:*",
     "@noble/curves": "^1.7.0",
     "ox": "^0.4.4",
     "zod": "^3.24.1"

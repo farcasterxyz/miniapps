@@ -154,7 +154,7 @@ export default defineConfig({
             items: [
               {
                 text: 'addMiniApp',
-                link: '/docs/sdk/actions/add-frame',
+                link: '/docs/sdk/actions/add-miniapp',
               },
               {
                 text: 'close',

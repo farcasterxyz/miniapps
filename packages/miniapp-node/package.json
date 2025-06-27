@@ -1,0 +1,44 @@
+{
+  "name": "@farcaster/miniapp-node",
+  "version": "0.0.41",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/farcasterxyz/frames.git",
+    "directory": "packages/miniapp-node"
+  },
+  "main": "dist/index.js",
+  "module": "esm/index.js",
+  "scripts": {
+    "clean": "rm -rf dist esm",
+    "prebuild": "npm run clean",
+    "build": "pnpm build:cjs & pnpm build:esm",
+    "build:cjs": "tsc -p tsconfig.node.json",
+    "build:esm": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest --coverage"
+  },
+  "files": [
+    "dist",
+    "esm",
+    "src"
+  ],
+  "devDependencies": {
+    "@farcaster/tsconfig": "workspace:*",
+    "@types/node": "^22.10.2",
+    "@vitest/coverage-v8": "^2.1.8",
+    "typescript": "^5.8.3",
+    "vitest": "^2.1.9"
+  },
+  "dependencies": {
+    "@farcaster/miniapp-core": "workspace:*",
+    "@noble/curves": "^1.7.0",
+    "ox": "^0.4.4",
+    "zod": "^3.24.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
