@@ -2,6 +2,7 @@ import { describe, expect, test } from 'vitest'
 import {
   actionLaunchFrameSchema,
   actionSchema,
+  frameEmbedNextSchema,
 } from '../../src/schemas/embeds.ts'
 
 describe('actionLaunchFrameSchema', () => {
@@ -75,5 +76,65 @@ describe('actionViewTokenSchema', () => {
       })
       expect(result.success, `Expected invalid CAIP-19: ${id}`).toBe(false)
     }
+  })
+})
+
+describe('frameEmbedNextSchema', () => {
+  const baseEmbed = {
+    imageUrl: 'https://example.com/image.png',
+    button: {
+      title: 'Click me',
+      action: {
+        type: 'launch_frame' as const,
+        name: 'Test',
+        url: 'https://example.com/frame',
+      },
+    },
+  }
+
+  test('valid with version "next"', () => {
+    const result = frameEmbedNextSchema.safeParse({
+      ...baseEmbed,
+      version: 'next',
+    })
+    expect(result.success).toBe(true)
+  })
+
+  test('valid with version "1"', () => {
+    const result = frameEmbedNextSchema.safeParse({
+      ...baseEmbed,
+      version: '1',
+    })
+    expect(result.success).toBe(true)
+  })
+
+  test('invalid with other version values', () => {
+    const invalidVersions = ['0', '2', '0.0.1', 'v1', 'latest']
+
+    for (const version of invalidVersions) {
+      const result = frameEmbedNextSchema.safeParse({
+        ...baseEmbed,
+        version,
+      })
+      expect(result.success, `Expected invalid version: ${version}`).toBe(false)
+    }
+  })
+
+  test('valid with aspectRatio', () => {
+    const result = frameEmbedNextSchema.safeParse({
+      ...baseEmbed,
+      version: '1',
+      aspectRatio: '1:1',
+    })
+    expect(result.success).toBe(true)
+  })
+
+  test('imageUrl must be secure URL', () => {
+    const result = frameEmbedNextSchema.safeParse({
+      ...baseEmbed,
+      version: '1',
+      imageUrl: 'http://example.com/image.png', // not https
+    })
+    expect(result.success).toBe(false)
   })
 })

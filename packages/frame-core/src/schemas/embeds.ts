@@ -32,7 +32,7 @@ export const buttonSchema = z.object({
 })
 
 export const frameEmbedNextSchema = z.object({
-  version: z.literal('next'),
+  version: z.union([z.literal('next'), z.literal('1')]),
   imageUrl: secureUrlSchema,
   aspectRatio: aspectRatioSchema.optional(),
   button: buttonSchema,
