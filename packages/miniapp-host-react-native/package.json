@@ -1,0 +1,37 @@
+{
+  "name": "@farcaster/miniapp-host-react-native",
+  "version": "0.0.54",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/farcasterxyz/frames.git",
+    "directory": "packages/miniapp-host-react-native"
+  },
+  "main": "dist/index.js",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "prebuild": "npm run clean",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "devDependencies": {
+    "@farcaster/tsconfig": "workspace:*",
+    "@types/react": "^18.3.18",
+    "react": "^18.3.1",
+    "react-native": "^0.76.5",
+    "react-native-webview": "^13.13.5",
+    "typescript": "^5.8.3"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-native-webview": ">=13.0.0"
+  },
+  "dependencies": {
+    "@farcaster/miniapp-host": "workspace:*",
+    "ox": "^0.4.4"
+  }
+}

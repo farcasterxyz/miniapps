@@ -1,5 +1,5 @@
-import type { SolanaWireRequestFn } from '@farcaster/frame-core'
-import { frameHost, sdk } from '@farcaster/frame-sdk'
+import type { SolanaWireRequestFn } from '@farcaster/miniapp-core'
+import { miniAppHost, sdk } from '@farcaster/miniapp-sdk'
 import { base58 } from '@scure/base'
 import {
   SignAndSendAllTransactions,
@@ -186,14 +186,14 @@ export class FarcasterSolanaWallet implements Wallet {
 
   async signSingleTransaction(input: SolanaSignTransactionInput) {
     const provider = await sdk.wallet.getSolanaProvider()
-    if (!provider || !frameHost.solanaProviderRequest) {
-      // We check the provider to make sure that the frame host has the
-      // capability, but we use the frame host directly below to avoid
+    if (!provider || !miniAppHost.solanaProviderRequest) {
+      // We check the provider to make sure that the miniapp host has the
+      // capability, but we use the miniapp host directly below to avoid
       // unnecessary serialization/unserialization steps
       throw new Error('could not get Solana provider')
     }
     const solanaProviderRequest =
-      frameHost.solanaProviderRequest as unknown as SolanaWireRequestFn
+      miniAppHost.solanaProviderRequest as unknown as SolanaWireRequestFn
     const { transaction } = input
     const transactionStr = Buffer.from(transaction).toString('base64')
     const { signedTransaction } = await solanaProviderRequest({
@@ -217,14 +217,14 @@ export class FarcasterSolanaWallet implements Wallet {
 
   async signAndSendSingleTransaction(input: SolanaSignAndSendTransactionInput) {
     const provider = await sdk.wallet.getSolanaProvider()
-    if (!provider || !frameHost.solanaProviderRequest) {
-      // We check the provider to make sure that the frame host has the
-      // capability, but we use the frame host directly below to avoid
+    if (!provider || !miniAppHost.solanaProviderRequest) {
+      // We check the provider to make sure that the miniapp host has the
+      // capability, but we use the miniapp host directly below to avoid
       // unnecessary serialization/unserialization steps
       throw new Error('could not get Solana provider')
     }
     const solanaProviderRequest =
-      frameHost.solanaProviderRequest as unknown as SolanaWireRequestFn
+      miniAppHost.solanaProviderRequest as unknown as SolanaWireRequestFn
     const { transaction } = input
     const transactionStr = Buffer.from(transaction).toString('base64')
     const { signature } = await solanaProviderRequest({

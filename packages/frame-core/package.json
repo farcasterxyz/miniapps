@@ -32,6 +32,7 @@
     "vitest": "^2.1.9"
   },
   "dependencies": {
+    "@farcaster/miniapp-core": "workspace:*",
     "@solana/web3.js": "^1.98.2",
     "ox": "^0.4.4",
     "zod": "^3.24.1"

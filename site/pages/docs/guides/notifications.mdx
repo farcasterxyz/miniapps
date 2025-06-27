@@ -71,7 +71,7 @@ Define the `webhookUrl` property in your app's configuration in `farcaster.json`
     "payload": "eyJkb21haW4iOiJleGFtcGxlLmNvbSJ9",
     "signature": "MHg3NmRkOWVlMjE4OGEyMjliNzExZjUzOTkxYTc1NmEzMGZjNTA3NmE5OTU5OWJmOWFmYjYyMzAyZWQxMWQ2MWFmNTExYzlhYWVjNjQ3OWMzODcyMTI5MzA2YmJhYjdhMTE0MmRhMjA4MmNjNTM5MTJiY2MyMDRhMWFjZTY2NjE5OTFj"
   },
-  "frame": {
+  "miniapp": {
     "version": "1",
     "name": "Example App",
     "iconUrl": "https://example.com/icon.png",
@@ -97,7 +97,7 @@ For a Mini App to send notifications, it needs to first be added by a user to
 their Farcaster client and for notifications to be enabled (these will be
 enabled by default). 
 
-Use the [addMiniApp](/docs/sdk/actions/add-frame) action while a user is using your app to prompt
+Use the [addMiniApp](/docs/sdk/actions/add-miniapp) action while a user is using your app to prompt
 them to add it:
 
 
@@ -141,10 +141,10 @@ import SendNotificationResponseSchema from '../../../snippets/sendNotificationRe
 When a user clicks the notification, the Farcaster client will:
 
 - Open your Mini App at `targetUrl`
-- Set the `context.location` to a `FrameLocationNotificationContext`
+- Set the `context.location` to a `MiniAppLocationNotificationContext`
 
 ```ts
-export type FrameLocationNotificationContext = {
+export type MiniAppLocationNotificationContext = {
   type: 'notification';
   notification: {
     notificationId: string;
@@ -199,7 +199,7 @@ on behalf of your application.
 
 ### Events
 
-#### frame_added
+#### miniapp_added
 
 Sent when the user adds the Mini App to their Farcaster client (whether or not
 this was triggered by an `addMiniApp()` prompt).
@@ -211,7 +211,7 @@ client equates adding to enabling notifications (Warpcast does this).
 
 ```json
 {
-  "event": "frame_added",
+  "event": "miniapp_added",
   "notificationDetails": {
     "url": "https://api.farcaster.xyz/v1/frame-notifications",
     "token": "a05059ef2415c67b08ecceb539201cbc6"
@@ -219,7 +219,7 @@ client equates adding to enabling notifications (Warpcast does this).
 }
 ```
 
-#### frame_removed
+#### miniapp_removed
 
 Sent when a user removes a mini app, which means that any notification tokens for
 that fid and client app (based on signer requester) should be considered
@@ -229,7 +229,7 @@ invalid:
 
 ```json
 {
-  "event": "frame_removed"
+  "event": "miniapp_removed"
 }
 ```
 

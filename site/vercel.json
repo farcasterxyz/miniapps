@@ -16,8 +16,8 @@
       "statusCode": 301
     },
     {
-      "source": "/docs/actions/add-frame",
-      "destination": "/docs/sdk/actions/add-frame",
+      "source": "/docs/actions/add-miniapp",
+      "destination": "/docs/sdk/actions/add-miniapp",
       "statusCode": 301
     },
     {

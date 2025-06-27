@@ -15,15 +15,15 @@ If your Mini App relies on certain blockchains or SDK methods, you can declare t
 
 ### `requiredChains`
 
-`frame.requiredChains` is an optional [manifest](/docs/guides/publishing#host-a-manifest-file) property that contains an array of [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md) identifiers. If the host does not support all of the chains declared here, it will know not to try rendering your Mini App.
+`miniapp.requiredChains` is an optional [manifest](/docs/guides/publishing#host-a-manifest-file) property that contains an array of [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md) identifiers. If the host does not support all of the chains declared here, it will know not to try rendering your Mini App.
 
-Note that only the chains listed in `chainList` [here](https://github.com/farcasterxyz/miniapps/blob/main/packages/frame-core/src/schemas/manifest.ts) are supported. If your manifest omits `requiredChains`, then the frame host will assume that no chains are required.
+Note that only the chains listed in `chainList` [here](https://github.com/farcasterxyz/miniapps/blob/main/packages/miniapp-core/src/schemas/manifest.ts) are supported. If your manifest omits `requiredChains`, then the mini app host will assume that no chains are required.
 
 ### `requiredCapabilities`
 
-`frame.requiredCapabilities` is an optional [manifest](/docs/guides/publishing#host-a-manifest-file) property that contains an array of paths to SDK methods, such as `wallet.getEthereumProvider` or `actions.composeCast`. If the host does not support all of the capabilities declared here, it will know not to try rendering your Mini App.
+`miniapp.requiredCapabilities` is an optional [manifest](/docs/guides/publishing#host-a-manifest-file) property that contains an array of paths to SDK methods, such as `wallet.getEthereumProvider` or `actions.composeCast`. If the host does not support all of the capabilities declared here, it will know not to try rendering your Mini App.
 
-The full list of supported SDK methods can be found in `miniAppHostCapabilityList` [here](https://github.com/farcasterxyz/miniapps/blob/main/packages/frame-core/src/types.ts). If your manifest omits `requiredCapabilities`, then the frame host will assume that no capabilities are required.
+The full list of supported SDK methods can be found in `miniAppHostCapabilityList` [here](https://github.com/farcasterxyz/miniapps/blob/main/packages/miniapp-core/src/types.ts). If your manifest omits `requiredCapabilities`, then the mini app host will assume that no capabilities are required.
 
 ## Runtime detection
 
@@ -40,7 +40,7 @@ This SDK method returns a list of supported SDK methods as an array of paths to 
 #### Example
 
 ```ts twoslash
-import { sdk } from '@farcaster/frame-sdk'
+import { sdk } from '@farcaster/miniapp-sdk'
 
 // Get all supported capabilities
 const capabilities = await sdk.getCapabilities()

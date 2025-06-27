@@ -1,11 +1,36 @@
-import { sdk } from './sdk.ts'
+// Deprecation warning
+if (typeof console !== 'undefined' && console.warn) {
+  console.warn(
+    '[DEPRECATION WARNING] @farcaster/frame-sdk is deprecated. Please migrate to @farcaster/miniapp-sdk. ' +
+    'See https://github.com/farcasterxyz/frames/blob/main/MIGRATION.md for migration guide.'
+  )
+}
 
-export * from './frameHost.ts'
-export * from './sdk.ts'
-export * from '@farcaster/frame-core'
+// Re-export everything from miniapp-sdk
+export * from '@farcaster/miniapp-sdk'
 
-export * as QuickAuth from './quickAuth.ts'
+// Import for aliasing
+import { sdk as miniAppSdk, miniAppHost } from '@farcaster/miniapp-sdk'
 
-export { quickAuth } from './quickAuth.ts'
+// Backward compatibility exports
+export const sdk = miniAppSdk
 
+// Create a proxy for frameHost that logs deprecation warning on first access
+let frameHostWarningShown = false
+export const frameHost = new Proxy(miniAppHost, {
+  get(target, prop, receiver) {
+    if (!frameHostWarningShown && typeof console !== 'undefined' && console.warn) {
+      console.warn(
+        '[DEPRECATION WARNING] frameHost is deprecated. Please use miniAppHost instead. ' +
+        'Import from @farcaster/miniapp-sdk and use miniAppHost.'
+      )
+      frameHostWarningShown = true
+    }
+    return Reflect.get(target, prop, receiver)
+  }
+})
+
+export type FrameSDK = typeof miniAppSdk
+
+// Default export
 export default sdk
