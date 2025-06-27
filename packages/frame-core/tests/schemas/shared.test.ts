@@ -2,6 +2,7 @@ import { describe, expect, test } from 'vitest'
 import {
   createSimpleStringSchema,
   domainSchema,
+  secureUrlSchema,
 } from '../../src/schemas/shared.ts'
 
 describe('createSimpleStringSchema', () => {
@@ -105,6 +106,74 @@ describe('domainSchema', () => {
     for (const domain of invalidDomains) {
       const result = domainSchema.safeParse(domain)
       expect(result.success, `Expected invalid domain: ${domain}`).toBe(false)
+    }
+  })
+})
+
+describe('secureUrlSchema', () => {
+  test('valid URLs', () => {
+    const validUrls = [
+      'https://example.com',
+      'https://sub.example.com/path',
+      'https://example.com:443/path?query=value',
+      'https://example.co.uk/path#anchor',
+    ]
+
+    for (const url of validUrls) {
+      const result = secureUrlSchema.safeParse(url)
+      expect(result.success, `Expected valid URL: ${url}`).toBe(true)
+    }
+  })
+
+  test('invalid URLs without https', () => {
+    const invalidUrls = [
+      'http://example.com',
+      'ftp://example.com',
+      'ws://example.com',
+    ]
+
+    for (const url of invalidUrls) {
+      const result = secureUrlSchema.safeParse(url)
+      expect(result.success, `Expected invalid URL: ${url}`).toBe(false)
+    }
+  })
+
+  test('invalid URLs with spaces', () => {
+    const result = secureUrlSchema.safeParse(
+      'https://example.com https://example.com',
+    )
+    expect(result.success).toBe(false)
+  })
+
+  test('invalid URLs with IP addresses', () => {
+    const ipUrls = [
+      'https://192.168.1.1',
+      'https://10.0.0.1/path',
+      'https://172.16.0.1:8080',
+      'https://127.0.0.1',
+      'https://[::1]',
+      'https://[2001:db8::1]/path',
+      'https://[fe80::1%25en0]',
+    ]
+
+    for (const url of ipUrls) {
+      const result = secureUrlSchema.safeParse(url)
+      expect(result.success, `Expected invalid URL: ${url}`).toBe(false)
+    }
+  })
+
+  test('invalid URLs with localhost', () => {
+    const localhostUrls = [
+      'https://localhost',
+      'https://localhost:3000',
+      'https://localhost/path',
+      'https://test.localhost',
+      'https://dev.localhost:8080',
+    ]
+
+    for (const url of localhostUrls) {
+      const result = secureUrlSchema.safeParse(url)
+      expect(result.success, `Expected invalid URL: ${url}`).toBe(false)
     }
   })
 })

@@ -61,7 +61,7 @@ describe('domainFrameConfigSchema canonicalDomain validation', () => {
   })
 })
 
-describe('domainFrameConfigSchema URL fields with spaces', () => {
+describe('domainFrameConfigSchema URL field validation', () => {
   const baseConfig = {
     version: '1' as const,
     name: 'Test App',
@@ -69,70 +69,40 @@ describe('domainFrameConfigSchema URL fields with spaces', () => {
     homeUrl: 'https://example.com/home',
   }
 
-  test('invalid when iconUrl contains spaces', () => {
-    const result = domainFrameConfigSchema.safeParse({
-      ...baseConfig,
-      iconUrl: 'https://example.com https://example.com',
-    })
-    expect(result.success).toBe(false)
+  test('URL fields use secureUrlSchema validation', () => {
+    // Test that required URL fields reject invalid URLs
+    const requiredFields = ['iconUrl', 'homeUrl']
+    for (const field of requiredFields) {
+      const result = domainFrameConfigSchema.safeParse({
+        ...baseConfig,
+        [field]: 'http://example.com', // not https
+      })
+      expect(result.success).toBe(false)
+    }
   })
 
-  test('invalid when homeUrl contains spaces', () => {
-    const result = domainFrameConfigSchema.safeParse({
-      ...baseConfig,
-      homeUrl: 'https://example.com https://example.com',
-    })
-    expect(result.success).toBe(false)
+  test('optional URL fields use secureUrlSchema validation', () => {
+    // Test one invalid URL for each optional field to verify validation is applied
+    const optionalUrlFields = [
+      'splashImageUrl',
+      'webhookUrl',
+      'heroImageUrl',
+      'ogImageUrl',
+    ]
+
+    for (const field of optionalUrlFields) {
+      const result = domainFrameConfigSchema.safeParse({
+        ...baseConfig,
+        [field]: 'invalid-url',
+      })
+      expect(result.success).toBe(false)
+    }
   })
 
-  test('invalid when splashImageUrl contains spaces', () => {
+  test('screenshotUrls array uses secureUrlSchema validation', () => {
     const result = domainFrameConfigSchema.safeParse({
       ...baseConfig,
-      splashImageUrl:
-        'https://example.com/image.png https://example.com/image.png',
-    })
-    expect(result.success).toBe(false)
-  })
-
-  test('invalid when webhookUrl contains spaces', () => {
-    const result = domainFrameConfigSchema.safeParse({
-      ...baseConfig,
-      webhookUrl: 'https://example.com/webhook https://example.com/webhook',
-    })
-    expect(result.success).toBe(false)
-  })
-
-  test('invalid when castShareUrl contains spaces', () => {
-    const result = domainFrameConfigSchema.safeParse({
-      ...baseConfig,
-      castShareUrl: 'https://example.com/share https://example.com/share',
-    })
-    expect(result.success).toBe(false)
-  })
-
-  test('invalid when heroImageUrl contains spaces', () => {
-    const result = domainFrameConfigSchema.safeParse({
-      ...baseConfig,
-      heroImageUrl: 'https://example.com/hero.jpg https://example.com/hero.jpg',
-    })
-    expect(result.success).toBe(false)
-  })
-
-  test('invalid when ogImageUrl contains spaces', () => {
-    const result = domainFrameConfigSchema.safeParse({
-      ...baseConfig,
-      ogImageUrl: 'https://example.com/og.png https://example.com/og.png',
-    })
-    expect(result.success).toBe(false)
-  })
-
-  test('invalid when screenshotUrls contains URLs with spaces', () => {
-    const result = domainFrameConfigSchema.safeParse({
-      ...baseConfig,
-      screenshotUrls: [
-        'https://example.com/screenshot1.png',
-        'https://example.com/screenshot2.png https://example.com/screenshot2.png',
-      ],
+      screenshotUrls: ['https://example.com/valid.png', 'not-a-url'],
     })
     expect(result.success).toBe(false)
   })
