@@ -1,5 +1,11 @@
 # @farcaster/create-mini-app
 
+## 0.0.9
+
+### Patch Changes
+
+- [#402](https://github.com/farcasterxyz/miniapps/pull/402) [`0f94fc1`](https://github.com/farcasterxyz/miniapps/commit/0f94fc15b590a551dffb545be9f04fcf9ea41689) Thanks [@PirosB3](https://github.com/PirosB3)! - Enforce Node.js version
+
 ## 0.0.8
 
 ### Patch Changes
