@@ -101,6 +101,10 @@ export default defineConfig({
             link: '/docs/guides/publishing',
           },
           {
+            text: 'App Discovery & Search',
+            link: '/docs/guides/discovery',
+          },
+          {
             text: 'Domain migration',
             link: '/docs/guides/domain-migration',
           },
