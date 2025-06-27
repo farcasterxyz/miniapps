@@ -14,6 +14,18 @@ and used within Farcaster clients. You can use an SDK to access native
 Farcaster features, like authentication, sending notifications, and interacting
 with the user's wallet. 
 
+## Requirements
+
+Before getting started, make sure you have:
+
+- **Node.js 22.11.0 or higher** (LTS version recommended)
+  - Check your version: `node --version`
+  - Download from [nodejs.org](https://nodejs.org/)
+- A package manager (npm, pnpm, or yarn)
+
+:::warning
+If you encounter installation errors, verify you're using Node.js 22.11.0 or higher. Earlier versions are not supported.
+:::
 
 ## Quick Start
 
@@ -77,6 +89,31 @@ the bottom of your HTML file with the following content.
 </script>
 ```
 
+## Troubleshooting
+
+### Node.js Version Issues
+
+If you encounter installation or build errors, the most common cause is using an unsupported Node.js version.
+
+**Common error messages:**
+- `npm ERR! engine Unsupported platform`
+- `npm ERR! peer dep missing`
+- Build failures with cryptic error messages
+- Package installation failures
+
+**Solution:**
+1. Check your Node.js version:
+   ```bash
+   node --version
+   ```
+
+2. If you're using Node.js < 22.11.0, update to the latest LTS version:
+   - Visit [nodejs.org](https://nodejs.org/) to download the latest LTS
+   - Or use a version manager like `nvm`:
+     ```bash
+     nvm install --lts
+     nvm use --lts
+     ```
 
 ## Building with AI
 
