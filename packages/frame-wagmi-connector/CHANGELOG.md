@@ -1,5 +1,14 @@
 # @farcaster/frame-wagmi-connector
 
+## 0.0.54
+
+### Patch Changes
+
+- [#402](https://github.com/farcasterxyz/miniapps/pull/402) [`0f94fc1`](https://github.com/farcasterxyz/miniapps/commit/0f94fc15b590a551dffb545be9f04fcf9ea41689) Thanks [@PirosB3](https://github.com/PirosB3)! - Enforce Node.js version
+
+- Updated dependencies [[`0f94fc1`](https://github.com/farcasterxyz/miniapps/commit/0f94fc15b590a551dffb545be9f04fcf9ea41689)]:
+  - @farcaster/frame-sdk@0.0.65
+
 ## 0.0.53
 
 ### Patch Changes

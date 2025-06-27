@@ -1,5 +1,15 @@
 # @farcaster/mini-app-solana
 
+## 0.0.21
+
+### Patch Changes
+
+- [#402](https://github.com/farcasterxyz/miniapps/pull/402) [`0f94fc1`](https://github.com/farcasterxyz/miniapps/commit/0f94fc15b590a551dffb545be9f04fcf9ea41689) Thanks [@PirosB3](https://github.com/PirosB3)! - Enforce Node.js version
+
+- Updated dependencies [[`e877930`](https://github.com/farcasterxyz/miniapps/commit/e877930e60f7980bf7d434c77c28f4416c6e5b2d), [`902c49d`](https://github.com/farcasterxyz/miniapps/commit/902c49da52b650249dcb9086804594d3e45d6ed0), [`0f94fc1`](https://github.com/farcasterxyz/miniapps/commit/0f94fc15b590a551dffb545be9f04fcf9ea41689), [`5e4a0e4`](https://github.com/farcasterxyz/miniapps/commit/5e4a0e45df3b4fad38c80930c89b76a61b321d52)]:
+  - @farcaster/frame-core@0.2.1
+  - @farcaster/frame-sdk@0.0.65
+
 ## 0.0.20
 
 ### Patch Changes
