@@ -1,12 +1,12 @@
-import { z } from 'zod'
+import { z } from 'zod/v4'
 import { miniAppHostCapabilityList } from '../types.ts'
 import {
   buttonTitleSchema,
   createSimpleStringSchema,
   domainSchema,
   encodedJsonFarcasterSignatureSchema,
-  miniAppNameSchema,
   hexColorSchema,
+  miniAppNameSchema,
   secureUrlSchema,
 } from './shared.ts'
 
@@ -119,18 +119,24 @@ export const domainMiniAppConfigSchema = z
     },
   )
 
-export const domainManifestSchema = z.object({
-  accountAssociation: encodedJsonFarcasterSignatureSchema,
-  miniapp: domainMiniAppConfigSchema.optional(),
-  // Support both 'frame' and 'miniapp' during transition period
-  frame: domainMiniAppConfigSchema.optional(),
-}).refine((data) => {
-  // If both are provided, they must be identical
-  if (data.frame && data.miniapp) {
-    return JSON.stringify(data.frame) === JSON.stringify(data.miniapp)
-  }
-  return true
-}, {
-  message: 'If both "frame" and "miniapp" are provided, they must be identical',
-  path: ['frame', 'miniapp']
-})
+export const domainManifestSchema = z
+  .object({
+    accountAssociation: encodedJsonFarcasterSignatureSchema,
+    miniapp: domainMiniAppConfigSchema.optional(),
+    // Support both 'frame' and 'miniapp' during transition period
+    frame: domainMiniAppConfigSchema.optional(),
+  })
+  .refine(
+    (data) => {
+      // If both are provided, they must be identical
+      if (data.frame && data.miniapp) {
+        return JSON.stringify(data.frame) === JSON.stringify(data.miniapp)
+      }
+      return true
+    },
+    {
+      message:
+        'If both "frame" and "miniapp" are provided, they must be identical',
+      path: ['frame', 'miniapp'],
+    },
+  )

@@ -47,7 +47,7 @@ to render a rich card.
 
 ### `version`
 
-The string literal `'next'`.
+The string literal `'1'`.
 
 
 ### `imageUrl`
@@ -93,7 +93,7 @@ Splash image Color. Defaults to `splashBackgroundColor` specified in your applic
 
 ```typescript
 const miniapp = {
-  version: "next",
+  version: "1",
   imageUrl: "https://yoink.party/framesV2/opengraph-image",
   button: {
     title: "🚩 Start",
@@ -112,9 +112,9 @@ const miniapp = {
 <html lang="en">
   <head>
     <!-- head content -->
-    <meta name="fc:miniapp" content='{"version":"next","imageUrl":"https://yoink.party/framesV2/opengraph-image","button":{"title":"🚩 Start","action":{"type":"launch_miniapp","name":"Yoink!","url":"https://yoink.party/framesV2","splashImageUrl":"https://yoink.party/logo.png","splashBackgroundColor":"#f5f0ec"}}}' />
+    <meta name="fc:miniapp" content='{"version":"1","imageUrl":"https://yoink.party/framesV2/opengraph-image","button":{"title":"🚩 Start","action":{"type":"launch_miniapp","name":"Yoink!","url":"https://yoink.party/framesV2","splashImageUrl":"https://yoink.party/logo.png","splashBackgroundColor":"#f5f0ec"}}}' />
     <!-- For backward compatibility -->
-    <meta name="fc:frame" content='{"version":"next","imageUrl":"https://yoink.party/framesV2/opengraph-image","button":{"title":"🚩 Start","action":{"type":"launch_frame","name":"Yoink!","url":"https://yoink.party/framesV2","splashImageUrl":"https://yoink.party/logo.png","splashBackgroundColor":"#f5f0ec"}}}' />
+    <meta name="fc:frame" content='{"version":"1","imageUrl":"https://yoink.party/framesV2/opengraph-image","button":{"title":"🚩 Start","action":{"type":"launch_frame","name":"Yoink!","url":"https://yoink.party/framesV2","splashImageUrl":"https://yoink.party/logo.png","splashBackgroundColor":"#f5f0ec"}}}' />
   </head>
   <body>
     <!-- page content -->

@@ -4,7 +4,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/farcasterxyz/frames.git",
+    "url": "https://github.com/farcasterxyz/miniapps.git",
     "directory": "packages/frame-core"
   },
   "main": "dist/index.js",
@@ -15,10 +15,7 @@
     "build": "pnpm build:cjs & pnpm build:esm",
     "build:cjs": "tsc -p tsconfig.node.json",
     "build:esm": "tsc -p tsconfig.json",
-    "typecheck": "tsc --noEmit",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest --coverage"
+    "typecheck": "tsc --noEmit"
   },
   "files": [
     "dist",
@@ -35,7 +32,7 @@
     "@farcaster/miniapp-core": "workspace:*",
     "@solana/web3.js": "^1.98.2",
     "ox": "^0.4.4",
-    "zod": "^3.24.1"
+    "zod": "^3.25.0"
   },
   "publishConfig": {
     "access": "public"

@@ -124,6 +124,8 @@ export type MiniAppConfig = {
  * Helper function to get the MiniApp config from a manifest,
  * supporting both 'miniapp' and 'frame' properties during the transition period
  */
-export function getMiniAppConfig(manifest: Manifest): MiniAppConfig | undefined {
+export function getMiniAppConfig(
+  manifest: Manifest,
+): MiniAppConfig | undefined {
   return manifest.miniapp || manifest.frame
 }

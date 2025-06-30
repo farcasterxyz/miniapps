@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from 'zod/v4'
 import { secureUrlSchema } from './shared.ts'
 
 export const notificationDetailsSchema = z.object({
@@ -6,7 +6,9 @@ export const notificationDetailsSchema = z.object({
   token: z.string(),
 })
 
-export type MiniAppNotificationDetails = z.infer<typeof notificationDetailsSchema>
+export type MiniAppNotificationDetails = z.infer<
+  typeof notificationDetailsSchema
+>
 
 export const sendNotificationRequestSchema = z.object({
   notificationId: z.string().max(128),

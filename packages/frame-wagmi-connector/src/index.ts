@@ -2,7 +2,7 @@
 if (typeof console !== 'undefined' && console.warn) {
   console.warn(
     '[DEPRECATION WARNING] @farcaster/frame-wagmi-connector is deprecated. Please migrate to @farcaster/miniapp-wagmi-connector. ' +
-    'See https://github.com/farcasterxyz/frames/blob/main/MIGRATION.md for migration guide.'
+      'See https://github.com/farcasterxyz/frames/blob/main/MIGRATION.md for migration guide.',
   )
 }
 
@@ -15,10 +15,14 @@ import { farcasterFrame as _farcasterFrame } from '@farcaster/miniapp-wagmi-conn
 // Add deprecation warning when farcasterFrame is used
 let farcasterFrameWarningShown = false
 export const farcasterFrame = () => {
-  if (!farcasterFrameWarningShown && typeof console !== 'undefined' && console.warn) {
+  if (
+    !farcasterFrameWarningShown &&
+    typeof console !== 'undefined' &&
+    console.warn
+  ) {
     console.warn(
       '[DEPRECATION WARNING] farcasterFrame() is deprecated. Please use farcasterMiniApp() instead. ' +
-      'Import from @farcaster/miniapp-wagmi-connector.'
+        'Import from @farcaster/miniapp-wagmi-connector.',
     )
     farcasterFrameWarningShown = true
   }

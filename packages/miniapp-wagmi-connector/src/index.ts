@@ -1,4 +1,4 @@
-import { farcasterMiniApp, farcasterFrame } from './connector.js'
+import { farcasterFrame, farcasterMiniApp } from './connector.js'
 
 export * from './connector.js'
 

@@ -1,8 +1,11 @@
 import { describe, expect, test } from 'vitest'
-import { actionLaunchMiniAppSchema } from '../src/schemas/embeds.ts'
-import { actionSchema, createSimpleStringSchema } from '../src/schemas/index.ts'
-import { domainMiniAppConfigSchema } from '../src/schemas/manifest.ts'
-import { domainSchema } from '../src/schemas/shared.ts'
+import {
+  actionLaunchMiniAppSchema,
+  actionSchema,
+  createSimpleStringSchema,
+  domainMiniAppConfigSchema,
+  domainSchema,
+} from '../src/index.ts'
 
 describe('createSimpleStringSchema', () => {
   test('valid string', () => {

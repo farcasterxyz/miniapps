@@ -1,10 +1,10 @@
-import { z } from 'zod'
+import { z } from 'zod/v4'
 import {
   aspectRatioSchema,
   buttonTitleSchema,
   caip19TokenSchema,
-  miniAppNameSchema,
   hexColorSchema,
+  miniAppNameSchema,
   secureUrlSchema,
 } from './shared.ts'
 

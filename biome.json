@@ -8,8 +8,9 @@
       "package.json",
       "**/esm",
       "**/dist",
+      "codemods",
       "examples/hono-backend/worker-configuration.d.ts",
-      "frame-host/src/comlink",
+      "miniapp-host/src/comlink",
       "packages/create-mini-app/templates"
     ]
   },

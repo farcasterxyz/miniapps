@@ -170,10 +170,10 @@ importers:
         version: 1.98.2(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)
       ox:
         specifier: ^0.4.4
-        version: 0.4.4(typescript@5.8.3)(zod@3.25.7)
+        version: 0.4.4(typescript@5.8.3)(zod@3.25.56)
       zod:
-        specifier: ^3.24.1
-        version: 3.25.7
+        specifier: ^3.25.0
+        version: 3.25.56
     devDependencies:
       '@farcaster/tsconfig':
         specifier: workspace:*
@@ -248,10 +248,10 @@ importers:
         version: 1.9.1
       ox:
         specifier: ^0.4.4
-        version: 0.4.4(typescript@5.8.3)(zod@3.25.7)
+        version: 0.4.4(typescript@5.8.3)(zod@3.25.56)
       zod:
-        specifier: ^3.24.1
-        version: 3.25.7
+        specifier: ^3.25.0
+        version: 3.25.56
     devDependencies:
       '@farcaster/tsconfig':
         specifier: workspace:*
@@ -371,7 +371,7 @@ importers:
         specifier: ^0.4.4
         version: 0.4.4(typescript@5.8.3)(zod@3.25.56)
       zod:
-        specifier: ^3.24.1
+        specifier: ^3.25.0
         version: 3.25.56
     devDependencies:
       '@farcaster/tsconfig':
@@ -8554,9 +8554,6 @@ packages:
   zod@3.25.56:
     resolution: {integrity: sha512-rd6eEF3BTNvQnR2e2wwolfTmUTnp70aUTqr0oaGbHifzC3BKJsoV+Gat8vxUMR1hwOKBs6El+qWehrHbCpW6SQ==}
 
-  zod@3.25.7:
-    resolution: {integrity: sha512-YGdT1cVRmKkOg6Sq7vY7IkxdphySKnXhaUmFI4r4FcuFVNgpCb9tZfNwXbT6BPjD5oz0nubFsoo9pIqKrDcCvg==}
-
   zustand@5.0.0:
     resolution: {integrity: sha512-LE+VcmbartOPM+auOjCCLQOsQ05zUTp8RkgwRzefUk+2jISdMMFnxvyTjA4YNWr5ZGXYbVsEMZosttuxUBkojQ==}
     engines: {node: '>=12.20.0'}
@@ -15045,11 +15042,6 @@ snapshots:
       typescript: 5.8.3
       zod: 3.25.56
 
-  abitype@1.0.8(typescript@5.8.3)(zod@3.25.7):
-    optionalDependencies:
-      typescript: 5.8.3
-      zod: 3.25.7
-
   abort-controller@3.0.0:
     dependencies:
       event-target-shim: 5.0.1
@@ -18546,20 +18538,6 @@ snapshots:
     transitivePeerDependencies:
       - zod
 
-  ox@0.4.4(typescript@5.8.3)(zod@3.25.7):
-    dependencies:
-      '@adraffy/ens-normalize': 1.11.0
-      '@noble/curves': 1.9.1
-      '@noble/hashes': 1.8.0
-      '@scure/bip32': 1.7.0
-      '@scure/bip39': 1.6.0
-      abitype: 1.0.8(typescript@5.8.3)(zod@3.25.7)
-      eventemitter3: 5.0.1
-    optionalDependencies:
-      typescript: 5.8.3
-    transitivePeerDependencies:
-      - zod
-
   ox@0.6.7(typescript@5.8.3)(zod@3.25.56):
     dependencies:
       '@adraffy/ens-normalize': 1.11.0
@@ -20821,8 +20799,6 @@ snapshots:
   zod@3.22.4: {}
 
   zod@3.25.56: {}
-
-  zod@3.25.7: {}
 
   zustand@5.0.0(@types/react@19.1.4)(react@19.1.0)(use-sync-external-store@1.4.0(react@19.1.0)):
     optionalDependencies:

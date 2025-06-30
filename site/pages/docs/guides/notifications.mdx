@@ -284,7 +284,7 @@ Mini Apps to verify the Farcaster client that generated the notification and the
 Farcaster user they generated it for. 
 
 The
-[`@farcaster/frame-node`](https://github.com/farcasterxyz/frames/tree/main/packages/frame-node)
+[`@farcaster/miniapp-node`](https://github.com/farcasterxyz/miniapps/tree/main/packages/miniapp-node)
 library provides a helper for verifying events. To use it, you'll need to supply a validation
 function that can check the signatures against the latest Farcaster network state.
 
@@ -301,7 +301,7 @@ import {
   ParseWebhookEvent,
   parseWebhookEvent,
   verifyAppKeyWithNeynar,
-} from "@farcaster/frame-node";
+} from "@farcaster/miniapp-node";
 
 try {
   const data = await parseWebhookEvent(requestJson, verifyAppKeyWithNeynar);
@@ -325,6 +325,6 @@ try {
 For a complete example, check out the [Mini App V2 Demo
 ](https://github.com/farcasterxyz/frames-v2-demo) has all of the above:
 
-- [Handles webhooks](https://github.com/farcasterxyz/frames-v2-demo/blob/main/src/app/api/webhook/route.ts) leveraging the [`@farcaster/frame-node`](https://github.com/farcasterxyz/frames/tree/main/packages/frame-node) library that makes this very easy
+- [Handles webhooks](https://github.com/farcasterxyz/frames-v2-demo/blob/main/src/app/api/webhook/route.ts) leveraging the [`@farcaster/miniapp-node`](https://github.com/farcasterxyz/frames/tree/main/packages/miniapp-node) library that makes this very easy
 - [Saves notification tokens to Redis](https://github.com/farcasterxyz/frames-v2-demo/blob/main/src/lib/kv.ts)
 - [Sends notifications](https://github.com/farcasterxyz/frames-v2-demo/blob/main/src/lib/notifs.ts)

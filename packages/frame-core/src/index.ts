@@ -2,7 +2,7 @@
 if (typeof console !== 'undefined' && console.warn) {
   console.warn(
     '[DEPRECATION WARNING] @farcaster/frame-core is deprecated. Please migrate to @farcaster/miniapp-core. ' +
-    'See https://github.com/farcasterxyz/frames/blob/main/MIGRATION.md for migration guide.'
+      'See https://github.com/farcasterxyz/frames/blob/main/MIGRATION.md for migration guide.',
   )
 }
 
@@ -11,22 +11,22 @@ export * from '@farcaster/miniapp-core'
 
 // Import types for aliasing
 import {
-  type MiniAppHost as _MiniAppHost,
-  type WireMiniAppHost as _WireMiniAppHost,
-  type MiniAppClientEvent as _MiniAppClientEvent,
-  type MiniAppServerEvent as _MiniAppServerEvent,
+  type EventFrameAddRejected as _EventFrameAddRejected,
   type EventFrameAdded as _EventFrameAdded,
   type EventFrameRemoved as _EventFrameRemoved,
-  type EventFrameAddRejected as _EventFrameAddRejected,
-  type MiniAppNotificationDetails as _MiniAppNotificationDetails,
+  type MiniAppClientEvent as _MiniAppClientEvent,
   type MiniAppEmbedNext as _MiniAppEmbedNext,
-  miniAppNameSchema as _miniAppNameSchema,
+  type MiniAppHost as _MiniAppHost,
+  type MiniAppNotificationDetails as _MiniAppNotificationDetails,
+  type MiniAppServerEvent as _MiniAppServerEvent,
+  type WireMiniAppHost as _WireMiniAppHost,
+  actionLaunchFrameSchema as _actionLaunchFrameSchema,
+  domainMiniAppConfigSchema as _domainMiniAppConfigSchema,
   eventFrameAddedSchema as _eventFrameAddedSchema,
   eventFrameRemovedSchema as _eventFrameRemovedSchema,
-  domainMiniAppConfigSchema as _domainMiniAppConfigSchema,
   miniAppEmbedNextSchema as _miniAppEmbedNextSchema,
+  miniAppNameSchema as _miniAppNameSchema,
   safeParseMiniAppEmbed as _safeParseMiniAppEmbed,
-  actionLaunchFrameSchema as _actionLaunchFrameSchema,
 } from '@farcaster/miniapp-core'
 
 // Backward compatibility type aliases

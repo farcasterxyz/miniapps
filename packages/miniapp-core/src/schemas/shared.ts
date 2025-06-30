@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from 'zod/v4'
 
 const SPECIAL_CHARS_PATTERN = /[@#$%^&*+=\/\\|~«»]/
 const REPEATED_PUNCTUATION_PATTERN = /(!{2,}|\?{2,}|-{2,})/
@@ -40,6 +40,35 @@ export const secureUrlSchema = z
   .url()
   .startsWith('https://', { message: 'Must be an https url' })
   .max(1024)
+  .refine((url) => !url.includes(' '), {
+    message: 'URL must not contain spaces',
+  })
+  .refine(
+    (url) => {
+      try {
+        const hostname = new URL(url).hostname
+        // Check for localhost
+        if (hostname === 'localhost' || hostname.endsWith('.localhost')) {
+          return false
+        }
+        // Check for IPv4 addresses
+        const ipv4Regex = /^(\d{1,3}\.){3}\d{1,3}$/
+        if (ipv4Regex.test(hostname)) {
+          return false
+        }
+        // Check for IPv6 addresses (including brackets)
+        if (hostname.startsWith('[') && hostname.endsWith(']')) {
+          return false
+        }
+        return true
+      } catch {
+        return false
+      }
+    },
+    {
+      message: 'URL must not use IP addresses or localhost',
+    },
+  )
 
 export const miniAppNameSchema = z.string().max(32)
 export const buttonTitleSchema = z.string().max(32)

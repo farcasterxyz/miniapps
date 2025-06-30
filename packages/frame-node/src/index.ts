@@ -2,7 +2,7 @@
 if (typeof console !== 'undefined' && console.warn) {
   console.warn(
     '[DEPRECATION WARNING] @farcaster/frame-node is deprecated. Please migrate to @farcaster/miniapp-node. ' +
-    'See https://github.com/farcasterxyz/frames/blob/main/MIGRATION.md for migration guide.'
+      'See https://github.com/farcasterxyz/frames/blob/main/MIGRATION.md for migration guide.',
   )
 }
 

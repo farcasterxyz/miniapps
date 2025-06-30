@@ -28,6 +28,25 @@ import { sdk } from '@farcaster/miniapp-sdk'
 await sdk.actions.ready();
 ```
 
+### In React applications
+
+If you're using React, call `ready` inside a `useEffect` hook to prevent it from running on every re-render:
+
+```tsx
+import { useEffect } from 'react'
+import { sdk } from '@farcaster/frame-sdk'
+
+function App() {
+  useEffect(() => {
+    sdk.actions.ready()
+  }, [])
+
+  return (
+    // Your app content
+  )
+}
+```
+
 **You should call ready as soon as possible while avoiding jitter and content
 reflows.**
 

@@ -13,7 +13,7 @@ export default defineConfig({
   titleTemplate: '%s · Farcaster Mini Apps',
   editLink: {
     pattern:
-      'https://github.com/farcasterxyz/frames/edit/main/site/pages/:path',
+      'https://github.com/farcasterxyz/miniapps/edit/main/site/pages/:path',
     text: 'Edit on GitHub',
   },
   iconUrl: '/favicon.png',
@@ -34,6 +34,8 @@ export default defineConfig({
   },
   ogImageUrl: {
     '/': OG_BASE_URL + '?title=%title&description=%description&',
+    '/blog':
+      OG_BASE_URL + '?title=%title&description=%description&section=Blog',
     '/docs/guides':
       OG_BASE_URL + '?title=%title&description=%description&section=Guide',
     '/docs/sdk':
@@ -53,12 +55,16 @@ export default defineConfig({
   },
   topNav: [
     {
+      text: 'Blog',
+      link: '/blog',
+    },
+    {
       text: 'llms.txt',
       link: 'https://miniapps.farcaster.xyz/llms-full.txt',
     },
     {
       text: 'Examples',
-      link: 'https://github.com/farcasterxyz/frames/tree/main/examples',
+      link: 'https://github.com/farcasterxyz/miniapps/tree/main/examples',
     },
     { text: 'Rewards', link: 'https://farcaster.xyz/~/developers/rewards' },
   ],
@@ -99,6 +105,10 @@ export default defineConfig({
           {
             text: 'Publishing your app',
             link: '/docs/guides/publishing',
+          },
+          {
+            text: 'App Discovery & Search',
+            link: '/docs/guides/discovery',
           },
           {
             text: 'Domain migration',
@@ -251,7 +261,7 @@ export default defineConfig({
   socials: [
     {
       icon: 'github',
-      link: 'https://github.com/farcasterxyz/frames',
+      link: 'https://github.com/farcasterxyz/miniapps',
     },
     {
       icon: 'x',

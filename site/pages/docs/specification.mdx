@@ -36,8 +36,8 @@ A Mini App URL must have a MiniAppEmbed in a serialized form in the `fc:miniapp`
 
 | Property | Type   | Required | Description             | Constraints                                   |
 |----------|--------|----------|-------------------------|-----------------------------------------------|
-| version  | string | Yes      | Version of the embed.   | Must be "1" or "next"                         |
-| imageUrl | string | Yes      | Image url for the embed | Max 1024 characters. Must be 3:2 aspect ratio. |
+| version  | string | Yes      | Version of the embed.   | Must be "next"                                |
+| imageUrl | string | Yes      | Image url for the embed | Max 1024 characters. Must be 3:2 aspect ratio.|
 | button   | object | Yes      | Button                  |                                               |
 
 #### Button Schema
@@ -64,7 +64,7 @@ A Mini App URL must have a MiniAppEmbed in a serialized form in the `fc:miniapp`
 
 ```json
 {
-  "version": "next",
+  "version": "1",
   "imageUrl": "https://yoink.party/framesV2/opengraph-image",
   "button": {
     "title": "🚩 Start",

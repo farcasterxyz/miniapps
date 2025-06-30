@@ -4,8 +4,6 @@
 | name                  | string  | Yes      | Mini App name.                                      | Max length 32 characters                                                                      |
 | homeUrl               | string  | Yes      | Default launch URL                                  | Max length 1024 characters.                                                                   |
 | iconUrl               | string  | Yes      | Icon image URL                                      | Max length 1024 characters.<br />Image must be 1024x1024px PNG, no alpha.                     |
-| imageUrl              | string  | No       | [DEPRECATED] Default image to show if shared in a feed. | Max length 1024 characters.<br />Image must be 3:2 aspect ratio.                          |
-| buttonTitle           | string  | No       | [DEPRECATED] Default button title to show if shared in a feed. | Max length 32 characters.                                                          |
 | splashImageUrl        | string  | No       | URL of image to show on loading screen.             | Max length 32 characters. Must be 200x200px.                                                  |
 | splashBackgroundColor | string  | No       | Hex color code to use on loading screen.            | Hex color code.                                                                               |
 | webhookUrl            | string  | No       | URL to which clients will POST events.              | Max length 1024 characters.<br />Must be set if the Mini App application uses notifications.  |
@@ -23,3 +21,5 @@
 | requiredChains        | array   | No       | [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md) IDs of required chains ([more info](/docs/sdk/detecting-capabilities)) | Only chains listed in `chainList` [here](https://github.com/farcasterxyz/miniapps/blob/main/packages/frame-core/src/schemas/manifest.ts) are supported |
 | requiredCapabilities  | array   | No       | List of required capabilities ([more info](/docs/sdk/detecting-capabilities)) | Each entry must be a path to an SDK method. Full list in `miniAppHostCapabilityList` [here](https://github.com/farcasterxyz/miniapps/blob/main/packages/frame-core/src/types.ts) |
 | canonicalDomain       | string  | No       | Canonical domain for the frame application          | Max length 1024 characters. Must be a valid domain name without protocol, port, or path (e.g., app.example.com). |
+| imageUrl              | string  | No       | [DEPRECATED] Default image to show if shared in a feed. | Max length 1024 characters.<br />Image must be 3:2 aspect ratio.                          |
+| buttonTitle           | string  | No       | [DEPRECATED] Default button title to show if shared in a feed. | Max length 32 characters.                                                          |
