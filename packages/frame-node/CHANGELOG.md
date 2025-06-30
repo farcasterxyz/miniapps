@@ -1,5 +1,14 @@
 # @farcaster/frame-node
 
+## 0.1.1
+
+### Patch Changes
+
+- [#409](https://github.com/farcasterxyz/miniapps/pull/409) [`92f1de9`](https://github.com/farcasterxyz/miniapps/commit/92f1de9c4e7307915b39aac470a4322707911bae) Thanks [@deodad](https://github.com/deodad)! - Roll back zod/v4 since it was causing package manager problems.
+
+- Updated dependencies [[`92f1de9`](https://github.com/farcasterxyz/miniapps/commit/92f1de9c4e7307915b39aac470a4322707911bae)]:
+  - @farcaster/miniapp-node@0.1.1
+
 ## 0.1.0
 
 ### Minor Changes
