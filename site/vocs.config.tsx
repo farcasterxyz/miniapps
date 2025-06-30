@@ -34,6 +34,8 @@ export default defineConfig({
   },
   ogImageUrl: {
     '/': OG_BASE_URL + '?title=%title&description=%description&',
+    '/blog':
+      OG_BASE_URL + '?title=%title&description=%description&section=Blog',
     '/docs/guides':
       OG_BASE_URL + '?title=%title&description=%description&section=Guide',
     '/docs/sdk':
