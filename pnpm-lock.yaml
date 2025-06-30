@@ -303,8 +303,8 @@ importers:
   packages/frame-wagmi-connector:
     dependencies:
       '@farcaster/frame-sdk':
-        specifier: ^0.0.64
-        version: 0.0.64(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.56)
+        specifier: ^0.1.0
+        version: 0.1.0(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.56)
     devDependencies:
       '@farcaster/miniapp-wagmi-connector':
         specifier: workspace:*
@@ -1906,11 +1906,15 @@ packages:
     resolution: {integrity: sha512-zQ0IqbdX8FZ9aw11vP+dZkKDkS+kgIvQPHnSAXzP9pLu+Rfu3D3XEeLbicvoXJTYnhZiPmsZUxgdzXwNKxRPbA==}
     engines: {node: '>=14'}
 
-  '@farcaster/frame-core@0.2.0':
-    resolution: {integrity: sha512-HNxg7A4p5W/HqMMs6CKKJXbhHFpLYrlcOGlvc9k9tRiGBSo8JjAZhyjVUfaXqSIvN0ItCGBVmtB0ULzpktMpTA==}
+  '@farcaster/frame-sdk@0.1.0':
+    resolution: {integrity: sha512-0P8pE5o2qGrOJ2YEUnzlJ4pTPE96biolUOmvf/H1+jYKaRjJqS7zaJ4J5DEoDCAFfnknElKqoZH3W2u6L2rGnw==}
+    engines: {node: '>=22.11.0'}
 
-  '@farcaster/frame-sdk@0.0.64':
-    resolution: {integrity: sha512-mrFXmkRc5RR6/PDaN3Rho4YFEh2oI2s9eg5NA9pHUEN9oPt4Sd5ShdeX/0/uVxOk3/EbVL69lGIGce5hYbUyhw==}
+  '@farcaster/miniapp-core@0.3.0':
+    resolution: {integrity: sha512-SUcDJxeZIpshvFaipmJxpq9xdYCNgQzyWPM2OOr+5dUPbCaPMWFvBQs4TZm5UUGp2cnSR2vvSU4Qi9nOhskdRA==}
+
+  '@farcaster/miniapp-sdk@0.1.0':
+    resolution: {integrity: sha512-tFtZAdigH0Uz6QxfFHJONrsKPn+dI12Z3LqA9mPDvt5MTONfsitwzSjIhkkXGYPWYNUVtRK65tWOkODpRVKt1Q==}
 
   '@farcaster/quick-auth@0.0.4':
     resolution: {integrity: sha512-yyFEyJiGUxxB4bvlza2t7FIz9NY67UMVD2V4LuExurntDqV1fQDLh5c6kzghJ/xm0Ow0GGUiF5zRDd7aybuKkw==}
@@ -10774,7 +10778,21 @@ snapshots:
       ethereum-cryptography: 2.2.1
       micro-ftch: 0.3.1
 
-  '@farcaster/frame-core@0.2.0(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)':
+  '@farcaster/frame-sdk@0.1.0(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.56)':
+    dependencies:
+      '@farcaster/miniapp-sdk': 0.1.0(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.56)
+      '@farcaster/quick-auth': 0.0.6(typescript@5.8.3)
+      comlink: 4.4.2
+      eventemitter3: 5.0.1
+      ox: 0.4.4(typescript@5.8.3)(zod@3.25.56)
+    transitivePeerDependencies:
+      - bufferutil
+      - encoding
+      - typescript
+      - utf-8-validate
+      - zod
+
+  '@farcaster/miniapp-core@0.3.0(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)':
     dependencies:
       '@solana/web3.js': 1.98.2(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)
       ox: 0.4.4(typescript@5.8.3)(zod@3.25.56)
@@ -10785,9 +10803,9 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@farcaster/frame-sdk@0.0.64(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.56)':
+  '@farcaster/miniapp-sdk@0.1.0(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.56)':
     dependencies:
-      '@farcaster/frame-core': 0.2.0(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)
+      '@farcaster/miniapp-core': 0.3.0(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)
       '@farcaster/quick-auth': 0.0.6(typescript@5.8.3)
       comlink: 4.4.2
       eventemitter3: 5.0.1
