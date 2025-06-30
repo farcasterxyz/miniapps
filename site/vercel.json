@@ -45,5 +45,10 @@
       "destination": "/docs/sdk/actions/view-profile",
       "statusCode": 301
     }
-  ]
+  ],
+  "git": {
+    "deploymentEnabled": {
+      "changeset-release/main": false
+    }
+  }
 }
