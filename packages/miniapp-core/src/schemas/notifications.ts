@@ -1,4 +1,4 @@
-import { z } from 'zod/v4'
+import { z } from 'zod'
 import { secureUrlSchema } from './shared.ts'
 
 export const notificationDetailsSchema = z.object({

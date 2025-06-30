@@ -1,4 +1,4 @@
-import { z } from 'zod/v4'
+import { z } from 'zod'
 import { notificationDetailsSchema } from './notifications.ts'
 
 export const eventMiniAppAddedSchema = z.object({

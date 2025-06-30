@@ -1,4 +1,4 @@
-import { z } from 'zod/v4'
+import { z } from 'zod'
 import { miniAppHostCapabilityList } from '../types.ts'
 import {
   buttonTitleSchema,

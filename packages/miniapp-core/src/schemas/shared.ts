@@ -1,4 +1,4 @@
-import { z } from 'zod/v4'
+import { z } from 'zod'
 
 const SPECIAL_CHARS_PATTERN = /[@#$%^&*+=\/\\|~«»]/
 const REPEATED_PUNCTUATION_PATTERN = /(!{2,}|\?{2,}|-{2,})/
