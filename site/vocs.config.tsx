@@ -53,6 +53,10 @@ export default defineConfig({
   },
   topNav: [
     {
+      text: 'Blog',
+      link: '/blog',
+    },
+    {
       text: 'llms.txt',
       link: 'https://miniapps.farcaster.xyz/llms-full.txt',
     },
