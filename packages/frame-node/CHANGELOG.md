@@ -1,5 +1,18 @@
 # @farcaster/frame-node
 
+## 0.1.0
+
+### Minor Changes
+
+- [#396](https://github.com/farcasterxyz/miniapps/pull/396) [`d23f93f`](https://github.com/farcasterxyz/miniapps/commit/d23f93f5dcfb382d52e2faa8dc6be3dd1ab0674f) Thanks [@CassOnMars](https://github.com/CassOnMars)! - introduce mini app rename
+
+### Patch Changes
+
+- [#407](https://github.com/farcasterxyz/miniapps/pull/407) [`b61457b`](https://github.com/farcasterxyz/miniapps/commit/b61457b208d021a9c53a2d71c54c958f2fe8798a) Thanks [@deodad](https://github.com/deodad)! - Moved to zod/v4 for schema validations.
+
+- Updated dependencies [[`d23f93f`](https://github.com/farcasterxyz/miniapps/commit/d23f93f5dcfb382d52e2faa8dc6be3dd1ab0674f)]:
+  - @farcaster/miniapp-node@0.1.0
+
 ## 0.0.41
 
 ### Patch Changes
