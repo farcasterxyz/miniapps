@@ -14,7 +14,6 @@ const mockEndpoint: Endpoint = {
 
 const webViewEndpoint: Endpoint = {
   postMessage: (data: unknown) => {
-    console.debug('[webview:req]', data)
     window.ReactNativeWebView.postMessage(JSON.stringify(data))
   },
   addEventListener: (_, listener, ...args) => {

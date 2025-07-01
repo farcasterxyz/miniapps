@@ -1,8 +1,7 @@
 // Deprecation warning
 if (typeof console !== 'undefined' && console.warn) {
   console.warn(
-    '[DEPRECATION WARNING] @farcaster/frame-host is deprecated. Please migrate to @farcaster/miniapp-host. ' +
-      'See https://github.com/farcasterxyz/frames/blob/main/MIGRATION.md for migration guide.',
+    '@farcaster/frame-host is deprecated. Please use @farcaster/miniapp-host instead.',
   )
 }
 
@@ -31,11 +30,10 @@ export function exposeToIframe({
     typeof console !== 'undefined' &&
     console.warn
   ) {
-    console.warn(
-      '[DEPRECATION WARNING] The frameOrigin parameter is deprecated. Please use miniAppOrigin instead. ' +
-        'Import exposeToIframe from @farcaster/miniapp-host.',
-    )
     exposeToIframeWarningShown = true
+    console.warn(
+      'The frameOrigin parameter in exposeToIframe is deprecated. Please use miniAppOrigin instead.',
+    )
   }
   return _exposeToIframe({
     iframe,

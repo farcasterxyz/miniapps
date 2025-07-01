@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-const SPECIAL_CHARS_PATTERN = /[@#$%^&*+=\/\\|~«»]/
+const SPECIAL_CHARS_PATTERN = /[@#$%^&*+=/\\|~«»]/
 const REPEATED_PUNCTUATION_PATTERN = /(!{2,}|\?{2,}|-{2,})/
 
 // Unicode ranges for emoji detection:
@@ -14,7 +14,10 @@ const EMOJI_PATTERN =
 export const createSimpleStringSchema = ({
   max,
   noSpaces,
-}: { max?: number; noSpaces?: boolean } = {}) => {
+}: {
+  max?: number
+  noSpaces?: boolean
+} = {}) => {
   const stringValidations = noSpaces
     ? z
         .string()

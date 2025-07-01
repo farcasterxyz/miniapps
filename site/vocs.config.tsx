@@ -23,13 +23,11 @@ export default defineConfig({
   },
   head() {
     return (
-      <>
-        <script
-          src="https://cdn.usefathom.com/script.js"
-          data-site="FJKRBMZB"
-          defer
-        />
-      </>
+      <script
+        src="https://cdn.usefathom.com/script.js"
+        data-site="FJKRBMZB"
+        defer
+      />
     )
   },
   ogImageUrl: {

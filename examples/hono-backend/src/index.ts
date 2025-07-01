@@ -1,4 +1,4 @@
-import { Errors, createClient } from '@farcaster/quick-auth'
+import { createClient, Errors } from '@farcaster/quick-auth'
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import { createMiddleware } from 'hono/factory'
@@ -33,7 +33,6 @@ const quickAuthMiddleware = createMiddleware<{
     c.set('user', user)
   } catch (e) {
     if (e instanceof Errors.InvalidTokenError) {
-      console.info('Invalid token:', e.message)
       throw new HTTPException(401, { message: 'Invalid token' })
     }
 

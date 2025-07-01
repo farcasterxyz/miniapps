@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noConsole: console used for developer debugger */
 import type { SolanaWireRequestFn } from '@farcaster/miniapp-core'
 import { miniAppHost, sdk } from '@farcaster/miniapp-sdk'
 import { base58 } from '@scure/base'

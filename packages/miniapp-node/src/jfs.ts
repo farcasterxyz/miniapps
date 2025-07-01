@@ -55,7 +55,7 @@ export async function verifyJsonFarcasterSignature(
     headerData = JSON.parse(
       Buffer.from(body.data.header, 'base64url').toString('utf-8'),
     )
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new InvalidJfsDataError('Error decoding and parsing header')
   }
 

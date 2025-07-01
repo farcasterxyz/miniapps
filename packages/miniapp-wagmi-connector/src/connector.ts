@@ -4,7 +4,7 @@ import {
   type Connector,
   createConnector,
 } from '@wagmi/core'
-import { SwitchChainError, fromHex, getAddress, numberToHex } from 'viem'
+import { fromHex, getAddress, numberToHex, SwitchChainError } from 'viem'
 
 farcasterMiniApp.type = 'farcasterMiniApp'
 

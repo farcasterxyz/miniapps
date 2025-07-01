@@ -1,13 +1,15 @@
 {
   "root": false,
-  "formatter": {
-    "enabled": true,
-    "indentStyle": "space",
-    "lineWidth": 120
-  },
+  "extends": "//",
   "linter": {
-    "enabled": true,
     "rules": {
+      "correctness": {
+        "useExhaustiveDependencies": "warn",
+        "useHookAtTopLevel": "error"
+      },
+      "suspicious": {
+        "noConsole": { "level": "warn", "options": { "allow": ["log"] } }
+      },
       "style": {
         "noParameterAssign": "error",
         "useAsConstAssertion": "error",
@@ -21,6 +23,5 @@
         "noUselessElse": "error"
       }
     }
-  },
-  "assist": { "actions": { "source": { "organizeImports": "on" } } }
+  }
 }

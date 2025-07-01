@@ -1,13 +1,14 @@
 {
   "root": false,
-  "formatter": {
-    "enabled": true,
-    "indentStyle": "space",
-    "lineWidth": 120
+  "extends": "//",
+  "files": {
+    "includes": ["**", "!src/comlink/**"]
   },
   "linter": {
-    "enabled": true,
     "rules": {
+      "suspicious": {
+        "noConsole": { "level": "off", "options": { "allow": ["log"] } }
+      },
       "style": {
         "noParameterAssign": "error",
         "useAsConstAssertion": "error",
@@ -21,6 +22,5 @@
         "noUselessElse": "error"
       }
     }
-  },
-  "assist": { "actions": { "source": { "organizeImports": "on" } } }
+  }
 }

@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import {
+  createJsonFarcasterSignature,
   InvalidJfsAppKeyError,
   InvalidJfsDataError,
   VerifyAppKeyError,
-  createJsonFarcasterSignature,
   verifyJsonFarcasterSignature,
 } from '../src/jfs.ts'
 import type { VerifyAppKey } from '../src/types.ts'
@@ -11,16 +11,16 @@ import { hexToBytes } from '../src/util.ts'
 
 describe('verifyJsonFarcasterSignature', () => {
   const verifyAppKeySuccess: VerifyAppKey = async (
-    fid: number,
-    appKey: string,
+    _fid: number,
+    _appKey: string,
   ) => ({ valid: true, appFid: 100 })
   const verifyAppKeyFailure: VerifyAppKey = async (
-    fid: number,
-    appKey: string,
+    _fid: number,
+    _appKey: string,
   ) => ({ valid: false })
   const verifyAppKeyThrows: VerifyAppKey = async (
-    fid: number,
-    appKey: string,
+    _fid: number,
+    _appKey: string,
   ) => {
     throw new Error('test')
   }

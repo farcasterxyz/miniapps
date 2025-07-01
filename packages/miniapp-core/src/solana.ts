@@ -70,9 +70,7 @@ export const createSolanaWalletProvider = (
     request({ method: 'signMessage', params: { message: msg } }),
   signTransaction: <T extends SolanaCombinedTransaction>(transaction: T) =>
     request({ method: 'signTransaction', params: { transaction } }),
-  signAndSendTransaction: (input: {
-    transaction: SolanaCombinedTransaction
-  }) =>
+  signAndSendTransaction: (input: { transaction: SolanaCombinedTransaction }) =>
     request({
       method: 'signAndSendTransaction',
       params: input,

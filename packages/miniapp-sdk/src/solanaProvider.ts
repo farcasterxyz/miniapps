@@ -1,8 +1,8 @@
 import {
+  createSolanaWalletProvider,
   type MiniAppHostCapability,
   type SolanaWalletProvider,
   type SolanaWireRequestFn,
-  createSolanaWalletProvider,
   unwrapSolanaProviderRequest,
 } from '@farcaster/miniapp-core'
 

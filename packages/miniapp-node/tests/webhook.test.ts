@@ -5,8 +5,8 @@ import { InvalidEventDataError, parseWebhookEvent } from '../src/webhook.ts'
 
 describe('parseWebhookEvent', () => {
   const verifyAppKeySuccess: VerifyAppKey = async (
-    fid: number,
-    appKey: string,
+    _fid: number,
+    _appKey: string,
   ) => ({ valid: true, appFid: 100 })
 
   it('succeeds when data is correct', async () => {

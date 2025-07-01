@@ -1,8 +1,7 @@
 // Deprecation warning
 if (typeof console !== 'undefined' && console.warn) {
   console.warn(
-    '[DEPRECATION WARNING] @farcaster/frame-sdk is deprecated. Please migrate to @farcaster/miniapp-sdk. ' +
-      'See https://github.com/farcasterxyz/frames/blob/main/MIGRATION.md for migration guide.',
+    '@farcaster/frame-sdk is deprecated. Please use @farcaster/miniapp-sdk instead.',
   )
 }
 
@@ -24,11 +23,8 @@ export const frameHost = new Proxy(miniAppHost, {
       typeof console !== 'undefined' &&
       console.warn
     ) {
-      console.warn(
-        '[DEPRECATION WARNING] frameHost is deprecated. Please use miniAppHost instead. ' +
-          'Import from @farcaster/miniapp-sdk and use miniAppHost.',
-      )
       frameHostWarningShown = true
+      console.warn('frameHost is deprecated. Please use miniAppHost instead.')
     }
     return Reflect.get(target, prop, receiver)
   },

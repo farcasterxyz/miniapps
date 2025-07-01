@@ -58,7 +58,7 @@ export const quickAuth: QuickAuth = (() => {
         payload: JWTPayload
       }
     | undefined
-  let pendingPromise: Promise<getToken.ReturnValue> | undefined = undefined
+  let pendingPromise: Promise<getToken.ReturnValue> | undefined
 
   async function getTokenInner(options: getToken.Options): getToken.ReturnType {
     const quickAuthClient = createLightClient({

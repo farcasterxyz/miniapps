@@ -3,10 +3,9 @@ import { createStore } from 'mipd'
 
 const store = createStore()
 
-let providers = store.getProviders()
+let _providers = store.getProviders()
 store.subscribe((providerDetails) => {
-  providers = providerDetails
-  console.debug('updated providers', providers)
+  _providers = providerDetails
 })
 
 setTimeout(() => {
@@ -20,12 +19,9 @@ setTimeout(() => {
     }),
   ])
     .then((ctx) => {
-      // biome-ignore lint/suspicious/noConsoleLog: <explanation>
       console.log(ctx)
     })
-    .catch((e) => {
-      console.warn(e.message)
-    })
+    .catch((_e) => {})
 
   document.querySelector<HTMLDivElement>('#sign')!.onclick = () => {
     sdk.wallet.getEthereumProvider().then((provider) =>

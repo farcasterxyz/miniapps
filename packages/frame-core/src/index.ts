@@ -11,22 +11,22 @@ export * from '@farcaster/miniapp-core'
 
 // Import types for aliasing
 import {
-  type EventFrameAddRejected as _EventFrameAddRejected,
+  actionLaunchFrameSchema as _actionLaunchFrameSchema,
+  domainMiniAppConfigSchema as _domainMiniAppConfigSchema,
   type EventFrameAdded as _EventFrameAdded,
+  type EventFrameAddRejected as _EventFrameAddRejected,
   type EventFrameRemoved as _EventFrameRemoved,
+  eventFrameAddedSchema as _eventFrameAddedSchema,
+  eventFrameRemovedSchema as _eventFrameRemovedSchema,
   type MiniAppClientEvent as _MiniAppClientEvent,
   type MiniAppEmbedNext as _MiniAppEmbedNext,
   type MiniAppHost as _MiniAppHost,
   type MiniAppNotificationDetails as _MiniAppNotificationDetails,
   type MiniAppServerEvent as _MiniAppServerEvent,
-  type WireMiniAppHost as _WireMiniAppHost,
-  actionLaunchFrameSchema as _actionLaunchFrameSchema,
-  domainMiniAppConfigSchema as _domainMiniAppConfigSchema,
-  eventFrameAddedSchema as _eventFrameAddedSchema,
-  eventFrameRemovedSchema as _eventFrameRemovedSchema,
   miniAppEmbedNextSchema as _miniAppEmbedNextSchema,
   miniAppNameSchema as _miniAppNameSchema,
   safeParseMiniAppEmbed as _safeParseMiniAppEmbed,
+  type WireMiniAppHost as _WireMiniAppHost,
 } from '@farcaster/miniapp-core'
 
 // Backward compatibility type aliases

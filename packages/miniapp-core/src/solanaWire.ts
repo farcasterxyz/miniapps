@@ -95,7 +95,7 @@ export function unwrapSolanaProviderRequest(
       return await wrappedRequestFn(request)
     }
     if (request.method === 'signAndSendTransaction') {
-      const { transaction, options } = request.params
+      const { transaction } = request.params
       const params = {
         transaction: serializeTransaction(transaction),
       }

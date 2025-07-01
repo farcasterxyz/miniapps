@@ -45,7 +45,9 @@ export type EventMap = {
   }) => void
   miniAppAddRejected: ({
     reason,
-  }: { reason: AddMiniApp.AddMiniAppRejectedReason }) => void
+  }: {
+    reason: AddMiniApp.AddMiniAppRejectedReason
+  }) => void
   miniAppRemoved: () => void
   notificationsEnabled: ({
     notificationDetails,

@@ -15,7 +15,7 @@ export const createBack: (options: {
   emitter: Emitter
   miniAppHost: Remote<WireMiniAppHost>
 }) => Back = ({ miniAppHost, emitter }) => {
-  let teardownWebNavigation: (() => void) | undefined = undefined
+  let teardownWebNavigation: (() => void) | undefined
   let backCb: (() => unknown) | null = null
 
   return {
@@ -57,13 +57,7 @@ export const createBack: (options: {
   }
 }
 
-function setupWebBack({
-  emitter,
-  back,
-}: {
-  emitter: Emitter
-  back: Back
-}) {
+function setupWebBack({ emitter, back }: { emitter: Emitter; back: Back }) {
   const navigation = getWebNavigation()
   if (navigation) {
     return setupNavigationApi({ emitter, back, navigation })
