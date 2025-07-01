@@ -1,5 +1,11 @@
 # @farcaster/frame-core
 
+## 0.3.2
+
+### Patch Changes
+
+- [#412](https://github.com/farcasterxyz/miniapps/pull/412) [`960dc83`](https://github.com/farcasterxyz/miniapps/commit/960dc83c0060a4a23cd6ed3fbb76d5425d4275b6) Thanks [@deodad](https://github.com/deodad)! - Transform manifest miniapp property to canonical frame.
+
 ## 0.3.1
 
 ### Patch Changes

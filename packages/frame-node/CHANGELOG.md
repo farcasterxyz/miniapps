@@ -1,5 +1,12 @@
 # @farcaster/frame-node
 
+## 0.1.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @farcaster/miniapp-node@0.1.2
+
 ## 0.1.1
 
 ### Patch Changes
