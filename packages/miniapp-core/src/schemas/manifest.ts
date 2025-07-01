@@ -140,3 +140,9 @@ export const domainManifestSchema = z
       path: ['frame', 'miniapp'],
     },
   )
+  .transform((schema) => {
+    return {
+      ...schema,
+      frame: schema.frame ?? schema.miniapp,
+    }
+  })

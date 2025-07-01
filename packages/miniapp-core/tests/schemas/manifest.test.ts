@@ -1,5 +1,8 @@
 import { describe, expect, test } from 'vitest'
-import { domainMiniAppConfigSchema } from '../../src/schemas/manifest.ts'
+import {
+  domainManifestSchema,
+  domainMiniAppConfigSchema,
+} from '../../src/schemas/manifest.ts'
 
 describe('domainMiniAppConfigSchema castShareUrl validation', () => {
   const baseConfig = {
@@ -105,5 +108,109 @@ describe('domainMiniAppConfigSchema URL field validation', () => {
       screenshotUrls: ['https://example.com/valid.png', 'not-a-url'],
     })
     expect(result.success).toBe(false)
+  })
+})
+
+describe('domainManifestSchema transform', () => {
+  // Mock accountAssociation for all tests
+  const mockAccountAssociation = {
+    header: '{"fid":1234,"type":"app_key","key":"0x1234"}',
+    payload:
+      '{"domain":"example.com","timestamp":1234567890,"expiresAt":1234567899}',
+    signature:
+      '0xabcd1234567890abcd1234567890abcd1234567890abcd1234567890abcd1234567890abcd1234567890abcd1234567890abcd1234567890abcd1234567890',
+  }
+
+  const baseFrame = {
+    version: '1' as const,
+    name: 'Test App',
+    iconUrl: 'https://example.com/icon.png',
+    homeUrl: 'https://example.com/home',
+  }
+
+  test('preserves frame when only frame is provided', () => {
+    const manifest = {
+      accountAssociation: mockAccountAssociation,
+      frame: baseFrame,
+    }
+
+    const result = domainManifestSchema.parse(manifest)
+    expect(result.frame).toEqual(baseFrame)
+  })
+
+  test('copies miniapp to frame when only miniapp is provided', () => {
+    const manifest = {
+      accountAssociation: mockAccountAssociation,
+      miniapp: baseFrame,
+    }
+
+    const result = domainManifestSchema.parse(manifest)
+    expect(result.frame).toEqual(baseFrame)
+    expect(result.miniapp).toEqual(baseFrame)
+  })
+
+  test('preserves both frame and miniapp when both are provided and identical', () => {
+    const manifest = {
+      accountAssociation: mockAccountAssociation,
+      frame: baseFrame,
+      miniapp: baseFrame,
+    }
+
+    const result = domainManifestSchema.parse(manifest)
+    expect(result.frame).toEqual(baseFrame)
+    expect(result.miniapp).toEqual(baseFrame)
+  })
+
+  test('fails when both frame and miniapp are provided but not identical', () => {
+    const differentApp = {
+      ...baseFrame,
+      name: 'Different App',
+    }
+
+    const manifest = {
+      accountAssociation: mockAccountAssociation,
+      frame: baseFrame,
+      miniapp: differentApp,
+    }
+
+    const result = domainManifestSchema.safeParse(manifest)
+    expect(result.success).toBe(false)
+    if (!result.success) {
+      expect(result.error.issues[0].message).toBe(
+        'If both "frame" and "miniapp" are provided, they must be identical',
+      )
+    }
+  })
+
+  test('transform ensures frame is always present in output', () => {
+    // Test with only miniapp
+    const manifestWithMiniapp = {
+      accountAssociation: mockAccountAssociation,
+      miniapp: baseFrame,
+    }
+
+    const result1 = domainManifestSchema.parse(manifestWithMiniapp)
+    expect(result1.frame).toBeDefined()
+    expect(result1.frame).toEqual(baseFrame)
+
+    // Test with only frame
+    const manifestWithFrame = {
+      accountAssociation: mockAccountAssociation,
+      frame: baseFrame,
+    }
+
+    const result2 = domainManifestSchema.parse(manifestWithFrame)
+    expect(result2.frame).toBeDefined()
+    expect(result2.frame).toEqual(baseFrame)
+  })
+
+  test('validates that at least one of frame or miniapp is provided', () => {
+    const manifestWithNeither = {
+      accountAssociation: mockAccountAssociation,
+    }
+
+    const result = domainManifestSchema.parse(manifestWithNeither)
+    // After transform, frame should be undefined since neither was provided
+    expect(result.frame).toBeUndefined()
   })
 })
