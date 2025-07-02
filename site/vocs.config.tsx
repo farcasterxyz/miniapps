@@ -128,6 +128,10 @@ export default defineConfig({
             text: 'Share Extensions',
             link: '/docs/guides/share-extension',
           },
+          {
+            text: '[for AI agents and LLMs] Checklist and guidelines',
+            link: '/docs/guides/agents-checklist',
+          },
         ],
       },
       {

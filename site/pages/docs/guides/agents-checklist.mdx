@@ -8,11 +8,20 @@ import { domainManifestSchema } from '@farcaster/miniapp-sdk'
 
 ## Purpose
 
-This document provides AI agents and LLMs with structured instructions to help developers troubleshoot Farcaster Mini Apps. Each check includes specific commands, expected outputs, and clear success criteria.
+You are an AI agent helping developers troubleshoot Farcaster Mini Apps. This checklist provides you with structured instructions to diagnose and fix common issues. Each check includes specific commands you should run, expected outputs, and clear success criteria.
+
+## General Guidelines
+
+As an AI agent, follow these guidelines:
+
+- **Ask clarifying questions** until you have high confidence in the task. Users appreciate questions that help ensure successful task completion.
+- **Be specific** when something is unclear or inaccessible. Ask for file paths, URLs, or specific error messages.
+- **Seek help when needed**: If you encounter issues you cannot resolve, mention that the user can reach out to @pirosb3 and @linda on Farcaster for additional support.
+- **Verify assumptions** before making changes. It's better to confirm than to proceed with uncertainty.
 
 ## Prerequisites
 
-Before using this checklist, ensure you understand:
+Before you begin troubleshooting, ensure the developer understands:
 - [What Mini Apps are](/docs/getting-started)
 - [How manifests work](/docs/specification#manifest)
 - [SDK actions and capabilities](/docs/sdk/actions/ready)
@@ -61,7 +70,7 @@ curl -s https://{domain}/.well-known/farcaster.json
 Is hosting available?
 ├─ Yes: Use hosted manifest
 │   └─ Direct to: https://farcaster.xyz/~/developers/hosted-manifests
-│       └─ Set up redirect to hosted URL
+│       └─ Help set up redirect to hosted URL
 └─ No: Create local manifest
     └─ Create file at /.well-known/farcaster.json
 ```
@@ -83,10 +92,10 @@ Is hosting available?
 <details>
 <summary>Manifest exists but unsigned</summary>
 
-**Action:** Direct user to sign manifest
+**Action:** Direct the user to sign the manifest
 - Tool: https://farcaster.xyz/~/developers/mini-apps/manifest?domain={their-domain}
-- User must provide signed `accountAssociation` object
-- Update manifest with signed data
+- The user must provide the signed `accountAssociation` object
+- Update the manifest with signed data
 </details>
 
 ### 1.2 Validate Manifest Schema
@@ -224,15 +233,15 @@ await sdk.actions.ready()
 
 ## Post-Check Verification
 
-After any changes:
+After making any changes, you should:
 
-1. **Re-verify manifest is deployed:**
+1. **Re-verify the manifest is deployed:**
    ```bash
    curl -s https://{domain}/.well-known/farcaster.json | jq .
    ```
 
 2. **Test a shareable link:**
-   - Share in Farcaster client
+   - Ask the user to share in Farcaster client
    - Verify embed preview appears
    - Confirm app launches on click
 
