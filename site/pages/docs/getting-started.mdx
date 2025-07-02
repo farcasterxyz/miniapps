@@ -89,6 +89,21 @@ the bottom of your HTML file with the following content.
 </script>
 ```
 
+## Making Your App Display
+
+After your app loads, you must call `sdk.actions.ready()` to hide the splash screen and display your content:
+
+```javascript
+import { sdk } from '@farcaster/miniapp-sdk'
+
+// After your app is fully loaded and ready to display
+await sdk.actions.ready()
+```
+
+:::warning
+**Important**: If you don't call `ready()`, users will see an infinite loading screen. This is one of the most common issues when building Mini Apps.
+:::
+
 ## Troubleshooting
 
 ### Node.js Version Issues
