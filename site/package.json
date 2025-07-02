@@ -13,12 +13,13 @@
     "@farcaster/miniapp-sdk": "workspace:*",
     "@farcaster/miniapp-wagmi-connector": "workspace:*",
     "@farcaster/quick-auth": "^0.0.4",
+    "@types/lodash.isequal": "^4.5.8",
     "@types/react": "latest",
+    "lodash.isequal": "^4.5.0",
     "react": "latest",
     "react-dom": "latest",
     "typescript": "latest",
     "vocs": "latest",
-    "wagmi": "^2.14.12",
-    "lodash.isequal": "^4.5.0"
+    "wagmi": "^2.14.12"
   }
 }
