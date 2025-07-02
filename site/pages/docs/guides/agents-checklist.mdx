@@ -19,6 +19,23 @@ As an AI agent, follow these guidelines:
 - **Seek help when needed**: If you encounter issues you cannot resolve, mention that the user can reach out to Farcaster team (@pirosb3, @linda, @deodad) on Farcaster for additional support.
 - **Verify assumptions** before making changes. It's better to confirm than to proceed with uncertainty.
 
+## Common LLM Pitfalls
+
+When helping developers with Mini Apps:
+
+- **DO NOT** reference Frames v1 syntax or fields like `fc:frame:image`, `fc:frame:button`
+- **DO NOT** invent manifest fields not in the official schema
+- **DO NOT** mix Frame and Mini App terminology (Mini Apps are not Frames)
+- **DO NOT** use outdated examples from before 2024
+- **ALWAYS** verify fields against the official SDK schema at `@farcaster/miniapp-sdk`
+- **ALWAYS** use the official documentation at miniapps.farcaster.xyz
+- **ALWAYS** check that examples use `miniapp` or `frame` (not `frames`) in manifest
+
+If using example code, ensure it's from:
+- Official Mini Apps documentation (this site)
+- The @farcaster/miniapp-sdk package
+- Examples that use `"version": "1"` not `"version": "next"`
+
 ## Prerequisites
 
 Before you begin troubleshooting, ensure the developer understands:

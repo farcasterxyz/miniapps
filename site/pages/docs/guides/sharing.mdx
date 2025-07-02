@@ -54,9 +54,21 @@ The string literal `'1'`.
 
 The URL of the image that should be displayed.
 
-- the image will be displayed at 3:2 aspect ratio.
-- the image must be less than 10MB
-- The URL must be \<= 1024 characters
+#### Image Format Requirements
+
+**Supported formats:** PNG, JPG, GIF, WebP  
+**Recommended:** PNG for best compatibility
+
+:::warning
+**Production Warning**: While SVG may work in preview tools, use PNG for production to ensure compatibility across all Farcaster clients.
+:::
+
+**Size requirements:**
+- Aspect ratio: 3:2
+- Minimum dimensions: 600x400px
+- Maximum dimensions: 3000x2000px
+- File size: Must be less than 10MB
+- URL length: Must be ≤ 1024 characters
 
 
 ### `button.title`
