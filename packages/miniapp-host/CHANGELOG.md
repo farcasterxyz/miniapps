@@ -1,5 +1,11 @@
 # @farcaster/frame-host
 
+## 0.2.0
+
+### Minor Changes
+
+- [#416](https://github.com/farcasterxyz/miniapps/pull/416) [`7e541f6`](https://github.com/farcasterxyz/miniapps/commit/7e541f677a1a51cc48cf74c45f3b62be20b1b813) Thanks [@CassOnMars](https://github.com/CassOnMars)! - fix: addMiniApp apply in comlink
+
 ## 0.1.2
 
 ### Patch Changes
