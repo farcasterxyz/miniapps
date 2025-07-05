@@ -1,5 +1,14 @@
 # @farcaster/frame-host
 
+## 0.1.5
+
+### Patch Changes
+
+- [#420](https://github.com/farcasterxyz/miniapps/pull/420) [`269a70e`](https://github.com/farcasterxyz/miniapps/commit/269a70ea13e7284547d001e240ac4db386f818f6) Thanks [@deodad](https://github.com/deodad)! - Fixed addFrame omission in expose types.
+
+- Updated dependencies [[`269a70e`](https://github.com/farcasterxyz/miniapps/commit/269a70ea13e7284547d001e240ac4db386f818f6)]:
+  - @farcaster/miniapp-host@0.2.2
+
 ## 0.1.4
 
 ### Patch Changes
