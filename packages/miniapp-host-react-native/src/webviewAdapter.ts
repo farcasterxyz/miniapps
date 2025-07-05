@@ -103,7 +103,7 @@ export function useExposeWebViewToEndpoint({
   debug = false,
 }: {
   endpoint: WebViewEndpoint | undefined
-  sdk: Omit<MiniAppHost, 'ethProviderRequestV2'>
+  sdk: Omit<MiniAppHost, 'ethProviderRequestV2' | 'addFrame'>
   ethProvider?: Provider
   debug?: boolean
 }) {
