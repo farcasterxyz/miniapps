@@ -1,5 +1,11 @@
 # @farcaster/frame-core
 
+## 0.3.4
+
+### Patch Changes
+
+- [#424](https://github.com/farcasterxyz/miniapps/pull/424) [`1e46d5f`](https://github.com/farcasterxyz/miniapps/commit/1e46d5fc85561d91b6d4777f2ee3c75207ee9f42) Thanks [@deodad](https://github.com/deodad)! - Accept version '1' in embed schema
+
 ## 0.3.3
 
 ### Patch Changes
