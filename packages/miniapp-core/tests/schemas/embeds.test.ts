@@ -2,6 +2,7 @@ import { describe, expect, test } from 'vitest'
 import {
   actionLaunchMiniAppSchema,
   actionSchema,
+  miniAppEmbedNextSchema,
 } from '../../src/schemas/embeds.ts'
 
 describe('actionLaunchMiniAppSchema', () => {
@@ -74,6 +75,127 @@ describe('actionViewTokenSchema', () => {
         token: id,
       })
       expect(result.success, `Expected invalid CAIP-19: ${id}`).toBe(false)
+    }
+  })
+})
+
+describe('miniAppEmbedNextSchema version field', () => {
+  const baseEmbed = {
+    imageUrl: 'https://example.com/image.png',
+    button: {
+      title: 'Launch',
+      action: {
+        type: 'launch_miniapp' as const,
+        name: 'Test App',
+      },
+    },
+  }
+
+  test('accepts version "next"', () => {
+    const result = miniAppEmbedNextSchema.safeParse({
+      ...baseEmbed,
+      version: 'next',
+    })
+    expect(result.success).toBe(true)
+    if (result.success) {
+      expect(result.data.version).toBe('next')
+    }
+  })
+
+  test('accepts version "1" as string', () => {
+    const result = miniAppEmbedNextSchema.safeParse({
+      ...baseEmbed,
+      version: '1',
+    })
+    expect(result.success).toBe(true)
+    if (result.success) {
+      expect(result.data.version).toBe('1')
+    }
+  })
+
+  test('accepts version 1 as number and coerces to "1"', () => {
+    const result = miniAppEmbedNextSchema.safeParse({
+      ...baseEmbed,
+      version: 1,
+    })
+    expect(result.success).toBe(true)
+    if (result.success) {
+      expect(result.data.version).toBe('1')
+    }
+  })
+
+  test('rejects other string versions', () => {
+    const result = miniAppEmbedNextSchema.safeParse({
+      ...baseEmbed,
+      version: '2',
+    })
+    expect(result.success).toBe(false)
+  })
+
+  test('rejects other number versions', () => {
+    const result = miniAppEmbedNextSchema.safeParse({
+      ...baseEmbed,
+      version: 2,
+    })
+    expect(result.success).toBe(false)
+  })
+
+  test('rejects missing version', () => {
+    const result = miniAppEmbedNextSchema.safeParse({
+      imageUrl: 'https://example.com/image.png',
+      button: {
+        title: 'Launch',
+        action: {
+          type: 'launch_miniapp' as const,
+          name: 'Test App',
+        },
+      },
+    })
+    expect(result.success).toBe(false)
+  })
+
+  test('full valid embed with version "1"', () => {
+    const result = miniAppEmbedNextSchema.safeParse({
+      version: '1',
+      imageUrl: 'https://example.com/image.png',
+      aspectRatio: '1:1',
+      button: {
+        title: 'Open App',
+        action: {
+          type: 'launch_miniapp',
+          name: 'My Mini App',
+          url: 'https://example.com/miniapp',
+          splashImageUrl: 'https://example.com/splash.png',
+          splashBackgroundColor: '#FF0000',
+        },
+      },
+    })
+    expect(result.success).toBe(true)
+    if (result.success) {
+      expect(result.data.version).toBe('1')
+      expect(result.data.aspectRatio).toBe('1:1')
+      expect(result.data.button.action.type).toBe('launch_miniapp')
+    }
+  })
+
+  test('full valid embed with version as number 1', () => {
+    const result = miniAppEmbedNextSchema.safeParse({
+      version: 1,
+      imageUrl: 'https://example.com/image.png',
+      aspectRatio: '3:2',
+      button: {
+        title: 'View Token',
+        action: {
+          type: 'view_token',
+          token: 'eip155:8453/erc20:0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
+        },
+      },
+    })
+    expect(result.success).toBe(true)
+    if (result.success) {
+      expect(result.data.version).toBe('1')
+      expect(result.data.aspectRatio).toBe('3:2')
+      expect(result.data.button.action.type).toBe('view_token')
     }
   })
 })
