@@ -84,6 +84,7 @@ export type WireMiniAppHost = {
   ethProviderRequestV2: Ethereum.RpcTransport
   eip6963RequestProvider: () => void
   solanaProviderRequest?: SolanaWireRequestFn
+  addFrame: AddMiniApp.WireAddMiniApp
   addMiniApp: AddMiniApp.WireAddMiniApp
   viewCast: ViewCast.ViewCast
   viewProfile: ViewProfile.ViewProfile
@@ -116,6 +117,7 @@ export type MiniAppHost = {
    */
   eip6963RequestProvider: () => void
   solanaProviderRequest?: SolanaRequestFn
+  addFrame: AddMiniApp.AddMiniApp
   addMiniApp: AddMiniApp.AddMiniApp
   viewCast: ViewCast.ViewCast
   viewProfile: ViewProfile.ViewProfile

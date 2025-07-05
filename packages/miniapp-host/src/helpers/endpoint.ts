@@ -20,7 +20,7 @@ export function exposeToEndpoint({
   debug = false,
 }: {
   endpoint: HostEndpoint
-  sdk: Omit<MiniAppHost, 'ethProviderRequestV2'>
+  sdk: Omit<MiniAppHost, 'ethProviderRequestV2' | 'addFrame'>
   miniAppOrigin: string
   ethProvider?: Provider.Provider
   debug?: boolean

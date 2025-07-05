@@ -55,7 +55,9 @@ async function isInMiniApp(timeoutMs = 50): Promise<boolean> {
 }
 
 const addMiniApp = async () => {
-  const response = await miniAppHost.addMiniApp()
+  // Use the existing message overcomlink for backwards compat until
+  // hosts are all upgraded.
+  const response = await miniAppHost.addFrame()
   if (response.result) {
     return response.result
   }
