@@ -42,7 +42,10 @@ export const buttonSchema = z.object({
 })
 
 export const miniAppEmbedNextSchema = z.object({
-  version: z.literal('next'),
+  version: z
+    .union([z.string(), z.number()])
+    .transform((val) => String(val))
+    .pipe(z.union([z.literal('next'), z.literal('1')])),
   imageUrl: secureUrlSchema,
   aspectRatio: aspectRatioSchema.optional(),
   button: buttonSchema,
