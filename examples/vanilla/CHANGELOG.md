@@ -1,5 +1,13 @@
 # vanilla
 
+## 0.1.4
+
+### Patch Changes
+
+- Updated dependencies [[`384866f`](https://github.com/farcasterxyz/miniapps/commit/384866fff451900c5666d5e84260d5e271dac9d7)]:
+  - @farcaster/miniapp-host@0.2.1
+  - @farcaster/miniapp-sdk@0.1.3
+
 ## 0.1.3
 
 ### Patch Changes
