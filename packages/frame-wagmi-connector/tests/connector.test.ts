@@ -312,7 +312,7 @@ describe('Switch Chain', () => {
     const switchChainId = base.id
     connector.getProvider = vi.fn().mockResolvedValue(mockProvider)
 
-    await connector.switchChain({ chainId: switchChainId })
+    await connector.switchChain!({ chainId: switchChainId })
 
     expect(mockProvider.request).toHaveBeenCalledWith({
       method: 'wallet_switchEthereumChain',
@@ -327,7 +327,7 @@ describe('Switch Chain', () => {
     const switchChainId = 404
     connector.getProvider = vi.fn().mockResolvedValue(mockProvider)
 
-    expect(connector.switchChain({ chainId: switchChainId })).rejects.toThrow(
+    expect(connector.switchChain!({ chainId: switchChainId })).rejects.toThrow(
       'Chain not configured.',
     )
   })
