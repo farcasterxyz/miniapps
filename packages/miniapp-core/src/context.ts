@@ -1,5 +1,7 @@
 import type { MiniAppNotificationDetails } from './schemas/index.ts'
 
+export type MiniAppPlatformType = 'web' | 'mobile'
+
 export type MiniAppUser = {
   fid: number
   username?: string
@@ -99,6 +101,7 @@ export type SafeAreaInsets = {
 }
 
 export type ClientContext = {
+  platformType?: MiniAppPlatformType
   clientFid: number
   added: boolean
   notificationDetails?: MiniAppNotificationDetails
