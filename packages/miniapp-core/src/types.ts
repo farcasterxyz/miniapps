@@ -6,6 +6,7 @@ import type {
 import type {
   AddMiniApp,
   ComposeCast,
+  OpenMiniApp,
   Ready,
   SendToken,
   SignIn,
@@ -60,6 +61,7 @@ export const miniAppHostCapabilityList = [
   'actions.viewToken',
   'actions.sendToken',
   'actions.swapToken',
+  'actions.openMiniApp',
   'haptics.impactOccurred',
   'haptics.notificationOccurred',
   'haptics.selectionChanged',
@@ -91,6 +93,7 @@ export type WireMiniAppHost = {
   viewToken: ViewToken.ViewToken
   sendToken: SendToken.SendToken
   swapToken: SwapToken.SwapToken
+  openMiniApp: OpenMiniApp.OpenMiniApp
   composeCast: <close extends boolean | undefined = undefined>(
     options: ComposeCast.Options<close>,
   ) => Promise<ComposeCast.Result<close>>
@@ -124,6 +127,7 @@ export type MiniAppHost = {
   viewToken: ViewToken.ViewToken
   sendToken: SendToken.SendToken
   swapToken: SwapToken.SwapToken
+  openMiniApp: OpenMiniApp.OpenMiniApp
   composeCast: <close extends boolean | undefined = undefined>(
     options: ComposeCast.Options<close>,
   ) => Promise<ComposeCast.Result<close>>

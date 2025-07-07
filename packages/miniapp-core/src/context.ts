@@ -65,12 +65,18 @@ export type ChannelLocationContext = {
   }
 }
 
+export type OpenMiniAppLocationContext = {
+  type: 'open_miniapp'
+  referrerDomain: string
+}
+
 export type LocationContext =
   | CastEmbedLocationContext
   | CastShareLocationContext
   | NotificationLocationContext
   | LauncherLocationContext
   | ChannelLocationContext
+  | OpenMiniAppLocationContext
 
 export type AccountLocation = {
   placeId: string
