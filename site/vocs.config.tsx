@@ -121,7 +121,7 @@ export default defineConfig({
             link: '/docs/guides/auth',
           },
           {
-            text: 'Mini App URLs',
+            text: 'Universal Links',
             link: '/docs/guides/urls',
           },
           {
