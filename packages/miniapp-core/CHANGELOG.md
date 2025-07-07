@@ -1,5 +1,11 @@
 # @farcaster/frame-core
 
+## 0.3.5
+
+### Patch Changes
+
+- [#427](https://github.com/farcasterxyz/miniapps/pull/427) [`764c392`](https://github.com/farcasterxyz/miniapps/commit/764c39238458a07443e082a491d674c6d17c240a) Thanks [@PirosB3](https://github.com/PirosB3)! - publishing a few undocumented methods for now
+
 ## 0.3.4
 
 ### Patch Changes
