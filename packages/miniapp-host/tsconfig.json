@@ -1,0 +1,10 @@
+{
+  "extends": "@farcaster/tsconfig/browser.json",
+  "include": ["src"],
+  "exclude": ["dist", "build", "node_modules"],
+  "types": ["src/comlink.d.ts"],
+  "compilerOptions": {
+    "outDir": "dist",
+    "allowJs": true
+  }
+}

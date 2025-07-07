@@ -24,9 +24,11 @@ version bump.
 
 ### Metatags
 
-A Mini App URL must have a FrameEmbed in a serialized form in the `fc:frame` meta tag in the HTML `<head>`. When this URL is rendered in a cast, the image is displayed in a 3:2 ratio with a button underneath. Clicking the button will open a Mini App to the provided action url and use the splash page to animate the transition.
+A Mini App URL must have a MiniAppEmbed in a serialized form in the `fc:miniapp` meta tag in the HTML `<head>`. For backward compatibility, the `fc:frame` meta tag is also supported. When this URL is rendered in a cast, the image is displayed in a 3:2 ratio with a button underneath. Clicking the button will open a Mini App to the provided action url and use the splash page to animate the transition.
 
 ```html
+<meta name="fc:miniapp" content="<stringified Embed JSON>" />
+<!-- For backward compatibility -->
 <meta name="fc:frame" content="<stringified Embed JSON>" />
 ```
 
@@ -123,7 +125,7 @@ iframes and mobile WebViews.
 The SDK is versioned using [Semantic Versioning](https://semver.org/). A
 [What's New page](/docs/sdk/changelog) is maintained to communicate developer
 impacting changes. A [lower level
-changelog](https://github.com/farcasterxyz/miniapps/blob/main/packages/frame-sdk/CHANGELOG.md)
+changelog](https://github.com/farcasterxyz/miniapps/blob/main/packages/miniapp-sdk/CHANGELOG.md)
 is maintained within the code base to document all changes.
 
 
@@ -132,7 +134,7 @@ is maintained within the code base to document all changes.
 - [context](/docs/sdk/context) - provides information about the context the Mini App is running in
 
 #### Actions
-- [addMiniApp](/docs/sdk/actions/add-frame) - Prompts the user to add the Mini App
+- [addMiniApp](/docs/sdk/actions/add-miniapp) - Prompts the user to add the Mini App
 - [close](/docs/sdk/actions/close) - Closes the Mini App
 - [composeCast](/docs/sdk/actions/compose-cast) - Prompt the user to cast
 - [ready](/docs/sdk/actions/ready) - Hides the Splash Screen
@@ -175,8 +177,8 @@ version bump.
 
 | Property           | Type   | Required | Description                                      |
 |--------------------|--------|----------|--------------------------------------------------|
-| accountAssociation | object | Yes      | Verifies domain ownership to a Farcaster account |
-| frame              | object | Yes      | Metadata about the Mini App                      |
+| accountAssociation | object | ✅ **Yes** | Verifies domain ownership to a Farcaster account |
+| miniapp (or frame) | object | ✅ **Yes** | Metadata about the Mini App                      |
 
 #### accountAssociation
 
@@ -241,7 +243,7 @@ Example of a valid farcaster.json manifest:
     "payload": "eyJkb21haW4iOiJ5b2luay5wYXJ0eSJ9",
     "signature": "MHgwZmJiYWIwODg3YTU2MDFiNDU3MzVkOTQ5MDRjM2Y1NGUxMzVhZTQxOGEzMWQ5ODNhODAzZmZlYWNlZWMyZDYzNWY4ZTFjYWU4M2NhNTAwOTMzM2FmMTc1NDlmMDY2YTVlOWUwNTljNmZiNDUxMzg0Njk1NzBhODNiNjcyZWJjZTFi"
   },
-  "frame": {
+  "miniapp": {
     "version": "1",
     "name": "Yoink!",
     "iconUrl": "https://yoink.party/logo.png",
@@ -269,7 +271,7 @@ to quickly navigate back to the app and the app to send notifications to the
 user.
 
 Mini Apps can prompt the user to add the app during an interaction with the
-[addMiniApp](/docs/sdk/actions/add-frame) action. Hosts may also let users add Mini
+[addMiniApp](/docs/sdk/actions/add-miniapp) action. Hosts may also let users add Mini
 Apps from discovery surfaces like app stores or featured notifications.
 
 Before a user adds a Mini App the Host should display information about the app
@@ -288,8 +290,8 @@ added apps.
 The Host server POSTs 4 types of events to the Mini App server at the
 `webhookUrl` specified in its Mini App manifest:
 
-- `frame_added`
-- `frame_removed`
+- `miniapp_added`
+- `miniapp_removed`
 - `notifications_enabled`
 - `notifications_disabled`
 
@@ -310,7 +312,7 @@ are signed with the app key of the user. The final format is:
 All 3 values are `base64url` encoded. The payload and header can be decoded to
 JSON, where the payload is different per event.
 
-#### frame_added
+#### miniapp_added
 
 This event may happen when an open frame calls `actions.addMiniApp` to prompt the
 user to favorite it, or when the frame is closed and the user adds the frame
@@ -327,7 +329,7 @@ Webhook payload:
 
 ```json
 {
-  "event": "frame-added",
+  "event": "miniapp-added",
   "notificationDetails": {
     "url": "https://api.farcaster.xyz/v1/frame-notifications",
     "token": "a05059ef2415c67b08ecceb539201cbc6"
@@ -336,13 +338,13 @@ Webhook payload:
 ```
 
 ```ts
-type EventFrameAddedPayload = {
-  event: 'frame_added';
-  notificationDetails?: FrameNotificationDetails;
+type EventMiniAppAddedPayload = {
+  event: 'miniapp_added';
+  notificationDetails?: MiniAppNotificationDetails;
 };
 ```
 
-#### frame_removed
+#### miniapp_removed
 
 A user can remove a frame, which means that any notification tokens for that
 fid and client app (based on signer requester) should be considered invalid:
@@ -351,7 +353,7 @@ Webhook payload:
 
 ```json
 {
-  "event": "frame-removed"
+  "event": "miniapp-removed"
 }
 ```
 
@@ -390,7 +392,7 @@ Webhook payload:
 ```ts
 type EventNotificationsEnabledPayload = {
   event: 'notifications_enabled';
-  notificationDetails: FrameNotificationDetails;
+  notificationDetails: MiniAppNotificationDetails;
 };
 ```
 

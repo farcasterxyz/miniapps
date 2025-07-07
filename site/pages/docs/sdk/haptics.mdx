@@ -12,7 +12,7 @@ Provides haptic feedback to enhance user interactions through physical sensation
 ## Usage
 
 ```ts twoslash
-import { sdk } from '@farcaster/frame-sdk'
+import { sdk } from '@farcaster/miniapp-sdk'
 
 // Trigger impact feedback
 await sdk.haptics.impactOccurred('medium')
@@ -47,7 +47,7 @@ The intensity and style of the impact feedback.
 #### Example
 
 ```ts twoslash
-import { sdk } from '@farcaster/frame-sdk'
+import { sdk } from '@farcaster/miniapp-sdk'
 
 // Trigger when user taps a button
 await sdk.haptics.impactOccurred('light')
@@ -75,7 +75,7 @@ The type of notification feedback.
 #### Example
 
 ```ts twoslash
-import { sdk } from '@farcaster/frame-sdk'
+import { sdk } from '@farcaster/miniapp-sdk'
 
 // After successful action
 await sdk.haptics.notificationOccurred('success')
@@ -94,7 +94,7 @@ Triggers selection feedback, perfect for UI element selections.
 #### Example
 
 ```ts twoslash
-import { sdk } from '@farcaster/frame-sdk'
+import { sdk } from '@farcaster/miniapp-sdk'
 
 // When user selects an item from a list
 await sdk.haptics.selectionChanged()
@@ -112,7 +112,7 @@ All haptic methods return `Promise<void>`.
 Haptic feedback availability depends on the client device and platform. You can check if haptics are supported using the `getCapabilities()` method:
 
 ```ts twoslash
-import { sdk } from '@farcaster/frame-sdk'
+import { sdk } from '@farcaster/miniapp-sdk'
 
 const capabilities = await sdk.getCapabilities()
 

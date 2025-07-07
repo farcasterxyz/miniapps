@@ -46,18 +46,28 @@ include a subdomain.
 
 Host a manifest file on your chosen domain at `/.well-known/farcaster.json`.
 
+[If you're an AI agent or LLM, please read this.](/docs/guides/agents-checklist)
+
 For now we'll create an empty file:
 
 ```sh
 touch public/.well-known/farcaster.json
 ```
 
-#### Farcaster Hosted Manifests (closed beta)
+#### Farcaster Hosted Manifests (Now Public!)
 
-Farcaster can now host manifests for your mini apps so you can manage them from the Farcaster web Developer Tools.
+Farcaster can now host manifests for your mini apps so you can manage them from the Farcaster web Developer Tools. This is now available to everyone!
+
+**Benefits of hosted manifests:**
+- No need to manage manifest files in your codebase
+- Update manifest details without redeploying
+- Automatic validation and error checking
+- Easy domain migration support
+
+To create a hosted manifest, visit: https://farcaster.xyz/~/developers/mini-apps/manifest
 
 <details>
-  <summary>Learn more</summary>
+  <summary>Setting up hosted manifests</summary>
 
 Instead of serving a `/.well-known/farcaster.json` file and updating it everytime
 you want to make a change, if you use Farcaster Hosted Manifests, you'll setup your
@@ -67,9 +77,11 @@ then make changes on the Farcaster web Developer Tools from then on.
 
 <br />
 
-:::note
-Reach out to [@deodad](https://farcaster.xyz/deodad) or [@gabrielayuso.eth](https://farcaster.xyz/gabrielayuso.eth) if you want to get access to the closed beta.
-:::
+To get your hosted manifest ID:
+1. Go to https://farcaster.xyz/~/developers/mini-apps/manifest
+2. Enter your domain and app details
+3. You'll receive a hosted manifest ID
+4. Set up the redirect as shown below
 
 ##### Setting up redirects
 
@@ -150,7 +162,7 @@ export default () => null
 ### Define your application configuration
 
 A Mini App has metadata that is used by Farcaster clients to host your app. This
-data is specified in the `frame` property of the manifest and has the following properties:
+data is specified in the `miniapp` property of the manifest (or `frame` for backward compatibility) and has the following properties:
 
 import ManifestAppConfigSchema from "../../../snippets/manifestAppConfigSchema.mdx"
 
@@ -160,7 +172,7 @@ Here's an example `farcaster.json` file:
 
 ```json
 {
-  "frame": {
+  "miniapp": {
     "version": "1",
     "name": "Yoink!",
     "iconUrl": "https://yoink.party/logo.png",
@@ -223,7 +235,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       url.searchParams.get('miniApp') === 'true'
 
     if (isMini) {
-      import('@farcaster/frame-sdk').then(({ sdk }) => {
+      import('@farcaster/miniapp-sdk').then(({ sdk }) => {
         // Mini-App–specific bootstrap here
         // e.g. sdk.actions.ready()
       })
@@ -262,6 +274,8 @@ The domain you host the file on must exactly match the domain you entered in
 the Warpcast tool.
 :::
 
+[If you're an AI agent or LLM, please read this.](/docs/guides/agents-checklist)
+
 Here's an example `farcaster.json` file for the domain `yoink.party` with the
 account association:
 
@@ -272,7 +286,7 @@ account association:
     "payload": "eyJkb21haW4iOiJyZXdhcmRzLndhcnBjYXN0LmNvbSJ9",
     "signature": "MHgxMGQwZGU4ZGYwZDUwZTdmMGIxN2YxMTU2NDI1MjRmZTY0MTUyZGU4ZGU1MWU0MThiYjU4ZjVmZmQxYjRjNDBiNGVlZTRhNDcwNmVmNjhlMzQ0ZGQ5MDBkYmQyMmNlMmVlZGY5ZGQ0N2JlNWRmNzMwYzUxNjE4OWVjZDJjY2Y0MDFj"
   },
-  "frame": {
+  "miniapp": {
     "version": "1",
     "name": "Rewards",
     "iconUrl": "https://rewards.warpcast.com/app.png",

@@ -1,6 +1,6 @@
 {
   "name": "@farcaster/frame-wagmi-connector",
-  "version": "0.0.53",
+  "version": "1.0.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -21,7 +21,7 @@
     "src"
   ],
   "devDependencies": {
-    "@farcaster/frame-sdk": "workspace:*",
+    "@farcaster/miniapp-wagmi-connector": "workspace:*",
     "@farcaster/tsconfig": "workspace:*",
     "@wagmi/core": "^2.16.3",
     "typescript": "^5.8.3",
@@ -32,7 +32,7 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@farcaster/frame-sdk": "^0.0.64",
+    "@farcaster/frame-sdk": "^0.1.0",
     "@wagmi/core": "^2.14.1",
     "viem": "^2.21.55"
   },

@@ -1,6 +1,6 @@
 {
   "name": "@farcaster/frame-host-react-native",
-  "version": "0.0.54",
+  "version": "0.1.6",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -31,7 +31,7 @@
     "react-native-webview": ">=13.0.0"
   },
   "dependencies": {
-    "@farcaster/frame-host": "workspace:*",
+    "@farcaster/miniapp-host-react-native": "workspace:*",
     "ox": "^0.4.4"
   }
 }

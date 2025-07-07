@@ -23,17 +23,17 @@ export default defineConfig({
   },
   head() {
     return (
-      <>
-        <script
-          src="https://cdn.usefathom.com/script.js"
-          data-site="FJKRBMZB"
-          defer
-        />
-      </>
+      <script
+        src="https://cdn.usefathom.com/script.js"
+        data-site="FJKRBMZB"
+        defer
+      />
     )
   },
   ogImageUrl: {
     '/': OG_BASE_URL + '?title=%title&description=%description&',
+    '/blog':
+      OG_BASE_URL + '?title=%title&description=%description&section=Blog',
     '/docs/guides':
       OG_BASE_URL + '?title=%title&description=%description&section=Guide',
     '/docs/sdk':
@@ -52,6 +52,10 @@ export default defineConfig({
     },
   },
   topNav: [
+    {
+      text: 'Blog',
+      link: '/blog',
+    },
     {
       text: 'llms.txt',
       link: 'https://miniapps.farcaster.xyz/llms-full.txt',
@@ -124,6 +128,10 @@ export default defineConfig({
             text: 'Share Extensions',
             link: '/docs/guides/share-extension',
           },
+          {
+            text: '[for AI agents and LLMs] Checklist and guidelines',
+            link: '/docs/guides/agents-checklist',
+          },
         ],
       },
       {
@@ -158,7 +166,7 @@ export default defineConfig({
             items: [
               {
                 text: 'addMiniApp',
-                link: '/docs/sdk/actions/add-frame',
+                link: '/docs/sdk/actions/add-miniapp',
               },
               {
                 text: 'close',

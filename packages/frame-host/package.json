@@ -1,6 +1,6 @@
 {
   "name": "@farcaster/frame-host",
-  "version": "0.0.54",
+  "version": "0.1.6",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -25,7 +25,7 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "@farcaster/frame-core": "workspace:*",
+    "@farcaster/miniapp-host": "workspace:*",
     "ox": "^0.4.4"
   },
   "peerDependencies": {

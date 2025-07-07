@@ -41,15 +41,15 @@ user's wallet:
 :::code-group
 
 ```bash [npm]
-npm install @farcaster/frame-wagmi-connector
+npm install @farcaster/miniapp-wagmi-connector
 ```
 
 ```bash [pnpm]
-pnpm add @farcaster/frame-wagmi-connector
+pnpm add @farcaster/miniapp-wagmi-connector
 ```
 
 ```bash [yarn]
-yarn add @farcaster/frame-wagmi-connector
+yarn add @farcaster/miniapp-wagmi-connector
 ```
 
 :::
@@ -61,7 +61,7 @@ Add the Mini App connector to your Wagmi config:
 ```ts
 import { http, createConfig } from 'wagmi'
 import { base } from 'wagmi/chains'
-import { farcasterFrame as miniAppConnector } from '@farcaster/frame-wagmi-connector'
+import { farcasterMiniApp as miniAppConnector } from '@farcaster/miniapp-wagmi-connector'
 
 export const config = createConfig({
   chains: [base],

@@ -27,7 +27,7 @@ const text = "I just learned how to compose a cast";
 const embeds = ["https://miniapps.farcaster.xyz/docs/sdk/actions/compose-cast"] as [string];
 
 // ---cut---
-import { sdk } from '@farcaster/frame-sdk'
+import { sdk } from '@farcaster/miniapp-sdk'
 
 await sdk.actions.composeCast({ 
   text,
@@ -82,7 +82,7 @@ The cast posted by the user, or `undefined` if set to close.
 **Note:** The `cast` property in the result can be `null` if the user decides not to create the cast.
 
 ```ts twoslash
-import { sdk } from "@farcaster/frame-sdk";
+import { sdk } from "@farcaster/miniapp-sdk";
 
 // ---cut---
 const result = await sdk.actions.composeCast({ 

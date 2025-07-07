@@ -1,0 +1,40 @@
+---
+layout: minimal
+title: Why Farcaster Doesn't Need OAuth 2.0
+description: A decentralized architecture delivers a more sovereign trust model
+---
+ 
+# Why Farcaster Doesn't Need OAuth 2.0
+
+OAuth exists to let three separate parties (user → platform → third-party app) establish mutual trust. Farcaster is built on a decentralized architecture
+that collapses this triangle:
+
+## 1. Identity & Authentication
+
+* **User-owned keys:** A user controlled crypotgraphic signature proves control of a Farcaster ID—no intermediary.
+* **Dev mappings** 
+  - Sign In with X → Sign-in with Farcaster (SIWF) 
+  - OAuth 2.0 Authorization Flow → Quick Auth
+
+## 2. Data Access & Permissions
+
+* **Open, replicated data:** Social data like casts, reactions, and profiles live on Snapchain and can be read by anyone.
+* **No permission scopes:** Everything is already public; you filter what you need instead of requesting scopes.
+* **Zero-cost reads:** Sync the chain yourself or hit a public indexer—no rate caps, no $5k +/month fire-hoses.
+* **Cryptographic writes:** Users can delegate a key to applications so the applications can writes on their behalf.
+* **Dev mappings** 
+  - Centralized APIs → Snapchain + infra services (e.g. Neynar)
+  - Access token → no equivalent, data is public
+  - Write permissions → App Keys
+
+## Builder Takeaways
+
+1. **Skip OAuth flows—wallet signature = auth.**
+2. **Forget permission scopes—use filters.**
+4. **Enjoy building permissionlessly**
+
+## Resources
+
+- [Quick Auth](https://miniapps.farcaster.xyz/docs/sdk/quick-auth)
+- [Neynar SDK for one-call Snapchain queries](https://docs.neynar.com/reference/quickstart)
+- [App Keys](https://docs.farcaster.xyz/reference/warpcast/signer-requests)

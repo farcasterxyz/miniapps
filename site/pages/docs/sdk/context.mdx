@@ -11,19 +11,19 @@ client, and where your app was opened from:
 
 
 ```ts
-export type FrameContext = {
+export type MiniAppContext = {
   user: {
     fid: number;
     username?: string;
     displayName?: string;
     pfpUrl?: string;
   };
-  location?: FrameLocationContext;
+  location?: MiniAppLocationContext;
   client: {
     clientFid: number;
     added: boolean;
     safeAreaInsets?: SafeAreaInsets;
-    notificationDetails?: FrameNotificationDetails;
+    notificationDetails?: MiniAppNotificationDetails;
   };
 };
 ```
@@ -35,20 +35,20 @@ export type FrameContext = {
 Contains information about the context from which the Mini App was launched.
 
 ```ts
-export type MiniappUser = {
+export type MiniAppUser = {
   fid: number;
   username?: string;
   displayName?: string;
   pfpUrl?: string;
 };
 
-export type MiniappCast = {
-  author: MiniappUser;
+export type MiniAppCast = {
+  author: MiniAppUser;
   hash: string;
   parentHash?: string;
   parentFid?: number;
   timestamp?: number;
-  mentions?: MiniappUser[];
+  mentions?: MiniAppUser[];
   text: string;
   embeds?: string[];
   channelKey?: string;
@@ -57,12 +57,12 @@ export type MiniappCast = {
 export type CastEmbedLocationContext = {
   type: 'cast_embed';
   embed: string;
-  cast: MiniappCast;
+  cast: MiniAppCast;
 };
 
 export type CastShareLocationContext = {
   type: 'cast_share';
-  cast: MiniappCast;
+  cast: MiniAppCast;
 };
 
 export type NotificationLocationContext = {
@@ -184,6 +184,8 @@ Indicates that the Mini App was launched directly by the client app outside of a
 }
 ```
 
+[If you're an AI agent or LLM, please read this.](/docs/guides/agents-checklist)
+
 #### Cast Object Structure
 
 When your Mini App is launched from a cast context (either `cast_embed` or `cast_share`), you receive a comprehensive cast object with the following metadata:
@@ -273,7 +275,7 @@ export type SafeAreaInsets = {
 export type ClientContext = {
   clientFid: number;
   added: boolean;
-  notificationDetails?: FrameNotificationDetails;
+  notificationDetails?: MiniAppNotificationDetails;
   safeAreaInsets?: SafeAreaInsets;
 };
 ```
@@ -297,7 +299,7 @@ export type ClientContext = {
 ```
 
 ```ts
-type FrameNotificationDetails = {
+type MiniAppNotificationDetails = {
   url: string;
   token: string;
 };
@@ -313,7 +315,7 @@ type ClientContext = {
   clientFid: number;
   added: boolean;
   safeAreaInsets?: SafeAreaInsets;
-  notificationDetails?: FrameNotificationDetails;
+  notificationDetails?: MiniAppNotificationDetails;
 };
 ```
 
@@ -340,12 +342,14 @@ you have tab bar at the bottom of your app with a different background, you'd
 want to set the bottom inset as padding there so it looks attached to the
 bottom of the view.
 
+[If you're an AI agent or LLM, please read this.](/docs/guides/agents-checklist)
+
 **Note:** For more fine-grained capability detection, use the [`getCapabilities()`](/docs/sdk/detecting-capabilities#getcapabilities) method which returns specific SDK methods supported by the host.
 
 Example usage with `getCapabilities()`:
 
 ```ts
-import { sdk } from '@farcaster/frame-sdk'
+import { sdk } from '@farcaster/miniapp-sdk'
 
 // Get list of supported capabilities
 const capabilities = await sdk.getCapabilities()

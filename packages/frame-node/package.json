@@ -1,6 +1,6 @@
 {
   "name": "@farcaster/frame-node",
-  "version": "0.0.41",
+  "version": "0.1.4",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -15,10 +15,7 @@
     "build": "pnpm build:cjs & pnpm build:esm",
     "build:cjs": "tsc -p tsconfig.node.json",
     "build:esm": "tsc -p tsconfig.json",
-    "typecheck": "tsc --noEmit",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest --coverage"
+    "typecheck": "tsc --noEmit"
   },
   "files": [
     "dist",
@@ -33,7 +30,7 @@
     "vitest": "^2.1.9"
   },
   "dependencies": {
-    "@farcaster/frame-core": "workspace:*",
+    "@farcaster/miniapp-node": "workspace:*",
     "@noble/curves": "^1.7.0",
     "ox": "^0.4.4",
     "zod": "^3.24.1"

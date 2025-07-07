@@ -1,0 +1,26 @@
+{
+  "root": false,
+  "extends": "//",
+  "files": {
+    "includes": ["**", "!src/comlink/**"]
+  },
+  "linter": {
+    "rules": {
+      "suspicious": {
+        "noConsole": { "level": "off", "options": { "allow": ["log"] } }
+      },
+      "style": {
+        "noParameterAssign": "error",
+        "useAsConstAssertion": "error",
+        "useDefaultParameterLast": "error",
+        "useEnumInitializers": "error",
+        "useSelfClosingElements": "error",
+        "useSingleVarDeclarator": "error",
+        "noUnusedTemplateLiteral": "error",
+        "useNumberNamespace": "error",
+        "noInferrableTypes": "error",
+        "noUselessElse": "error"
+      }
+    }
+  }
+}

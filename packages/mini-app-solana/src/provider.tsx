@@ -2,7 +2,6 @@ import type { Adapter } from '@solana/wallet-adapter-base'
 import {
   ConnectionProvider,
   WalletProvider,
-  useWallet,
 } from '@solana/wallet-adapter-react'
 import * as React from 'react'
 

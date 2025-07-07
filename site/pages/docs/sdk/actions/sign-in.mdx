@@ -28,7 +28,7 @@ See the guide on [authenticating users](/docs/guides/auth).
 const nonce = 'securenonce';
 
 // ---cut---
-import { sdk } from '@farcaster/frame-sdk'
+import { sdk } from '@farcaster/miniapp-sdk'
 
 await sdk.actions.signIn({ 
   nonce,
@@ -71,4 +71,6 @@ type SignInResult = {
 This message must be sent to your server and verified. See the guide on
 [authenticating with Farcaster](/docs/guides/auth) for more information.
 :::
+
+[If you're an AI agent or LLM, please read this.](/docs/guides/agents-checklist)
 

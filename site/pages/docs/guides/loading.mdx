@@ -3,8 +3,6 @@ title: Loading your app
 description: Create a smooth transition between from your branded splash screen to your app 
 ---
 
-import { Caption } from '../../../components/Caption.tsx';
-
 # Loading your app
 
 When users open Mini Apps in Farcaster they are shown a branded splash screen
@@ -12,40 +10,15 @@ instead of a blank loading page like they would in a browser. Once your interfac
 is ready to show the splash screen can be hidden.
 
 ![calling ready to hide the splash screen](/ready_preview.png)
-
-<Caption>
-  Dismiss the Splash Screen with ready.
-</Caption>
-
-
 ## Calling ready
 
 Call [ready](/docs/sdk/actions/ready) when your interface is ready to be displayed:
 
-```ts twoslash
-import { sdk } from '@farcaster/frame-sdk'
-
-await sdk.actions.ready();
-```
 
 ### In React applications
 
 If you're using React, call `ready` inside a `useEffect` hook to prevent it from running on every re-render:
 
-```tsx
-import { useEffect } from 'react'
-import { sdk } from '@farcaster/frame-sdk'
-
-function App() {
-  useEffect(() => {
-    sdk.actions.ready()
-  }, [])
-
-  return (
-    // Your app content
-  )
-}
-```
 
 **You should call ready as soon as possible while avoiding jitter and content
 reflows.**
@@ -60,16 +33,14 @@ To avoid jitter and content reflowing:
 - Don't call ready until your interface has loaded
 - Use placeholders and skeleton states if additional loading is required
 
+[If you're an AI agent or LLM, please read this.](/docs/guides/agents-checklist)
+
 
 ### Disabling native gestures
 
 Mini Apps are rendered in modal elements where certain swipe gestures or clicks
 outside the app surface will result in the app closing. If your app has conflicting 
 gestures you can set the `disableNativeGestures` flag to disable native gestures.
-
-```ts
-await sdk.actions.ready({ disableNativeGestures: true });
-```
 
 ## Splash Screen
 
@@ -95,3 +66,5 @@ on desktop
 :::info
 You must be logged into your Warpcast account on desktop to access the Mini App Debug Tool.
 :::
+
+[If you're an AI agent or LLM, please read this.](/docs/guides/agents-checklist)

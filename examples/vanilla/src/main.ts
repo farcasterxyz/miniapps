@@ -1,4 +1,4 @@
-import { type FrameHost, exposeToIframe } from '@farcaster/frame-host'
+import { exposeToIframe, type MiniAppHost } from '@farcaster/miniapp-host'
 import './style.css'
 
 declare global {
@@ -40,7 +40,7 @@ const announceProvider = () => {
   })
 }
 
-const frameHost: FrameHost = {
+const frameHost: MiniAppHost = {
   ready: () => {
     document.querySelector<HTMLDivElement>('#splash')!.hidden = true
   },
@@ -73,11 +73,11 @@ const frameHost: FrameHost = {
       btn!.hidden = true
     }
   },
-} as FrameHost
+} as MiniAppHost
 
 const { endpoint } = exposeToIframe({
   iframe: document.querySelector<HTMLIFrameElement>('#iframe')!,
   sdk: frameHost,
   ethProvider: window.ethereum,
-  frameOrigin: window.origin,
+  miniAppOrigin: window.origin,
 })

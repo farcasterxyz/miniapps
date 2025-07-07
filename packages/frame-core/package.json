@@ -1,6 +1,6 @@
 {
   "name": "@farcaster/frame-core",
-  "version": "0.2.0",
+  "version": "0.3.4",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -15,10 +15,7 @@
     "build": "pnpm build:cjs & pnpm build:esm",
     "build:cjs": "tsc -p tsconfig.node.json",
     "build:esm": "tsc -p tsconfig.json",
-    "typecheck": "tsc --noEmit",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest --coverage"
+    "typecheck": "tsc --noEmit"
   },
   "files": [
     "dist",
@@ -32,6 +29,7 @@
     "vitest": "^2.1.9"
   },
   "dependencies": {
+    "@farcaster/miniapp-core": "workspace:*",
     "@solana/web3.js": "^1.98.2",
     "ox": "^0.4.4",
     "zod": "^3.24.1"

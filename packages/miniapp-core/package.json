@@ -1,0 +1,42 @@
+{
+  "name": "@farcaster/miniapp-core",
+  "version": "0.3.4",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/farcasterxyz/frames.git",
+    "directory": "packages/miniapp-core"
+  },
+  "main": "dist/index.js",
+  "module": "esm/index.js",
+  "scripts": {
+    "clean": "rm -rf dist esm",
+    "prebuild": "npm run clean",
+    "build": "pnpm build:cjs & pnpm build:esm",
+    "build:cjs": "tsc -p tsconfig.node.json",
+    "build:esm": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest --coverage"
+  },
+  "files": [
+    "dist",
+    "esm",
+    "src"
+  ],
+  "devDependencies": {
+    "@farcaster/tsconfig": "workspace:*",
+    "@vitest/coverage-v8": "^2.1.8",
+    "typescript": "^5.8.3",
+    "vitest": "^2.1.9"
+  },
+  "dependencies": {
+    "@solana/web3.js": "^1.98.2",
+    "ox": "^0.4.4",
+    "zod": "^3.25.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

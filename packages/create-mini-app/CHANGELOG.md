@@ -1,5 +1,15 @@
 # @farcaster/create-mini-app
 
+## 0.1.0
+
+### Minor Changes
+
+- [#396](https://github.com/farcasterxyz/miniapps/pull/396) [`d23f93f`](https://github.com/farcasterxyz/miniapps/commit/d23f93f5dcfb382d52e2faa8dc6be3dd1ab0674f) Thanks [@CassOnMars](https://github.com/CassOnMars)! - introduce mini app rename
+
+### Patch Changes
+
+- [#402](https://github.com/farcasterxyz/miniapps/pull/402) [`0f94fc1`](https://github.com/farcasterxyz/miniapps/commit/0f94fc15b590a551dffb545be9f04fcf9ea41689) Thanks [@PirosB3](https://github.com/PirosB3)! - Enforce Node.js version
+
 ## 0.0.8
 
 ### Patch Changes

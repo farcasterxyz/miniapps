@@ -1,5 +1,54 @@
 # @farcaster/frame-core
 
+## 0.3.4
+
+### Patch Changes
+
+- Updated dependencies [[`1e46d5f`](https://github.com/farcasterxyz/miniapps/commit/1e46d5fc85561d91b6d4777f2ee3c75207ee9f42)]:
+  - @farcaster/miniapp-core@0.3.4
+
+## 0.3.3
+
+### Patch Changes
+
+- Updated dependencies [[`384866f`](https://github.com/farcasterxyz/miniapps/commit/384866fff451900c5666d5e84260d5e271dac9d7)]:
+  - @farcaster/miniapp-core@0.3.3
+
+## 0.3.2
+
+### Patch Changes
+
+- Updated dependencies [[`960dc83`](https://github.com/farcasterxyz/miniapps/commit/960dc83c0060a4a23cd6ed3fbb76d5425d4275b6)]:
+  - @farcaster/miniapp-core@0.3.2
+
+## 0.3.1
+
+### Patch Changes
+
+- [#409](https://github.com/farcasterxyz/miniapps/pull/409) [`92f1de9`](https://github.com/farcasterxyz/miniapps/commit/92f1de9c4e7307915b39aac470a4322707911bae) Thanks [@deodad](https://github.com/deodad)! - Roll back zod/v4 since it was causing package manager problems.
+
+- Updated dependencies [[`92f1de9`](https://github.com/farcasterxyz/miniapps/commit/92f1de9c4e7307915b39aac470a4322707911bae)]:
+  - @farcaster/miniapp-core@0.3.1
+
+## 0.3.0
+
+### Minor Changes
+
+- [#396](https://github.com/farcasterxyz/miniapps/pull/396) [`d23f93f`](https://github.com/farcasterxyz/miniapps/commit/d23f93f5dcfb382d52e2faa8dc6be3dd1ab0674f) Thanks [@CassOnMars](https://github.com/CassOnMars)! - introduce mini app rename
+
+### Patch Changes
+
+- [#399](https://github.com/farcasterxyz/miniapps/pull/399) [`e877930`](https://github.com/farcasterxyz/miniapps/commit/e877930e60f7980bf7d434c77c28f4416c6e5b2d) Thanks [@deodad](https://github.com/deodad)! - Accept version '1' for current Embed schema.
+
+- [#394](https://github.com/farcasterxyz/miniapps/pull/394) [`902c49d`](https://github.com/farcasterxyz/miniapps/commit/902c49da52b650249dcb9086804594d3e45d6ed0) Thanks [@deodad](https://github.com/deodad)! - Expanded url validation to check for spaces.
+
+- [#407](https://github.com/farcasterxyz/miniapps/pull/407) [`b61457b`](https://github.com/farcasterxyz/miniapps/commit/b61457b208d021a9c53a2d71c54c958f2fe8798a) Thanks [@deodad](https://github.com/deodad)! - Moved to zod/v4 for schema validations.
+
+- [#398](https://github.com/farcasterxyz/miniapps/pull/398) [`5e4a0e4`](https://github.com/farcasterxyz/miniapps/commit/5e4a0e45df3b4fad38c80930c89b76a61b321d52) Thanks [@deodad](https://github.com/deodad)! - Disallow localhost and IPs URLs.
+
+- Updated dependencies [[`d23f93f`](https://github.com/farcasterxyz/miniapps/commit/d23f93f5dcfb382d52e2faa8dc6be3dd1ab0674f)]:
+  - @farcaster/miniapp-core@0.3.0
+
 ## 0.2.0
 
 ### Minor Changes

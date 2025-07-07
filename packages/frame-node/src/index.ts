@@ -1,7 +1,9 @@
-export * from '@farcaster/frame-core'
-export * from './jfs.ts'
-export * from './neynar.ts'
-export * from './farcaster.ts'
-export * from './types.ts'
-export * from './webhook.ts'
-export * from './util.ts'
+// Deprecation warning
+if (typeof console !== 'undefined' && console.warn) {
+  console.warn(
+    '@farcaster/frame-node is deprecated. Please use @farcaster/miniapp-node instead.',
+  )
+}
+
+// Re-export everything from miniapp-node
+export * from '@farcaster/miniapp-node'

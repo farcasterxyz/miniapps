@@ -1,5 +1,51 @@
 # @farcaster/mini-app-solana
 
+## 1.0.4
+
+### Patch Changes
+
+- Updated dependencies [[`1e46d5f`](https://github.com/farcasterxyz/miniapps/commit/1e46d5fc85561d91b6d4777f2ee3c75207ee9f42)]:
+  - @farcaster/miniapp-core@0.3.4
+  - @farcaster/miniapp-sdk@0.1.4
+
+## 1.0.3
+
+### Patch Changes
+
+- Updated dependencies [[`384866f`](https://github.com/farcasterxyz/miniapps/commit/384866fff451900c5666d5e84260d5e271dac9d7)]:
+  - @farcaster/miniapp-core@0.3.3
+  - @farcaster/miniapp-sdk@0.1.3
+
+## 1.0.2
+
+### Patch Changes
+
+- Updated dependencies [[`960dc83`](https://github.com/farcasterxyz/miniapps/commit/960dc83c0060a4a23cd6ed3fbb76d5425d4275b6)]:
+  - @farcaster/miniapp-core@0.3.2
+  - @farcaster/miniapp-sdk@0.1.2
+
+## 1.0.1
+
+### Patch Changes
+
+- Updated dependencies [[`92f1de9`](https://github.com/farcasterxyz/miniapps/commit/92f1de9c4e7307915b39aac470a4322707911bae)]:
+  - @farcaster/miniapp-core@0.3.1
+  - @farcaster/miniapp-sdk@0.1.1
+
+## 1.0.0
+
+### Minor Changes
+
+- [#396](https://github.com/farcasterxyz/miniapps/pull/396) [`d23f93f`](https://github.com/farcasterxyz/miniapps/commit/d23f93f5dcfb382d52e2faa8dc6be3dd1ab0674f) Thanks [@CassOnMars](https://github.com/CassOnMars)! - introduce mini app rename
+
+### Patch Changes
+
+- [#402](https://github.com/farcasterxyz/miniapps/pull/402) [`0f94fc1`](https://github.com/farcasterxyz/miniapps/commit/0f94fc15b590a551dffb545be9f04fcf9ea41689) Thanks [@PirosB3](https://github.com/PirosB3)! - Enforce Node.js version
+
+- Updated dependencies [[`d23f93f`](https://github.com/farcasterxyz/miniapps/commit/d23f93f5dcfb382d52e2faa8dc6be3dd1ab0674f)]:
+  - @farcaster/miniapp-core@0.3.0
+  - @farcaster/miniapp-sdk@0.1.0
+
 ## 0.0.20
 
 ### Patch Changes

@@ -1,7 +1,7 @@
 {
   "name": "vanilla",
   "private": true,
-  "version": "0.0.48",
+  "version": "0.1.6",
   "type": "module",
   "license": "MIT",
   "scripts": {
@@ -15,8 +15,8 @@
     "vite": "^6.2.5"
   },
   "dependencies": {
-    "@farcaster/frame-host": "workspace:*",
-    "@farcaster/frame-sdk": "workspace:*",
+    "@farcaster/miniapp-host": "workspace:*",
+    "@farcaster/miniapp-sdk": "workspace:*",
     "mipd": "^0.0.7"
   }
 }

@@ -1,5 +1,58 @@
 # @farcaster/frame-host
 
+## 0.1.6
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @farcaster/miniapp-host@0.2.3
+
+## 0.1.5
+
+### Patch Changes
+
+- Updated dependencies [[`269a70e`](https://github.com/farcasterxyz/miniapps/commit/269a70ea13e7284547d001e240ac4db386f818f6)]:
+  - @farcaster/miniapp-host@0.2.2
+
+## 0.1.4
+
+### Patch Changes
+
+- Updated dependencies [[`384866f`](https://github.com/farcasterxyz/miniapps/commit/384866fff451900c5666d5e84260d5e271dac9d7)]:
+  - @farcaster/miniapp-host@0.2.1
+
+## 0.1.3
+
+### Patch Changes
+
+- Updated dependencies [[`7e541f6`](https://github.com/farcasterxyz/miniapps/commit/7e541f677a1a51cc48cf74c45f3b62be20b1b813)]:
+  - @farcaster/miniapp-host@0.2.0
+
+## 0.1.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @farcaster/miniapp-host@0.1.2
+
+## 0.1.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @farcaster/miniapp-host@0.1.1
+
+## 0.1.0
+
+### Minor Changes
+
+- [#396](https://github.com/farcasterxyz/miniapps/pull/396) [`d23f93f`](https://github.com/farcasterxyz/miniapps/commit/d23f93f5dcfb382d52e2faa8dc6be3dd1ab0674f) Thanks [@CassOnMars](https://github.com/CassOnMars)! - introduce mini app rename
+
+### Patch Changes
+
+- Updated dependencies [[`d23f93f`](https://github.com/farcasterxyz/miniapps/commit/d23f93f5dcfb382d52e2faa8dc6be3dd1ab0674f)]:
+  - @farcaster/miniapp-host@0.1.0
+
 ## 0.0.54
 
 ### Patch Changes

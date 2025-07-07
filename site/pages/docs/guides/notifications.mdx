@@ -56,6 +56,8 @@ Neynar](https://docs.neynar.com/docs/send-notifications-to-mini-app-users).
 - **Roll your own** - If you want to host your own server to receive webhooks:<br />
 [Follow the Receiving Webhooks guide](#receiving-webhooks).
 
+[If you're an AI agent or LLM, please read this.](/docs/guides/agents-checklist)
+
 
 ### Add your webhook URL in `farcaster.json`
 
@@ -71,7 +73,7 @@ Define the `webhookUrl` property in your app's configuration in `farcaster.json`
     "payload": "eyJkb21haW4iOiJleGFtcGxlLmNvbSJ9",
     "signature": "MHg3NmRkOWVlMjE4OGEyMjliNzExZjUzOTkxYTc1NmEzMGZjNTA3NmE5OTU5OWJmOWFmYjYyMzAyZWQxMWQ2MWFmNTExYzlhYWVjNjQ3OWMzODcyMTI5MzA2YmJhYjdhMTE0MmRhMjA4MmNjNTM5MTJiY2MyMDRhMWFjZTY2NjE5OTFj"
   },
-  "frame": {
+  "miniapp": {
     "version": "1",
     "name": "Example App",
     "iconUrl": "https://example.com/icon.png",
@@ -97,7 +99,7 @@ For a Mini App to send notifications, it needs to first be added by a user to
 their Farcaster client and for notifications to be enabled (these will be
 enabled by default). 
 
-Use the [addMiniApp](/docs/sdk/actions/add-frame) action while a user is using your app to prompt
+Use the [addMiniApp](/docs/sdk/actions/add-miniapp) action while a user is using your app to prompt
 them to add it:
 
 
@@ -141,10 +143,10 @@ import SendNotificationResponseSchema from '../../../snippets/sendNotificationRe
 When a user clicks the notification, the Farcaster client will:
 
 - Open your Mini App at `targetUrl`
-- Set the `context.location` to a `FrameLocationNotificationContext`
+- Set the `context.location` to a `MiniAppLocationNotificationContext`
 
 ```ts
-export type FrameLocationNotificationContext = {
+export type MiniAppLocationNotificationContext = {
   type: 'notification';
   notification: {
     notificationId: string;
@@ -199,7 +201,7 @@ on behalf of your application.
 
 ### Events
 
-#### frame_added
+#### miniapp_added
 
 Sent when the user adds the Mini App to their Farcaster client (whether or not
 this was triggered by an `addMiniApp()` prompt).
@@ -211,7 +213,7 @@ client equates adding to enabling notifications (Warpcast does this).
 
 ```json
 {
-  "event": "frame_added",
+  "event": "miniapp_added",
   "notificationDetails": {
     "url": "https://api.farcaster.xyz/v1/frame-notifications",
     "token": "a05059ef2415c67b08ecceb539201cbc6"
@@ -219,7 +221,7 @@ client equates adding to enabling notifications (Warpcast does this).
 }
 ```
 
-#### frame_removed
+#### miniapp_removed
 
 Sent when a user removes a mini app, which means that any notification tokens for
 that fid and client app (based on signer requester) should be considered
@@ -229,7 +231,7 @@ invalid:
 
 ```json
 {
-  "event": "frame_removed"
+  "event": "miniapp_removed"
 }
 ```
 
@@ -284,12 +286,14 @@ Mini Apps to verify the Farcaster client that generated the notification and the
 Farcaster user they generated it for. 
 
 The
-[`@farcaster/frame-node`](https://github.com/farcasterxyz/miniapps/tree/main/packages/frame-node)
+[`@farcaster/miniapp-node`](https://github.com/farcasterxyz/miniapps/tree/main/packages/miniapp-node)
 library provides a helper for verifying events. To use it, you'll need to supply a validation
 function that can check the signatures against the latest Farcaster network state.
 
 An implementation that uses [Neynar](https://neynar.com) is provided. You can sign up and get
 an API key on their free tier. Make sure to set `NEYNAR_API_KEY` environment variable.
+
+[If you're an AI agent or LLM, please read this.](/docs/guides/agents-checklist)
 
 ### Example
 
@@ -301,7 +305,7 @@ import {
   ParseWebhookEvent,
   parseWebhookEvent,
   verifyAppKeyWithNeynar,
-} from "@farcaster/frame-node";
+} from "@farcaster/miniapp-node";
 
 try {
   const data = await parseWebhookEvent(requestJson, verifyAppKeyWithNeynar);
@@ -325,6 +329,6 @@ try {
 For a complete example, check out the [Mini App V2 Demo
 ](https://github.com/farcasterxyz/frames-v2-demo) has all of the above:
 
-- [Handles webhooks](https://github.com/farcasterxyz/frames-v2-demo/blob/main/src/app/api/webhook/route.ts) leveraging the [`@farcaster/frame-node`](https://github.com/farcasterxyz/frames/tree/main/packages/frame-node) library that makes this very easy
+- [Handles webhooks](https://github.com/farcasterxyz/frames-v2-demo/blob/main/src/app/api/webhook/route.ts) leveraging the [`@farcaster/miniapp-node`](https://github.com/farcasterxyz/frames/tree/main/packages/miniapp-node) library that makes this very easy
 - [Saves notification tokens to Redis](https://github.com/farcasterxyz/frames-v2-demo/blob/main/src/lib/kv.ts)
 - [Sends notifications](https://github.com/farcasterxyz/frames-v2-demo/blob/main/src/lib/notifs.ts)

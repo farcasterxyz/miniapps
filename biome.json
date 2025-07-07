@@ -1,21 +1,36 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.0.6/schema.json",
   "files": {
-    "ignore": [
-      "tsconfig.json",
-      "tsconfig.*.json",
-      "packages/tsconfig",
-      "package.json",
-      "**/esm",
-      "**/dist",
-      "examples/hono-backend/worker-configuration.d.ts",
-      "frame-host/src/comlink",
-      "packages/create-mini-app/templates"
+    "includes": [
+      "**",
+      "!**/tsconfig.json",
+      "!**/tsconfig.*.json",
+      "!**/packages/tsconfig",
+      "!**/package.json",
+      "!**/esm",
+      "!**/dist",
+      "!**/codemods",
+      "!**/examples/hono-backend/worker-configuration.d.ts",
+      "!packages/miniapp-host/src/comlink/**",
+      "!**/packages/create-mini-app/templates"
     ]
   },
-  "organizeImports": {
-    "enabled": true
-  },
+  "overrides": [
+    {
+      "includes": [
+        "packages/frame-*/src/index.ts",
+        "packages/frame-wagmi-connector/src/index.ts"
+      ],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsole": "off"
+          }
+        }
+      }
+    }
+  ],
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
@@ -33,13 +48,23 @@
       },
       "style": {
         "noNonNullAssertion": "off",
-        "useTemplate": "off"
+        "useTemplate": "off",
+        "noParameterAssign": "error",
+        "useAsConstAssertion": "error",
+        "useDefaultParameterLast": "error",
+        "useEnumInitializers": "error",
+        "useSelfClosingElements": "error",
+        "useSingleVarDeclarator": "error",
+        "noUnusedTemplateLiteral": "error",
+        "useNumberNamespace": "error",
+        "noInferrableTypes": "error",
+        "noUselessElse": "error"
       },
       "suspicious": {
         "noAssignInExpressions": "off",
-        "noConsoleLog": "error",
         "noExplicitAny": "off",
-        "noShadowRestrictedNames": "off"
+        "noShadowRestrictedNames": "off",
+        "noConsole": { "level": "error", "options": { "allow": ["log"] } }
       },
       "correctness": {
         "useImportExtensions": "error"
