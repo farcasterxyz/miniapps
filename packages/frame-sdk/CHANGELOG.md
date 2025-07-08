@@ -1,5 +1,12 @@
 # @farcaster/frame-kit
 
+## 0.1.6
+
+### Patch Changes
+
+- Updated dependencies [[`ef6dfcb`](https://github.com/farcasterxyz/miniapps/commit/ef6dfcb118fdd0b1ec0b96e5607cfe3ecace01ff)]:
+  - @farcaster/miniapp-sdk@0.1.6
+
 ## 0.1.5
 
 ### Patch Changes

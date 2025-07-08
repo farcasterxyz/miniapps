@@ -1,5 +1,12 @@
 # react-ts
 
+## 0.1.6
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @farcaster/frame-sdk@0.1.6
+
 ## 0.1.5
 
 ### Patch Changes

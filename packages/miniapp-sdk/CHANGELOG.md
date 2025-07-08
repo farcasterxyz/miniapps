@@ -1,5 +1,11 @@
 # @farcaster/frame-kit
 
+## 0.1.6
+
+### Patch Changes
+
+- [#430](https://github.com/farcasterxyz/miniapps/pull/430) [`ef6dfcb`](https://github.com/farcasterxyz/miniapps/commit/ef6dfcb118fdd0b1ec0b96e5607cfe3ecace01ff) Thanks [@PirosB3](https://github.com/PirosB3)! - Missing implementation
+
 ## 0.1.5
 
 ### Patch Changes
