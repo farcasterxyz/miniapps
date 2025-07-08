@@ -7,6 +7,7 @@ import type {
   ImpactOccurred,
   MiniAppNotificationDetails,
   NotificationOccurred,
+  OpenMiniApp,
   Ready,
   SelectionChanged,
   SendToken,
@@ -86,6 +87,7 @@ export type MiniAppSDK = {
     viewToken: ViewToken.ViewToken
     sendToken: SendToken.SendToken
     swapToken: SwapToken.SwapToken
+    openMiniApp: OpenMiniApp.OpenMiniApp
   }
   experimental: {
     getSolanaProvider: () => Promise<SolanaWalletProvider | undefined>

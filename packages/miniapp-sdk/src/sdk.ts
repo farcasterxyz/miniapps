@@ -89,6 +89,7 @@ export const sdk: MiniAppSDK = {
     close: miniAppHost.close.bind(miniAppHost),
     viewCast: miniAppHost.viewCast.bind(miniAppHost),
     viewProfile: miniAppHost.viewProfile.bind(miniAppHost),
+    openMiniApp: miniAppHost.openMiniApp.bind(miniAppHost),
     signIn: async (options) => {
       const response = await miniAppHost.signIn(options)
       if (response.result) {
