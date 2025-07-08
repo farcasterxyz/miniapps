@@ -362,6 +362,8 @@ export function expose(
                 return obj.selectionChanged(...argumentList);
               case 'updateBackState':
                 return obj.updateBackState(...argumentList);
+              case 'openMiniApp':
+                return obj.openMiniApp(...argumentList);
               default:
                 throw new Error(`Unsupported APPLY for ${path.join('/')}`)
             }
