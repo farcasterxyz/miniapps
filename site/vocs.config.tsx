@@ -185,6 +185,10 @@ export default defineConfig({
                 link: '/docs/sdk/actions/open-url',
               },
               {
+                text: 'openMiniApp',
+                link: '/docs/sdk/actions/open-miniapp',
+              },
+              {
                 text: 'signIn',
                 link: '/docs/sdk/actions/sign-in',
               },

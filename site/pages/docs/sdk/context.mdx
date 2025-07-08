@@ -98,12 +98,18 @@ export type ChannelLocationContext = {
   };
 };
 
+export type OpenMiniAppLocationContext = {
+  type: 'open_miniapp';
+  referrerDomain: string;
+};
+
 export type LocationContext =
   | CastEmbedLocationContext
   | CastShareLocationContext
   | NotificationLocationContext
   | LauncherLocationContext
-  | ChannelLocationContext;
+  | ChannelLocationContext
+  | OpenMiniAppLocationContext;
 ```
 
 #### Cast Embed
@@ -183,6 +189,23 @@ Indicates that the Mini App was launched directly by the client app outside of a
   type: "launcher"
 }
 ```
+
+#### Open Mini App
+
+Indicates that the Mini App was launched from another Mini App using the `openMiniApp` action. This enables app-to-app navigation and referral tracking.
+
+```ts
+> sdk.context.location
+{
+  type: "open_miniapp",
+  referrerDomain: "example-app.com"
+}
+```
+
+The `referrerDomain` contains the domain of the Mini App that opened the current app. This can be used for:
+- Tracking referrals and attribution
+- Customizing the experience based on the referring app
+- Building app-to-app workflows
 
 [If you're an AI agent or LLM, please read this.](/docs/guides/agents-checklist)
 
