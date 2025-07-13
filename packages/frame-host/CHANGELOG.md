@@ -1,5 +1,12 @@
 # @farcaster/frame-host
 
+## 0.1.9
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @farcaster/miniapp-host@0.2.6
+
 ## 0.1.8
 
 ### Patch Changes

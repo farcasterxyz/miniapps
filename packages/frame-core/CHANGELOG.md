@@ -1,5 +1,14 @@
 # @farcaster/frame-core
 
+## 0.3.6
+
+### Patch Changes
+
+- [#442](https://github.com/farcasterxyz/miniapps/pull/442) [`614ec77`](https://github.com/farcasterxyz/miniapps/commit/614ec77e8f7917dc3b07e563a8ba6bb3b6c10b67) Thanks [@deodad](https://github.com/deodad)! - Export intermediate schema for manifest properties.
+
+- Updated dependencies [[`614ec77`](https://github.com/farcasterxyz/miniapps/commit/614ec77e8f7917dc3b07e563a8ba6bb3b6c10b67)]:
+  - @farcaster/miniapp-core@0.3.6
+
 ## 0.3.5
 
 ### Patch Changes
