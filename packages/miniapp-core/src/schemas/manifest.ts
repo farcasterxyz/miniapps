@@ -10,7 +10,7 @@ import {
   secureUrlSchema,
 } from './shared.ts'
 
-const primaryCategorySchema = z.enum([
+export const primaryCategories = [
   'games',
   'social',
   'finance',
@@ -24,9 +24,38 @@ const primaryCategorySchema = z.enum([
   'developer-tools',
   'entertainment',
   'art-creativity',
+] as const
+
+export type PrimaryCategory = (typeof primaryCategories)[number]
+
+export const primaryCategorySchema = z.enum(primaryCategories)
+
+export const versionSchema = z.union([
+  z.literal('0.0.0'),
+  z.literal('0.0.1'),
+  z.literal('1'),
+  z.literal('next'),
 ])
 
-const chainList = [
+export const subtitleSchema = createSimpleStringSchema({ max: 30 })
+
+export const descriptionSchema = createSimpleStringSchema({ max: 170 })
+
+export const screenshotUrlsSchema = z.array(secureUrlSchema).max(3)
+
+export const tagsSchema = z
+  .array(createSimpleStringSchema({ max: 20, noSpaces: true }))
+  .max(5)
+
+export const taglineSchema = createSimpleStringSchema({ max: 30 })
+
+export const ogTitleSchema = createSimpleStringSchema({ max: 30 })
+
+export const ogDescriptionSchema = createSimpleStringSchema({ max: 100 })
+
+export const noindexSchema = z.boolean()
+
+export const chains = [
   'eip155:1', // Ethereum mainnet
   'eip155:8453', // Base mainnet
   'eip155:42161', // Arbitrum One
@@ -45,22 +74,27 @@ const chainList = [
   'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp', // Solana
 ] as const
 
+export type Chains = (typeof chains)[number]
+
 function removeArrayDuplicates<T>(arr: T[]) {
   const set = new Set(arr)
   return Array.from(set)
 }
+
+export const requiredChainsSchema = z
+  .array(z.enum(chains))
+  .transform(removeArrayDuplicates)
+
+export const requiredCapabilitiesSchema = z
+  .array(z.enum(miniAppHostCapabilityList))
+  .transform(removeArrayDuplicates)
 
 export const domainMiniAppConfigSchema = z
   .object({
     // 0.0.0 and 0.0.1 are not technically part of the spec but kept for
     // backwards compatibility. next should always resolve to the most recent
     // schema version.
-    version: z.union([
-      z.literal('0.0.0'),
-      z.literal('0.0.1'),
-      z.literal('1'),
-      z.literal('next'),
-    ]),
+    version: versionSchema,
     name: miniAppNameSchema,
     iconUrl: secureUrlSchema,
     homeUrl: secureUrlSchema,
@@ -72,30 +106,21 @@ export const domainMiniAppConfigSchema = z
     splashBackgroundColor: hexColorSchema.optional(),
     webhookUrl: secureUrlSchema.optional(),
     /** see: https://github.com/farcasterxyz/miniapps/discussions/191 */
-    subtitle: createSimpleStringSchema({ max: 30 }).optional(),
-    description: createSimpleStringSchema({ max: 170 }).optional(),
-    screenshotUrls: z.array(secureUrlSchema).max(3).optional(),
+    subtitle: subtitleSchema.optional(),
+    description: descriptionSchema.optional(),
+    screenshotUrls: screenshotUrlsSchema.optional(),
     primaryCategory: primaryCategorySchema.optional(),
-    tags: z
-      .array(createSimpleStringSchema({ max: 20, noSpaces: true }))
-      .max(5)
-      .optional(),
+    tags: tagsSchema.optional(),
     heroImageUrl: secureUrlSchema.optional(),
-    tagline: createSimpleStringSchema({ max: 30 }).optional(),
-    ogTitle: createSimpleStringSchema({ max: 30 }).optional(),
-    ogDescription: createSimpleStringSchema({ max: 100 }).optional(),
+    tagline: taglineSchema.optional(),
+    ogTitle: ogTitleSchema.optional(),
+    ogDescription: ogDescriptionSchema.optional(),
     ogImageUrl: secureUrlSchema.optional(),
     /** see: https://github.com/farcasterxyz/miniapps/discussions/204 */
-    noindex: z.boolean().optional(),
+    noindex: noindexSchema.optional(),
     /** see https://github.com/farcasterxyz/miniapps/discussions/256 */
-    requiredChains: z
-      .array(z.enum(chainList))
-      .transform(removeArrayDuplicates)
-      .optional(),
-    requiredCapabilities: z
-      .array(z.enum(miniAppHostCapabilityList))
-      .transform(removeArrayDuplicates)
-      .optional(),
+    requiredChains: requiredChainsSchema.optional(),
+    requiredCapabilities: requiredCapabilitiesSchema.optional(),
     /** see https://github.com/farcasterxyz/miniapps/discussions/158 */
     /** Documentation will be added once this feature is finalized. */
     castShareUrl: secureUrlSchema.optional(),
