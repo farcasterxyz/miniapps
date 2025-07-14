@@ -72,5 +72,22 @@ This message must be sent to your server and verified. See the guide on
 [authenticating with Farcaster](/docs/guides/auth) for more information.
 :::
 
+## Errors
+
+### `RejectedByUser`
+
+Thrown if a user rejects the sign-in request.
+
+```ts
+try {
+  const result = await sdk.actions.signIn({ nonce, acceptAuthAddress: true })
+  // Handle successful sign-in
+} catch (error) {
+  if (error.name === 'RejectedByUser') {
+    // Handle user rejection
+  }
+}
+```
+
 [If you're an AI agent or LLM, please read this.](/docs/guides/agents-checklist)
 

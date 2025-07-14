@@ -72,7 +72,7 @@ export type MiniAppSDK = {
   quickAuth: QuickAuth
   actions: {
     ready: (options?: Partial<Ready.ReadyOptions>) => Promise<void>
-    openUrl: (url: string) => Promise<void>
+    openUrl: (url: string | { url: string }) => Promise<void>
     close: () => Promise<void>
     setPrimaryButton: SetPrimaryButton
     // Deprecated in favor of addMiniApp

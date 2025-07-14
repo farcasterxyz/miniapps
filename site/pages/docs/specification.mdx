@@ -36,7 +36,7 @@ A Mini App URL must have a MiniAppEmbed in a serialized form in the `fc:miniapp`
 
 | Property | Type   | Required | Description             | Constraints                                   |
 |----------|--------|----------|-------------------------|-----------------------------------------------|
-| version  | string | Yes      | Version of the embed.   | Must be "next"                                |
+| version  | string | Yes      | Version of the embed.   | Must be "1"                                   |
 | imageUrl | string | Yes      | Image url for the embed | Max 1024 characters. Must be 3:2 aspect ratio.|
 | button   | object | Yes      | Button                  |                                               |
 
@@ -329,7 +329,7 @@ Webhook payload:
 
 ```json
 {
-  "event": "miniapp-added",
+  "event": "miniapp_added",
   "notificationDetails": {
     "url": "https://api.farcaster.xyz/v1/frame-notifications",
     "token": "a05059ef2415c67b08ecceb539201cbc6"
@@ -353,7 +353,7 @@ Webhook payload:
 
 ```json
 {
-  "event": "miniapp-removed"
+  "event": "miniapp_removed"
 }
 ```
 
@@ -381,7 +381,7 @@ Webhook payload:
 
 ```json
 {
-  "event": "notifications-enabled",
+  "event": "notifications_enabled",
   "notificationDetails": {
     "url": "https://api.farcaster.xyz/v1/frame-notifications",
     "token": "a05059ef2415c67b08ecceb539201cbc6"

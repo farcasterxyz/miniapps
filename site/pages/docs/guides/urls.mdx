@@ -87,13 +87,7 @@ Not at the moment. Only the canonical Universal Link or URL shared in the cast w
 
 **Can I open a Mini App from another Mini App?**
 
-Yes, you can open a Mini App from another Mini App by using the `openUrl` action.
-However, this prompts to close the current app when the new app is opened and there is no
-way to navigate back.
+Yes, you can open a Mini App from another Mini App by using the `openMiniApp` action.
 
-```ts
-import { sdk } from '@farcaster/miniapp-sdk'
- 
-const url = 'https://farcaster.xyz/miniapps/deoWzfI9kLjH/rewards'
-await sdk.actions.openUrl(url)
-```
+This will prompt the user to open the new app. Note that this closes the current app 
+when the new app is opened and there is no way to navigate back.
