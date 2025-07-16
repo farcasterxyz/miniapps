@@ -244,6 +244,13 @@ await sdk.actions.ready()
 1. Open tunnel URL directly in browser first
 2. Then use in preview tool
 3. This whitelists the domain for iframe usage
+
+**Important Limitations:**
+
+- SDK actions like `addMiniApp()` will fail with tunnel domains
+- Your manifest domain must match your app's hosting domain exactly
+- Tunnel domains are excluded from discovery/search
+- For testing `addMiniApp()` and other manifest-dependent features, deploy to your production domain
 </details>
 
 ---

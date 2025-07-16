@@ -24,13 +24,11 @@ import { sdk } from '@farcaster/miniapp-sdk'
 await sdk.actions.addMiniApp()
 ```
 
-:::caution
 The `addMiniApp()` action requires your app's domain to exactly match the domain in your manifest file. This means:
 
 - You cannot use tunnel domains (ngrok, localtunnel, etc.) - the action will fail
 - Your app must be deployed to the same domain specified in your `farcaster.json`
 - For local development, use the preview tool instead of trying to add the app
-:::
 
 ## Return Value
 
