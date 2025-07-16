@@ -47,10 +47,11 @@ When using a tunnel URL for the first time, you must open it in your browser bef
 2. You should see your local application
 3. Now the URL can be used in the Mini App preview tool or embed debugger
 
-:::warning[Important Domain Limitations]
-**Tunnel domains are for development only.** When using tunnel services like ngrok or cloudflared:
+:::warning
+**Tunnel domains are for development only**. When using tunnel services like ngrok or cloudflared:
+
 - SDK actions like `addMiniApp()` will fail with tunnel domains
-- Your app won't appear in discovery/search
+- Your app won't appear in discovery/search  
 - The manifest domain must exactly match your app's hosting domain
 
 For production, deploy your app to a proper domain that matches your manifest.
