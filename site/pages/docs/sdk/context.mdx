@@ -11,6 +11,8 @@ client, and where your app was opened from:
 
 
 ```ts
+export type MiniAppPlatformType = 'web' | 'mobile';
+
 export type MiniAppContext = {
   user: {
     fid: number;
@@ -20,6 +22,7 @@ export type MiniAppContext = {
   };
   location?: MiniAppLocationContext;
   client: {
+    platformType?: MiniAppPlatformType;
     clientFid: number;
     added: boolean;
     safeAreaInsets?: SafeAreaInsets;
@@ -282,6 +285,7 @@ type User = {
 
 Details about the Farcaster client running the Mini App. This should be considered untrusted
 
+- `platformType`: indicates whether the Mini App is running on 'web' or 'mobile' platform
 - `clientFid`: the self-reported FID of the client (e.g. 9152 for Warpcast)
 - `added`: whether the user has added the Mini App to the client
 - `safeAreaInsets`: insets to avoid areas covered by navigation elements that obscure the view
@@ -296,6 +300,7 @@ export type SafeAreaInsets = {
 };
 
 export type ClientContext = {
+  platformType?: MiniAppPlatformType;
   clientFid: number;
   added: boolean;
   notificationDetails?: MiniAppNotificationDetails;
@@ -306,6 +311,7 @@ export type ClientContext = {
 ```ts
 > sdk.context.client
 {
+  platformType: "mobile",
   clientFid: 9152,
   added: true,
   safeAreaInsets: {
@@ -335,6 +341,7 @@ type SafeAreaInsets = {
 };
 
 type ClientContext = {
+  platformType?: MiniAppPlatformType;
   clientFid: number;
   added: boolean;
   safeAreaInsets?: SafeAreaInsets;
