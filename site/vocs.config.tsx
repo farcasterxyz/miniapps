@@ -242,6 +242,10 @@ export default defineConfig({
             text: 'Events',
             link: '/docs/sdk/events',
           },
+          {
+            text: 'Compatibility',
+            link: '/docs/sdk/compatibility',
+          },
         ],
       },
       {
