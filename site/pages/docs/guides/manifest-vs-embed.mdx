@@ -1,0 +1,142 @@
+---
+title: Manifest vs Embed Guide
+description: Complete guide explaining the difference between manifests and embeds with practical examples
+---
+
+# Farcaster Mini Apps: Manifests vs Embeds Developer Guide
+
+## Quick Summary
+
+**Manifest** = Your app's identity and configuration (one per domain)  
+**Embed** = Social sharing for individual pages (many per domain)
+
+---
+
+## Frequently Asked Questions
+
+### What's the difference between a manifest and an embed?
+
+**Manifest** is a configuration file that identifies and configures your entire Mini App at the domain level. It lives at `/.well-known/farcaster.json` and tells Farcaster clients "this domain is a Mini App."
+
+**Embed** is page-level metadata that makes individual URLs shareable as rich objects in Farcaster feeds. It lives in HTML meta tags and tells Farcaster clients "this specific page can be rendered as an interactive card."
+
+### Do I need both?
+
+**For most Mini Apps: Yes.**
+
+- **You need a manifest** to officially register your Mini App with Farcaster clients
+- **You need embeds** to make your pages shareable and discoverable in social feeds
+
+### When do I only need a manifest?
+
+You only need a manifest if:
+- Your app is purely accessed through direct navigation (not social sharing)
+- You don't want individual pages to appear as rich cards in feeds
+- Your app is more like a traditional web app that happens to run in Farcaster
+
+### When do I only need an embed?
+
+You rarely need only an embed. Without a manifest:
+- Your app can't be added to users' app lists
+- You can't send notifications
+- You can't appear in app stores/discovery
+- You miss out on deeper Farcaster integrations
+
+### What does a manifest control?
+
+A manifest (`/.well-known/farcaster.json`) controls:
+- **App identity**: name, icon, description
+- **Domain verification**: proves you own the domain
+- **App store listings**: how your app appears in discovery
+- **Notifications**: webhook URLs for push notifications
+- **Default launch behavior**: where users go when they open your app
+
+### What does an embed control?
+
+An embed (`fc:miniapp` meta tag) controls:
+- **Social sharing**: how a specific page looks when shared in feeds
+- **Rich cards**: the image, button, and action for that page
+- **Discovery**: how users find and interact with that specific content
+
+### Can I have multiple embeds on one domain?
+
+**Yes!** You should have:
+- **One manifest** per domain (at `/.well-known/farcaster.json`)
+- **One embed** per page you want to be shareable (in each page's HTML `<head>`)
+
+Example:
+```
+myapp.com/.well-known/farcaster.json  ← Manifest
+myapp.com/game/123                     ← Page with embed
+myapp.com/leaderboard                  ← Page with embed  
+myapp.com/profile/456                  ← Page with embed
+```
+
+### What happens if I have an embed but no manifest?
+
+Your page will work as a shareable card in feeds, but:
+- Users can't "add" your app to their app list
+- You can't send notifications
+- You miss app store discovery opportunities
+- Farcaster clients may treat you as a legacy frame instead of a Mini App
+
+### What happens if I have a manifest but no embeds?
+
+Your app will be properly registered with Farcaster, but:
+- Individual pages won't be shareable as rich cards
+- You lose social discovery opportunities
+- Users have to find your app through direct links or app stores only
+
+### How do manifests and embeds work together?
+
+They complement each other:
+
+1. **Manifest** establishes your app's identity and capabilities
+2. **Embeds** make your content discoverable and shareable
+3. **Both** reference similar information (app name, icons, URLs) but serve different purposes
+
+The manifest is your "app registration" while embeds are your "social sharing strategy."
+
+### Do they need to match?
+
+Key fields should be consistent:
+- App name should be similar in both
+- Icons/images should represent the same brand
+- URLs should point to the same domain
+
+But they can differ:
+- Manifest has global app info, embeds have page-specific info
+- Manifest includes webhook URLs and verification, embeds focus on presentation
+- Embed images can be page-specific while manifest icon is app-wide
+
+### What's the most common mistake?
+
+**Creating embeds without manifests.** Developers often start with embeds because they want social sharing, but forget the manifest. This limits their app's capabilities and integration with Farcaster.
+
+**Best practice**: Set up your manifest first, then add embeds to pages you want to be shareable.
+
+### Quick implementation checklist
+
+**For your manifest** (`/.well-known/farcaster.json`):
+- [ ] Domain verification signature
+- [ ] App name, icon, and home URL
+- [ ] Webhook URL (if you want notifications)
+
+**For your embeds** (each shareable page):
+- [ ] `fc:miniapp` meta tag in HTML `<head>`
+- [ ] Version, image URL, and button configuration
+- [ ] Action that launches your app
+
+### Where can I see examples?
+
+Check the [Farcaster specification](/docs/specification) for complete examples of both manifests and embeds with all required fields and formatting.
+
+---
+
+## Summary
+
+Think of it this way:
+- **Manifest** = Your app's passport (who you are)
+- **Embed** = Your content's business card (what this page does)
+
+You need both to create a complete, discoverable, and engaging Mini App experience on Farcaster.

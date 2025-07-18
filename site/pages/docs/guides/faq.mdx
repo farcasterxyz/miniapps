@@ -1,0 +1,100 @@
+---
+title: Frequently Asked Questions
+description: Common developer questions and troubleshooting for Farcaster Mini Apps
+---
+
+# FAQ: Frequently Asked Questions
+
+## What is the difference between a manifest and an embed?
+
+**Quick Answer**: A **manifest** is your app's identity document (one per domain), while an **embed** is social sharing metadata (one per page you want shareable).
+
+- **Manifest** = App registration at `/.well-known/farcaster.json` that identifies your entire Mini App
+- **Embed** = Page-level `fc:miniapp` meta tags that make individual URLs shareable as rich cards
+
+**For a complete explanation with examples and implementation guidance**, see our detailed [Manifest vs Embed Developer Guide](/docs/guides/manifest-vs-embed).
+
+## Do I need both a manifest and embeds?
+
+**For most Mini Apps: Yes.**
+
+Without a manifest, your app can't be added to users' app lists, send notifications, or appear in app discovery. Without embeds, your pages won't be shareable as rich cards in social feeds.
+
+## Are Frames v2 and Mini Apps the same thing?
+
+Yes! Frames v2 and Mini Apps are the same technology. "Mini Apps" is the current name for what was previously called "Frames v2."
+
+## Do I need paid APIs to build a Mini App?
+
+Not necessarily. Many basic operations can be done with free tiers, but some advanced features may require paid services like Neynar for expanded functionality.
+
+## Why isn't my app showing up in search?
+
+Your app needs to meet several requirements:
+- **Registered manifest** with complete required fields
+- **Recent user activity** and engagement
+- **Working images** with proper content-type headers
+- **Production domain** (not development tunnels like ngrok)
+
+See our [App Discovery & Search guide](/docs/guides/discovery) for complete requirements.
+
+## Why do I see an infinite loading screen?
+
+Make sure you're calling `sdk.actions.ready()` after your app is fully loaded:
+
+```javascript
+import { sdk } from '@farcaster/miniapp-sdk'
+
+// Wait for your app to be ready, then call
+await sdk.actions.ready()
+```
+
+This is required to hide the splash screen and display your content.
+
+## How do I test my Mini App locally?
+
+Currently, you need to use tunneling tools like ngrok to expose your local server:
+
+1. **Node.js version**: Use Node.js 22.11.0 or higher
+2. **Tunneling**: Use ngrok or similar tools to create HTTPS URLs
+3. **HTTPS required**: Farcaster requires HTTPS for Mini Apps
+
+## My manifest isn't validating. What's wrong?
+
+Common validation issues:
+- **Invalid JSON syntax** - Use a JSON validator to check
+- **Missing required fields** - Ensure `name`, `iconUrl`, `homeUrl` are present
+- **Invalid image URLs** - Images must return proper `image/*` content-type headers
+- **Domain mismatch** - The manifest domain must match where it's hosted
+
+## How does app discovery and ranking work?
+
+Apps are ranked based on:
+- Number of users who opened the app
+- Number of users who added the app to their collection
+- Recent engagement and trending activity
+- App quality and user retention
+
+## Can I use my own authentication instead of Farcaster auth?
+
+While you can implement custom auth, using Farcaster's built-in authentication provides better integration and user experience within the Farcaster ecosystem.
+
+## How do I get notifications working?
+
+You need:
+1. A `webhookUrl` in your manifest
+2. Proper webhook endpoint implementation
+3. Users must add your app to enable notifications
+
+See our [notifications guide](/docs/guides/notifications) for complete setup instructions.
+
+## What happens if users don't have Farcaster accounts?
+
+Mini Apps are designed to work within the Farcaster ecosystem. Users need Farcaster accounts to fully interact with Mini Apps and their social features.
+
+## How do I handle breaking changes?
+
+- Follow our [changelog](/docs/sdk/changelog) for updates
+- Join the developer community for early announcements
+- Test updates in development before deploying to production
+- Use versioned dependencies to control update timing
