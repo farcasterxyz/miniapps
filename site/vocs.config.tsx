@@ -85,14 +85,6 @@ export default defineConfig({
         text: 'Guides',
         items: [
           {
-            text: 'Frequently Asked Questions',
-            link: '/docs/guides/faq',
-          },
-          {
-            text: 'Manifest vs Embed Guide',
-            link: '/docs/guides/manifest-vs-embed',
-          },
-          {
             text: 'Loading your app',
             link: '/docs/guides/loading',
           },
@@ -135,6 +127,14 @@ export default defineConfig({
           {
             text: 'Share Extensions',
             link: '/docs/guides/share-extension',
+          },
+          {
+            text: 'Manifest vs Embed Guide',
+            link: '/docs/guides/manifest-vs-embed',
+          },
+          {
+            text: 'FAQ',
+            link: '/docs/guides/faq',
           },
           {
             text: '[for AI agents and LLMs] Checklist and guidelines',
