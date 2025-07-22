@@ -69,11 +69,13 @@ Common validation issues:
 
 ## How does app discovery and ranking work?
 
-Apps are ranked based on:
-- Number of users who opened the app
-- Number of users who added the app to their collection
-- Recent engagement and trending activity
-- App quality and user retention
+Apps are ranked using multiple engagement signals:
+- **Opens**: How frequently users access your app
+- **Additions**: Number of users who add your app to their collection  
+- **Transaction data**: EVM and SOL transactions within your app
+- **Trending signals**: Recent growth and engagement momentum
+
+Apps must meet minimum usage thresholds and maintain recent activity to appear in search results.
 
 ## Can I use my own authentication instead of Farcaster auth?
 
@@ -95,6 +97,5 @@ Mini Apps are designed to work within the Farcaster ecosystem. Users need Farcas
 ## How do I handle breaking changes?
 
 - Follow our [changelog](/docs/sdk/changelog) for updates
-- Join the developer community for early announcements
-- Test updates in development before deploying to production
+- Join the [Devs: Mini Apps](https://farcaster.xyz/~/group/X2P7HNc4PHTriCssYHNcmQ) group chat on Faracaster
 - Use versioned dependencies to control update timing
