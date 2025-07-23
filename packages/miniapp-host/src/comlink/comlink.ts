@@ -653,6 +653,6 @@ function requestResponseMessage(
 function generateUUID(): string {
   return new Array(4)
     .fill(0)
-    .map(() => Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString(16))
+    .map(() => Math.floor(Math.random() * 0xFFFFFFFF).toString(16).padStart(8, '0'))
     .join('-')
 }
