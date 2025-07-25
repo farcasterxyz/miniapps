@@ -143,62 +143,78 @@ Common use cases include:
 
 #### Using Batch Transactions
 
-With Wagmi, send multiple transactions as a batch using the `sendCalls` method:
+With Wagmi's `useSendCalls` hook, sending multiple transactions as a batch is simple:
 
 ```tsx
-import { useWalletClient, useAccount } from 'wagmi'
+import { useSendCalls } from 'wagmi'
 import { parseEther } from 'viem'
 
-const { address } = useAccount()
-const { data: walletClient } = useWalletClient()
+function BatchTransfer() {
+  const { sendCalls } = useSendCalls()
 
-// Send multiple ETH transfers in one batch
-const { id } = await walletClient.sendCalls({
-  account: address,
-  calls: [
-    {
-      to: '0x70997970C51812dc3A010C7d01b50e0d17dc79C8',
-      value: parseEther('0.01')
-    },
-    {
-      to: '0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC', 
-      value: parseEther('0.02')
-    }
-  ]
-})
-
-// Wait for completion
-const result = await walletClient.waitForCallsStatus({ id })
+  return (
+    <button
+      onClick={() => 
+        sendCalls({
+          calls: [
+            {
+              to: '0x70997970C51812dc3A010C7d01b50e0d17dc79C8',
+              value: parseEther('0.01')
+            },
+            {
+              to: '0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC', 
+              value: parseEther('0.02')
+            }
+          ]
+        })
+      }
+    >
+      Send Batch Transfer
+    </button>
+  )
+}
 ```
 
 #### Example: Token Approval and Swap
 
 ```tsx
+import { useSendCalls } from 'wagmi'
 import { encodeFunctionData, parseUnits } from 'viem'
 
-const { id } = await walletClient.sendCalls({
-  account: address,
-  calls: [
-    // Approve USDC
-    {
-      to: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
-      data: encodeFunctionData({
-        abi: erc20Abi,
-        functionName: 'approve',
-        args: ['0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D', parseUnits('100', 6)]
-      })
-    },
-    // Swap USDC for ETH
-    {
-      to: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D',
-      data: encodeFunctionData({
-        abi: uniswapAbi,
-        functionName: 'swapExactTokensForETH',
-        args: [/* swap parameters */]
-      })
-    }
-  ]
-})
+function ApproveAndSwap() {
+  const { sendCalls } = useSendCalls()
+
+  const handleApproveAndSwap = () => {
+    sendCalls({
+      calls: [
+        // Approve USDC
+        {
+          to: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+          data: encodeFunctionData({
+            abi: erc20Abi,
+            functionName: 'approve',
+            args: ['0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D', parseUnits('100', 6)]
+          })
+        },
+        // Swap USDC for ETH
+        {
+          to: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D',
+          data: encodeFunctionData({
+            abi: uniswapAbi,
+            functionName: 'swapExactTokensForETH',
+            args: [/* swap parameters */]
+          })
+        }
+      ]
+    })
+  }
+
+  return (
+    <button onClick={handleApproveAndSwap}>
+      Approve & Swap
+    </button>
+  )
+}
 ```
 
 All transactions are individually validated and scanned for security, maintaining the same safety guarantees as single transactions.
