@@ -210,15 +210,30 @@ const { id } = await walletClient.sendCalls({
 })
 ```
 
-:::warning
-**Important Limitations:**
+#### Security & Validation
 
-- **Non-atomic execution**: The Farcaster Wallet executes transactions sequentially, not atomically. If one transaction fails, subsequent transactions may not be executed.
+All transactions in the batch are individually validated and scanned for security threats, maintaining the same robust safety guarantees as single transactions. This means you get the convenience of batch operations without compromising on security.
+
+#### When to Use Regular Transactions Instead
+
+You should use individual transactions instead of batching when you need to:
+- Check the output of one transaction before executing the next
+- Make decisions based on transaction results between calls
+- Handle complex conditional logic that depends on intermediate states
+
+:::note
+**Current Limitations:**
+
+- **Sequential execution**: Transactions are executed one after another, not atomically. If one transaction fails, subsequent transactions may not be executed.
 - **No paymaster support**: Gas fees must be paid by the user's wallet for each transaction.
-- **Transaction scanning**: All transactions in the batch are validated and scanned for security, maintaining the same safety guarantees as individual transactions.
 :::
 
 Despite these limitations, batch transactions significantly improve user experience by reducing the number of confirmation dialogs and streamlining complex operations.
+
+#### Frequently Asked Questions
+
+**Where is batch transaction support available?**  
+Batch transactions are supported on all EVM chains that Farcaster supports.
 
 
 ## Troubleshooting
