@@ -130,6 +130,97 @@ the user's wallet).
 ::::
 
 
+## Additional Features
+
+### Batch Transactions
+
+The Farcaster Wallet now supports EIP-5792 `wallet_sendCalls`, enabling you to batch multiple transactions into a single user confirmation. This significantly improves user experience by allowing complex operations like "approve and transfer" to be executed together.
+
+#### What are Batch Transactions?
+
+Batch transactions allow you to group multiple transaction calls that are presented to the user as a single operation. Instead of requiring users to approve multiple transactions separately, they can review and approve all operations at once.
+
+Common use cases include:
+- Approving a token allowance and executing a swap
+- Multiple NFT mints in one operation
+- Complex DeFi interactions requiring multiple contract calls
+
+#### Using Batch Transactions
+
+With Wagmi, you can send multiple transactions as a batch using the `sendCalls` method:
+
+```tsx
+import { useWalletClient, useAccount } from 'wagmi'
+import { parseEther } from 'viem'
+
+const { address } = useAccount()
+const { data: walletClient } = useWalletClient()
+
+// Send multiple ETH transfers in one batch
+const { id } = await walletClient.sendCalls({
+  account: address,
+  calls: [
+    {
+      to: '0x70997970C51812dc3A010C7d01b50e0d17dc79C8',
+      value: parseEther('0.01')
+    },
+    {
+      to: '0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC', 
+      value: parseEther('0.02')
+    }
+  ]
+})
+
+// Wait for the batch to complete
+const result = await walletClient.waitForCallsStatus({ id })
+```
+
+#### Practical Example: Token Approval and Swap
+
+A common pattern is approving a token and then swapping it in a single batch:
+
+```tsx
+import { encodeFunctionData, parseUnits } from 'viem'
+
+const usdcAddress = '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
+const uniswapRouter = '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D'
+
+const { id } = await walletClient.sendCalls({
+  account: address,
+  calls: [
+    // Approve USDC spending
+    {
+      to: usdcAddress,
+      data: encodeFunctionData({
+        abi: erc20Abi,
+        functionName: 'approve',
+        args: [uniswapRouter, parseUnits('100', 6)]
+      })
+    },
+    // Swap USDC for ETH
+    {
+      to: uniswapRouter,
+      data: encodeFunctionData({
+        abi: uniswapAbi,
+        functionName: 'swapExactTokensForETH',
+        args: [/* swap parameters */]
+      })
+    }
+  ]
+})
+```
+
+:::warning
+**Important Limitations:**
+
+- **Non-atomic execution**: The Farcaster Wallet executes transactions sequentially, not atomically. If one transaction fails, subsequent transactions may not be executed.
+- **No paymaster support**: Gas fees must be paid by the user's wallet for each transaction.
+- **Transaction scanning**: All transactions in the batch are validated and scanned for security, maintaining the same safety guarantees as individual transactions.
+:::
+
+Despite these limitations, batch transactions significantly improve user experience by reducing the number of confirmation dialogs and streamlining complex operations.
+
+
 ## Troubleshooting
 
 ### Transaction Scanning

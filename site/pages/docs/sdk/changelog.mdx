@@ -5,6 +5,14 @@ description: Recent changes to the Mini Apps SDK
 
 # What's New
 
+## July 25, 2025
+
+- Added support for EIP-5792 batch transactions in Farcaster Wallet:
+  - Mini Apps can now use `wallet_sendCalls` to batch multiple transactions into a single user confirmation
+  - Supports common patterns like "approve and transfer" in one operation
+  - Transactions are executed sequentially with full security scanning
+  - Note: Atomic execution and paymaster support are not yet available
+
 ## June 9, 2025 (0.0.61)
 
 - Moved Quick Auth out of experimental and enhanced functionality:
