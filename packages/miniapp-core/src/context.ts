@@ -116,6 +116,7 @@ export type ClientContext = {
 
 export type ClientFeatures = {
   haptics: boolean
+  cameraAndMicrophoneAccess?: boolean
 }
 
 export type MiniAppContext = {

@@ -114,6 +114,8 @@ export const sdk: MiniAppSDK = {
     viewToken: miniAppHost.viewToken.bind(miniAppHost),
     sendToken: miniAppHost.sendToken.bind(miniAppHost),
     swapToken: miniAppHost.swapToken.bind(miniAppHost),
+    requestCameraAndMicrophoneAccess:
+      miniAppHost.requestCameraAndMicrophoneAccess.bind(miniAppHost),
   },
   experimental: {
     getSolanaProvider,

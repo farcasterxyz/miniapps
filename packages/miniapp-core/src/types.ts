@@ -8,6 +8,7 @@ import type {
   ComposeCast,
   OpenMiniApp,
   Ready,
+  RequestCameraAndMicrophoneAccess,
   SendToken,
   SignIn,
   SwapToken,
@@ -62,6 +63,7 @@ export const miniAppHostCapabilityList = [
   'actions.sendToken',
   'actions.swapToken',
   'actions.openMiniApp',
+  'actions.requestCameraAndMicrophoneAccess',
   'haptics.impactOccurred',
   'haptics.notificationOccurred',
   'haptics.selectionChanged',
@@ -97,6 +99,7 @@ export type WireMiniAppHost = {
   composeCast: <close extends boolean | undefined = undefined>(
     options: ComposeCast.Options<close>,
   ) => Promise<ComposeCast.Result<close>>
+  requestCameraAndMicrophoneAccess: RequestCameraAndMicrophoneAccess.RequestCameraAndMicrophoneAccess
   impactOccurred: ImpactOccurred
   notificationOccurred: NotificationOccurred
   selectionChanged: SelectionChanged
@@ -131,6 +134,7 @@ export type MiniAppHost = {
   composeCast: <close extends boolean | undefined = undefined>(
     options: ComposeCast.Options<close>,
   ) => Promise<ComposeCast.Result<close>>
+  requestCameraAndMicrophoneAccess: RequestCameraAndMicrophoneAccess.RequestCameraAndMicrophoneAccess
   impactOccurred: ImpactOccurred
   notificationOccurred: NotificationOccurred
   selectionChanged: SelectionChanged
