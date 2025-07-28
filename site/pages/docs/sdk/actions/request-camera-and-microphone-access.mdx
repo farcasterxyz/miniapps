@@ -1,0 +1,104 @@
+---
+title: requestCameraAndMicrophoneAccess
+description: Request permission to access the device's camera and microphone
+---
+
+# requestCameraAndMicrophoneAccess
+
+Request permission to access the device's camera and microphone. This method triggers a permission dialog in the host app.
+
+:::note
+This is an experimental feature and may not be available on all platforms. Check the `features.cameraAndMicrophoneAccess` flag in the SDK context to determine if this feature is supported.
+:::
+
+## Usage
+
+```ts twoslash
+import { sdk } from '@farcaster/miniapp-sdk'
+
+try {
+  await sdk.actions.requestCameraAndMicrophoneAccess()
+  console.log('Camera and microphone access granted')
+  // You can now use camera and microphone in your mini app
+} catch (error) {
+  console.log('Camera and microphone access denied')
+  // Handle the denial gracefully
+}
+```
+
+## Return Value
+
+Returns a `Promise<void>` that:
+- **Resolves** when the user grants permission
+- **Rejects** when the user denies permission or dismisses the dialog
+
+## Feature Detection
+
+Before using this action, check if it's supported:
+
+```ts twoslash
+import { sdk } from '@farcaster/miniapp-sdk'
+
+// Check if the feature is available
+const context = await sdk.context
+if (context.features?.cameraAndMicrophoneAccess) {
+  // Feature is supported and permissions have been granted
+  // You can use camera/microphone features
+} else {
+  // Feature is not supported or permissions not granted
+}
+```
+
+## Permissions
+
+- The permission dialog will only be shown once per domain
+- If the user has previously granted or denied permissions, the promise will immediately resolve or reject accordingly
+- Users can manage permissions through the mini app settings in the host app
+
+## Example: Video Recording
+
+```ts twoslash
+import { sdk } from '@farcaster/miniapp-sdk'
+
+async function startVideoRecording() {
+  try {
+    // Request permissions first
+    await sdk.actions.requestCameraAndMicrophoneAccess()
+    
+    // Now you can access getUserMedia
+    const stream = await navigator.mediaDevices.getUserMedia({ 
+      video: true, 
+      audio: true 
+    })
+    
+    // Use the stream for video recording
+    const videoElement = document.querySelector('video')
+    if (videoElement) {
+      videoElement.srcObject = stream
+    }
+  } catch (error) {
+    if (error instanceof Error && error.name === 'NotAllowedError') {
+      // Permissions were denied
+      alert('Camera and microphone access is required for video recording')
+    } else {
+      console.error('Failed to start recording:', error)
+    }
+  }
+}
+```
+
+## Platform Support
+
+| Platform | Supported | Notes |
+|----------|-----------|-------|
+| iOS      | ✅         | Full support with domain-level permissions |
+| Android  | ✅         | Supported (see note below) |
+| Web      | ❌         | Not currently supported |
+
+:::note
+On Android, camera and microphone permissions work slightly differently than iOS. Once permissions are granted to the host app, mini apps may have access without additional prompts. This is standard behavior for Android WebView permissions.
+:::
+
+:::warning
+Camera and microphone access is not supported in web mini apps. The action will always reject on web platforms.
+:::
