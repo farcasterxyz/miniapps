@@ -390,7 +390,7 @@ export type ClientFeatures = {
 ```
 
 - `haptics`: Indicates whether haptic feedback is supported on the current platform
-- `cameraAndMicrophoneAccess`: Indicates whether camera and microphone access is available and has been granted. This field is optional and may not be present on all platforms.
+- `cameraAndMicrophoneAccess`: Indicates whether camera and microphone permissions have been granted and stored for this mini app. When `true`, the user has previously granted access and won't be prompted again. This field is optional and may not be present on all platforms.
 
 ```ts
 > sdk.context.features
