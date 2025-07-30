@@ -28,6 +28,10 @@ export type MiniAppContext = {
     safeAreaInsets?: SafeAreaInsets;
     notificationDetails?: MiniAppNotificationDetails;
   };
+  features?: {
+    haptics: boolean;
+    cameraAndMicrophoneAccess?: boolean;
+  };
 };
 ```
 
@@ -373,6 +377,46 @@ want to set the bottom inset as padding there so it looks attached to the
 bottom of the view.
 
 [If you're an AI agent or LLM, please read this.](/docs/guides/agents-checklist)
+
+### features
+
+Optional object that indicates which features are available and their current state in the client.
+
+```ts
+export type ClientFeatures = {
+  haptics: boolean;
+  cameraAndMicrophoneAccess?: boolean;
+};
+```
+
+- `haptics`: Indicates whether haptic feedback is supported on the current platform
+- `cameraAndMicrophoneAccess`: Indicates whether camera and microphone permissions have been granted and stored for this mini app. When `true`, the user has previously granted access and won't be prompted again. This field is optional and may not be present on all platforms.
+
+```ts
+> sdk.context.features
+{
+  haptics: true,
+  cameraAndMicrophoneAccess: true
+}
+```
+
+#### Using features for capability detection
+
+You can use the `features` object to conditionally enable functionality based on platform support:
+
+```ts
+// Check if camera/microphone is available before using it
+if (context.features?.cameraAndMicrophoneAccess) {
+  // Camera and microphone access is available and granted
+  const stream = await navigator.mediaDevices.getUserMedia({ 
+    video: true, 
+    audio: true 
+  })
+} else {
+  // Feature not supported or permissions not granted
+  console.log('Camera/microphone not available')
+}
+```
 
 **Note:** For more fine-grained capability detection, use the [`getCapabilities()`](/docs/sdk/detecting-capabilities#getcapabilities) method which returns specific SDK methods supported by the host.
 

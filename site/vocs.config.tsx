@@ -220,6 +220,10 @@ export default defineConfig({
                 text: 'viewToken',
                 link: '/docs/sdk/actions/view-token',
               },
+              {
+                text: 'requestCameraAndMicrophoneAccess',
+                link: '/docs/sdk/actions/request-camera-and-microphone-access',
+              },
             ],
           },
           {

@@ -134,6 +134,105 @@ the user's wallet).
 ::::
 
 
+## Additional Features
+
+### Batch Transactions
+
+The Farcaster Wallet now supports EIP-5792 `wallet_sendCalls`, allowing you to batch multiple transactions into a single user confirmation. This improves the user experience by enabling operations like "approve and swap" in one step.
+
+Common use cases include:
+- Approving a token allowance and executing a swap
+- Multiple NFT mints in one operation
+- Complex DeFi interactions requiring multiple contract calls
+
+#### Using Batch Transactions
+
+With Wagmi's `useSendCalls` hook, sending multiple transactions as a batch is simple:
+
+```tsx
+import { useSendCalls } from 'wagmi'
+import { parseEther } from 'viem'
+
+function BatchTransfer() {
+  const { sendCalls } = useSendCalls()
+
+  return (
+    <button
+      onClick={() => 
+        sendCalls({
+          calls: [
+            {
+              to: '0x70997970C51812dc3A010C7d01b50e0d17dc79C8',
+              value: parseEther('0.01')
+            },
+            {
+              to: '0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC', 
+              value: parseEther('0.02')
+            }
+          ]
+        })
+      }
+    >
+      Send Batch Transfer
+    </button>
+  )
+}
+```
+
+#### Example: Token Approval and Swap
+
+```tsx
+import { useSendCalls } from 'wagmi'
+import { encodeFunctionData, parseUnits } from 'viem'
+
+function ApproveAndSwap() {
+  const { sendCalls } = useSendCalls()
+
+  const handleApproveAndSwap = () => {
+    sendCalls({
+      calls: [
+        // Approve USDC
+        {
+          to: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+          data: encodeFunctionData({
+            abi: erc20Abi,
+            functionName: 'approve',
+            args: ['0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D', parseUnits('100', 6)]
+          })
+        },
+        // Swap USDC for ETH
+        {
+          to: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D',
+          data: encodeFunctionData({
+            abi: uniswapAbi,
+            functionName: 'swapExactTokensForETH',
+            args: [/* swap parameters */]
+          })
+        }
+      ]
+    })
+  }
+
+  return (
+    <button onClick={handleApproveAndSwap}>
+      Approve & Swap
+    </button>
+  )
+}
+```
+
+All transactions are individually validated and scanned for security, maintaining the same safety guarantees as single transactions.
+
+:::note
+**Limitations:**
+- Transactions execute sequentially, not atomically
+- No paymaster support yet
+- Available on all EVM chains Farcaster supports
+
+Use individual transactions when you need to check outputs between calls.
+:::
+
+
 ## Troubleshooting
 
 ### Transaction Scanning

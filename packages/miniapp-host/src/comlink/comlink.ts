@@ -348,6 +348,8 @@ export function expose(
                 return obj.swapToken(...argumentList);
               case 'sendToken':
                 return obj.sendToken(...argumentList);
+              case 'requestCameraAndMicrophoneAccess':
+                return obj.requestCameraAndMicrophoneAccess(...argumentList);
               case 'solanaProviderRequest':
                 return obj.solanaProviderRequest(...argumentList);
               case 'getCapabilities':

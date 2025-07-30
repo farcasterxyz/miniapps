@@ -1,5 +1,11 @@
 # @farcaster/frame-core
 
+## 0.3.7
+
+### Patch Changes
+
+- [#456](https://github.com/farcasterxyz/miniapps/pull/456) [`5bc0153`](https://github.com/farcasterxyz/miniapps/commit/5bc01536a4232d9ae9ba16f3c00d95426ad31a0c) Thanks [@PirosB3](https://github.com/PirosB3)! - added experimental camera permissions
+
 ## 0.3.6
 
 ### Patch Changes
