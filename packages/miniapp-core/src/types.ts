@@ -143,11 +143,6 @@ export type MiniAppHost = {
   updateBackState: UpdateBackState
 }
 
-export type EventFrameAddRejected = {
-  event: 'frame_add_rejected'
-  reason: AddMiniApp.AddMiniAppRejectedReason
-}
-
 export type EventMiniAppAddRejected = {
   event: 'miniapp_add_rejected'
   reason: AddMiniApp.AddMiniAppRejectedReason
@@ -171,5 +166,4 @@ export type MiniAppClientEvent =
   | EventBackNavigationTriggered
   | Ethereum.EventEip6963AnnounceProvider
   | EventFrameAdded
-  | EventFrameAddRejected
   | EventFrameRemoved
