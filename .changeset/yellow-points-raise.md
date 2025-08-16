@@ -3,4 +3,4 @@
 "@farcaster/miniapp-sdk": patch
 ---
 
-Uopdates
+Uopdates and removes event types

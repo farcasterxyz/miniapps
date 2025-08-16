@@ -19,8 +19,6 @@ import type {
 import type { UpdateBackState } from './back.ts'
 import type { MiniAppContext } from './context.ts'
 import type {
-  EventFrameAdded,
-  EventFrameRemoved,
   EventMiniAppAdded,
   EventMiniAppRemoved,
   EventNotificationsDisabled,
@@ -165,5 +163,3 @@ export type MiniAppClientEvent =
   | EventPrimaryButtonClicked
   | EventBackNavigationTriggered
   | Ethereum.EventEip6963AnnounceProvider
-  | EventFrameAdded
-  | EventFrameRemoved
