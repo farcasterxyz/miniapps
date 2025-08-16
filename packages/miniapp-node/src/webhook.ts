@@ -21,6 +21,13 @@ export class InvalidEventDataError<
   override readonly name = 'VerifyJsonFarcasterSignature.InvalidEventDataError'
 }
 
+// Support legacy frame_* event names by mapping them to miniapp_*
+const LEGACY_EVENT_MAP: Record<string, string> = {
+  frame_added: 'miniapp_added',
+  frame_removed: 'miniapp_removed',
+  frame_add_rejected: 'miniapp_add_rejected',
+}
+
 export async function parseWebhookEvent(
   rawData: unknown,
   verifyAppKey: VerifyAppKey,
@@ -41,7 +48,15 @@ export async function parseWebhookEvent(
     )
   }
 
-  const event = serverEventSchema.safeParse(payloadJson)
+  const normalizedPayload =
+    payloadJson && typeof payloadJson.event === 'string'
+      ? {
+          ...payloadJson,
+          event: LEGACY_EVENT_MAP[payloadJson.event] ?? payloadJson.event,
+        }
+      : payloadJson
+
+  const event = serverEventSchema.safeParse(normalizedPayload)
   if (event.success === false) {
     throw new InvalidEventDataError('Invalid event payload', event.error)
   }

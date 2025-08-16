@@ -27,7 +27,7 @@ describe('parseWebhookEvent', () => {
 
     await expect(
       parseWebhookEvent(data, verifyAppKeySuccess),
-    ).resolves.toMatchObject({ fid: 5448, event: { event: 'frame_removed' } })
+    ).resolves.toMatchObject({ fid: 5448, event: { event: 'miniapp_removed' } })
   })
 
   it('throws on invalid JFS data', async () => {
