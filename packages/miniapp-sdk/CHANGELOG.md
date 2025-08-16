@@ -1,5 +1,14 @@
 # @farcaster/frame-kit
 
+## 0.1.9
+
+### Patch Changes
+
+- [#465](https://github.com/farcasterxyz/miniapps/pull/465) [`a0823d3`](https://github.com/farcasterxyz/miniapps/commit/a0823d303b80310b153895034576b3a527f3afc1) Thanks [@PirosB3](https://github.com/PirosB3)! - Uopdates and removes event types
+
+- Updated dependencies [[`a0823d3`](https://github.com/farcasterxyz/miniapps/commit/a0823d303b80310b153895034576b3a527f3afc1)]:
+  - @farcaster/miniapp-core@0.3.8
+
 ## 0.1.8
 
 ### Patch Changes
