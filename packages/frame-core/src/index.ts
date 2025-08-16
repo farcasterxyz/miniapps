@@ -13,11 +13,6 @@ export * from '@farcaster/miniapp-core'
 import {
   actionLaunchFrameSchema as _actionLaunchFrameSchema,
   domainMiniAppConfigSchema as _domainMiniAppConfigSchema,
-  type EventMiniAppAdded as _EventFrameAdded,
-  type EventMiniAppAddRejected as _EventFrameAddRejected,
-  type EventMiniAppRemoved as _EventFrameRemoved,
-  eventMiniAppAddedSchema as _eventFrameAddedSchema,
-  eventMiniAppRemovedSchema as _eventFrameRemovedSchema,
   type MiniAppClientEvent as _MiniAppClientEvent,
   type MiniAppEmbedNext as _MiniAppEmbedNext,
   type MiniAppHost as _MiniAppHost,
@@ -34,16 +29,11 @@ export type FrameHost = _MiniAppHost
 export type WireFrameHost = _WireMiniAppHost
 export type FrameClientEvent = _MiniAppClientEvent
 export type FrameServerEvent = _MiniAppServerEvent
-export type EventFrameAdded = _EventFrameAdded
-export type EventFrameRemoved = _EventFrameRemoved
-export type EventFrameAddRejected = _EventFrameAddRejected
 export type FrameNotificationDetails = _MiniAppNotificationDetails
 export type FrameEmbedNext = _MiniAppEmbedNext
 
 // Backward compatibility schema aliases
 export const frameNameSchema = _miniAppNameSchema
-export const eventFrameAddedSchema = _eventFrameAddedSchema
-export const eventFrameRemovedSchema = _eventFrameRemovedSchema
 export const domainFrameConfigSchema = _domainMiniAppConfigSchema
 export const frameEmbedNextSchema = _miniAppEmbedNextSchema
 export const safeParseFrameEmbed = _safeParseMiniAppEmbed
