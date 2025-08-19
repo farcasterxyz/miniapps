@@ -315,6 +315,19 @@ export function expose(
           break
         case MessageType.APPLY: {
           returnValue = (() => {
+            // Validate that path is exactly one non-empty string item
+            // Context: this is a security measure to prevent RPC calls from being executed
+            // due to serialization of objects into the path.
+            if (
+              !Array.isArray(path) ||
+              path.length !== 1 ||
+              typeof path[0] !== 'string' ||
+              path[0].trim() === ''
+            ) {
+              throw new Error(
+                'Invalid APPLY path. Expected a single non-empty method name string. Are you trying to serialize an object into the path? Please do not do that—send data as arguments instead.'
+              );
+            }
             switch (path[0]) {
               case 'close':
                 return obj.close();
