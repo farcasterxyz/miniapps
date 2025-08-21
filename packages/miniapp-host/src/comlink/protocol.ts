@@ -65,6 +65,15 @@ export enum MessageType {
   RELEASE = 'RELEASE',
 }
 
+export const MESSAGE_TYPES: Set<MessageType> = new Set([
+  MessageType.GET,
+  MessageType.SET,
+  MessageType.APPLY,
+  MessageType.CONSTRUCT,
+  MessageType.ENDPOINT,
+  MessageType.RELEASE,
+])
+
 export interface GetMessage {
   id?: MessageID
   type: MessageType.GET

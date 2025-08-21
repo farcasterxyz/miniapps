@@ -2,6 +2,7 @@ import {
   type Endpoint,
   type EventSource,
   type Message,
+  MESSAGE_TYPES,
   MessageType,
   type PostMessageWithOrigin,
   type WireValue,
@@ -304,6 +305,12 @@ export function expose(
 
     const argumentList = (ev.data.argumentList || []).map(fromWireValue)
 
+    // On web we notice that this callback can get triggered by other web extensions (e.g. MetaMask)
+    // We don't want to handle these messages, so we return early.
+    if (!MESSAGE_TYPES.has(type)) {
+      return;
+    }
+
     // Enforce that `path` is exactly one non-empty string for all message types
     if (
       !Array.isArray(path) ||
@@ -313,6 +320,7 @@ export function expose(
     ) {
       throw new Error(`Invalid path: ${path.join('/')}`)
     }
+
     let returnValue
     try {
       switch (type) {
@@ -389,7 +397,7 @@ export function expose(
         case MessageType.ENDPOINT:
           throw new Error(`Unsupported ENDPOINT for ${path.join('/')}`)
         default:
-          return
+          throw new Error(`Unsupported message type: ${type}. This should never happen since we are guarding against it.`)
       }
     } catch (value) {
       returnValue = { value, [throwMarker]: 0 }
