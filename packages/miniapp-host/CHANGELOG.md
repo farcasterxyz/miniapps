@@ -1,5 +1,11 @@
 # @farcaster/frame-host
 
+## 0.2.10
+
+### Patch Changes
+
+- [#469](https://github.com/farcasterxyz/miniapps/pull/469) [`93be32a`](https://github.com/farcasterxyz/miniapps/commit/93be32a17ccd96bb038caf57c5ae3b59e9f9ff5a) Thanks [@PirosB3](https://github.com/PirosB3)! - Updates
+
 ## 0.2.9
 
 ### Patch Changes
