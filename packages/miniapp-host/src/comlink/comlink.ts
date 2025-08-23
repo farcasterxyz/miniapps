@@ -318,7 +318,8 @@ export function expose(
       typeof path[0] !== 'string' ||
       path[0].trim() === ''
     ) {
-      throw new Error(`Invalid path: ${path.join('/')}`)
+      console.warn(`Invalid path: ${path.join('/')}. Method: ${type}. Ignoring message.`)
+      return;
     }
 
     let returnValue
