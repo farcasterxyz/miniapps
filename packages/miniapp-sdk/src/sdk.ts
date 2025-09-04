@@ -103,22 +103,6 @@ export const sdk: MiniAppSDK = {
 
       throw new Error('Unreachable')
     },
-    signManifest: async (options) => {
-      const response = await miniAppHost.signManifest(options)
-      if (response.result) {
-        return response.result
-      }
-
-      if (response.error.type === 'rejected_by_user') {
-        throw new SignManifest.RejectedByUser()
-      }
-
-      if (response.error.type === 'invalid_domain') {
-        throw new SignManifest.InvalidDomain()
-      }
-
-      throw new Error('Unreachable')
-    },
     openUrl: (urlArg: string | { url: string }) => {
       const url = typeof urlArg === 'string' ? urlArg : urlArg.url
       return miniAppHost.openUrl(url.trim())
@@ -136,6 +120,22 @@ export const sdk: MiniAppSDK = {
   },
   experimental: {
     getSolanaProvider,
+    signManifest: async (options) => {
+      const response = await miniAppHost.signManifest(options)
+      if (response.result) {
+        return response.result
+      }
+
+      if (response.error.type === 'rejected_by_user') {
+        throw new SignManifest.RejectedByUser()
+      }
+
+      if (response.error.type === 'invalid_domain') {
+        throw new SignManifest.InvalidDomain()
+      }
+
+      throw new Error('Unreachable')
+    },
     quickAuth(options) {
       return quickAuth.getToken(options)
     },

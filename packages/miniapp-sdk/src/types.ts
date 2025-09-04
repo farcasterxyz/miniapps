@@ -81,7 +81,6 @@ export type MiniAppSDK = {
     addFrame: AddMiniApp.AddMiniApp
     addMiniApp: AddMiniApp.AddMiniApp
     signIn: SignIn.SignIn
-    signManifest: SignManifest.SignManifest
     viewCast: ViewCast.ViewCast
     viewProfile: ViewProfile.ViewProfile
     composeCast: <close extends boolean | undefined = undefined>(
@@ -95,6 +94,7 @@ export type MiniAppSDK = {
   }
   experimental: {
     getSolanaProvider: () => Promise<SolanaWalletProvider | undefined>
+    signManifest: SignManifest.SignManifest
 
     /**
      * @deprecated - use `sdk.quickAuth.getToken`
