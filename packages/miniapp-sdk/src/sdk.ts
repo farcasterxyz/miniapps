@@ -2,6 +2,7 @@ import {
   AddMiniApp,
   type MiniAppClientEvent,
   SignIn,
+  SignManifest,
 } from '@farcaster/miniapp-core'
 import { createBack } from './back.ts'
 import { ethereumProvider, getEthereumProvider } from './ethereumProvider.ts'
@@ -98,6 +99,22 @@ export const sdk: MiniAppSDK = {
 
       if (response.error.type === 'rejected_by_user') {
         throw new SignIn.RejectedByUser()
+      }
+
+      throw new Error('Unreachable')
+    },
+    signManifest: async (options) => {
+      const response = await miniAppHost.signManifest(options)
+      if (response.result) {
+        return response.result
+      }
+
+      if (response.error.type === 'rejected_by_user') {
+        throw new SignManifest.RejectedByUser()
+      }
+
+      if (response.error.type === 'invalid_domain') {
+        throw new SignManifest.InvalidDomain()
       }
 
       throw new Error('Unreachable')

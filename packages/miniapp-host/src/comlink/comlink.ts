@@ -343,6 +343,8 @@ export function expose(
                 return obj.openUrl(...argumentList);
               case 'signIn':
                 return obj.signIn(...argumentList);
+              case 'signManifest':
+                return obj.signManifest(...argumentList);
               case 'setPrimaryButton':
                 return obj.setPrimaryButton(...argumentList);
               case 'ethProviderRequest':

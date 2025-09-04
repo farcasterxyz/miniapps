@@ -14,6 +14,7 @@ import type {
   SendToken,
   SetPrimaryButtonOptions,
   SignIn,
+  SignManifest,
   SolanaWalletProvider,
   SwapToken,
   ViewCast,
@@ -80,6 +81,7 @@ export type MiniAppSDK = {
     addFrame: AddMiniApp.AddMiniApp
     addMiniApp: AddMiniApp.AddMiniApp
     signIn: SignIn.SignIn
+    signManifest: SignManifest.SignManifest
     viewCast: ViewCast.ViewCast
     viewProfile: ViewProfile.ViewProfile
     composeCast: <close extends boolean | undefined = undefined>(

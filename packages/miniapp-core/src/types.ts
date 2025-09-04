@@ -11,6 +11,7 @@ import type {
   RequestCameraAndMicrophoneAccess,
   SendToken,
   SignIn,
+  SignManifest,
   SwapToken,
   ViewCast,
   ViewProfile,
@@ -54,6 +55,7 @@ export const miniAppHostCapabilityList = [
   'actions.setPrimaryButton',
   'actions.addMiniApp',
   'actions.signIn',
+  'actions.signManifest',
   'actions.viewCast',
   'actions.viewProfile',
   'actions.composeCast',
@@ -81,6 +83,7 @@ export type WireMiniAppHost = {
   ready: Ready.Ready
   openUrl: (url: string) => void
   signIn: SignIn.WireSignIn
+  signManifest: SignManifest.WireSignManifest
   setPrimaryButton: SetPrimaryButton
   ethProviderRequest: Ethereum.EthProvideRequest
   ethProviderRequestV2: Ethereum.RpcTransport
@@ -112,6 +115,7 @@ export type MiniAppHost = {
   ready: Ready.Ready
   openUrl: (url: string) => void
   signIn: SignIn.SignIn
+  signManifest: SignManifest.SignManifest
   setPrimaryButton: SetPrimaryButton
   ethProviderRequest: Ethereum.EthProvideRequest
   ethProviderRequestV2: Ethereum.RpcTransport
