@@ -30,7 +30,7 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@farcaster/miniapp-sdk": "^0.1.9",
+    "@farcaster/miniapp-sdk": "^0.1.10",
     "@wagmi/core": "^2.14.1",
     "viem": "^2.21.55"
   }

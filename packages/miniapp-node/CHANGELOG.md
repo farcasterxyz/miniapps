@@ -1,5 +1,12 @@
 # @farcaster/frame-node
 
+## 0.1.9
+
+### Patch Changes
+
+- Updated dependencies [[`a631434`](https://github.com/farcasterxyz/miniapps/commit/a631434a43f3ec208d9c956822113385a6c1fc91)]:
+  - @farcaster/miniapp-core@0.3.9
+
 ## 0.1.8
 
 ### Patch Changes

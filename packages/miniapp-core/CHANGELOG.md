@@ -1,5 +1,11 @@
 # @farcaster/frame-core
 
+## 0.3.9
+
+### Patch Changes
+
+- [#478](https://github.com/farcasterxyz/miniapps/pull/478) [`a631434`](https://github.com/farcasterxyz/miniapps/commit/a631434a43f3ec208d9c956822113385a6c1fc91) Thanks [@PirosB3](https://github.com/PirosB3)! - Added experimental manifest signing tool
+
 ## 0.3.8
 
 ### Patch Changes

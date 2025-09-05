@@ -1,5 +1,14 @@
 # @farcaster/frame-host
 
+## 0.2.12
+
+### Patch Changes
+
+- [#478](https://github.com/farcasterxyz/miniapps/pull/478) [`a631434`](https://github.com/farcasterxyz/miniapps/commit/a631434a43f3ec208d9c956822113385a6c1fc91) Thanks [@PirosB3](https://github.com/PirosB3)! - Added experimental manifest signing tool
+
+- Updated dependencies [[`a631434`](https://github.com/farcasterxyz/miniapps/commit/a631434a43f3ec208d9c956822113385a6c1fc91)]:
+  - @farcaster/miniapp-core@0.3.9
+
 ## 0.2.11
 
 ### Patch Changes
