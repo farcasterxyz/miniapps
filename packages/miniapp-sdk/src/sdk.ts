@@ -134,6 +134,10 @@ export const sdk: MiniAppSDK = {
         throw new SignManifest.InvalidDomain()
       }
 
+      if (response.error.type === 'generic_error') {
+        throw new SignManifest.GenericError(response.error.message)
+      }
+
       throw new Error('Unreachable')
     },
     quickAuth(options) {

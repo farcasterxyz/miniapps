@@ -23,9 +23,15 @@ type InvalidDomainJsonError = {
   type: 'invalid_domain'
 }
 
+type GenericErrorJsonError = {
+  type: 'generic_error'
+  message?: string
+}
+
 export type SignManifestJsonError =
   | RejectedByUserJsonError
   | InvalidDomainJsonError
+  | GenericErrorJsonError
 
 export type SignManifestRejectedReason = SignManifestJsonError['type']
 
@@ -56,5 +62,16 @@ export class InvalidDomain extends Errors.BaseError {
 
   constructor() {
     super('Invalid domain provided')
+  }
+}
+
+/**
+ * Thrown when manifest signing fails for generic reasons.
+ */
+export class GenericError extends Errors.BaseError {
+  override readonly name = 'SignManifest.GenericError'
+
+  constructor(message = 'Manifest signing failed') {
+    super(message)
   }
 }

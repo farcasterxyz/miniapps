@@ -11,6 +11,16 @@ import { Caption } from '../../../../components/Caption.tsx';
 This is an experimental feature and may change or be removed in future versions.
 :::
 
+:::warning Host Discretion
+The availability and behavior of `signManifest` depends entirely on the host implementation. Hosts may choose to:
+- Enable manifest signing for all domains
+- Restrict signing to specific allowlisted domains
+- Disable the feature entirely
+- Implement additional validation requirements
+
+Check with your specific host's documentation for their manifest signing policies.
+:::
+
 Signs a domain manifest for verification and authenticity purposes.
 
 ## Usage
@@ -71,6 +81,52 @@ try {
 } catch (error) {
   if (error instanceof SignManifest.InvalidDomain) {
     // Handle invalid domain
+  }
+}
+```
+
+### `GenericError`
+
+Thrown when manifest signing fails for various reasons including host restrictions, network issues, or other implementation-specific failures.
+
+```ts
+try {
+  await sdk.experimental.signManifest({ domain: 'example.com' })
+} catch (error) {
+  if (error instanceof SignManifest.GenericError) {
+    // Handle generic signing failures
+    console.log('Signing failed:', error.message)
+  }
+}
+```
+
+### Generic Error Handling
+
+For robust error handling, you should catch all specific error types:
+
+```ts
+try {
+  const result = await sdk.experimental.signManifest({ domain: 'example.com' })
+  // Handle successful signing
+} catch (error) {
+  if (error instanceof SignManifest.RejectedByUser) {
+    // User declined to sign the manifest
+    console.log('User rejected manifest signing')
+  } else if (error instanceof SignManifest.InvalidDomain) {
+    // Domain format is invalid
+    console.log('Invalid domain format')
+  } else if (error instanceof SignManifest.GenericError) {
+    // Generic signing failures
+    console.log('Signing failed:', error.message)
+    // This could include:
+    // - Domain not allowlisted by host
+    // - Feature disabled by host
+    // - Network or connectivity issues
+    // - Host-specific validation failures
+  } else {
+    // Other unexpected errors
+    console.log('Manifest signing failed:', error.message)
+    // This could include network or authentication errors
   }
 }
 ```

@@ -94,6 +94,15 @@ export function wrapHandlers(host: MiniAppHost): WireMiniAppHost {
           }
         }
 
+        if (e instanceof SignManifest.GenericError) {
+          return {
+            error: {
+              type: 'generic_error',
+              message: e.message,
+            },
+          }
+        }
+
         throw e
       }
     },
