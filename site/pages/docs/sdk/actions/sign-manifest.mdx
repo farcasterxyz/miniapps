@@ -1,0 +1,76 @@
+---
+title: signManifest (Experimental)
+description: Signs a domain manifest for verification
+---
+
+import { Caption } from '../../../../components/Caption.tsx';
+
+# signManifest (Experimental)
+
+:::warning
+This is an experimental feature and may change or be removed in future versions.
+:::
+
+Signs a domain manifest for verification and authenticity purposes.
+
+## Usage
+
+```ts twoslash
+import { sdk } from '@farcaster/miniapp-sdk'
+
+const result = await sdk.experimental.signManifest({
+  domain: 'example.com'
+})
+```
+
+## Parameters
+
+### `options`
+
+- **domain** (required): The domain to sign the manifest for
+
+## Return Value
+
+Returns an object with the following properties:
+
+- **header**: The header component of the signed manifest
+- **payload**: The payload component containing the domain data  
+- **signature**: The cryptographic signature
+
+```ts
+{
+  header: string
+  payload: string
+  signature: string
+}
+```
+
+## Errors
+
+### `RejectedByUser`
+
+Thrown if a user rejects the request to sign the manifest.
+
+```ts
+try {
+  await sdk.experimental.signManifest({ domain: 'example.com' })
+} catch (error) {
+  if (error instanceof SignManifest.RejectedByUser) {
+    // Handle user rejection
+  }
+}
+```
+
+### `InvalidDomain`
+
+Thrown when the provided domain is invalid or malformed.
+
+```ts
+try {
+  await sdk.experimental.signManifest({ domain: 'invalid-domain' })
+} catch (error) {
+  if (error instanceof SignManifest.InvalidDomain) {
+    // Handle invalid domain
+  }
+}
+```

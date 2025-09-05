@@ -224,6 +224,10 @@ export default defineConfig({
                 text: 'requestCameraAndMicrophoneAccess',
                 link: '/docs/sdk/actions/request-camera-and-microphone-access',
               },
+              {
+                text: 'signManifest (experimental)',
+                link: '/docs/sdk/actions/sign-manifest',
+              },
             ],
           },
           {
