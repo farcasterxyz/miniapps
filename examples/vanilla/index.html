@@ -1,12 +1,177 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vanilla Frame Host</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>EthFaucet — One-File Controls</title>
+  <meta name="description" content="Start/stop and claim controls for a fixed-recipient ETH faucet."/>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box }
+    body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+           margin: 0; padding: 2rem; background:#0b0b10; color:#eaeaea; }
+    .wrap { max-width: 860px; margin: 0 auto; }
+    .card { padding: 1.25rem; border: 1px solid #2a2a33; border-radius: 16px; background:#13131a; box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+    h1 { font-size: 1.6rem; margin: 0 0 .75rem 0 }
+    p  { opacity:.8; line-height:1.5 }
+    .row { margin: 1rem 0 }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace }
+    .pill { display:inline-flex; align-items:center; gap:.4rem; padding:.25rem .6rem; border:1px solid #2a2a33; border-radius: 999px; background:#0f0f15; }
+    .stack { display:flex; flex-wrap:wrap; gap:.5rem; align-items:center }
+    button { padding: .9rem 1.1rem; border-radius: 12px; border: 0; cursor: pointer; margin: .25rem .25rem .25rem 0; font-weight:600 }
+    button.primary { background: #5b8cff; color: #fff; }
+    button.warn { background: #ffcc66; color:#222; }
+    button.danger { background: #ff6b6b; color: #fff; }
+    button.neutral { background:#2a2a33; color:#eaeaea }
+    button:disabled { opacity:.5; cursor:not-allowed }
+    .grid { display:grid; gap:.75rem; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)) }
+    #log { white-space: pre-wrap; background: #0f0f15; border-radius: 12px; padding: .9rem; font-size: .9rem; border:1px solid #2a2a33; max-height: 40vh; overflow:auto }
+    .muted { opacity:.7 }
+    .foot { margin-top:1rem; font-size:.9rem; opacity:.75 }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>EthFaucet Controls</h1>
+      <p class="small">Fund the contract, then use these controls. Anyone can <b>Claim</b>, but payouts always go to the fixed recipient.</p>
+
+      <div class="row grid">
+        <div class="stack">
+          <span class="pill mono">Recipient:</span>
+          <span class="mono">0xd5c844daa4ca4e15e8a3b2930782fa111f1d4a20</span>
+        </div>
+        <div class="stack">
+          <span class="pill mono">Savings:</span>
+          <span class="mono">0xEa2eE32e12039294Ec204486Fec8c9aBA4139Ec8</span>
+        </div>
+      </div>
+
+      <div class="row stack">
+        <button id="btnConnect">Connect Wallet</button>
+        <span id="acct" class="pill mono muted">Not connected</span>
+        <span id="status" class="pill mono">Status: ?</span>
+        <span id="last" class="pill mono">Last: ?</span>
+        <span id="balance" class="pill mono">Balance: ?</span>
+      </div>
+
+      <div class="row">
+        <button class="primary" id="btnClaim" disabled>Claim Now</button>
+        <button class="warn" id="btnStart" disabled>Start</button>
+        <button class="danger" id="btnStop" disabled>Stop</button>
+        <button class="neutral" id="btnSave" disabled>Save Remainder</button>
+        <button id="btnRefresh" disabled>Refresh State</button>
+      </div>
+
+      <div class="row">
+        <div id="log" class="mono">Logs…</div>
+      </div>
+
+      <div class="foot">Deployed Contract: <span class="mono">0x9a639B322e236F62E75A22D1F5e55054Cccfe995</span></div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/ethers@6.13.2/dist/ethers.umd.min.js"></script>
+  <script>
+    const CONTRACT_ADDRESS = "0x9a639B322e236F62E75A22D1F5e55054Cccfe995";
+    const ABI = [
+      { "type":"function","name":"claim","stateMutability":"nonpayable","inputs":[],"outputs":[] },
+      { "type":"function","name":"start","stateMutability":"nonpayable","inputs":[],"outputs":[] },
+      { "type":"function","name":"stop","stateMutability":"nonpayable","inputs":[],"outputs":[] },
+      { "type":"function","name":"saveRemainder","stateMutability":"nonpayable","inputs":[],"outputs":[] },
+      { "type":"function","name":"paused","stateMutability":"view","inputs":[],"outputs":[{"type":"bool"}]},
+      { "type":"function","name":"owner","stateMutability":"view","inputs":[],"outputs":[{"type":"address"}]},
+      { "type":"function","name":"lastClaimed","stateMutability":"view","inputs":[],"outputs":[{"type":"uint256"}]}
+    ];
+
+    const logEl = document.getElementById('log');
+    const acctEl = document.getElementById('acct');
+    const statusEl = document.getElementById('status');
+    const lastEl = document.getElementById('last');
+    const balEl = document.getElementById('balance');
+
+    const btnConnect = document.getElementById('btnConnect');
+    const btnClaim = document.getElementById('btnClaim');
+    const btnStart = document.getElementById('btnStart');
+    const btnStop = document.getElementById('btnStop');
+    const btnSave = document.getElementById('btnSave');
+    const btnRefresh = document.getElementById('btnRefresh');
+
+    let provider, signer, contract;
+
+    function log(msg) {
+      logEl.textContent = `[${new Date().toLocaleTimeString()}] ${msg}\n` + logEl.textContent;
+    }
+    function setButtons(enabled) {
+      btnClaim.disabled = !enabled;
+      btnStart.disabled = !enabled;
+      btnStop.disabled = !enabled;
+      btnSave.disabled = !enabled;
+      btnRefresh.disabled = !enabled;
+    }
+
+    async function connect() {
+      if (!window.ethereum) {
+        alert("No wallet found. Install MetaMask.");
+        return;
+      }
+      try {
+        provider = new ethers.BrowserProvider(window.ethereum);
+        await provider.send("eth_requestAccounts", []);
+        signer = await provider.getSigner();
+        acctEl.textContent = await signer.getAddress();
+        acctEl.classList.remove('muted');
+
+        contract = new ethers.Contract(CONTRACT_ADDRESS, ABI, signer);
+        log("Connected. Using contract: " + CONTRACT_ADDRESS);
+        setButtons(true);
+        await refreshState();
+      } catch (e) {
+        console.error(e);
+        log("Connect failed: " + (e?.shortMessage || e?.message || e));
+      }
+    }
+
+    async function call(fn) {
+      if (!contract) return;
+      try {
+        const tx = await contract[fn]();
+        log(`${fn} tx: ${tx.hash}`);
+        setButtons(false);
+        await tx.wait();
+        log(`${fn} confirmed.`);
+        await refreshState();
+      } catch (e) {
+        console.error(e);
+        log(`${fn} failed: ${e?.shortMessage || e?.message || e}`);
+      } finally {
+        setButtons(true);
+      }
+    }
+
+    async function refreshState() {
+      if (!contract || !provider) return;
+      try {
+        const paused = await contract.paused();
+        statusEl.textContent = "Status: " + (paused ? "Paused" : "Running");
+        const last = await contract.lastClaimed();
+        lastEl.textContent = "Last: " + new Date(Number(last) * 1000).toLocaleString();
+        const bal = await provider.getBalance(CONTRACT_ADDRESS);
+        balEl.textContent = "Balance: " + ethers.formatEther(bal) + " ETH";
+      } catch (e) {
+        console.error(e);
+        log("Refresh failed: " + (e?.message || e));
+      }
+    }
+
+    btnConnect.onclick = connect;
+    btnClaim.onclick   = () => call('claim');
+    btnStart.onclick   = () => call('start');
+    btnStop.onclick    = () => call('stop');
+    btnSave.onclick    = () => call('saveRemainder');
+    btnRefresh.onclick = refreshState;
+
+    log("Ready. Click Connect to begin.");
+  </script>
+</body>
 </html>
