@@ -18,7 +18,7 @@
   "scripts": {
     "clean": "rm -rf dist esm",
     "prebuild": "npm run clean",
-    "build": "pnpm build:cjs & pnpm build:esm & pnpm build:types",
+    "build": "pnpm build:types && pnpm build:cjs && pnpm build:esm",
     "build:cjs": "tsc -p tsconfig.node.json",
     "build:esm": "tsc -p tsconfig.json",
     "build:types": "tsc -p tsconfig.json --declaration --emitDeclarationOnly --outDir dist/types",
