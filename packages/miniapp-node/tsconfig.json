@@ -1,8 +1,10 @@
 {
   "extends": "@farcaster/tsconfig/browser.json",
   "include": ["src"],
-  "exclude": ["esm", "dist", "build", "node_modules"],
+  "exclude": ["dist", "build", "node_modules"],
   "compilerOptions": {
-    "outDir": "esm"
+    "outDir": "dist/esm",
+    "declaration": false,
+    "tsBuildInfoFile": "./tsconfig.tsbuildinfo"
   }
 }

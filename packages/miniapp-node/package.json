@@ -7,14 +7,21 @@
     "url": "https://github.com/farcasterxyz/frames.git",
     "directory": "packages/miniapp-node"
   },
-  "main": "dist/index.js",
-  "module": "esm/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "default": "./dist/cjs/index.js"
+    }
+  },
   "scripts": {
     "clean": "rm -rf dist esm",
     "prebuild": "npm run clean",
-    "build": "pnpm build:cjs & pnpm build:esm",
+    "build": "pnpm build:cjs & pnpm build:esm & pnpm build:types",
     "build:cjs": "tsc -p tsconfig.node.json",
     "build:esm": "tsc -p tsconfig.json",
+    "build:types": "tsc -p tsconfig.json --declaration --emitDeclarationOnly --outDir dist/types",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -22,7 +29,6 @@
   },
   "files": [
     "dist",
-    "esm",
     "src"
   ],
   "devDependencies": {
