@@ -22,11 +22,10 @@ export type SignInOptions = {
   /**
    * Whether an [Auth
    * Address](https://github.com/farcasterxyz/protocol/discussions/225) signed
-   * message is acceptable. Defaults to `false` to maintain backwards
-   * compatibility, though applications should set this to `true` for the best
-   * user experience assuming their verification method supports it.
+   * message is acceptable. Defaults to `true` for the best user experience.
+   * Set to `false` if your verification method does not support auth addresses.
    *
-   * @default false
+   * @default true
    */
   acceptAuthAddress?: boolean
 }
