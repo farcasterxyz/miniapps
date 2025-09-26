@@ -1,5 +1,12 @@
 # @farcaster/frame-host
 
+## 0.1.16
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @farcaster/miniapp-host-react-native@0.1.16
+
 ## 0.1.15
 
 ### Patch Changes
