@@ -1,5 +1,16 @@
 # @farcaster/frame-kit
 
+## 0.2.0
+
+### Minor Changes
+
+- [#493](https://github.com/farcasterxyz/miniapps/pull/493) [`9edfb78`](https://github.com/farcasterxyz/miniapps/commit/9edfb783f40ce1b2504bfdf2e2f2e15815541771) Thanks [@horsefacts](https://github.com/horsefacts)! - feat: default to auth address signIn
+
+### Patch Changes
+
+- Updated dependencies [[`9edfb78`](https://github.com/farcasterxyz/miniapps/commit/9edfb783f40ce1b2504bfdf2e2f2e15815541771)]:
+  - @farcaster/miniapp-core@0.4.0
+
 ## 0.1.10
 
 ### Patch Changes

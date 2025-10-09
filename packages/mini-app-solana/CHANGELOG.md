@@ -1,5 +1,13 @@
 # @farcaster/mini-app-solana
 
+## 1.1.0
+
+### Patch Changes
+
+- Updated dependencies [[`9edfb78`](https://github.com/farcasterxyz/miniapps/commit/9edfb783f40ce1b2504bfdf2e2f2e15815541771)]:
+  - @farcaster/miniapp-core@0.4.0
+  - @farcaster/miniapp-sdk@0.2.0
+
 ## 1.0.9
 
 ### Patch Changes
