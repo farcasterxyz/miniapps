@@ -1,5 +1,11 @@
 # @farcaster/frame-core
 
+## 0.4.0
+
+### Minor Changes
+
+- [#493](https://github.com/farcasterxyz/miniapps/pull/493) [`9edfb78`](https://github.com/farcasterxyz/miniapps/commit/9edfb783f40ce1b2504bfdf2e2f2e15815541771) Thanks [@horsefacts](https://github.com/horsefacts)! - feat: default to auth address signIn
+
 ## 0.3.9
 
 ### Patch Changes
