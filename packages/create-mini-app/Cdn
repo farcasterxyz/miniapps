@@ -1,0 +1,3 @@
+<script type="module">
+  import { sdk } from 'https://esm.sh/@farcaster/miniapp-sdk'
+</script>
