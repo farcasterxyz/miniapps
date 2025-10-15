@@ -41,11 +41,7 @@ function SignButton() {
 
   return (
     <>
-      <button
-        type="button"
-        onClick={() => signMessage({ message: "hello world" })}
-        disabled={isPending}
-      >
+      <button type="button" onClick={() => signMessage({ message: "hello world" })} disabled={isPending}>
         {isPending ? "Signing..." : "Sign message"}
       </button>
       {data && (
