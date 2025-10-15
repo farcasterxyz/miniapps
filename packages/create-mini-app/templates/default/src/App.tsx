@@ -1,4 +1,4 @@
-import { sdk } from "@farcaster/frame-sdk";
+import { sdk } from "@farcaster/miniapp-sdk";
 import { useEffect } from "react";
 import { useAccount, useConnect, useSignMessage } from "wagmi";
 
@@ -41,7 +41,11 @@ function SignButton() {
 
   return (
     <>
-      <button type="button" onClick={() => signMessage({ message: "hello world" })} disabled={isPending}>
+      <button
+        type="button"
+        onClick={() => signMessage({ message: "hello world" })}
+        disabled={isPending}
+      >
         {isPending ? "Signing..." : "Sign message"}
       </button>
       {data && (
