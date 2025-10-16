@@ -71,6 +71,7 @@ export const chains = [
   'eip155:130', // Unichain
   'eip155:10143', // Monad testnet
   'eip155:42220', // Celo
+  'eip155:999', // HyperEVM
   'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp', // Solana
 ] as const
 
