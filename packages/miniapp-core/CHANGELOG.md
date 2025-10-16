@@ -1,5 +1,11 @@
 # @farcaster/frame-core
 
+## 0.4.1
+
+### Patch Changes
+
+- [#510](https://github.com/farcasterxyz/miniapps/pull/510) [`153d925`](https://github.com/farcasterxyz/miniapps/commit/153d925e01bbddb59cfbe72ee3288f97b85618b4) Thanks [@PirosB3](https://github.com/PirosB3)! - Added HyperEVM chain ID
+
 ## 0.4.0
 
 ### Minor Changes

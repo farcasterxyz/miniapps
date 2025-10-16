@@ -1,5 +1,13 @@
 # vanilla
 
+## 0.1.18
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @farcaster/miniapp-host@0.2.14
+  - @farcaster/miniapp-sdk@0.2.1
+
 ## 0.1.17
 
 ### Patch Changes
