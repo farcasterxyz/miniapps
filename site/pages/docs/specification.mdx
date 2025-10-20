@@ -187,7 +187,7 @@ account.
 
 The value is set to the JSON representation of a [JSON Farcaster
 Signature](https://github.com/farcasterxyz/protocol/discussions/208) from the
-account's custody address with the following payload:
+account's custody address or a valid auth address with the following payload:
 
 ```json
 {
@@ -196,6 +196,8 @@ account's custody address with the following payload:
 ```
 
 The `domain` value must exactly match the FQDN of where it is hosted.
+
+The `header.type` must be `"custody"` or `"auth"`.
 
 ##### Schema
 
@@ -212,7 +214,7 @@ The `domain` value must exactly match the FQDN of where it is hosted.
 {
   "header": "eyJmaWQiOjM2MjEsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHgyY2Q4NWEwOTMyNjFmNTkyNzA4MDRBNkVBNjk3Q2VBNENlQkVjYWZFIn0",
   "payload": "eyJkb21haW4iOiJ5b2luay5wYXJ0eSJ9",
-  "signature": "MHgwZmJiYWIwODg3YTU2MDFiNDU3MzVkOTQ5MDRjM2Y1NGUxMzVhZTQxOGEzMWQ5ODNhODAzZmZlYWNlZWMyZDYzNWY4ZTFjYWU4M2NhNTAwOTMzM2FmMTc1NDlmMDY2YTVlOWUwNTljNmZiNDUxMzg0Njk1NzBhODNiNjcyZWJjZTFi"
+  "signature": "D7urCIelYBtFc12UkEw/VOE1rkGKMdmDqAP/6s7sLWNfjhyug8pQCTM68XVJ8Gal6eBZxvtFE4RpVwqDtnLrzhs="
 }
 ```
 
