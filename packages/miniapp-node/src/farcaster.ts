@@ -1,5 +1,5 @@
 import * as AbiParameters from 'ox/AbiParameters'
-import { z } from 'zod'
+import * as z from 'zod'
 import {
   BaseError,
   type VerifyAppKey,
