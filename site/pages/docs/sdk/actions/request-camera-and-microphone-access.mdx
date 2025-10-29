@@ -11,6 +11,22 @@ Request permission to access the device's camera and microphone. This method tri
 This is an experimental feature that stores camera and microphone permission settings per mini app. The stored preference ensures users aren't repeatedly prompted for the same permissions. Check the `features.cameraAndMicrophoneAccess` flag in the SDK context to determine if permissions have been granted.
 :::
 
+## Platform Support
+
+| Platform | Supported | Notes |
+|----------|-----------|-------|
+| iOS      | ✅         | Full support with domain-level permissions |
+| Android  | ✅         | Supported (see note below) |
+| Web      | ❌         | Not currently supported |
+
+:::note
+On Android, camera and microphone permissions work slightly differently than iOS. Once permissions are granted to the host app, mini apps may have access without additional prompts. This is standard behavior for Android WebView permissions.
+:::
+
+:::warning
+Camera and microphone access is not supported in web mini apps. The action will always reject on web platforms.
+:::
+
 ## Usage
 
 ```ts twoslash
@@ -90,19 +106,3 @@ async function startVideoRecording() {
   }
 }
 ```
-
-## Platform Support
-
-| Platform | Supported | Notes |
-|----------|-----------|-------|
-| iOS      | ✅         | Full support with domain-level permissions |
-| Android  | ✅         | Supported (see note below) |
-| Web      | ❌         | Not currently supported |
-
-:::note
-On Android, camera and microphone permissions work slightly differently than iOS. Once permissions are granted to the host app, mini apps may have access without additional prompts. This is standard behavior for Android WebView permissions.
-:::
-
-:::warning
-Camera and microphone access is not supported in web mini apps. The action will always reject on web platforms.
-:::

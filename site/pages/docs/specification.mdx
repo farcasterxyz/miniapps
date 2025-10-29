@@ -24,11 +24,11 @@ version bump.
 
 ### Metatags
 
-A Mini App URL must have a MiniAppEmbed in a serialized form in the `fc:miniapp` meta tag in the HTML `<head>`. For backward compatibility, the `fc:frame` meta tag is also supported. When this URL is rendered in a cast, the image is displayed in a 3:2 ratio with a button underneath. Clicking the button will open a Mini App to the provided action url and use the splash page to animate the transition.
+A Mini App URL must have a MiniAppEmbed in a serialized form in the `fc:miniapp` meta tag in the HTML `<head>`. For backward compatibility of legacy Mini Apps, the `fc:frame` meta tag is also supported. When this URL is rendered in a cast, the image is displayed in a 3:2 ratio with a button underneath. Clicking the button will open a Mini App to the provided action url and use the splash page to animate the transition.
 
 ```html
 <meta name="fc:miniapp" content="<stringified Embed JSON>" />
-<!-- For backward compatibility -->
+<!-- For backward compatibility of legacy Mini Apps -->
 <meta name="fc:frame" content="<stringified Embed JSON>" />
 ```
 
@@ -54,7 +54,7 @@ A Mini App URL must have a MiniAppEmbed in a serialized form in the `fc:miniapp`
 |-----------------------|--------|----------|------------------------------------------|----------------------------------------------|
 | type                  | string | Yes      | The type of action.                      | One of: `launch_frame`, `view_token`         |
 | url                   | string | No       | App URL to open. If not provided, defaults to full URL used to fetch the document. | Max length 1024 characters.                   |
-| name                  | string | No       |                                          | Name of the application                      |
+| name                  | string | Yes      |                                          | Name of the application                      |
 | splashImageUrl        | string | No       | URL of image to show on loading screen.  | Max length 32 characters. Must be 200x200px. |
 | splashBackgroundColor | string | No       | Hex color code to use on loading screen. | Hex color code.                              |
 
