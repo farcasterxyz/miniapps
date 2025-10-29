@@ -27,9 +27,11 @@ When helping developers with Mini Apps:
 - **DO NOT** invent manifest fields not in the official schema
 - **DO NOT** mix Frame and Mini App terminology (Mini Apps are not Frames)
 - **DO NOT** use outdated examples from before 2024
+- **DO NOT** use `fc:frame` meta tag for new implementations. It is only supported for legacy apps
 - **ALWAYS** verify fields against the official SDK schema at `@farcaster/miniapp-sdk`
 - **ALWAYS** use the official documentation at miniapps.farcaster.xyz
 - **ALWAYS** check that examples use `miniapp` or `frame` (not `frames`) in manifest
+- **ALWAYS** use `fc:miniapp` meta tag for new Mini Apps (not `fc:frame`)
 
 If using example code, ensure it's from:
 - Official Mini Apps documentation (this site)

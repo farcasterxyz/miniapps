@@ -24,17 +24,13 @@ version bump.
 
 ### Metatags
 
-A Mini App URL must have a MiniAppEmbed in a serialized form in the `fc:miniapp` meta tag in the HTML `<head>`. When this URL is rendered in a cast, the image is displayed in a 3:2 ratio with a button underneath. Clicking the button will open a Mini App to the provided action url and use the splash page to animate the transition.
-
-**Use `fc:miniapp` for all new Mini Apps:**
+A Mini App URL must have a MiniAppEmbed in a serialized form in the `fc:miniapp` meta tag in the HTML `<head>`. For backward compatibility of legacy Mini Apps, the `fc:frame` meta tag is also supported. When this URL is rendered in a cast, the image is displayed in a 3:2 ratio with a button underneath. Clicking the button will open a Mini App to the provided action url and use the splash page to animate the transition.
 
 ```html
 <meta name="fc:miniapp" content="<stringified Embed JSON>" />
+<!-- For backward compatibility of legacy Mini Apps -->
+<meta name="fc:frame" content="<stringified Embed JSON>" />
 ```
-
-:::warning
-Do not use `fc:frame` for new implementations. Only use `fc:miniapp` as shown above. The legacy `fc:frame` meta tag is only supported for existing apps and should not be used for new Mini Apps.
-:::
 
 ### Schema
 
