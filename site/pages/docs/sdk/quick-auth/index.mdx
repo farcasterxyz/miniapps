@@ -71,7 +71,7 @@ acquired.
 
 <script type="module">
   import ky from "https://esm.sh/ky";
-  import { sdk } from "https://esm.sh/@farcaster/miniapp-sdk";
+  import { sdk } from "https://esm.sh/@farcaster/miniapp-sdk?bundle";
 
   const { token } = await sdk.quickAuth.getToken();
   const user = await ky.get("http://localhost:8787" + "/me", {headers: {Authorization: 'Bearer ' + token }}).json();
