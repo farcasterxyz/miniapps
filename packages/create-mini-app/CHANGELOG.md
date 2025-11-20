@@ -1,5 +1,11 @@
 # @farcaster/create-mini-app
 
+## 0.1.1
+
+### Patch Changes
+
+- [#509](https://github.com/farcasterxyz/miniapps/pull/509) [`7cd3967`](https://github.com/farcasterxyz/miniapps/commit/7cd3967047b01307bbd47e7cff7dad85e94e19ed) Thanks [@obxium](https://github.com/obxium)! - Update create-mini-app template to use @farcaster/miniapp-sdk
+
 ## 0.1.0
 
 ### Minor Changes
