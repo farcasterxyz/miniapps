@@ -12,7 +12,7 @@
   "devDependencies": {
     "@types/dom-navigation": "^1.0.5",
     "typescript": "^5.8.3",
-    "vite": "^6.3.6"
+    "vite": "^6.4.1"
   },
   "dependencies": {
     "@farcaster/miniapp-host": "workspace:*",
