@@ -1,0 +1,119 @@
+---
+AIGC:
+    ContentProducer: Minimax Agent AI
+    ContentPropagator: Minimax Agent AI
+    Label: AIGC
+    ProduceID: "00000000000000000000000000000000"
+    PropagateID: "00000000000000000000000000000000"
+    ReservedCode1: 3046022100d591030df146b3e2427efcc3feace5a4e833ad51a4fbe6e1c3526242367f1924022100edd89b63216320ef715646ac8e449f2da8ede35909877ec4893092c0437c968d
+    ReservedCode2: 30460221008816dfc5d054288ba5fc99cdb1b5feccf51aa41b6187f7fe52beb8027cfdc71c022100c9f34d57b72147be8fc1a441a67000ef4e52e9d9336c02e09cd172dcab761633
+---
+
+# GREMLIN: Living Social Organism for Farcaster
+
+GREMLIN is a revolutionary miniapp that brings digital creatures to life within the Farcaster social network. These creatures evolve in real-time based on your social activity, creating a living ecosystem of interconnected organisms.
+
+## Features
+
+### 🧬 Real-Time Evolution
+- Creatures mutate based on social behavior patterns
+- Activity tracking for posts, engagement, conflicts, and network interactions
+- Visual mutations that reflect your digital persona
+
+### 🌐 Network Effects
+- Mutations can spread between users through network interactions
+- Trait inheritance with random evolution during transfer
+- Living ecosystem with traceable lineage trees
+
+### 🎨 Bio-Digital Aesthetic
+- Dark, atmospheric interface with bioluminescent accents
+- WebGL-powered creature visualization
+- Terminal/laboratory aesthetic with organic chaos
+
+### 📊 Social Bio-Metrics
+- **Engagement (Food)**: Influences creature energy and growth
+- **Conflict (Stress)**: Affects aggression and defensive mutations
+- **Frequency (Heartbeat)**: Determines activity levels and rhythm
+
+### 🧪 Scientific Interface
+- Real-time vital signs and creature status
+- Mutation tracking and lineage visualization
+- Network statistics and gene pool monitoring
+
+## Technology Stack
+
+- **Frontend**: Vanilla JavaScript, HTML5 Canvas, CSS3
+- **Graphics**: WebGL-powered creature engine with particle systems
+- **Integration**: Farcaster Frame SDK compatibility
+- **Design**: Bio-digital brutalism aesthetic with custom CSS system
+
+## Creature Mutations
+
+### Common Mutations
+- **Shadow Flake**: Emerges from network silence
+- **Heartbeat Sync**: Rhythmic adaptation to social patterns
+- **Night Owl**: Dark hours activity adaptation
+
+### Rare Mutations
+- **Ink Aura**: Dark matter absorption ability
+- **Debate Teeth**: Sharpened from heated arguments
+- **Social Butterfly**: Network connection enhancement
+
+### Epic/Legendary Mutations
+- **Gene Weaver**: Advanced mutation inheritance
+- **Thick Skin**: Resilience from criticism
+- **Viral Surge**: Content adaptation from high engagement
+
+### Mythic Mutations
+- **Phoenix Spark**: Born from complete network death
+- **Void Touch**: Touched by digital emptiness
+
+## How It Works
+
+1. **Activity Tracking**: Monitor user activity on Farcaster
+2. **Behavior Analysis**: Analyze patterns in engagement, conflict, and frequency
+3. **Mutation Triggers**: Check for conditions that trigger mutations
+4. **Visual Evolution**: Update creature appearance and behavior
+5. **Network Sharing**: Share mutations with the broader ecosystem
+6. **Lineage Tracking**: Maintain evolutionary history and genealogy
+
+## Installation
+
+1. Clone or download the project files
+2. Open `index.html` in a web browser
+3. For Farcaster integration, deploy to a web server and configure Frame SDK
+
+## Usage
+
+- **Interact with Creature**: Click on the creature to see reaction effects
+- **Share Mutations**: Use the action buttons to share with network
+- **View Lineage**: Track evolutionary history and family tree
+- **Export Data**: Save creature DNA and mutation data
+
+## Network Integration
+
+The app simulates Farcaster integration with:
+- User activity tracking
+- Network mutation events
+- Trait inheritance between users
+- Real-time ecosystem statistics
+
+## Design Philosophy
+
+GREMLIN represents the first "living" social organism in a digital network. Instead of static features or games, it creates emergent narrative and cultural identity through:
+- **Behavioral Reflection**: Creatures mirror user personality and activity
+- **Network Evolution**: Mutations spread and evolve through social connections
+- **Living History**: Every interaction becomes part of the creature's DNA
+- **Cultural Significance**: Creatures become unique digital artifacts
+
+## Future Enhancements
+
+- Direct Farcaster API integration
+- Real-time multiplayer creature interactions
+- Advanced genetic algorithms for mutation evolution
+- AR/VR visualization modes
+- Mobile app companion
+
+---
+
+*GREMLIN isn't a toy in your profile. It's a creature born from your presence.*
