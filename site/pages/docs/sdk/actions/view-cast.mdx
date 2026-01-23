@@ -31,6 +31,12 @@ await sdk.actions.viewCast({
 
 The hash of the cast to view. This should be a valid cast hash from the Farcaster protocol.
 
+### authorUsername (optional)
+
+- **Type:** `string`
+
+The username of the cast's author.
+
 ### close (optional)
 
 - **Type:** `boolean`
@@ -47,13 +53,19 @@ import { sdk } from "@farcaster/miniapp-sdk";
 
 // ---cut---
 // View a specific cast
-await sdk.actions.viewCast({ 
-  hash: "0x1234567890abcdef"
-})
+await sdk.actions.viewCast({
+  hash: "0x6a112e2d35e2d2008e25dd29811e8769d1edd9ca",
+});
 
 // View a cast and close the mini app
-await sdk.actions.viewCast({ 
-  hash: "0x1234567890abcdef",
-  close: true
-})
+await sdk.actions.viewCast({
+  hash: "0x6a112e2d35e2d2008e25dd29811e8769d1edd9ca",
+  close: true,
+});
+
+// View a cast by author and hash
+await sdk.actions.viewCast({
+  hash: "0x78c086e5",
+  authorUsername: "six",
+});
 ```

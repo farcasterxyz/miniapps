@@ -6,6 +6,12 @@ export type ViewCastOptions = {
   hash: string
 
   /**
+   * The username of the cast's author.
+   * @example "alice"
+   */
+  authorUsername?: string
+
+  /**
    * Whether the app should be closed when this action is called.
    * If true, the app will be closed after opening the cast view.
    */
@@ -19,6 +25,14 @@ export type ViewCastOptions = {
  * ```ts
  * await sdk.actions.viewCast({
  *   hash: "0x6a112e2d35e2d2008e25dd29811e8769d1edd9ca"
+ * })
+ * ```
+ *
+ * @example
+ * ```ts
+ * await sdk.actions.viewCast({
+ *   hash: "0x78c086e5",
+ *   authorUsername: "six"
  * })
  * ```
  *
