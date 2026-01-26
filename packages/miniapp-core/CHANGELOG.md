@@ -1,5 +1,11 @@
 # @farcaster/frame-core
 
+## 0.5.0
+
+### Minor Changes
+
+- [#552](https://github.com/farcasterxyz/miniapps/pull/552) [`e640bf5`](https://github.com/farcasterxyz/miniapps/commit/e640bf5a230d16fe4d45f6eb52d34c3604b3fee7) Thanks [@lyoshenka](https://github.com/lyoshenka)! - add authorUsername param to viewCast() miniapp action
+
 ## 0.4.1
 
 ### Patch Changes
