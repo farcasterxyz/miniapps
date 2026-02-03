@@ -11,8 +11,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@farcaster/frame-sdk": "workspace:*",
-    "@farcaster/frame-wagmi-connector": "workspace:*",
+    "@farcaster/miniapp-sdk": "workspace:*",
+    "@farcaster/miniapp-wagmi-connector": "workspace:*",
     "@tanstack/react-query": "^5.66.9",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
