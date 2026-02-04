@@ -12,6 +12,7 @@ runs:
       with:
         cache: pnpm
         node-version: '24'
+        registry-url: 'https://registry.npmjs.org'
 
     - name: Install dependencies
       shell: bash
