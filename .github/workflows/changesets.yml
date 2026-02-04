@@ -30,7 +30,7 @@ jobs:
         with:
           # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
           fetch-depth: 0
-          submodules: 'recursive'
+          submodules: "recursive"
 
       - name: Install dependencies
         uses: ./.github/actions/install-dependencies
@@ -38,21 +38,21 @@ jobs:
       - name: PR or publish
         uses: changesets/action@v1.6.0
         with:
-          title: 'chore: version packages'
-          commit: 'chore: version packages'
+          title: "chore: version packages"
+          commit: "chore: version packages"
           createGithubReleases: ${{ github.ref == 'refs/heads/main' }}
           publish: pnpm changeset:publish
           version: pnpm changeset:version
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_SCOPED_TOKEN }}
-          NPM_TOKEN: ''
+          NPM_TOKEN: ""
 
       - name: Publish prerelease
         if: steps.changesets.outputs.published != 'true'
         continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_SCOPED_TOKEN }}
-          NPM_TOKEN: ''
+          NPM_TOKEN: ""
         run: |
           git reset --hard origin/main
           pnpm clean
