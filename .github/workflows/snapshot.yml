@@ -21,11 +21,10 @@ jobs:
       - name: Publish Snapshots
         continue-on-error: true
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
         run: |
           snapshot=$(git branch --show-current | tr -cs '[:alnum:]-' '-' | tr '[:upper:]' '[:lower:]' | sed 's/-$//')
-          npm config set "//registry.npmjs.org/:_authToken" "$NPM_TOKEN"
           pnpm clean
           pnpm changeset version --no-git-tag --snapshot $snapshot
           pnpm changeset:prepublish

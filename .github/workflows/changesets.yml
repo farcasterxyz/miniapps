@@ -18,6 +18,10 @@ jobs:
     name: Create version pull request
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    permissions:
+      contents: write
+      id-token: write
+      pull-requests: write
 
     steps:
       - name: Clone repository
@@ -39,17 +43,16 @@ jobs:
           publish: pnpm changeset:publish
           version: pnpm changeset:version
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.REPO_SCOPED_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
 
       - name: Publish prerelease
         if: steps.changesets.outputs.published != 'true'
         continue-on-error: true
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.REPO_SCOPED_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
         run: |
-          npm config set "//registry.npmjs.org/:_authToken" "$NPM_TOKEN"
           git reset --hard origin/main
           pnpm clean
           pnpm changeset version --no-git-tag --snapshot canary
