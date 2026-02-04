@@ -35,7 +35,7 @@ jobs:
         uses: ./.github/actions/install-dependencies
 
       - name: PR or publish
-        uses: changesets/action@06245a4e0a36c064a573d4150030f5ec548e4fcc
+        uses: changesets/action@v1.6.0
         with:
           title: 'chore: version packages'
           commit: 'chore: version packages'
@@ -44,6 +44,7 @@ jobs:
           version: pnpm changeset:version
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_SCOPED_TOKEN }}
+          NPM_TOKEN: ''
           NPM_CONFIG_PROVENANCE: true
 
       - name: Publish prerelease
@@ -51,6 +52,7 @@ jobs:
         continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_SCOPED_TOKEN }}
+          NPM_TOKEN: ''
           NPM_CONFIG_PROVENANCE: true
         run: |
           git reset --hard origin/main
