@@ -15,6 +15,11 @@
     "cli"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/farcasterxyz/miniapps.git",
+    "directory": "packages/create-mini-app"
+  },
   "scripts": {
     "build": "pnpm run clean && tsc --project tsconfig.build.json",
     "check:types": "tsc --noEmit",
