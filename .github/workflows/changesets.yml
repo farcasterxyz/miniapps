@@ -44,14 +44,14 @@ jobs:
           publish: pnpm changeset:publish
           version: pnpm changeset:version
         env:
-          GITHUB_TOKEN: ${{ secrets.REPO_SCOPED_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ""
 
       - name: Publish prerelease
         if: steps.changesets.outputs.published != 'true'
         continue-on-error: true
         env:
-          GITHUB_TOKEN: ${{ secrets.REPO_SCOPED_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ""
         run: |
           git reset --hard origin/main
