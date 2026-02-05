@@ -40,6 +40,7 @@ jobs:
         with:
           title: "chore: version packages"
           commit: "chore: version packages"
+          createGithubReleases: ${{ github.ref == 'refs/heads/main' }}
           publish: pnpm changeset:publish
           version: pnpm changeset:version
         env:
