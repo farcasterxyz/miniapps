@@ -1,5 +1,14 @@
 # @farcaster/frame-host
 
+## 0.1.19
+
+### Patch Changes
+
+- [#559](https://github.com/farcasterxyz/miniapps/pull/559) [`5e466f0`](https://github.com/farcasterxyz/miniapps/commit/5e466f0649c3daddac75271993e540ee0daf8435) Thanks [@tybook](https://github.com/tybook)! - Test deploy via new CI auth method
+
+- Updated dependencies [[`5e466f0`](https://github.com/farcasterxyz/miniapps/commit/5e466f0649c3daddac75271993e540ee0daf8435)]:
+  - @farcaster/miniapp-host@0.2.16
+
 ## 0.1.18
 
 ### Patch Changes
