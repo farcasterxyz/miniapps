@@ -20,6 +20,7 @@
     "src"
   ],
   "devDependencies": {
+    "@farcaster/frame-sdk": "workspace:*",
     "@farcaster/miniapp-wagmi-connector": "workspace:*",
     "@farcaster/tsconfig": "workspace:*",
     "@wagmi/core": "^2.16.3",
