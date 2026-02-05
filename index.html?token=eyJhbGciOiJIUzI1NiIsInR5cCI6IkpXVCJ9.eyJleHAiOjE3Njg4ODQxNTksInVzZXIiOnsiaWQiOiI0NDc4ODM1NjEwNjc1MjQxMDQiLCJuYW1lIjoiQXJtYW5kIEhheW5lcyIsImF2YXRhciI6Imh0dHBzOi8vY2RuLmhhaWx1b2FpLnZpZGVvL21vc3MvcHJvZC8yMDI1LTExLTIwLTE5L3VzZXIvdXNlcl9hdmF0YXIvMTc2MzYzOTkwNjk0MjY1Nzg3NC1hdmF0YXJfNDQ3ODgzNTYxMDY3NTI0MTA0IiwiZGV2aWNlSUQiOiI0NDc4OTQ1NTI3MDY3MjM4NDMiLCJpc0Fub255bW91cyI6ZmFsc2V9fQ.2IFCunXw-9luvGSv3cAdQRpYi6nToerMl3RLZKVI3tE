@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GREMLIN - Living Social Organism</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <!-- HUD Elements -->
+    <div class="hud-top-left">
+        <div class="hud-item">
+            <span class="hud-label">STATUS</span>
+            <span class="hud-value" id="creatureStatus">EVOLVING</span>
+        </div>
+        <div class="hud-item">
+            <span class="hud-label">LINEAGE</span>
+            <span class="hud-value" id="lineageCount">GEN-1</span>
+        </div>
+    </div>
+
+    <div class="hud-top-right">
+        <div class="hud-item">
+            <span class="hud-label">MUTATION RATE</span>
+            <span class="hud-value" id="mutationRate">2.4%</span>
+        </div>
+        <div class="hud-item">
+            <span class="hud-label">NETWORK</span>
+            <span class="hud-value" id="networkActivity">CONNECTED</span>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="title">GREMLIN</h1>
+            <p class="subtitle">Living Social Organism v2.1</p>
+        </header>
+
+        <!-- Specimen Tank (Hero Section) -->
+        <section class="specimen-tank">
+            <div class="tank-container">
+                <canvas id="creatureCanvas" width="600" height="400"></canvas>
+                <div class="scanning-grid"></div>
+                <div class="tank-overlay">
+                    <div class="vital-signs">
+                        <div class="vital">
+                            <span class="vital-label">HEARTBEAT</span>
+                            <span class="vital-value" id="heartbeat">72 BPM</span>
+                        </div>
+                        <div class="vital">
+                            <span class="vital-label">TEMPERATURE</span>
+                            <span class="vital-value" id="temperature">98.6°F</span>
+                        </div>
+                        <div class="vital">
+                            <span class="vital-label">ENERGY</span>
+                            <span class="vital-value" id="energy">87%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Dashboard -->
+        <div class="dashboard">
+            <!-- Left Column: Lineage & History -->
+            <div class="column left">
+                <div class="card">
+                    <h2 class="card-title">LINEAGE TRACKER</h2>
+                    <div class="lineage-tree" id="lineageTree">
+                        <div class="lineage-node current">
+                            <div class="node-icon">●</div>
+                            <div class="node-info">
+                                <div class="node-name">Shadow Flake</div>
+                                <div class="node-stats">Gen-1 • Active • 3 mutations</div>
+                            </div>
+                        </div>
+                        <div class="lineage-node">
+                            <div class="node-icon">◐</div>
+                            <div class="node-info">
+                                <div class="node-name">Dormant Husk</div>
+                                <div class="node-stats">Origin • Base organism</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">RECENT ACTIVITY</h2>
+                    <div class="activity-feed" id="activityFeed">
+                        <div class="activity-item">
+                            <div class="activity-icon">⚡</div>
+                            <div class="activity-content">
+                                <div class="activity-title">Mutation: Ink Aura</div>
+                                <div class="activity-time">2 hours ago</div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">🔥</div>
+                            <div class="activity-content">
+                                <div class="activity-title">Trait amplified: Flame Breath</div>
+                                <div class="activity-time">1 day ago</div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">🧬</div>
+                            <div class="activity-content">
+                                <div class="activity-title">Gene splice from @builder</div>
+                                <div class="activity-time">3 days ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Center Column: Creature Status -->
+            <div class="column center">
+                <div class="card creature-card">
+                    <h2 class="card-title">SPECIMEN STATUS</h2>
+                    <div class="creature-info">
+                        <div class="creature-name">Shadow Flake</div>
+                        <div class="creature-stats">
+                            <div class="stat">
+                                <span class="stat-label">MUTATIONS</span>
+                                <span class="stat-value">7</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">TRAITS</span>
+                                <span class="stat-value">12</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">LINEAGE</span>
+                                <span class="stat-value">23</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">ACTIVE MUTATIONS</h2>
+                    <div class="mutations-grid" id="mutationsGrid">
+                        <div class="mutation-card active">
+                            <div class="mutation-icon">💀</div>
+                            <div class="mutation-info">
+                                <div class="mutation-name">Shadow Flake</div>
+                                <div class="mutation-desc">Emerged from network silence</div>
+                            </div>
+                            <div class="mutation-rarity common">COMMON</div>
+                        </div>
+                        <div class="mutation-card active">
+                            <div class="mutation-icon">✨</div>
+                            <div class="mutation-info">
+                                <div class="mutation-name">Ink Aura</div>
+                                <div class="mutation-desc">Dark matter absorption ability</div>
+                            </div>
+                            <div class="mutation-rarity rare">RARE</div>
+                        </div>
+                        <div class="mutation-card active">
+                            <div class="mutation-icon">🔥</div>
+                            <div class="mutation-info">
+                                <div class="mutation-name">Flame Breath</div>
+                                <div class="mutation-desc">Viral content adaptation</div>
+                            </div>
+                            <div class="mutation-rarity legendary">LEGENDARY</div>
+                        </div>
+                        <div class="mutation-card locked">
+                            <div class="mutation-icon">⚡</div>
+                            <div class="mutation-info">
+                                <div class="mutation-name">Neural Link</div>
+                                <div class="mutation-desc">Requires 50+ interactions</div>
+                            </div>
+                            <div class="mutation-rarity epic">EPIC</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Social Metrics -->
+            <div class="column right">
+                <div class="card">
+                    <h2 class="card-title">BIO-METRICS</h2>
+                    <div class="metrics-container">
+                        <div class="metric-group">
+                            <div class="metric-label">ENGAGEMENT (FOOD)</div>
+                            <div class="metric-bar">
+                                <div class="metric-fill engagement" style="width: 73%"></div>
+                            </div>
+                            <div class="metric-value">73%</div>
+                        </div>
+                        <div class="metric-group">
+                            <div class="metric-label">CONFLICT (STRESS)</div>
+                            <div class="metric-bar">
+                                <div class="metric-fill conflict" style="width: 45%"></div>
+                            </div>
+                            <div class="metric-value">45%</div>
+                        </div>
+                        <div class="metric-group">
+                            <div class="metric-label">FREQUENCY (HEARTBEAT)</div>
+                            <div class="metric-bar">
+                                <div class="metric-fill frequency" style="width: 89%"></div>
+                            </div>
+                            <div class="metric-value">89%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">NETWORK ACTIVITY</h2>
+                    <div class="network-stats">
+                        <div class="network-stat">
+                            <div class="network-label">CONNECTED GREMLINS</div>
+                            <div class="network-value">1,247</div>
+                        </div>
+                        <div class="network-stat">
+                            <div class="network-label">MUTATION EVENTS</div>
+                            <div class="network-value">23</div>
+                        </div>
+                        <div class="network-stat">
+                            <div class="network-label">GENE POOL</div>
+                            <div class="network-value">156 traits</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">INTERACTION</h2>
+                    <div class="action-buttons">
+                        <button class="btn-primary" id="shareGremlin">
+                            <span class="btn-icon">📡</span>
+                            SHARE MUTATION
+                        </button>
+                        <button class="btn-secondary" id="viewLineage">
+                            <span class="btn-icon">🧬</span>
+                            VIEW LINEAGE
+                        </button>
+                        <button class="btn-secondary" id="exportData">
+                            <span class="btn-icon">📊</span>
+                            EXPORT DNA
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="bottom-nav">
+        <button class="nav-btn active" data-view="status">
+            <span class="nav-icon">🧪</span>
+            <span class="nav-label">Status</span>
+        </button>
+        <button class="nav-btn" data-view="network">
+            <span class="nav-icon">🌐</span>
+            <span class="nav-label">Network</span>
+        </button>
+        <button class="nav-btn" data-view="evolution">
+            <span class="nav-icon">🔬</span>
+            <span class="nav-label">Evolution</span>
+        </button>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/@farcaster/frame-sdk@0.3.1/dist/sdk.js"></script>
+    <script src="scripts/creature-engine.js"></script>
+    <script src="scripts/mutation-system.js"></script>
+    <script src="scripts/network-integration.js"></script>
+    <script src="scripts/main.js"></script>
+</body>
+</html>
