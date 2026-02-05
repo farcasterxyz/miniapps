@@ -1,6 +1,6 @@
 {
   "name": "@farcaster/miniapp-wagmi-connector",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -30,7 +30,7 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@farcaster/miniapp-sdk": "^0.2.2",
+    "@farcaster/miniapp-sdk": "^0.2.3",
     "@wagmi/core": "^2.14.1",
     "viem": "^2.21.55"
   }
