@@ -20,6 +20,6 @@
     "react-dom": "latest",
     "typescript": "latest",
     "vocs": "latest",
-    "wagmi": "^2.14.12"
+    "wagmi": "^2.19.5"
   }
 }
