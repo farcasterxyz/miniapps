@@ -18,20 +18,17 @@ let accountsChanged: Connector['onAccountsChanged'] | undefined
 let chainChanged: Connector['onChainChanged'] | undefined
 let disconnect: Connector['onDisconnect'] | undefined
 
-type FarcasterEthereumProvider = {
-  request: (parameters: {
+type Provider = {
+  request: <T = unknown>(parameters: {
     method: string
     params?: unknown[]
-  }) => Promise<unknown>
-  on: (event: string, listener: (...args: unknown[]) => void) => void
-  removeListener?: (
-    event: string,
-    listener: (...args: unknown[]) => void,
-  ) => void
+  }) => Promise<T>
+  on: (event: string, listener: (...args: any[]) => void) => void
+  removeListener?: (event: string, listener: (...args: any[]) => void) => void
 }
 
 export function farcasterMiniApp() {
-  return createConnector<FarcasterEthereumProvider>((config) => ({
+  return createConnector<Provider>((config) => ({
     id: 'farcaster',
     name: 'Farcaster',
     rdns: 'xyz.farcaster.MiniAppWallet',
@@ -40,9 +37,9 @@ export function farcasterMiniApp() {
 
     async connect({ chainId, withCapabilities } = {}) {
       const provider = await this.getProvider()
-      const accounts = (await provider.request({
+      const accounts = await provider.request<readonly Address[]>({
         method: 'eth_requestAccounts',
-      })) as readonly Address[]
+      })
 
       let targetChainId = chainId
       if (!targetChainId) {
@@ -57,7 +54,6 @@ export function farcasterMiniApp() {
 
       if (!accountsChanged) {
         accountsChanged = this.onAccountsChanged.bind(this)
-        // @ts-expect-error - provider type is stricter
         provider.on('accountsChanged', accountsChanged)
       }
       if (!chainChanged) {
@@ -77,12 +73,12 @@ export function farcasterMiniApp() {
 
       const normalizedAccounts = accounts.map((account) => getAddress(account))
       return {
-        accounts: withCapabilities
+        accounts: (withCapabilities
           ? normalizedAccounts.map((address) => ({
               address,
               capabilities: {},
             }))
-          : normalizedAccounts,
+          : normalizedAccounts) as never,
         chainId: currentChainId,
       }
     },
@@ -90,7 +86,6 @@ export function farcasterMiniApp() {
       const provider = await this.getProvider()
 
       if (accountsChanged) {
-        // @ts-expect-error - provider type is stricter
         provider.removeListener?.('accountsChanged', accountsChanged)
         accountsChanged = undefined
       }
@@ -107,14 +102,16 @@ export function farcasterMiniApp() {
     },
     async getAccounts() {
       const provider = await this.getProvider()
-      const accounts = (await provider.request({
+      const accounts = await provider.request<readonly Address[]>({
         method: 'eth_accounts',
-      })) as readonly Address[]
+      })
       return accounts.map((x) => getAddress(x))
     },
     async getChainId() {
       const provider = await this.getProvider()
-      const hexChainId = await provider.request({ method: 'eth_chainId' })
+      const hexChainId = await provider.request<`0x${string}`>({
+        method: 'eth_chainId',
+      })
       return fromHex(hexChainId, 'number')
     },
     async isAuthorized() {
@@ -161,8 +158,8 @@ export function farcasterMiniApp() {
     async onDisconnect() {
       config.emitter.emit('disconnect')
     },
-    async getProvider() {
-      return MiniAppSDK.wallet.ethProvider as FarcasterEthereumProvider
+    async getProvider(): Promise<Provider> {
+      return MiniAppSDK.wallet.ethProvider as Provider
     },
   }))
 }
