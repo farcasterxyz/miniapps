@@ -23,7 +23,7 @@
     "@farcaster/frame-sdk": "workspace:*",
     "@farcaster/miniapp-wagmi-connector": "workspace:*",
     "@farcaster/tsconfig": "workspace:*",
-    "@wagmi/core": "^2.16.3",
+    "@wagmi/core": "^2.22.1",
     "typescript": "^5.8.3",
     "viem": "^2.21.57"
   },
@@ -32,7 +32,7 @@
   },
   "peerDependencies": {
     "@farcaster/frame-sdk": "^0.1.14",
-    "@wagmi/core": "^2.14.1",
+    "@wagmi/core": "^2.22.1",
     "viem": "^2.21.55"
   },
   "engines": {

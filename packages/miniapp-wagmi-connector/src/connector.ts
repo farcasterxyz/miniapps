@@ -4,7 +4,13 @@ import {
   type Connector,
   createConnector,
 } from '@wagmi/core'
-import { fromHex, getAddress, numberToHex, SwitchChainError } from 'viem'
+import {
+  type Address,
+  fromHex,
+  getAddress,
+  numberToHex,
+  SwitchChainError,
+} from 'viem'
 
 farcasterMiniApp.type = 'farcasterMiniApp'
 
@@ -12,17 +18,26 @@ let accountsChanged: Connector['onAccountsChanged'] | undefined
 let chainChanged: Connector['onChainChanged'] | undefined
 let disconnect: Connector['onDisconnect'] | undefined
 
+type Provider = {
+  request: <T = unknown>(parameters: {
+    method: string
+    params?: unknown[]
+  }) => Promise<T>
+  on: (event: string, listener: (...args: any[]) => void) => void
+  removeListener?: (event: string, listener: (...args: any[]) => void) => void
+}
+
 export function farcasterMiniApp() {
-  return createConnector<typeof MiniAppSDK.wallet.ethProvider>((config) => ({
+  return createConnector<Provider>((config) => ({
     id: 'farcaster',
     name: 'Farcaster',
     rdns: 'xyz.farcaster.MiniAppWallet',
     icon: 'https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/055c25d6-7fe7-4a49-abf9-49772021cf00/original',
     type: farcasterMiniApp.type,
 
-    async connect({ chainId } = {}) {
+    async connect({ chainId, withCapabilities } = {}) {
       const provider = await this.getProvider()
-      const accounts = await provider.request({
+      const accounts = await provider.request<readonly Address[]>({
         method: 'eth_requestAccounts',
       })
 
@@ -39,7 +54,6 @@ export function farcasterMiniApp() {
 
       if (!accountsChanged) {
         accountsChanged = this.onAccountsChanged.bind(this)
-        // @ts-expect-error - provider type is stricter
         provider.on('accountsChanged', accountsChanged)
       }
       if (!chainChanged) {
@@ -57,8 +71,14 @@ export function farcasterMiniApp() {
         currentChainId = chain.id
       }
 
+      const normalizedAccounts = accounts.map((account) => getAddress(account))
       return {
-        accounts: accounts.map((x) => getAddress(x)),
+        accounts: (withCapabilities
+          ? normalizedAccounts.map((address) => ({
+              address,
+              capabilities: {},
+            }))
+          : normalizedAccounts) as never,
         chainId: currentChainId,
       }
     },
@@ -66,31 +86,32 @@ export function farcasterMiniApp() {
       const provider = await this.getProvider()
 
       if (accountsChanged) {
-        // @ts-expect-error - provider type is stricter
-        provider.removeListener('accountsChanged', accountsChanged)
+        provider.removeListener?.('accountsChanged', accountsChanged)
         accountsChanged = undefined
       }
 
       if (chainChanged) {
-        provider.removeListener('chainChanged', chainChanged)
+        provider.removeListener?.('chainChanged', chainChanged)
         chainChanged = undefined
       }
 
       if (disconnect) {
-        provider.removeListener('disconnect', disconnect)
+        provider.removeListener?.('disconnect', disconnect)
         disconnect = undefined
       }
     },
     async getAccounts() {
       const provider = await this.getProvider()
-      const accounts = await provider.request({
+      const accounts = await provider.request<readonly Address[]>({
         method: 'eth_accounts',
       })
       return accounts.map((x) => getAddress(x))
     },
     async getChainId() {
       const provider = await this.getProvider()
-      const hexChainId = await provider.request({ method: 'eth_chainId' })
+      const hexChainId = await provider.request<`0x${string}`>({
+        method: 'eth_chainId',
+      })
       return fromHex(hexChainId, 'number')
     },
     async isAuthorized() {
@@ -137,8 +158,8 @@ export function farcasterMiniApp() {
     async onDisconnect() {
       config.emitter.emit('disconnect')
     },
-    async getProvider() {
-      return MiniAppSDK.wallet.ethProvider
+    async getProvider(): Promise<Provider> {
+      return MiniAppSDK.wallet.ethProvider as Provider
     },
   }))
 }
