@@ -201,6 +201,29 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 - Image URL returns 200 and is 3:2 ratio
 - Button title ≤ 32 characters
 
+<details>
+<summary>Embed image missing or gray (Vercel Firewall / Bot Protection)</summary>
+
+**Cause:** Farcaster clients fetch `imageUrl` server-side. Vercel Bot Protection or
+Firewall challenges can block those requests while normal browser traffic still works.
+
+**Mitigations:**
+1. In the Vercel project, add a Firewall rule to **bypass** Bot Protection for the
+   path(s) used only for embed images (for example `/opengraph-image`, `/api/og/*`).
+2. Or host `imageUrl` on a CDN or hostname without bot challenges.
+3. Verify the image URL from a shell (no cookies):
+
+```bash
+curl -sI "https://{domain}/{embed-image-path}" | head -n 8
+```
+
+Expect `HTTP/2 200` and `content-type: image/...`. If the response is HTML or `403`,
+fix hosting or Firewall rules before debugging the client.
+
+Reference: [Sharing guide — Vercel Firewall and Bot Protection](/docs/guides/sharing#vercel-firewall-and-bot-protection)
+
+</details>
+
 ---
 
 ## Check 3: Preview and Runtime
