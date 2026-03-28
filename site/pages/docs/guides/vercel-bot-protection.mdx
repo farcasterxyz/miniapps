@@ -11,10 +11,7 @@ get blocked because they can't solve JavaScript challenges. This causes broken
 embed cards, failed discovery, and the Mini App getting stuck on the splash
 screen.
 
-Farcaster's fetcher is not in Vercel's
-[verified bots directory](https://vercel.com/docs/bot-management#verified-bots),
-so it gets challenged like any other non-browser client. The fix is to create WAF
-bypass rules for the paths Farcaster needs to access.
+The fix is to create WAF bypass rules for the paths Farcaster needs to access.
 
 :::warning
 The Vercel WAF evaluates **before** your application code runs. Bot-allowlisting
