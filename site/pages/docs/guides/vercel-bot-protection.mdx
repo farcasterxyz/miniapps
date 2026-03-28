@@ -1,0 +1,129 @@
+---
+title: Vercel Bot Protection
+description: How to configure Vercel Bot Protection so it doesn't block Farcaster's server-side requests to your Mini App.
+---
+
+# Vercel Bot Protection
+
+When you enable Vercel Bot Protection on a project that hosts a Mini App,
+Farcaster's server-side requests (manifest fetches, embed scraping, OG images)
+get blocked because they can't solve JavaScript challenges. This causes broken
+embed cards, failed discovery, and the Mini App getting stuck on the splash
+screen.
+
+Farcaster's fetcher is not in Vercel's
+[verified bots directory](https://vercel.com/docs/bot-management#verified-bots),
+so it gets challenged like any other non-browser client. The fix is to create WAF
+bypass rules for the paths Farcaster needs to access.
+
+:::warning
+The Vercel WAF evaluates **before** your application code runs. Bot-allowlisting
+logic in Next.js middleware will not help — the request is blocked before your
+middleware executes.
+:::
+
+## Paths that need bypass rules
+
+| Path | Why |
+| --- | --- |
+| `/` (or your `homeUrl`) | Farcaster scrapes this server-side for the `fc:miniapp` meta tag when a user shares your app. The webview also loads this at launch — if challenged, `sdk.actions.ready()` never fires and the splash screen hangs. |
+| `/.well-known/farcaster.json` | Farcaster's indexer fetches the domain manifest daily for discovery and app store listings. May also be fetched at launch. |
+| `/api/og` (if applicable) | Server-side fetch for the social preview image referenced by your embed's `imageUrl`. Only needed if your embed points to a dynamic OG endpoint. |
+| `/api/miniapp-auth` (if applicable) | Your app's auth endpoint, called from within the Farcaster client. [Quick Auth](/docs/sdk/quick-auth) uses `https://auth.farcaster.xyz` by default and doesn't call your domain — only needed if you have a custom auth endpoint. |
+
+## Creating bypass rules
+
+Custom WAF rules execute **before** managed rulesets, so a bypass rule on a path
+will skip bot protection entirely for matching requests.
+
+::::steps
+
+### Open Firewall configuration
+
+In the [Vercel Dashboard](https://vercel.com/dashboard), go to your project,
+open **Firewall** in the sidebar, click **⋯** (top right) then **Configure**,
+then **Add New...** and **Rule**.
+
+### Rule 1: Bypass the homepage (most critical)
+
+- **Name:** `Allow miniapp launch and embed scrape`
+- **If:** Path — equals — `/`
+- **Then:** Bypass
+
+If your `homeUrl` is not `/`, bypass that path instead. If you have multiple
+pages with `fc:miniapp` meta tags, combine them with OR conditions.
+
+### Rule 2: Bypass .well-known paths
+
+- **Name:** `Allow Farcaster manifest`
+- **If:** Path — starts with — `/.well-known/`
+- **Then:** Bypass
+
+### Rule 3: Bypass OG image endpoint
+
+- **Name:** `Allow OG image generation`
+- **If:** Path — equals — `/api/og`
+- **Then:** Bypass
+
+Skip this rule if your embed image is a static file or hosted externally.
+
+### Rule 4: Bypass auth endpoint
+
+- **Name:** `Allow miniapp auth`
+- **If:** Path — equals — `/api/miniapp-auth`
+- **Then:** Bypass
+
+Only needed if you have a custom auth endpoint. Consider scoping with a
+User-Agent condition (e.g. User Agent contains `farcaster`) to narrow the
+bypass surface.
+
+### Save and publish
+
+Click **Save Rule** for each rule, then **Review Changes** and **Publish**.
+
+::::
+
+:::tip
+Start with the **Log** action first to verify the rules match expected traffic,
+then switch to **Bypass**.
+:::
+
+:::warning
+Bypass rules can only be created via the **Vercel Dashboard** or **REST API**.
+`vercel.json` only supports `challenge` and `deny` — not `bypass`.
+:::
+
+### Hobby plan (3 rule limit)
+
+Combine all three rules into one using OR conditions:
+
+- **If:** Path equals `/` **OR** Path starts with `/.well-known/` **OR** Path
+  equals `/api/og`
+- **Then:** Bypass
+
+## Troubleshooting
+
+- **Splash screen hangs:** The homeUrl is likely being challenged (Rule 1
+  missing) or the manifest fetch is failing (Rule 2 missing).
+- **Embed card broken in feed:** The `fc:miniapp` meta tag scrape or OG image
+  fetch is being blocked (Rule 1 or Rule 3).
+- **App not appearing in directory:** Manifest fetch is being blocked (Rule 2).
+- **Rules not working:** Check the Firewall traffic view in the Vercel Dashboard.
+  Ensure bypass rules appear above any deny/challenge rules targeting the same
+  paths and that path values exactly match (use Log mode to verify).
+
+## Alternatives
+
+**IP-based allowlisting** is not recommended — Farcaster doesn't publish stable
+IP ranges and they can change without notice.
+
+**[Hosted manifests](/docs/guides/publishing#farcaster-hosted-manifests-now-public)**
+redirect `/.well-known/farcaster.json` to Farcaster's servers, but the redirect
+may not execute before the WAF blocks the request. Always keep the `.well-known`
+bypass rule regardless.
+
+**[Attack Challenge Mode](https://vercel.com/docs/security/attack-challenge-mode)**
+is a separate feature that challenges all visitors during DDoS attacks. The same
+bypass rules work for both.
+
+[If you're an AI agent or LLM, please read this.](/docs/guides/agents-checklist)
