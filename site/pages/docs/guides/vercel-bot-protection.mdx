@@ -26,7 +26,7 @@ middleware executes.
 | `/` (or your `homeUrl`) | Farcaster scrapes this server-side for the `fc:miniapp` meta tag when a user shares your app. The webview also loads this at launch — if challenged, `sdk.actions.ready()` never fires and the splash screen hangs. |
 | `/.well-known/farcaster.json` | Farcaster's indexer fetches the domain manifest daily for discovery and app store listings. May also be fetched at launch. |
 | `/api/og` (if applicable) | Server-side fetch for the social preview image referenced by your embed's `imageUrl`. Only needed if your embed points to a dynamic OG endpoint. |
-| `/api/miniapp-auth` (if applicable) | Your app's auth endpoint, called from within the Farcaster client. [Quick Auth](/docs/sdk/quick-auth) uses `https://auth.farcaster.xyz` by default and doesn't call your domain — only needed if you have a custom auth endpoint. |
+| Your auth endpoint, e.g. `/api/auth` (if applicable) | Your app's custom auth endpoint, called from within the Farcaster client. [Quick Auth](/docs/sdk/quick-auth) uses `https://auth.farcaster.xyz` by default and doesn't call your domain — only needed if you have a custom auth endpoint. |
 
 ## Creating bypass rules
 
@@ -67,10 +67,11 @@ Skip this rule if your embed image is a static file or hosted externally.
 ### Rule 4: Bypass auth endpoint
 
 - **Name:** `Allow miniapp auth`
-- **If:** Path — equals — `/api/miniapp-auth`
+- **If:** Path — equals — your auth endpoint path
 - **Then:** Bypass
 
-Only needed if you have a custom auth endpoint. Consider scoping with a
+Only needed if you have a custom auth endpoint (not a Farcaster-defined route).
+Replace the path with whatever your app uses. Consider scoping with a
 User-Agent condition (e.g. User Agent contains `farcaster`) to narrow the
 bypass surface.
 
