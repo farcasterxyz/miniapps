@@ -133,6 +133,10 @@ export default defineConfig({
             link: '/docs/guides/manifest-vs-embed',
           },
           {
+            text: 'Vercel Bot Protection',
+            link: '/docs/guides/vercel-bot-protection',
+          },
+          {
             text: 'FAQ',
             link: '/docs/guides/faq',
           },
