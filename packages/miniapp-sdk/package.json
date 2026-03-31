@@ -31,6 +31,6 @@
     "@farcaster/quick-auth": "^0.0.6",
     "comlink": "^4.4.2",
     "eventemitter3": "^5.0.1",
-    "ox": "^0.4.4"
+    "ox": "^0.14.0"
   }
 }

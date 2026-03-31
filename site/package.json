@@ -9,6 +9,7 @@
   },
   "devDependencies": {
     "@farcaster/miniapp-core": "workspace:*",
+    "zod": "^4.0.0",
     "@farcaster/miniapp-node": "workspace:*",
     "@farcaster/miniapp-sdk": "workspace:*",
     "@farcaster/miniapp-wagmi-connector": "workspace:*",

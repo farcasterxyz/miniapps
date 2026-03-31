@@ -8,9 +8,27 @@ import { fromHex, getAddress, numberToHex, SwitchChainError } from 'viem'
 
 farcasterMiniApp.type = 'farcasterMiniApp'
 
-let accountsChanged: Connector['onAccountsChanged'] | undefined
+let accountsChanged: ((accounts: readonly `0x${string}`[]) => void) | undefined
 let chainChanged: Connector['onChainChanged'] | undefined
 let disconnect: Connector['onDisconnect'] | undefined
+
+type MiniAppProvider = typeof MiniAppSDK.wallet.ethProvider
+type MiniAppProviderWithEvents = MiniAppProvider & {
+  on: NonNullable<MiniAppProvider['on']>
+  removeListener: NonNullable<MiniAppProvider['removeListener']>
+}
+
+function assertProviderHasEventEmitterMethods(
+  provider: MiniAppProvider,
+): asserts provider is MiniAppProviderWithEvents {
+  if (typeof provider.on !== 'function') {
+    throw new Error('MiniApp provider does not support event listeners.')
+  }
+
+  if (typeof provider.removeListener !== 'function') {
+    throw new Error('MiniApp provider does not support removing listeners.')
+  }
+}
 
 export function farcasterMiniApp() {
   return createConnector<typeof MiniAppSDK.wallet.ethProvider>((config) => ({
@@ -22,6 +40,7 @@ export function farcasterMiniApp() {
 
     async connect({ chainId } = {}) {
       const provider = await this.getProvider()
+      assertProviderHasEventEmitterMethods(provider)
       const accounts = await provider.request({
         method: 'eth_requestAccounts',
       })
@@ -38,8 +57,8 @@ export function farcasterMiniApp() {
       if (!targetChainId) throw new Error('No chains found on connector.')
 
       if (!accountsChanged) {
-        accountsChanged = this.onAccountsChanged.bind(this)
-        // @ts-expect-error - provider type is stricter
+        const onAccountsChanged = this.onAccountsChanged.bind(this)
+        accountsChanged = (accounts) => onAccountsChanged([...accounts])
         provider.on('accountsChanged', accountsChanged)
       }
       if (!chainChanged) {
@@ -64,9 +83,9 @@ export function farcasterMiniApp() {
     },
     async disconnect() {
       const provider = await this.getProvider()
+      assertProviderHasEventEmitterMethods(provider)
 
       if (accountsChanged) {
-        // @ts-expect-error - provider type is stricter
         provider.removeListener('accountsChanged', accountsChanged)
         accountsChanged = undefined
       }

@@ -1,6 +1,6 @@
 import type { MiniAppHost } from '@farcaster/miniapp-host'
 import { exposeToEndpoint, useExposeToEndpoint } from '@farcaster/miniapp-host'
-import type { Provider } from 'ox/Provider'
+import type * as OxProvider from 'ox/Provider'
 import {
   type RefObject,
   useCallback,
@@ -25,7 +25,7 @@ export function useWebViewRpcAdapter({
   webViewRef: RefObject<WebView>
   domain: string
   sdk: Omit<MiniAppHost, 'ethProviderRequestV2'>
-  ethProvider?: Provider
+  ethProvider?: OxProvider.Provider<undefined, true>
   debug?: boolean
 }) {
   const [endpoint, setEndpoint] = useState<WebViewEndpoint>()
@@ -104,7 +104,7 @@ export function useExposeWebViewToEndpoint({
 }: {
   endpoint: WebViewEndpoint | undefined
   sdk: Omit<MiniAppHost, 'ethProviderRequestV2' | 'addFrame'>
-  ethProvider?: Provider
+  ethProvider?: OxProvider.Provider<undefined, true>
   debug?: boolean
 }) {
   useExposeToEndpoint({

@@ -7,7 +7,7 @@ export function forwardEthereumProviderEvents({
   provider,
   endpoint,
 }: {
-  provider: Provider.Provider
+  provider: Provider.Provider<undefined, true>
   endpoint: HostEndpoint
 }) {
   const accountsChanged: Provider.EventMap['accountsChanged'] = (accounts) => {
