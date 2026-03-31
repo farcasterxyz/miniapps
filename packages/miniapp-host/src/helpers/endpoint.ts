@@ -22,7 +22,7 @@ export function exposeToEndpoint({
   endpoint: HostEndpoint
   sdk: Omit<MiniAppHost, 'ethProviderRequestV2' | 'addFrame'>
   miniAppOrigin: string
-  ethProvider?: Provider.Provider
+  ethProvider?: Provider.Provider<undefined, true>
   debug?: boolean
 }) {
   const extendedSdk = wrapHandlers(sdk as MiniAppHost)
@@ -54,7 +54,7 @@ export function useExposeToEndpoint({
   endpoint: HostEndpoint | undefined
   sdk: Omit<MiniAppHost, 'ethProviderRequestV2' | 'addFrame'>
   miniAppOrigin: string
-  ethProvider?: Provider.Provider
+  ethProvider?: Provider.Provider<undefined, true>
   debug?: boolean
 }) {
   useEffect(() => {

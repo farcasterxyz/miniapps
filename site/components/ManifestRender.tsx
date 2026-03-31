@@ -3,7 +3,7 @@ import isEqual from 'lodash.isequal'
 import type { z } from 'zod'
 
 interface SchemaRendererProps {
-  schema: z.ZodSchema<any>
+  schema: z.ZodType<any>
   children: string
   title?: string
 }

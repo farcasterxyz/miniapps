@@ -22,7 +22,7 @@ export const createSimpleStringSchema = ({
     ? z
         .string()
         .max(max ?? Number.POSITIVE_INFINITY)
-        .regex(/^\S*$/, 'Spaces are not allowed')
+        .regex(/^\S*$/, { message: 'Spaces are not allowed' })
     : z.string().max(max ?? Number.POSITIVE_INFINITY)
 
   return stringValidations

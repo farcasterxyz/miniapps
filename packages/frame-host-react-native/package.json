@@ -32,6 +32,6 @@
   },
   "dependencies": {
     "@farcaster/miniapp-host-react-native": "workspace:*",
-    "ox": "^0.4.4"
+    "ox": "^0.14.0"
   }
 }

@@ -45,10 +45,9 @@ function toProviderRpcError({
   }
 }
 
-export const ethereumProvider: Provider.Provider = Provider.from({
+const providerConfig = {
   ...emitter,
   async request(args) {
-    // @ts-expect-error
     const request = store.prepare(args)
 
     try {
@@ -82,7 +81,10 @@ export const ethereumProvider: Provider.Provider = Provider.from({
       })
     }
   },
-})
+} satisfies Parameters<typeof Provider.from>[0]
+
+export const ethereumProvider: ReturnType<typeof Provider.from> =
+  Provider.from(providerConfig)
 
 export async function getEthereumProvider(): Promise<
   Provider.Provider | undefined

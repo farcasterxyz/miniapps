@@ -1,5 +1,5 @@
 import type { MiniAppHost } from '@farcaster/miniapp-core'
-import type { Provider } from 'ox/Provider'
+import type * as OxProvider from 'ox/Provider'
 import * as Comlink from './comlink/index.ts'
 import { exposeToEndpoint } from './helpers/endpoint.ts'
 import type { HostEndpoint } from './types.ts'
@@ -57,7 +57,7 @@ export function exposeToIframe({
   iframe: HTMLIFrameElement
   sdk: Omit<MiniAppHost, 'ethProviderRequestV2'>
   miniAppOrigin: string
-  ethProvider?: Provider
+  ethProvider?: OxProvider.Provider<undefined, true>
   debug?: boolean
 }) {
   const endpoint = createIframeEndpoint({
