@@ -238,3 +238,33 @@ to serve a fallback image.
 
 In this case you should use an extremely short or even 0 `max-age` to prevent the
 error image from getting stuck in any upstream CDNs.
+
+### Vercel Firewall and Bot Protection
+
+Farcaster clients fetch your **`imageUrl`** over HTTPS when building or refreshing
+embed previews. If you host on **Vercel** and enable **Firewall** or **Bot
+Protection**, those requests can be challenged or blocked because they often look
+like automated traffic (no browser session, cookieless, or an unfamiliar user
+agent). The HTML page with `fc:miniapp` may still scrape successfully while the
+image request fails, so you see a broken or gray embed image.
+
+**Mitigations:**
+
+- **Allowlist the image path in Vercel Firewall** — Add a custom rule so requests
+  to your embed image route(s) bypass Bot Protection / challenges (for example paths
+  used only for `imageUrl`, such as `/opengraph-image`, `/api/og`, or `/embed/*.png`).
+  See [Vercel Bot Protection](https://vercel.com/docs/bot-protection) and
+  [Firewall custom rules](https://vercel.com/docs/vercel-firewall) in the Vercel docs.
+- **Serve static embed images from an unprotected origin** — Put PNG/WebP assets on
+  a CDN or hostname without bot challenges and point `imageUrl` there; keep dynamic
+  generation on Vercel only if you can exempt that route.
+- **Verify without a browser** — From a terminal, confirm the URL returns image
+  bytes and not an HTML challenge page:
+
+```bash
+curl -sI "https://your-domain.com/path-to-embed-image.png" | head -n 5
+```
+
+You should see `200` and a `content-type` like `image/png` or `image/jpeg`. If you
+get `403`, a redirect to a challenge, or `text/html`, adjust Firewall rules or
+hosting before relying on that URL in production embeds.
