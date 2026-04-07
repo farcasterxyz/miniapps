@@ -27,6 +27,10 @@ export type MiniAppContext = {
     added: boolean;
     safeAreaInsets?: SafeAreaInsets;
     notificationDetails?: MiniAppNotificationDetails;
+    /** Unread in-app notification count for launcher / “Your Apps” badges */
+    notificationBadgeCount?: number;
+    /** User toggle: when false, Host should not show notification badges for this app */
+    notificationBadgesEnabled?: boolean;
   };
   features?: {
     haptics: boolean;
@@ -294,6 +298,8 @@ Details about the Farcaster client running the Mini App. This should be consider
 - `added`: whether the user has added the Mini App to the client
 - `safeAreaInsets`: insets to avoid areas covered by navigation elements that obscure the view
 - `notificationDetails`: in case the user has enabled notifications, includes the `url` and `token` for sending notifications
+- `notificationBadgeCount` (optional): when the Host tracks unread in-app notifications for this Mini App, the count to display on the app icon in launcher or “Your Apps” style surfaces (e.g. a red badge). Omitted if the Host does not expose a count.
+- `notificationBadgesEnabled` (optional): user preference in the Host; when `false`, notification badges should not be shown for this app’s icon even if a count exists. Omitted if the Host does not expose this setting.
 
 ```ts
 export type SafeAreaInsets = {
@@ -308,6 +314,8 @@ export type ClientContext = {
   clientFid: number;
   added: boolean;
   notificationDetails?: MiniAppNotificationDetails;
+  notificationBadgeCount?: number;
+  notificationBadgesEnabled?: boolean;
   safeAreaInsets?: SafeAreaInsets;
 };
 ```
@@ -327,7 +335,9 @@ export type ClientContext = {
   notificationDetails: {
     url: "https://api.farcaster.xyz/v1/frame-notifications",
     token: "a05059ef2415c67b08ecceb539201cbc6"
-  }
+  },
+  notificationBadgeCount: 3,
+  notificationBadgesEnabled: true
 }
 ```
 
@@ -350,6 +360,8 @@ type ClientContext = {
   added: boolean;
   safeAreaInsets?: SafeAreaInsets;
   notificationDetails?: MiniAppNotificationDetails;
+  notificationBadgeCount?: number;
+  notificationBadgesEnabled?: boolean;
 };
 ```
 

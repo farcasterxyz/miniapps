@@ -286,6 +286,24 @@ After a user adds a Mini App, the Host should make it easy to find and launch
 the Mini App by providing a top-level interface where users can browse and open
 added apps.
 
+#### Notification badges in launcher / Your Apps
+
+Hosts may show a small badge (for example a red dot with a numeric count) on a
+Mini App’s icon in launcher grids, “Your Apps”, or similar surfaces so users
+can see pending in-app notifications at a glance.
+
+When the Host tracks an unread count for the current Mini App session, it
+should pass it in `sdk.context.client.notificationBadgeCount` as a non-negative
+integer. When the count is zero or badges are turned off for this app (see
+below), the Host may omit `notificationBadgeCount` or set it to `0`.
+
+Hosts should offer a user-controlled setting to hide these notification badges
+(for example a toggle in app settings or in the Your Apps screen). When the
+user disables badges, the Host sets `sdk.context.client.notificationBadgesEnabled`
+to `false` for the Mini App context; when enabled or when the Host does not
+implement this preference, omit the field or set it to `true`. Mini Apps that
+read context can use `notificationBadgesEnabled === false` to avoid showing
+redundant in-app notification UI when the Host already hides badges.
 
 ### Server Events
 
