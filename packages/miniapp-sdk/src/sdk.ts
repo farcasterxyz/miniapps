@@ -55,6 +55,19 @@ async function isInMiniApp(timeoutMs = 1000): Promise<boolean> {
   return isInMiniApp
 }
 
+const NOT_IN_MINIAPP_ERROR =
+  'Not running inside a Mini App host (open this app from a supported Farcaster client).'
+
+/**
+ * Rejects immediately when the page is not embedded in a Mini App host, so host
+ * actions do not hang on Comlink calls that never get a response.
+ */
+async function ensureInMiniApp(): Promise<void> {
+  if (!(await isInMiniApp())) {
+    throw new Error(NOT_IN_MINIAPP_ERROR)
+  }
+}
+
 const addMiniApp = async () => {
   // Use the existing message overcomlink for backwards compat until
   // hosts are all upgraded.
@@ -115,9 +128,18 @@ export const sdk: MiniAppSDK = {
     composeCast(options = {}) {
       return miniAppHost.composeCast(options) as never
     },
-    viewToken: miniAppHost.viewToken.bind(miniAppHost),
-    sendToken: miniAppHost.sendToken.bind(miniAppHost),
-    swapToken: miniAppHost.swapToken.bind(miniAppHost),
+    viewToken: async (options) => {
+      await ensureInMiniApp()
+      return miniAppHost.viewToken(options)
+    },
+    sendToken: async (options) => {
+      await ensureInMiniApp()
+      return miniAppHost.sendToken(options)
+    },
+    swapToken: async (options) => {
+      await ensureInMiniApp()
+      return miniAppHost.swapToken(options)
+    },
     requestCameraAndMicrophoneAccess:
       miniAppHost.requestCameraAndMicrophoneAccess.bind(miniAppHost),
   },
