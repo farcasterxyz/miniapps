@@ -26,6 +26,7 @@ export const sendNotificationFailedTokenReasonSchema = z.enum([
   'domain_mismatch',
   'target_url_mismatch',
   'no_webhook_url',
+  'invalid_token',
   'unknown',
 ])
 
