@@ -79,6 +79,30 @@ A Mini App URL must have a MiniAppEmbed in a serialized form in the `fc:miniapp`
 }
 ```
 
+### Embed image server (Snap)
+
+When a client renders a cast that contains a Mini App embed, it fetches the embed's
+`imageUrl` to show the card image in the feed. That URL is sometimes called a
+**Snap** image server.
+
+To support **context-aware** images (for example, a preview that quotes the
+parent cast when the embed appears in a **reply**), the host **SHOULD** request
+the image with an HTTP **POST** to `imageUrl` and a JSON body that includes cast
+context. Hosts **MAY** omit this on clients that cannot issue POSTs with a body;
+image servers **SHOULD** tolerate `GET` or an empty body for backward
+compatibility.
+
+Recommended JSON body (all fields optional; omit when unknown):
+
+| Property       | Type   | Description |
+|----------------|--------|-------------|
+| `castId`       | object | The cast that contains this embed: `{ "fid": number, "hash": string }`. `hash` is a 40-character hex string (optional `0x` prefix). Same information as legacy Frames' `castId` / `castId.hash`. |
+| `parentCastId` | object | Direct parent cast when `castId` is a reply: `{ "fid": number, "hash": string }`. |
+| `parentHash`   | string | Parent cast hash only (use when author FID is unavailable); prefer `parentCastId` when possible. |
+| `threadHash`   | string | Thread root hash when known. |
+| `embedUrl`     | string | HTTPS URL of the page that supplied the `fc:miniapp` / `fc:frame` metadata for this card. |
+
+TypeScript apps can parse and validate this body with `snapImageServerRequestBodySchema` from `@farcaster/miniapp-core`.
 
 ## App Surface
 
