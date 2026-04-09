@@ -22,11 +22,34 @@ export type SendNotificationRequest = z.infer<
   typeof sendNotificationRequestSchema
 >
 
+export const sendNotificationFailedTokenReasonSchema = z.enum([
+  'domain_mismatch',
+  'target_url_mismatch',
+  'no_webhook_url',
+  'invalid_token',
+  'unknown',
+])
+
+export type SendNotificationFailedTokenReason = z.infer<
+  typeof sendNotificationFailedTokenReasonSchema
+>
+
+export const sendNotificationFailedTokenSchema = z.object({
+  token: z.string(),
+  fid: z.number().int().positive().optional(),
+  reason: sendNotificationFailedTokenReasonSchema,
+})
+
+export type SendNotificationFailedToken = z.infer<
+  typeof sendNotificationFailedTokenSchema
+>
+
 export const sendNotificationResponseSchema = z.object({
   result: z.object({
     successfulTokens: z.array(z.string()),
     invalidTokens: z.array(z.string()),
     rateLimitedTokens: z.array(z.string()),
+    failedTokens: z.array(sendNotificationFailedTokenSchema).optional(),
   }),
 })
 
