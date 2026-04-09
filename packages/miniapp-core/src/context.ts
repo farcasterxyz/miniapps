@@ -111,6 +111,18 @@ export type ClientContext = {
   clientFid: number
   added: boolean
   notificationDetails?: MiniAppNotificationDetails
+  /**
+   * When the Host surfaces a launcher or “Your Apps” style grid, this is the
+   * count of unread in-app notifications for this Mini App (e.g. for a red badge).
+   * Omitted when the Host does not track or expose a count.
+   */
+  notificationBadgeCount?: number
+  /**
+   * User preference in the Host: when `false`, notification badges should not be
+   * shown on this app’s icon (even if `notificationBadgeCount` is set).
+   * Omitted when the Host does not expose this setting.
+   */
+  notificationBadgesEnabled?: boolean
   safeAreaInsets?: SafeAreaInsets
 }
 
