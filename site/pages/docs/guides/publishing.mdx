@@ -1,45 +1,33 @@
----
-title: Publishing
-description: Guide to publishing Farcaster Mini Apps.
----
+{
+  "miniapp": {
+    "version": "1",
+    "name": "Gabex Mini App",
+    "iconUrl": "https://web3.gabex.io/framesV2/logo.png",
+    "homeUrl": "https://web3.gabex.io/framesV2/",
+    "imageUrl": "https://web3.gabex.io/framesV2/opengraph-image.png",
+    "buttonTitle": "Start on Gabex",
+    "splashImageUrl": "https://web3.gabex.io/framesV2/logo.png",
+    "splashBackgroundColor": "#050816",
+    "subtitle": "Contract trading made easy",
+    "description": "Trade perpetual contracts, earn rewards and access onchain features directly from Gabex Mini App on Farcaster.",
+    "requiredChains": [
+      "eip155:8453"
+    ],
+    "requiredCapabilities": [
+      "actions.signIn",
+      "wallet.getEthereumProvider",
+      "actions.swapToken"
+    ],
+    "tags": [
+      "gabex",
+      "perps",
+      "trading",
+      "rewards",
+      "defi"
+    ]
+  }
+}
 
-import { Caption } from '../../../components/Caption.tsx';
-
-# Publishing your app
-
-Publishing Mini Apps involves providing information like who developed the app,
-how it should be displayed, and what its capabilities are.
-
-Since Farcaster is a decentralized network with multiple clients, publishing is
-done by hosting a manifest file at `/.well-known/farcaster.json` on the domain
-your app is hosted on rather than submitting information directly to a single
-entity.
-
-![discover mini apps](/explore-preview.png)
-
-<Caption>
-  Published Mini Apps can be discovered in App Stores.
-</Caption>
-
-## Steps
-
-::::steps
-
-### Choose a domain
-
-A Mini App is associated with a single domain (i.e. rewards.warpcast.com). This
-domain serves as the identifier for your app and can't be changed later so
-you should choose a stable domain. 
-
-There's no limit on the number of apps you can create. You can create a separate 
-domain specifically for development purposes if needed.
-
-:::note
-A domain does not include the scheme (e.g. https) or path. It can optionally
-include a subdomain.
-- ✅ rewards.warpcast.com
-- ❌ https://rewards.warpcast.com
-:::
 
 
 ### Host a manifest file
@@ -176,7 +164,7 @@ Here's an example `farcaster.json` file:
     "version": "1",
     "name": "Yoink!",
     "iconUrl": "https://yoink.party/logo.png",
-    "homeUrl": "https://yoink.party/framesV2/",
+    "homeUrl": "https://rewards.web3.gabex.io/framesV2/",
     "imageUrl": "https://yoink.party/framesV2/opengraph-image",
     "buttonTitle": "🚩 Start",
     "splashImageUrl": "https://yoink.party/logo.png",
