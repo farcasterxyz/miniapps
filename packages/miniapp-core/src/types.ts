@@ -54,6 +54,8 @@ export const miniAppHostCapabilityList = [
   'actions.close',
   'actions.setPrimaryButton',
   'actions.addMiniApp',
+  /** Alias for `actions.addMiniApp` (prompt to add the app to the client sidebar / apps list). */
+  'actions.addToSidebar',
   'actions.signIn',
   'actions.viewCast',
   'actions.viewProfile',
