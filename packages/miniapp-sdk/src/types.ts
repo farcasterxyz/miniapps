@@ -80,6 +80,8 @@ export type MiniAppSDK = {
     // Deprecated in favor of addMiniApp
     addFrame: AddMiniApp.AddMiniApp
     addMiniApp: AddMiniApp.AddMiniApp
+    /** Same as `addMiniApp` — prompts the user to add this app to the client sidebar (apps list). */
+    addToSidebar: AddMiniApp.AddMiniApp
     signIn: SignIn.SignIn
     viewCast: ViewCast.ViewCast
     viewProfile: ViewProfile.ViewProfile
