@@ -1,4 +1,8 @@
-import { exposeToIframe, type MiniAppHost } from '@farcaster/miniapp-host'
+import {
+  exposeToIframe,
+  type MiniAppHost,
+  saveFileInBrowser,
+} from '@farcaster/miniapp-host'
 import './style.css'
 
 declare global {
@@ -41,6 +45,7 @@ const announceProvider = () => {
 }
 
 const frameHost: MiniAppHost = {
+  saveFile: saveFileInBrowser,
   ready: () => {
     document.querySelector<HTMLDivElement>('#splash')!.hidden = true
   },
