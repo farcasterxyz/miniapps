@@ -118,6 +118,27 @@ export const domainSchema = z
     message: 'Domain must not include port numbers',
   })
 
+// Farcaster fName (no dots): lowercase letters, digits, underscore.
+// ENS-style names (e.g. *.eth, *.base.eth): validated like domain labels via DOMAIN_REGEX.
+const FNAME_USERNAME_REGEX = /^[a-z0-9_]{1,64}$/
+
+export const usernameSchema = z
+  .string()
+  .min(1)
+  .max(255)
+  .refine(
+    (value) =>
+      value.includes('.')
+        ? DOMAIN_REGEX.test(value)
+        : FNAME_USERNAME_REGEX.test(value),
+    {
+      message:
+        'Must be a valid Farcaster username (fName) or ENS-style name (e.g. name.eth, name.base.eth)',
+    },
+  )
+
+export type UsernameSchema = z.infer<typeof usernameSchema>
+
 export const aspectRatioSchema = z.union([z.literal('1:1'), z.literal('3:2')])
 
 export const encodedJsonFarcasterSignatureSchema = z.object({

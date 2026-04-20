@@ -3,6 +3,7 @@ import {
   createSimpleStringSchema,
   domainSchema,
   secureUrlSchema,
+  usernameSchema,
 } from '../../src/schemas/shared.ts'
 
 describe('createSimpleStringSchema', () => {
@@ -106,6 +107,48 @@ describe('domainSchema', () => {
     for (const domain of invalidDomains) {
       const result = domainSchema.safeParse(domain)
       expect(result.success, `Expected invalid domain: ${domain}`).toBe(false)
+    }
+  })
+})
+
+describe('usernameSchema', () => {
+  test('accepts fName-style usernames', () => {
+    const valid = ['six', 'alphacaster', 'user_123', 'a']
+
+    for (const username of valid) {
+      const result = usernameSchema.safeParse(username)
+      expect(result.success, `Expected valid username: ${username}`).toBe(true)
+    }
+  })
+
+  test('accepts ENS-style usernames with dots', () => {
+    const valid = [
+      'alphacaster.eth',
+      'alphacaster.base.eth',
+      'sub.alphacaster.base.eth',
+    ]
+
+    for (const username of valid) {
+      const result = usernameSchema.safeParse(username)
+      expect(result.success, `Expected valid username: ${username}`).toBe(true)
+    }
+  })
+
+  test('rejects invalid usernames', () => {
+    const invalid = [
+      '', // empty
+      'Alphacaster', // uppercase in fName segment
+      'alpha-caster', // hyphen only allowed in dotted ENS-style names
+      'alphacaster..eth', // consecutive dots
+      'alphacaster@eth', // invalid character
+      'a.b', // TLD too short
+    ]
+
+    for (const username of invalid) {
+      const result = usernameSchema.safeParse(username)
+      expect(result.success, `Expected invalid username: ${username}`).toBe(
+        false,
+      )
     }
   })
 })
