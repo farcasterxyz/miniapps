@@ -40,6 +40,10 @@ Your `farcaster.json` manifest must include these essential fields:
 
 **Note:** These fields are not required to have a mini app render as an embed, but they are necessary for the mini app to be indexed in the search engine.
 
+### Category for search and browse
+
+Set **`primaryCategory`** in your manifest to one of the [documented category slugs](/docs/specification#manifest) (for example `games` or `art-creativity`). Discovery surfaces can index this field as a **category facet** so users can filter or search by type. Use the exact slug from the schema (lowercase, hyphenated), not a display name.
+
 ### Usage & Engagement Criteria
 
 Apps must demonstrate basic usage before being indexed:

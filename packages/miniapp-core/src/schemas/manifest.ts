@@ -10,6 +10,7 @@ import {
   secureUrlSchema,
 } from './shared.ts'
 
+/** Canonical category slugs for discovery (e.g. directory search facets). */
 export const primaryCategories = [
   'games',
   'social',
@@ -110,6 +111,7 @@ export const domainMiniAppConfigSchema = z
     subtitle: subtitleSchema.optional(),
     description: descriptionSchema.optional(),
     screenshotUrls: screenshotUrlsSchema.optional(),
+    /** Discovery facet: exact slug from `primaryCategories` (e.g. games, art-creativity). */
     primaryCategory: primaryCategorySchema.optional(),
     tags: tagsSchema.optional(),
     heroImageUrl: secureUrlSchema.optional(),

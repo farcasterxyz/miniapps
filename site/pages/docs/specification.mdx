@@ -226,6 +226,12 @@ import ManifestAppConfigSchema from "../../snippets/manifestAppConfigSchema.mdx"
 
 <ManifestAppConfigSchema />
 
+#### Discovery and search
+
+Hosts that index Mini Apps for search or directory surfaces **should** treat `primaryCategory` as a first-class facet: index the field from the manifest and allow users to filter or match on the **exact category slug** (for example `games`, `art-creativity`). Category slugs are lowercase, hyphenated, and enumerated in the manifest schema (`primaryCategories` in [`packages/miniapp-core/src/schemas/manifest.ts`](https://github.com/farcasterxyz/miniapps/blob/main/packages/miniapp-core/src/schemas/manifest.ts)).
+
+The `tags` field remains useful for free-form keywords; `primaryCategory` is the stable, single-valued category for browse-by-type experiences.
+
 
 ##### Example
 
