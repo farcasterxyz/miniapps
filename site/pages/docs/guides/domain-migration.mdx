@@ -27,7 +27,7 @@ This ensures continuity for your users and preserves your app's presence in app 
 
 ### Prepare your new domain
 
-Set up your Mini App on the new domain with a complete manifest file at `/.well-known/farcaster.json`. This should include all your app configuration and an account association from the same FID to maintain ownership verification.
+Set up your Mini App on the new domain with a complete manifest file at `/.well-known/farcaster.json`. This should include all your app configuration, an account association from the same FID, and a `canonicalDomain` field pointing to itself (the new domain).
 
 :::warning
 Keep the same `webhookUrl` in your new domain's manifest. If you use a managed
@@ -49,6 +49,7 @@ notifications for existing users.
     "name": "Your App Name",
     "iconUrl": "https://new-domain.com/icon.png",
     "homeUrl": "https://new-domain.com",
+    "canonicalDomain": "new-domain.com",
     // ... other configuration
   }
 }
@@ -70,11 +71,19 @@ Add the `canonicalDomain` field to your manifest on the **old domain**, pointing
     "name": "Your App Name",
     "iconUrl": "https://old-domain.com/icon.png",
     "homeUrl": "https://old-domain.com",
-    "canonicalDomain": "new-domain.com", // Add this line
+    "canonicalDomain": "new-domain.com",
     // ... other configuration
   }
 }
 ```
+
+:::warning
+Both manifests must be live simultaneously and both must set `canonicalDomain`
+to the same value (the new domain). Farcaster verifies the `canonicalDomain`
+by fetching the manifest from the target domain — if the new domain's manifest
+is missing or doesn't include a matching `canonicalDomain`, the migration will
+not be processed.
+:::
 
 :::note
 The `canonicalDomain` value must be a valid domain name without protocol, port, or path:
@@ -84,28 +93,6 @@ The `canonicalDomain` value must be a valid domain name without protocol, port, 
 - ❌ `new-domain.com:3000`
 - ❌ `new-domain.com/app`
 :::
-
-### Optional: Add canonicalDomain to the new manifest
-
-You can optionally include the `canonicalDomain` field in your new domain's manifest as well, pointing to itself. This can help with client caching and ensures consistency:
-
-```json
-{
-  "accountAssociation": {
-    "header": "...",
-    "payload": "...",
-    "signature": "..."
-  },
-  "miniapp": {
-    "version": "1",
-    "name": "Your App Name",
-    "iconUrl": "https://new-domain.com/icon.png",
-    "homeUrl": "https://new-domain.com",
-    "canonicalDomain": "new-domain.com", // Self-referential
-    // ... other configuration
-  }
-}
-```
 
 ### Maintain both domains during transition
 
