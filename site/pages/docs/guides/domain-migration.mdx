@@ -29,6 +29,14 @@ This ensures continuity for your users and preserves your app's presence in app 
 
 Set up your Mini App on the new domain with a complete manifest file at `/.well-known/farcaster.json`. This should include all your app configuration and an account association from the same FID to maintain ownership verification.
 
+:::warning
+Keep the same `webhookUrl` in your new domain's manifest. If you use a managed
+notification service like [Neynar](https://neynar.com), this means using the
+same Neynar app — do not create a new one. Changing the `webhookUrl` will cause
+new notification tokens to be stored separately from the migrated ones, breaking
+notifications for existing users.
+:::
+
 ```json
 {
   "accountAssociation": {
