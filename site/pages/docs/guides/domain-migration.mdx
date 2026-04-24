@@ -160,6 +160,14 @@ Ensure that:
 
 This is normal during transition. Some clients may cache manifest data, and users may have bookmarked the old URL. Continue to serve redirects from the old domain.
 
+### `www.` prefix issues
+
+The `www.` prefix is treated as a subdomain. `www.example.com` and `example.com`
+are different domains and will be treated as separate apps. If your app is on
+`example.com`, do not use `www.example.com` as either a `canonicalDomain` value
+or in your `targetUrl` when sending notifications — this will cause domain
+mismatch errors and token invalidation.
+
 ### Account association issues
 
 Make sure you use the same account to produce the association on both domains to maintain ownership verification. Do not reuse the account association data from one manifest to the other.

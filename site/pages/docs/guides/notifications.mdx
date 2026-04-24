@@ -136,6 +136,13 @@ import SendNotificationRequestSchema from '../../../snippets/sendNotificationReq
 
 <SendNotificationRequestSchema />
 
+:::warning
+The `targetUrl` hostname must exactly match the domain your Mini App is registered
+on. Subdomains matter: if your app is on `example.com`, using
+`www.example.com` in the `targetUrl` will cause a `target_url_mismatch` error
+and the affected tokens will be permanently invalidated.
+:::
+
 The server should response with an HTTP 200 OK and the following JSON body:
 
 import SendNotificationResponseSchema from '../../../snippets/sendNotificationResponseSchema.mdx'
