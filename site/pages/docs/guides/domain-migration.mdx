@@ -29,6 +29,14 @@ This ensures continuity for your users and preserves your app's presence in app 
 
 Set up your Mini App on the new domain with a complete manifest file at `/.well-known/farcaster.json`. This should include all your app configuration and an account association from the same FID to maintain ownership verification.
 
+:::warning
+Keep the same `webhookUrl` in your new domain's manifest. If you use a managed
+notification service like [Neynar](https://neynar.com), this means using the
+same Neynar app — do not create a new one. Changing the `webhookUrl` will cause
+new notification tokens to be stored separately from the migrated ones, breaking
+notifications for existing users.
+:::
+
 ```json
 {
   "accountAssociation": {
@@ -77,9 +85,9 @@ The `canonicalDomain` value must be a valid domain name without protocol, port, 
 - ❌ `new-domain.com/app`
 :::
 
-### Optional: Add canonicalDomain to the new manifest
+### Add canonicalDomain to the new manifest
 
-You can optionally include the `canonicalDomain` field in your new domain's manifest as well, pointing to itself. This can help with client caching and ensures consistency:
+Include the `canonicalDomain` field in your new domain's manifest as well, pointing to itself. This ensures consistency and makes it clear which domain is canonical:
 
 ```json
 {
@@ -98,6 +106,12 @@ You can optionally include the `canonicalDomain` field in your new domain's mani
   }
 }
 ```
+
+:::warning
+Both manifests must be live simultaneously. Farcaster verifies the
+`canonicalDomain` by fetching the manifest from the target domain — if the new
+domain's manifest is not accessible, the migration will not be processed.
+:::
 
 ### Maintain both domains during transition
 
@@ -159,6 +173,14 @@ Ensure that:
 ### Users still accessing the old domain
 
 This is normal during transition. Some clients may cache manifest data, and users may have bookmarked the old URL. Continue to serve redirects from the old domain.
+
+### `www.` prefix issues
+
+The `www.` prefix is treated as a subdomain. `www.example.com` and `example.com`
+are different domains and will be treated as separate apps. If your app is on
+`example.com`, do not use `www.example.com` as either a `canonicalDomain` value
+or in your `targetUrl` when sending notifications — this will cause domain
+mismatch errors and token invalidation.
 
 ### Account association issues
 

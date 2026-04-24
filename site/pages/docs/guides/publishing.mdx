@@ -41,6 +41,13 @@ include a subdomain.
 - ❌ https://rewards.warpcast.com
 :::
 
+:::warning
+The `www.` prefix is treated as a subdomain like any other. `www.example.com`
+and `example.com` are considered **different apps** with separate notification
+tokens and user data. Pick one and use it consistently everywhere — in your
+manifest, `accountAssociation`, and `targetUrl` when sending notifications.
+:::
+
 
 ### Host a manifest file
 
