@@ -87,7 +87,7 @@ The `canonicalDomain` value must be a valid domain name without protocol, port, 
 
 ### Add canonicalDomain to the new manifest
 
-Add the same `canonicalDomain` field to your **new domain's** manifest, pointing to itself:
+Include the `canonicalDomain` field in your new domain's manifest as well, pointing to itself. This ensures consistency and makes it clear which domain is canonical:
 
 ```json
 {
@@ -108,11 +108,9 @@ Add the same `canonicalDomain` field to your **new domain's** manifest, pointing
 ```
 
 :::warning
-Both manifests must be live simultaneously and both must set `canonicalDomain`
-to the same value (the new domain). Farcaster verifies the `canonicalDomain`
-by fetching the manifest from the target domain — if the new domain's manifest
-is missing or doesn't include a matching `canonicalDomain`, the migration will
-not be processed.
+Both manifests must be live simultaneously. Farcaster verifies the
+`canonicalDomain` by fetching the manifest from the target domain — if the new
+domain's manifest is not accessible, the migration will not be processed.
 :::
 
 ### Maintain both domains during transition
