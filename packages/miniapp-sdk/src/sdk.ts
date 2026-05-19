@@ -1,6 +1,7 @@
 import {
   AddMiniApp,
   type MiniAppClientEvent,
+  SaveFile,
   SignIn,
   SignManifest,
 } from '@farcaster/miniapp-core'
@@ -120,6 +121,26 @@ export const sdk: MiniAppSDK = {
     swapToken: miniAppHost.swapToken.bind(miniAppHost),
     requestCameraAndMicrophoneAccess:
       miniAppHost.requestCameraAndMicrophoneAccess.bind(miniAppHost),
+    saveFile: async (options) => {
+      const response = await miniAppHost.saveFile(options)
+      if (response.result) {
+        return
+      }
+
+      if (response.error.type === 'unsupported') {
+        throw new SaveFile.Unsupported()
+      }
+
+      if (response.error.type === 'rejected_by_user') {
+        throw new SaveFile.RejectedByUser()
+      }
+
+      if (response.error.type === 'save_failed') {
+        throw new SaveFile.SaveFailed(response.error.message)
+      }
+
+      throw new Error('Unreachable')
+    },
   },
   experimental: {
     getSolanaProvider,

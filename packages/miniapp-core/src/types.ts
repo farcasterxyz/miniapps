@@ -9,6 +9,7 @@ import type {
   OpenMiniApp,
   Ready,
   RequestCameraAndMicrophoneAccess,
+  SaveFile,
   SendToken,
   SignIn,
   SignManifest,
@@ -63,6 +64,7 @@ export const miniAppHostCapabilityList = [
   'actions.swapToken',
   'actions.openMiniApp',
   'actions.requestCameraAndMicrophoneAccess',
+  'actions.saveFile',
   'experimental.signManifest',
   'haptics.impactOccurred',
   'haptics.notificationOccurred',
@@ -101,6 +103,7 @@ export type WireMiniAppHost = {
     options: ComposeCast.Options<close>,
   ) => Promise<ComposeCast.Result<close>>
   requestCameraAndMicrophoneAccess: RequestCameraAndMicrophoneAccess.RequestCameraAndMicrophoneAccess
+  saveFile: SaveFile.WireSaveFile
   impactOccurred: ImpactOccurred
   notificationOccurred: NotificationOccurred
   selectionChanged: SelectionChanged
@@ -137,6 +140,11 @@ export type MiniAppHost = {
     options: ComposeCast.Options<close>,
   ) => Promise<ComposeCast.Result<close>>
   requestCameraAndMicrophoneAccess: RequestCameraAndMicrophoneAccess.RequestCameraAndMicrophoneAccess
+  /**
+   * When set, triggers a native or browser save flow so the user can persist a file on device.
+   * When omitted, the wire layer reports unsupported and the SDK throws `SaveFile.Unsupported`.
+   */
+  saveFile?: SaveFile.SaveFile
   impactOccurred: ImpactOccurred
   notificationOccurred: NotificationOccurred
   selectionChanged: SelectionChanged

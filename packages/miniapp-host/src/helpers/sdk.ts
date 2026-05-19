@@ -1,6 +1,7 @@
 import type { MiniAppHost, WireMiniAppHost } from '@farcaster/miniapp-core'
 import {
   AddMiniApp,
+  SaveFile,
   SignIn,
   SignManifest,
   wrapSolanaProviderRequest,
@@ -66,6 +67,39 @@ export function wrapHandlers(host: MiniAppHost): WireMiniAppHost {
           return {
             error: {
               type: 'rejected_by_user',
+            },
+          }
+        }
+
+        throw e
+      }
+    },
+    saveFile: async (options) => {
+      if (!host.saveFile) {
+        return {
+          error: {
+            type: 'unsupported',
+          },
+        }
+      }
+
+      try {
+        await host.saveFile(options)
+        return { result: true }
+      } catch (e) {
+        if (e instanceof SaveFile.RejectedByUser) {
+          return {
+            error: {
+              type: 'rejected_by_user',
+            },
+          }
+        }
+
+        if (e instanceof SaveFile.SaveFailed) {
+          return {
+            error: {
+              type: 'save_failed',
+              message: e.message,
             },
           }
         }
