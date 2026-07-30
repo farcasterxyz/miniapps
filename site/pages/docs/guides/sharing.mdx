@@ -86,6 +86,8 @@ The string literal `'launch_miniapp'` (or `'launch_frame'` for backward compatib
 
 The URL that the user will be sent to within your app. If not provided, it defaults to the current webpage URL (including query parameters).
 
+When it _is_ provided, query parameters from the URL the user actually opened (for example a cast embed with `?ref=…`) are merged onto your declared `action.url` so your app still receives them. If the same parameter appears in both, the value declared in your `action.url` wins.
+
 
 ### `button.action.name` (optional)
 
