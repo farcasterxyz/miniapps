@@ -44,6 +44,14 @@ type OpenMiniAppOptions = {
   - A Mini App embed URL (e.g., `https://example.com/specific-page`)
   - A Mini App launch URL (e.g., `https://farcaster.xyz/miniapps/[id]/[name]`)
 
+:::note
+Query params on `url` are forwarded to the target Mini App even when it declares
+its own `action.url` — they are merged onto the resolved launch URL so the
+target can read them from `window.location.search`. If the same param is
+declared in both, the target's `action.url` value wins. This is what makes the
+referral example below (`searchParams.get('ref')`) work.
+:::
+
 ## Return Value
 
 `Promise<void>` - The promise resolves when navigation is successful. If navigation fails, the promise will be rejected with an error.
