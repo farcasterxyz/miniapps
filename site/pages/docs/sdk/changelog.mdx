@@ -5,6 +5,10 @@ description: Recent changes to the Mini Apps SDK
 
 # What's New
 
+## July 30, 2026
+
+- Query parameters are now forwarded to a Mini App even when it declares its own `button.action.url`. When a Mini App is launched from a link (for example a cast embed with `?ref=…`), the query params on the URL the user opened are merged onto the declared `action.url` so the app still receives them. Params declared in `action.url` win on conflict. Previously these params were dropped whenever `action.url` was set.
+
 ## December 19, 2024
 
 - Added experimental [`signManifest`](/docs/sdk/actions/sign-manifest) action for domain manifest verification:
