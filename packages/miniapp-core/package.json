@@ -27,14 +27,22 @@
   ],
   "devDependencies": {
     "@farcaster/tsconfig": "workspace:*",
+    "@solana/web3.js": "^1.98.2",
     "@vitest/coverage-v8": "^2.1.8",
     "typescript": "^5.8.3",
     "vitest": "^2.1.9"
   },
   "dependencies": {
-    "@solana/web3.js": "^1.98.2",
     "ox": "^0.14.0",
     "zod": "^4.0.0"
+  },
+  "peerDependencies": {
+    "@solana/web3.js": "^1.98.2"
+  },
+  "peerDependenciesMeta": {
+    "@solana/web3.js": {
+      "optional": true
+    }
   },
   "publishConfig": {
     "access": "public"
