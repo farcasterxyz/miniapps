@@ -1,16 +1,32 @@
-import {
-  Connection as SolanaConnection,
-  type SendOptions as SolanaSendOptions,
-  type Transaction as SolanaTransaction,
-  type VersionedTransaction as SolanaVersionedTransaction,
-} from '@solana/web3.js'
+/**
+ * Minimal structural mirror of `@solana/web3.js` `SendOptions`.
+ *
+ * Declared locally (rather than re-exported from `@solana/web3.js`) so that
+ * importing this type from the package root never forces resolution of
+ * `@solana/web3.js`. `@solana/web3.js` is an optional peer dependency; the
+ * web3.js-backed helpers live in the `@farcaster/miniapp-core/solana`
+ * subpath.
+ */
+export type SolanaSendOptions = {
+  skipPreflight?: boolean
+  preflightCommitment?: string
+  maxRetries?: number
+  minContextSlot?: number
+}
 
-export { SolanaConnection }
-export type { SolanaSendOptions }
-
-export type SolanaCombinedTransaction =
-  | SolanaTransaction
-  | SolanaVersionedTransaction
+/**
+ * Minimal structural mirror of a serializable Solana transaction
+ * (`@solana/web3.js` `Transaction | VersionedTransaction`). Both expose a
+ * `serialize()` method, which is the only surface this package needs to treat
+ * them generically.
+ *
+ * Declared locally so that importing this type from the package root never
+ * forces resolution of `@solana/web3.js`. Concrete web3.js `Transaction` /
+ * `VersionedTransaction` instances are structurally assignable to this type.
+ */
+export type SolanaCombinedTransaction = {
+  serialize(config?: { verifySignatures?: boolean }): Uint8Array
+}
 
 export type SolanaConnectRequestArguments = {
   method: 'connect'
@@ -29,7 +45,7 @@ export type SolanaSignAndSendTransactionRequestArguments = {
   }
 }
 export type SolanaSignTransactionRequestArguments<
-  T extends SolanaCombinedTransaction = SolanaTransaction,
+  T extends SolanaCombinedTransaction = SolanaCombinedTransaction,
 > = {
   method: 'signTransaction'
   params: {
@@ -62,6 +78,12 @@ export interface SolanaWalletProvider {
   }): Promise<{ signature: string }>
 }
 
+/**
+ * Wraps a {@link SolanaRequestFn} into a {@link SolanaWalletProvider}.
+ *
+ * This helper does not use any `@solana/web3.js` runtime values, so it is safe
+ * to import from the package root without `@solana/web3.js` installed.
+ */
 export const createSolanaWalletProvider = (
   request: SolanaRequestFn,
 ): SolanaWalletProvider => ({

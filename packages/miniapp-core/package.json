@@ -9,6 +9,30 @@
   },
   "main": "dist/index.js",
   "module": "esm/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./esm/index.d.ts",
+        "default": "./esm/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    },
+    "./solana": {
+      "import": {
+        "types": "./esm/solanaWire.d.ts",
+        "default": "./esm/solanaWire.js"
+      },
+      "require": {
+        "types": "./dist/solanaWire.d.ts",
+        "default": "./dist/solanaWire.js"
+      }
+    },
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "clean": "rm -rf dist esm",
     "prebuild": "npm run clean",
