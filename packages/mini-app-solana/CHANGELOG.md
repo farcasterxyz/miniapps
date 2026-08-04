@@ -1,5 +1,17 @@
 # @farcaster/mini-app-solana
 
+## 3.0.0
+
+### Minor Changes
+
+- [#621](https://github.com/farcasterxyz/miniapps/pull/621) [`5048780`](https://github.com/farcasterxyz/miniapps/commit/5048780b5d0740a5f6307e34c5006783de5d7062) Thanks [@veganbeef](https://github.com/veganbeef)! - Declare `@solana/web3.js` (`^1.98.2`) as an explicit peer dependency. Previously it was only pulled in incidentally via the Solana wallet-adapter ecosystem and via `@farcaster/miniapp-core`'s (now optional) dependency. Making it explicit ensures the peer is present now that `@farcaster/miniapp-core` no longer forces `@solana/web3.js` into the tree.
+
+### Patch Changes
+
+- Updated dependencies [[`5048780`](https://github.com/farcasterxyz/miniapps/commit/5048780b5d0740a5f6307e34c5006783de5d7062), [`5048780`](https://github.com/farcasterxyz/miniapps/commit/5048780b5d0740a5f6307e34c5006783de5d7062)]:
+  - @farcaster/miniapp-core@0.7.0
+  - @farcaster/miniapp-sdk@0.4.0
+
 ## 2.0.0
 
 ### Patch Changes
