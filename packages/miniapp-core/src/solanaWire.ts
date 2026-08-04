@@ -1,8 +1,20 @@
 import {
+  Connection as SolanaConnection,
   Transaction as SolanaTransaction,
   VersionedMessage as SolanaVersionedMessage,
   VersionedTransaction as SolanaVersionedTransaction,
 } from '@solana/web3.js'
+
+/**
+ * `@farcaster/miniapp-core/solana` — the `@solana/web3.js`-backed entrypoint.
+ *
+ * Importing this subpath requires `@solana/web3.js` to be installed (it is an
+ * optional peer dependency of `@farcaster/miniapp-core`). The web3.js-free
+ * types and {@link createSolanaWalletProvider} are re-exported here for
+ * convenience so Solana consumers can import everything from one place.
+ */
+export * from './solana.ts'
+export { SolanaConnection }
 
 import type {
   SolanaCombinedTransaction,

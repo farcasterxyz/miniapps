@@ -8,6 +8,18 @@
     "directory": "packages/miniapp-host"
   },
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./solana": {
+      "types": "./dist/solana.d.ts",
+      "default": "./dist/solana.js"
+    },
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "clean": "rm -rf dist",
     "prebuild": "npm run clean",
@@ -20,6 +32,7 @@
   ],
   "devDependencies": {
     "@farcaster/tsconfig": "workspace:*",
+    "@solana/web3.js": "^1.98.2",
     "@types/react": "^18.3.18",
     "react": "^18.3.1",
     "typescript": "^5.8.3"
@@ -29,6 +42,12 @@
     "ox": "^0.14.0"
   },
   "peerDependencies": {
+    "@solana/web3.js": "^1.98.2",
     "react": ">=17.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@solana/web3.js": {
+      "optional": true
+    }
   }
 }

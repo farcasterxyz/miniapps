@@ -82,6 +82,39 @@ function Content() {
 The SDK also exposes a low-level Solana provider at `sdk.wallet.getSolanaProvider()`.
 This provider is modeled after `window.phantom.solana` and its full API can be found [here](https://github.com/farcasterxyz/miniapps/blob/main/packages/miniapp-core/src/solana.ts).
 
+Because this provider works with `@solana/web3.js` transaction objects,
+`@solana/web3.js` is an optional peer dependency. To use the low-level provider,
+install `@solana/web3.js` and opt in by importing `@farcaster/miniapp-sdk/solana`
+once in your app entry:
+
+:::code-group
+
+```bash [npm]
+npm install @solana/web3.js
+```
+
+```bash [pnpm]
+pnpm add @solana/web3.js
+```
+
+```bash [yarn]
+yarn add @solana/web3.js
+```
+
+:::
+
+```tsx
+// Enables sdk.wallet.getSolanaProvider(). Import once in your app entry.
+import '@farcaster/miniapp-sdk/solana';
+import { sdk } from '@farcaster/miniapp-sdk';
+
+const solanaProvider = await sdk.wallet.getSolanaProvider();
+```
+
+Mini apps that use `@farcaster/mini-app-solana` (the recommended Wallet Standard
+integration above) do not need this — that path does not use the low-level
+provider.
+
 ## Using Wallet Standard directly
 
 It's also possible to interface with the user's Solana wallet directly through Wallet Standard, or via Wallet Adapter's "core" (non-React) integrations.

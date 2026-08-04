@@ -8,6 +8,18 @@
     "directory": "packages/miniapp-sdk"
   },
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./solana": {
+      "types": "./dist/solana.d.ts",
+      "default": "./dist/solana.js"
+    },
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "clean": "rm -rf dist",
     "prebuild": "npm run clean",
@@ -22,6 +34,7 @@
   ],
   "devDependencies": {
     "@farcaster/tsconfig": "workspace:*",
+    "@solana/web3.js": "^1.98.2",
     "esbuild": "^0.25.0",
     "mipd": "^0.0.7",
     "typescript": "^5.8.3"
@@ -32,5 +45,13 @@
     "comlink": "^4.4.2",
     "eventemitter3": "^5.0.1",
     "ox": "^0.14.0"
+  },
+  "peerDependencies": {
+    "@solana/web3.js": "^1.98.2"
+  },
+  "peerDependenciesMeta": {
+    "@solana/web3.js": {
+      "optional": true
+    }
   }
 }
