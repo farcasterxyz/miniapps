@@ -1,6 +1,7 @@
 import {
   AddMiniApp,
   type MiniAppClientEvent,
+  type MiniAppHostCapability,
   SignIn,
   SignManifest,
 } from '@farcaster/miniapp-core'
@@ -13,6 +14,17 @@ import { getSolanaProvider } from './solanaProvider.ts'
 import type { MiniAppSDK } from './types.ts'
 
 let cachedIsInMiniAppResult: boolean | null = null
+
+async function getCapabilities(): Promise<MiniAppHostCapability[]> {
+  const caps = await miniAppHost.getCapabilities()
+  if (
+    caps.includes('actions.addMiniApp') &&
+    !caps.includes('actions.addToSidebar')
+  ) {
+    return [...caps, 'actions.addToSidebar']
+  }
+  return caps
+}
 
 /**
  * Determines if the current environment is a MiniApp context.
@@ -76,7 +88,7 @@ const addMiniApp = async () => {
 
 export const sdk: MiniAppSDK = {
   ...emitter,
-  getCapabilities: miniAppHost.getCapabilities,
+  getCapabilities,
   getChains: miniAppHost.getChains,
   isInMiniApp,
   context: miniAppHost.context,
@@ -112,6 +124,7 @@ export const sdk: MiniAppSDK = {
     },
     addFrame: addMiniApp,
     addMiniApp,
+    addToSidebar: addMiniApp,
     composeCast(options = {}) {
       return miniAppHost.composeCast(options) as never
     },

@@ -181,6 +181,10 @@ export default defineConfig({
                 link: '/docs/sdk/actions/add-miniapp',
               },
               {
+                text: 'addToSidebar',
+                link: '/docs/sdk/actions/add-to-sidebar',
+              },
+              {
                 text: 'close',
                 link: '/docs/sdk/actions/close',
               },
