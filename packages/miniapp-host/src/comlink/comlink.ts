@@ -387,6 +387,9 @@ export function expose(
                 return obj.updateBackState(...argumentList);
               case 'openMiniApp':
                 return obj.openMiniApp(...argumentList);
+              // Legacy Frames SDK name for opening another mini app
+              case 'openSnap':
+                return obj.openSnap(...argumentList);
               default:
                 throw new Error(`Unsupported APPLY for ${path.join('/')}`)
             }

@@ -62,6 +62,8 @@ export const miniAppHostCapabilityList = [
   'actions.sendToken',
   'actions.swapToken',
   'actions.openMiniApp',
+  // Legacy alias for actions.openMiniApp (Frames `open_snap`)
+  'actions.openSnap',
   'actions.requestCameraAndMicrophoneAccess',
   'experimental.signManifest',
   'haptics.impactOccurred',
@@ -97,6 +99,8 @@ export type WireMiniAppHost = {
   sendToken: SendToken.SendToken
   swapToken: SwapToken.SwapToken
   openMiniApp: OpenMiniApp.OpenMiniApp
+  /** @deprecated Legacy Frames wire name; same as {@link openMiniApp}. */
+  openSnap: OpenMiniApp.OpenMiniApp
   composeCast: <close extends boolean | undefined = undefined>(
     options: ComposeCast.Options<close>,
   ) => Promise<ComposeCast.Result<close>>

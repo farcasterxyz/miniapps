@@ -90,6 +90,8 @@ export type MiniAppSDK = {
     sendToken: SendToken.SendToken
     swapToken: SwapToken.SwapToken
     openMiniApp: OpenMiniApp.OpenMiniApp
+    /** @deprecated Legacy Frames action name; same as {@link openMiniApp}. */
+    openSnap: OpenMiniApp.OpenMiniApp
     requestCameraAndMicrophoneAccess: RequestCameraAndMicrophoneAccess.RequestCameraAndMicrophoneAccess
   }
   experimental: {

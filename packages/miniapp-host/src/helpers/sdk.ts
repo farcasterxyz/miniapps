@@ -62,6 +62,7 @@ function toWireSolanaProviderRequest(
 export function wrapHandlers(host: MiniAppHost): WireMiniAppHost {
   return {
     ...host,
+    openSnap: host.openMiniApp,
     addFrame: async () => {
       try {
         const result = await host.addMiniApp()
