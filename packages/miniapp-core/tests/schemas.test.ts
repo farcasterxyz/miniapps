@@ -148,6 +148,22 @@ describe('domainMiniAppConfigSchema castShareUrl validation', () => {
       )
     }
   })
+
+  test('valid primaryCategory slug', () => {
+    const result = domainMiniAppConfigSchema.safeParse({
+      ...baseConfig,
+      primaryCategory: 'art-creativity',
+    })
+    expect(result.success).toBe(true)
+  })
+
+  test('invalid primaryCategory slug', () => {
+    const result = domainMiniAppConfigSchema.safeParse({
+      ...baseConfig,
+      primaryCategory: 'Art',
+    })
+    expect(result.success).toBe(false)
+  })
 })
 
 describe('domainSchema', () => {
