@@ -193,7 +193,7 @@ if (typeof window !== 'undefined') {
   // web events
   window.addEventListener('message', (event) => {
     if (event instanceof MessageEvent) {
-      if (event.data.type === 'frameEvent') {
+      if (event.data?.type === 'frameEvent') {
         const miniAppEvent = event.data.event as MiniAppClientEvent
         if (miniAppEvent.event === 'primary_button_clicked') {
           emitter.emit('primaryButtonClicked')
