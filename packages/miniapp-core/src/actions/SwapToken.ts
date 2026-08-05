@@ -1,3 +1,18 @@
+/**
+ * Optional copy for the host swap UI so users can see cost and outcome
+ * before confirming (e.g. a prominent headline for required token amount).
+ */
+export type SwapTokenDisplayHints = {
+  /**
+   * Short primary line shown prominently in the swap sheet (e.g. "5,000,000 tokens").
+   */
+  headline?: string
+  /**
+   * Supporting line (e.g. "You receive 1 entry" or token names).
+   */
+  subline?: string
+}
+
 export type SwapTokenOptions = {
   /**
    * CAIP-19 asset ID
@@ -17,6 +32,12 @@ export type SwapTokenOptions = {
    * For example, 1 USDC: 1000000
    */
   sellAmount?: string
+
+  /**
+   * Human-readable hints for the host to surface in the swap UI alongside
+   * chain amounts. Hosts may ignore unsupported fields.
+   */
+  display?: SwapTokenDisplayHints
 }
 
 type SwapTokenDetails = {

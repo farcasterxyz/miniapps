@@ -22,6 +22,10 @@ await sdk.actions.swapToken({
   sellToken,
   buyToken,
   sellAmount,
+  display: {
+    headline: "5,000,000 tokens",
+    subline: "Required to participate",
+  },
 })
 ```
 
@@ -53,10 +57,21 @@ Sell token amount, as numeric string
 
 For example, 1 USDC: 1000000
 
+### display (optional)
+
+- **Type:** `{ headline?: string; subline?: string }`
+
+Optional copy for the **host** swap UI so required amounts and outcomes are easy to see before the user confirms. `headline` is intended for a prominent primary line (for example formatted token totals); `subline` can explain what the swap is for. Farcaster clients that support this field show it in the swap sheet; others ignore it. Numeric `sellAmount` remains the source of truth for the transaction.
+
 
 ## Return Value
 
 ```ts twoslash
+type SwapTokenDisplayHints = {
+  headline?: string;
+  subline?: string;
+};
+
 type SwapTokenDetails = {
   /**
    * Array of tx identifiers in order of execution.
