@@ -189,6 +189,21 @@ if (typeof document !== 'undefined') {
 }
 
 // Required to pass SSR
+if (
+  typeof window !== 'undefined' &&
+  typeof document !== 'undefined' &&
+  window !== window.parent
+) {
+  // Prevent scroll chaining to the parent host page when the mini app runs in
+  // an iframe in the browser (nested scroll / rubber-band conflicts).
+  for (const el of [document.documentElement, document.body]) {
+    el.style.setProperty('overscroll-behavior', 'contain')
+    el.style.setProperty('overscroll-behavior-y', 'contain')
+    el.style.setProperty('min-height', '100%')
+  }
+}
+
+// Required to pass SSR
 if (typeof window !== 'undefined') {
   // web events
   window.addEventListener('message', (event) => {

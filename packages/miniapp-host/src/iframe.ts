@@ -60,18 +60,37 @@ export function exposeToIframe({
   ethProvider?: OxProvider.Provider<undefined, true>
   debug?: boolean
 }) {
+  const prevInline = {
+    width: iframe.style.width,
+    height: iframe.style.height,
+    minHeight: iframe.style.minHeight,
+    display: iframe.style.display,
+  }
+  if (!prevInline.width) iframe.style.width = '100%'
+  if (!prevInline.height) iframe.style.height = '100%'
+  if (!prevInline.minHeight) iframe.style.minHeight = '100%'
+  if (!prevInline.display) iframe.style.display = 'block'
+
   const endpoint = createIframeEndpoint({
     iframe,
     targetOrigin: miniAppOrigin,
     debug,
   })
-  const cleanup = exposeToEndpoint({
+  const cleanupRpc = exposeToEndpoint({
     endpoint,
     sdk,
     ethProvider,
     miniAppOrigin,
     debug,
   })
+
+  const cleanup = () => {
+    cleanupRpc()
+    iframe.style.width = prevInline.width
+    iframe.style.height = prevInline.height
+    iframe.style.minHeight = prevInline.minHeight
+    iframe.style.display = prevInline.display
+  }
 
   return {
     endpoint,
