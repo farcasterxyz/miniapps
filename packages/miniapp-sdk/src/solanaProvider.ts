@@ -63,7 +63,13 @@ async function getSolanaProvider(): Promise<SolanaWalletProvider | undefined> {
   let capabilities: MiniAppHostCapability[] | undefined
   try {
     capabilities = await miniAppHost.getCapabilities()
-  } catch {}
+  } catch (error) {
+    console.warn(
+      'Unable to read Mini App host capabilities while detecting Solana support.',
+      error,
+    )
+  }
+
   if (!capabilities?.includes('wallet.getSolanaProvider')) {
     return undefined
   }
