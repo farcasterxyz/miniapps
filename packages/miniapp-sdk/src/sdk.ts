@@ -108,7 +108,14 @@ export const sdk: MiniAppSDK = {
     },
     openUrl: (urlArg: string | { url: string }) => {
       const url = typeof urlArg === 'string' ? urlArg : urlArg.url
-      return miniAppHost.openUrl(url.trim())
+      const trimmedUrl = url.trim()
+      const parsed = new URL(trimmedUrl)
+      if (parsed.protocol !== 'https:') {
+        throw new Error(
+          `openUrl: only HTTPS URLs are allowed (got ${parsed.protocol})`,
+        )
+      }
+      return miniAppHost.openUrl(trimmedUrl)
     },
     addFrame: addMiniApp,
     addMiniApp,
