@@ -10,6 +10,7 @@ import type {
   OpenMiniApp,
   Ready,
   RequestCameraAndMicrophoneAccess,
+  RequestFullScreen,
   SelectionChanged,
   SendToken,
   SetPrimaryButtonOptions,
@@ -91,6 +92,8 @@ export type MiniAppSDK = {
     swapToken: SwapToken.SwapToken
     openMiniApp: OpenMiniApp.OpenMiniApp
     requestCameraAndMicrophoneAccess: RequestCameraAndMicrophoneAccess.RequestCameraAndMicrophoneAccess
+    requestFullScreen: RequestFullScreen.RequestFullScreen
+    exitFullScreen: RequestFullScreen.ExitFullScreen
   }
   experimental: {
     getSolanaProvider: () => Promise<SolanaWalletProvider | undefined>

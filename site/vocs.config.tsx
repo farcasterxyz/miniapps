@@ -229,6 +229,10 @@ export default defineConfig({
                 link: '/docs/sdk/actions/request-camera-and-microphone-access',
               },
               {
+                text: 'requestFullScreen',
+                link: '/docs/sdk/actions/request-full-screen',
+              },
+              {
                 text: 'signManifest (experimental)',
                 link: '/docs/sdk/actions/sign-manifest',
               },

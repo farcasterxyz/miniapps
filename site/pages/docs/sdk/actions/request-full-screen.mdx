@@ -1,0 +1,89 @@
+---
+title: requestFullScreen
+description: Ask the client to show your Mini App full screen
+---
+
+# requestFullScreen
+
+Ask the client to show your Mini App full screen, and `exitFullScreen` to
+return to the default frame.
+
+Mini Apps always open in their default, mobile-sized frame. Clients with
+larger screens, such as web, can expand a Mini App to fill the screen. The
+user can also enter and leave full screen from the client's own controls, so
+a Mini App should never assume it stays full screen.
+
+## Platform Support
+
+| Platform | Supported | Notes |
+|----------|-----------|-------|
+| Web      | ✅         | Only for Mini Apps the client allows |
+| iOS      | ❌         | Mini Apps are already full screen |
+| Android  | ❌         | Mini Apps are already full screen |
+
+## Opting in
+
+Set `supportsFullScreen` to `true` in your [manifest](/docs/guides/publishing#define-your-application-configuration)
+to tell clients your Mini App has a responsive layout:
+
+```json
+{
+  "miniapp": {
+    "version": "1",
+    "name": "Example",
+    "homeUrl": "https://example.com",
+    "iconUrl": "https://example.com/icon.png",
+    "supportsFullScreen": true
+  }
+}
+```
+
+Clients decide whether to offer full screen. A client may limit it to Mini
+Apps it has approved, even when `supportsFullScreen` is set.
+
+## Usage
+
+```ts twoslash
+import { sdk } from '@farcaster/miniapp-sdk'
+
+try {
+  await sdk.actions.requestFullScreen()
+} catch (error) {
+  // The client doesn't support full screen, or declined the request
+}
+
+// Later, return to the default frame
+await sdk.actions.exitFullScreen()
+```
+
+## Return Value
+
+`requestFullScreen` returns a `Promise<void>` that:
+- **Resolves** once the Mini App is full screen
+- **Rejects** when the client doesn't support full screen or declines the request
+
+`exitFullScreen` returns a `Promise<void>` that resolves once the Mini App is
+back in its default frame, including when it wasn't full screen.
+
+## Responding to the new size
+
+The client resizes your Mini App's frame, so handle it like any responsive
+web page: use CSS media queries or listen for `resize`.
+
+```ts
+window.addEventListener('resize', () => {
+  const isWide = window.innerWidth > 600
+  // Update your layout
+})
+```
+
+## Feature Detection
+
+```ts twoslash
+import { sdk } from '@farcaster/miniapp-sdk'
+
+const capabilities = await sdk.getCapabilities()
+if (capabilities.includes('actions.requestFullScreen')) {
+  // The client can show Mini Apps full screen
+}
+```
