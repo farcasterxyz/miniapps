@@ -120,6 +120,8 @@ export const sdk: MiniAppSDK = {
     swapToken: miniAppHost.swapToken.bind(miniAppHost),
     requestCameraAndMicrophoneAccess:
       miniAppHost.requestCameraAndMicrophoneAccess.bind(miniAppHost),
+    requestFullScreen: miniAppHost.requestFullScreen.bind(miniAppHost),
+    exitFullScreen: miniAppHost.exitFullScreen.bind(miniAppHost),
   },
   experimental: {
     getSolanaProvider,

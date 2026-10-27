@@ -127,6 +127,11 @@ export const domainMiniAppConfigSchema = z
     castShareUrl: secureUrlSchema.optional(),
     /** Canonical domain for the miniapp application */
     canonicalDomain: domainSchema.optional(),
+    /**
+     * Whether the mini app has a responsive layout that hosts may show full
+     * screen. Hosts may still restrict full screen to mini apps they approve.
+     */
+    supportsFullScreen: z.boolean().optional(),
   })
   .refine(
     (data) => {

@@ -110,6 +110,18 @@ export function wrapHandlers(host: MiniAppHost): WireMiniAppHost {
         throw e
       }
     },
+    requestFullScreen: async () => {
+      if (!host.requestFullScreen) {
+        throw new Error('requestFullScreen is not supported by this host')
+      }
+      return host.requestFullScreen()
+    },
+    exitFullScreen: async () => {
+      if (!host.exitFullScreen) {
+        throw new Error('exitFullScreen is not supported by this host')
+      }
+      return host.exitFullScreen()
+    },
     signIn: async (options) => {
       try {
         const result = await host.signIn(options)

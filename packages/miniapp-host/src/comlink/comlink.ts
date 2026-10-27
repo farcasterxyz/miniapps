@@ -371,6 +371,10 @@ export function expose(
                 return obj.sendToken(...argumentList);
               case 'requestCameraAndMicrophoneAccess':
                 return obj.requestCameraAndMicrophoneAccess(...argumentList);
+              case 'requestFullScreen':
+                return obj.requestFullScreen(...argumentList);
+              case 'exitFullScreen':
+                return obj.exitFullScreen(...argumentList);
               case 'solanaProviderRequest':
                 return obj.solanaProviderRequest(...argumentList);
               case 'getCapabilities':

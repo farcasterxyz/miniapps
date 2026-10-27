@@ -9,6 +9,7 @@ import type {
   OpenMiniApp,
   Ready,
   RequestCameraAndMicrophoneAccess,
+  RequestFullScreen,
   SendToken,
   SignIn,
   SignManifest,
@@ -63,6 +64,8 @@ export const miniAppHostCapabilityList = [
   'actions.swapToken',
   'actions.openMiniApp',
   'actions.requestCameraAndMicrophoneAccess',
+  'actions.requestFullScreen',
+  'actions.exitFullScreen',
   'experimental.signManifest',
   'haptics.impactOccurred',
   'haptics.notificationOccurred',
@@ -101,6 +104,8 @@ export type WireMiniAppHost = {
     options: ComposeCast.Options<close>,
   ) => Promise<ComposeCast.Result<close>>
   requestCameraAndMicrophoneAccess: RequestCameraAndMicrophoneAccess.RequestCameraAndMicrophoneAccess
+  requestFullScreen: RequestFullScreen.RequestFullScreen
+  exitFullScreen: RequestFullScreen.ExitFullScreen
   impactOccurred: ImpactOccurred
   notificationOccurred: NotificationOccurred
   selectionChanged: SelectionChanged
@@ -137,6 +142,10 @@ export type MiniAppHost = {
     options: ComposeCast.Options<close>,
   ) => Promise<ComposeCast.Result<close>>
   requestCameraAndMicrophoneAccess: RequestCameraAndMicrophoneAccess.RequestCameraAndMicrophoneAccess
+  /** Optional: hosts that can't show mini apps full screen may omit it. */
+  requestFullScreen?: RequestFullScreen.RequestFullScreen
+  /** Optional: hosts that can't show mini apps full screen may omit it. */
+  exitFullScreen?: RequestFullScreen.ExitFullScreen
   impactOccurred: ImpactOccurred
   notificationOccurred: NotificationOccurred
   selectionChanged: SelectionChanged
