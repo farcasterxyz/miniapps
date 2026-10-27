@@ -1,5 +1,31 @@
 # @farcaster/frame-host
 
+## 0.4.0
+
+### Minor Changes
+
+- [#628](https://github.com/farcasterxyz/miniapps/pull/628) [`76f7dc0`](https://github.com/farcasterxyz/miniapps/commit/76f7dc030048c6950846077df0acc0bd7d2721f6) Thanks [@bob-obringer](https://github.com/bob-obringer)! - Add `sdk.actions.requestFullScreen()` and `sdk.actions.exitFullScreen()`, the matching `actions.requestFullScreen` and `actions.exitFullScreen` capabilities, and a `supportsFullScreen` manifest property. Hosts that can show mini apps full screen (for example on web) can implement the new optional `requestFullScreen` and `exitFullScreen` handlers on `MiniAppHost`; hosts that omit them reject the request.
+
+- [#621](https://github.com/farcasterxyz/miniapps/pull/621) [`5048780`](https://github.com/farcasterxyz/miniapps/commit/5048780b5d0740a5f6307e34c5006783de5d7062) Thanks [@veganbeef](https://github.com/veganbeef)! - Keep `@solana/web3.js` out of the default `@farcaster/miniapp-host` module graph so hosts that do not support Solana install, import, bundle, and type-check without it (and without pulling in the Solana v1 RPC stack / GHSA-w5hq-g745-h8pq).
+
+  `@solana/web3.js` is now an optional peer dependency. The `@solana/web3.js`-backed request wrapping used by `wrapHandlers`/`exposeToEndpoint` has moved to an opt-in `@farcaster/miniapp-host/solana` entrypoint.
+
+  If your host exposes a Solana provider (sets `solanaProviderRequest` on its `MiniAppHost`), you must now:
+
+  1. Install `@solana/web3.js`.
+  2. Add `import '@farcaster/miniapp-host/solana'` once in your host entry.
+
+  ```ts
+  import "@farcaster/miniapp-host/solana"; // enables wrapping of solanaProviderRequest
+  ```
+
+  A host that provides `solanaProviderRequest` without importing the subpath will throw a descriptive error the first time a mini app makes a Solana request. Hosts that do not support Solana require no changes.
+
+### Patch Changes
+
+- Updated dependencies [[`76f7dc0`](https://github.com/farcasterxyz/miniapps/commit/76f7dc030048c6950846077df0acc0bd7d2721f6), [`5048780`](https://github.com/farcasterxyz/miniapps/commit/5048780b5d0740a5f6307e34c5006783de5d7062)]:
+  - @farcaster/miniapp-core@0.7.0
+
 ## 0.3.0
 
 ### Minor Changes
