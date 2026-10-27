@@ -31,7 +31,7 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@farcaster/frame-sdk": "^0.2.0",
+    "@farcaster/frame-sdk": "^0.2.1",
     "@wagmi/core": "^2.14.1",
     "viem": "^2.21.55"
   },
