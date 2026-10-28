@@ -8,6 +8,7 @@ import type {
   MiniAppNotificationDetails,
   NotificationOccurred,
   OpenMiniApp,
+  PublishCast,
   Ready,
   RequestCameraAndMicrophoneAccess,
   RequestFullScreen,
@@ -87,6 +88,11 @@ export type MiniAppSDK = {
     composeCast: <close extends boolean | undefined = undefined>(
       options?: ComposeCast.Options<close>,
     ) => Promise<ComposeCast.Result<close>>
+    /**
+     * Publish a cast for the user without opening the composer. The host
+     * confirms the first time, then posts with the domain it loaded.
+     */
+    publishCast: PublishCast.PublishCast
     viewToken: ViewToken.ViewToken
     sendToken: SendToken.SendToken
     swapToken: SwapToken.SwapToken
