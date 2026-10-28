@@ -1,6 +1,7 @@
 import {
   AddMiniApp,
   type MiniAppClientEvent,
+  PublishCast,
   SignIn,
   SignManifest,
 } from '@farcaster/miniapp-core'
@@ -114,6 +115,22 @@ export const sdk: MiniAppSDK = {
     addMiniApp,
     composeCast(options = {}) {
       return miniAppHost.composeCast(options) as never
+    },
+    async publishCast(options) {
+      if (!miniAppHost.publishCast) {
+        throw new Error('Host does not support publishCast')
+      }
+
+      const response = await miniAppHost.publishCast(options)
+      if (response.result) {
+        return response.result
+      }
+
+      if (response.error.type === 'rejected_by_user') {
+        throw new PublishCast.RejectedByUser()
+      }
+
+      throw new Error('Unreachable')
     },
     viewToken: miniAppHost.viewToken.bind(miniAppHost),
     sendToken: miniAppHost.sendToken.bind(miniAppHost),
