@@ -1,0 +1,60 @@
+---
+title: publishCast
+description: Publish a cast without opening the composer
+---
+
+# publishCast
+
+Publish a cast for the signed-in user without opening the composer. The host
+confirms the first time, then posts the cast with the domain it loaded. The
+mini app never receives the user's session.
+
+Check `actions.publishCast` with [`getCapabilities`](/docs/sdk/detecting-capabilities)
+before calling. Hosts that have not shipped the action will not list it.
+
+## Usage
+
+```ts
+import { sdk } from '@farcaster/miniapp-sdk'
+
+const result = await sdk.actions.publishCast({
+  text: 'My entry',
+  embeds: ['https://earn.example.com/entries/1'],
+  parent: { type: 'cast', hash: '0xabc' },
+})
+
+console.log(result.cast.hash)
+```
+
+If the user declines, the promise rejects with `PublishCast.RejectedByUser`.
+
+## Parameters
+
+### text
+
+- **Type:** `string`
+
+Text of the cast. Mentions use the human-writable form (e.g. @farcaster).
+
+### embeds (optional)
+
+- **Type:** `[] | [string] | [string, string]`
+
+Embeds. Max two. The host may only allow URLs on the mini app's own domain.
+
+### parent (optional)
+
+- **Type:** `{ type: 'cast'; hash: string }`
+
+Cast to reply to.
+
+### submissionId and codeExplanation (optional)
+
+Pass these when posting again after the host's guidelines check refused the
+cast, along with the author's explanation.
+
+## Return Value
+
+```ts
+{ cast: { hash: string } }
+```
