@@ -25,9 +25,9 @@
   "devDependencies": {
     "@farcaster/tsconfig": "workspace:*",
     "@types/node": "^22.10.2",
-    "@vitest/coverage-v8": "^2.1.8",
+    "@vitest/coverage-v8": "4.1.12",
     "typescript": "^5.8.3",
-    "vitest": "^2.1.9"
+    "vitest": "4.1.12"
   },
   "dependencies": {
     "@farcaster/miniapp-node": "workspace:*",
