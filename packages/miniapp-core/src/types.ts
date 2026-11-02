@@ -7,6 +7,7 @@ import type {
   AddMiniApp,
   ComposeCast,
   OpenMiniApp,
+  PublishCast,
   Ready,
   RequestCameraAndMicrophoneAccess,
   RequestFullScreen,
@@ -59,6 +60,7 @@ export const miniAppHostCapabilityList = [
   'actions.viewCast',
   'actions.viewProfile',
   'actions.composeCast',
+  'actions.publishCast',
   'actions.viewToken',
   'actions.sendToken',
   'actions.swapToken',
@@ -103,6 +105,8 @@ export type WireMiniAppHost = {
   composeCast: <close extends boolean | undefined = undefined>(
     options: ComposeCast.Options<close>,
   ) => Promise<ComposeCast.Result<close>>
+  /** Optional until hosts ship the direct-publish action. */
+  publishCast?: PublishCast.WirePublishCast
   requestCameraAndMicrophoneAccess: RequestCameraAndMicrophoneAccess.RequestCameraAndMicrophoneAccess
   requestFullScreen: RequestFullScreen.RequestFullScreen
   exitFullScreen: RequestFullScreen.ExitFullScreen
@@ -141,6 +145,8 @@ export type MiniAppHost = {
   composeCast: <close extends boolean | undefined = undefined>(
     options: ComposeCast.Options<close>,
   ) => Promise<ComposeCast.Result<close>>
+  /** Optional until hosts ship the direct-publish action. */
+  publishCast?: PublishCast.PublishCast
   requestCameraAndMicrophoneAccess: RequestCameraAndMicrophoneAccess.RequestCameraAndMicrophoneAccess
   /** Optional: hosts that can't show mini apps full screen may omit it. */
   requestFullScreen?: RequestFullScreen.RequestFullScreen

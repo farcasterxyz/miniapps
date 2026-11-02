@@ -189,6 +189,10 @@ export default defineConfig({
                 link: '/docs/sdk/actions/compose-cast',
               },
               {
+                text: 'publishCast',
+                link: '/docs/sdk/actions/publish-cast',
+              },
+              {
                 text: 'ready',
                 link: '/docs/sdk/actions/ready',
               },
