@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@farcaster/miniapp-core": "workspace:*",
-    "@farcaster/quick-auth": "^0.0.6",
+    "@farcaster/quick-auth": "^0.1.0",
     "comlink": "^4.4.2",
     "eventemitter3": "^5.0.1",
     "ox": "^0.14.0"

@@ -296,8 +296,8 @@ importers:
         specifier: workspace:*
         version: link:../miniapp-sdk
       '@farcaster/quick-auth':
-        specifier: 0.0.8
-        version: 0.0.8(typescript@5.8.3)
+        specifier: ^0.1.0
+        version: 0.1.0(typescript@5.8.3)
       comlink:
         specifier: ^4.4.2
         version: 4.4.2
@@ -500,8 +500,8 @@ importers:
         specifier: workspace:*
         version: link:../miniapp-core
       '@farcaster/quick-auth':
-        specifier: ^0.0.6
-        version: 0.0.6(typescript@5.8.3)
+        specifier: ^0.1.0
+        version: 0.1.0(typescript@5.8.3)
       comlink:
         specifier: ^4.4.2
         version: 4.4.2
@@ -563,8 +563,8 @@ importers:
         specifier: workspace:*
         version: link:../packages/miniapp-wagmi-connector
       '@farcaster/quick-auth':
-        specifier: ^0.0.4
-        version: 0.0.4(typescript@5.9.2)
+        specifier: ^0.1.0
+        version: 0.1.0(typescript@5.9.2)
       '@types/lodash.isequal':
         specifier: ^4.5.8
         version: 4.5.8
@@ -2153,18 +2153,8 @@ packages:
     resolution: {integrity: sha512-zQ0IqbdX8FZ9aw11vP+dZkKDkS+kgIvQPHnSAXzP9pLu+Rfu3D3XEeLbicvoXJTYnhZiPmsZUxgdzXwNKxRPbA==}
     engines: {node: '>=14'}
 
-  '@farcaster/quick-auth@0.0.4':
-    resolution: {integrity: sha512-yyFEyJiGUxxB4bvlza2t7FIz9NY67UMVD2V4LuExurntDqV1fQDLh5c6kzghJ/xm0Ow0GGUiF5zRDd7aybuKkw==}
-    peerDependencies:
-      typescript: 5.8.3
-
-  '@farcaster/quick-auth@0.0.6':
-    resolution: {integrity: sha512-tiZndhpfDtEhaKlkmS5cVDuS+A/tafqZT3y9I44rC69m3beJok6e8dIH2JhxVy3EvOWTyTBnrmNn6GOOh+qK6A==}
-    peerDependencies:
-      typescript: 5.8.3
-
-  '@farcaster/quick-auth@0.0.8':
-    resolution: {integrity: sha512-NRIq1BcbcQCC6xBF5owfckkY00xKQVpqhpLNl5rICVpl0xeDsiVbkenIrHaUuyjtCK2W28YVc2ZCFRyz9ERHKg==}
+  '@farcaster/quick-auth@0.1.0':
+    resolution: {integrity: sha512-ETmn8hBvq5yGXqhKjrg9xa0sx/TybPcCxJvLrLz5eRI02dieNFWrT7YHdIGBEg/CTnb/tI/y6OEKtDVRQcSuTw==}
     peerDependencies:
       typescript: 5.8.3
 
@@ -10702,23 +10692,17 @@ snapshots:
       ethereum-cryptography: 2.2.1
       micro-ftch: 0.3.1
 
-  '@farcaster/quick-auth@0.0.4(typescript@5.9.2)':
+  '@farcaster/quick-auth@0.1.0(typescript@5.8.3)':
+    dependencies:
+      jose: 5.10.0
+      typescript: 5.8.3
+      zod: 4.6.7
+
+  '@farcaster/quick-auth@0.1.0(typescript@5.9.2)':
     dependencies:
       jose: 5.10.0
       typescript: 5.9.2
-      zod: 3.25.76
-
-  '@farcaster/quick-auth@0.0.6(typescript@5.8.3)':
-    dependencies:
-      jose: 5.10.0
-      typescript: 5.8.3
-      zod: 3.25.76
-
-  '@farcaster/quick-auth@0.0.8(typescript@5.8.3)':
-    dependencies:
-      jose: 5.10.0
-      typescript: 5.8.3
-      zod: 3.25.76
+      zod: 4.6.7
 
   '@floating-ui/core@1.6.9':
     dependencies:
@@ -20614,7 +20598,8 @@ snapshots:
 
   zod@3.22.4: {}
 
-  zod@3.25.76: {}
+  zod@3.25.76:
+    optional: true
 
   zod@4.6.7: {}
 
